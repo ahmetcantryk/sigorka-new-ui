@@ -1,0 +1,28 @@
+.btn-primary {
+    color: #291f69 !important;
+    background-color: #00d4a6 !important;
+    font-family: "Source Sans 3" !important;
+    font-weight: 600 !important;
+    padding: 8px 24px !important;
+    border: none !important;
+    border-radius: 10px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+.btn {
+    height: 50px;
+    border-radius: 10px;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    font-size: 14px;
+    font-weight: 600;
+    border-color: transparent;
+    display: inline-flex
+;
+    align-items: center;
+    padding: 8px 24px;
+    outline: 0;
+    text-align: center;
+    justify-content: center;
+    text-decoration: none !important;
+}

@@ -1,0 +1,35 @@
+/* Sadece teklif sayfalarında aktif olacak stiller */
+.quote-page input,
+.quote-page textarea{
+    box-shadow: none !important;
+    border:none !important;
+    outline: none !important;
+}
+
+.quote-page button{
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.quote-page textarea:focus{
+    border:none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.quote-page button:focus{
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.quote-page .navbar{
+    background-color: white !important;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* B2C Form Sayfaları - Header Stil (Dashboard, Teklif, Satın Al Sayfaları) */
+/* Yuvamguvende hariç - Hakkımızda, Blog, Ürün detay gibi alt sayfalar etkilenmez */
+.navbar--b2c-form {
+    background: white !important;
+    box-shadow: 0 2px 11px 0 rgba(0, 0, 0, .1) !important;
+}

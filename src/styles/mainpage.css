@@ -1,0 +1,973 @@
+.promo {
+    overflow: hidden;
+    min-height: 810px;
+    position: relative;
+    padding-top: 130px;
+}
+
+.promo__head {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.promo__title {
+    font-size: 40px;
+    font-weight: 800;
+    color: #291f69;
+    margin: 0 0 10px;
+}
+
+.promo__subtitle {
+    font-size: 24px;
+    font-weight: 400;
+    color: #fff;
+}
+
+.promo__video-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    /* Alternatif çözüm: background-position benzeri davranış */
+    /* background-position: left center; */
+}
+
+.promo__video-wrapper--desktop {
+    display: block;
+}
+
+.promo__video-wrapper--mobile {
+    display: none;
+}
+
+.promo__video {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translateY(-50%);
+    object-fit: cover;
+    object-position: left center;
+}
+
+.promo__video--desktop {
+    display: block;
+    transform-origin: left center;
+    /* Alternatif transform çözümü - yorum satırında saklı */
+    /* transform: translateY(-50%) translateX(-20%); */
+}
+
+.promo__video--mobile {
+    display: none;
+}
+
+@media(max-width: 1550px) {
+    .promo {
+        min-height: 700px;
+        position: relative;
+        zoom: 0.9;
+    }
+}
+
+
+/* Tablet ve küçük desktop için özel hizalama */
+@media(max-width: 1199px) and (min-width: 768px) {
+    .promo__video {
+        object-position: left 30%;
+    }
+}
+
+/* Mobil için özel hizalama */
+@media(max-width: 767px) {
+    .promo {
+        min-height:auto;
+        position: relative;
+        padding-top: 100px;
+        padding-bottom: 0;
+        background-color: #c7c3ef;
+        zoom:1 !important;
+    }
+
+    .promo__head {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .promo__title {
+        font-size: 32px;
+        margin: 0 0 10px;
+    }
+
+    .promo__subtitle {
+        font-size: 16px;
+        color: #fff;
+    }
+
+    .promo__video-wrapper--desktop {
+        display: none;
+    }
+
+    .promo__video-wrapper--mobile {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 360px;
+        z-index: 1;
+    }
+
+    .promo__video--mobile {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .promo__container {
+        padding-bottom: 0;
+    }
+}
+
+.promo-products {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.promo-products__link {
+    text-align: center;
+    color: #291f69;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.promo-products__link span {
+    font-size: 10px;
+    transition: transform .3s ease;
+}
+
+.promo-products__link:hover {
+    transition: transform .3s ease;
+}
+
+.promo-products__link:hover span {
+    transform: translateX(4px);
+}
+
+/* Dropdown hover sorunu çözümü - sadece 992px ve üzeri için aktif */
+@media (min-width: 992px) {
+    .main-nav__item--dropdown .sub-nav {
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.6s ease, visibility 0.6s ease;
+        pointer-events: none;
+    }
+
+    /* Dropdown açıkken görünür yap */
+    .main-nav__item--dropdown:hover .sub-nav,
+    .main-nav__item--dropdown.active .sub-nav {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    /* Dropdown linklerine smooth transition ekle */
+    .main-nav__item--dropdown .main-nav__link {
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Dropdown kapandığında hover efektini temizle */
+    .main-nav__item--dropdown:not(:hover) .main-nav__link {
+        background-color: transparent !important;
+        color: #291f69 !important;
+    }
+
+    /* Scroll edildiğinde dropdown kapandığında hover efektini temizle */
+    .navbar--reverse .main-nav__item--dropdown:not(:hover) .main-nav__link {
+        background-color: transparent !important;
+        color: #291f69 !important;
+    }
+
+    /* Dropdown açıkken hover efektini koru - sticky navbar dahil */
+    .main-nav__item--dropdown:hover .main-nav__link,
+    .main-nav__item--dropdown.active .main-nav__link,
+    .navbar--reverse .main-nav__item--dropdown:hover .main-nav__link {
+        background-color: #b5b0eb !important;
+        color: #291f69 !important;
+    }
+
+    /* Hover aktif class'ı için özel stil */
+    .main-nav__link.hover-active {
+        background-color: #b5b0eb !important;
+        color: #291f69 !important;
+    }
+}
+
+.promo-product-box {
+    display: flex;
+    min-height: 130px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #e6e4ff;
+    padding: 20px 10px;
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    position: relative;
+}
+
+.promo-product-box__icon {
+    font-size: 48px;
+    margin: 0 0 15px;
+    color: #291f69;
+}
+
+.promo-product-box__title {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0;
+    text-align: center;
+    color: #291f69;
+}
+
+.promo-product-box:hover {
+    background-color: #291f69;
+    -moz-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    -webkit-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+}
+
+.promo-product-box:hover .promo-product-box__icon,.promo-product-box:hover .promo-product-box__title {
+    color: #e6e4ff;
+}
+
+.promo-product-box__popper {
+    width: 75px;
+    height: 75px;
+    background: url(/images/popper.svg) center no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #291f69;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 3px;
+    text-align: center;
+    line-height: 1.1;
+    position: absolute;
+    left: -20px;
+    top: -20px;
+}
+
+.promo-product-box__popper--alt {
+    background-image: url(/images/popper-alt.svg);
+}
+
+.campaigns {
+    padding: 60px 0 90px;
+}
+
+.campaigns__slider {
+    max-width: 836px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.campaigns__slider .owl-nav {
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+    width: 90px;
+    display: flex;
+    top:auto;
+    left:auto;
+    gap: 10px;
+    pointer-events: none;
+    height: 40px;
+    z-index: 99;
+}
+
+.campaigns__slider .owl-nav .campaigns__nav-next,
+.campaigns__slider .owl-nav .campaigns__nav-prev {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;     
+    background-color: #fff!important;
+    border: 1px solid #d9ae5f!important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: all;
+    transition: all .3s ease;
+    outline: 0;
+}
+
+.campaigns__slider .owl-nav .campaigns__nav-next span,
+.campaigns__slider .owl-nav .campaigns__nav-prev span {
+    font-size: 13px;
+    color: #d9ae5f;
+    line-height: 1;
+}
+
+.campaigns__slider .owl-nav .campaigns__nav-next:hover,
+.campaigns__slider .owl-nav .campaigns__nav-prev:hover {
+    background-color: #d9ae5f!important;
+    -moz-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    -webkit-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+}
+
+.campaigns__slider .campaigns__nav-next:hover span,
+.campaigns__slider .campaigns__nav-prev:hover span {
+    color: #fff;
+}
+
+.campaigns__item-img {
+    position: relative;
+    padding-bottom: 20px;
+    display: block;
+}
+
+.campaigns__item-img img {
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.campaigns__item-popper {
+    width: 110px;
+    height: 110px;
+    background: url(/images/popper.svg) center no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #291f69;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 6px;
+    text-align: center;
+    line-height: 1.1;
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+    z-index: 9999;
+}
+
+.campaigns__item-content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.campaigns__item-content h4 {
+    color: #000;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 10px;
+}
+
+.campaigns__item-content h4 strong {
+    color: #d9ae5f !important;
+    font-weight: 700;
+}
+
+.campaigns__item-content p {
+    font-size: 16px;
+    color: #8d8d8d;
+    margin: 0 0 20px;
+}
+
+.campaigns__item-content a {
+    color: #00d4a6;
+    font-size: 14px;
+    font-weight: 600;
+    transition: transform .3s ease;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.campaigns__item-content a span {
+    font-size: 9px;
+    transition: transform .3s ease;
+}
+
+.campaigns__item-content a:hover span {
+    transform: translateX(4px);
+    transition: transform .3s ease;
+}
+
+@media(max-width: 767px) {
+    .campaigns {
+        padding:15px 0 60px;
+    }
+
+    .campaigns__slider .owl-nav button.owl-prev {
+        left: 10px;
+    }
+
+    .campaigns__slider .owl-nav button.owl-next {
+        right: 10px;
+    }
+}
+
+.testimonials {
+    padding: 60px 0;
+    background: url(/images/bg-testimonials.jpg) center top no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.testimonials:before {
+    content: "";
+    background: url(/images/quote-open.svg) center no-repeat;
+    background-size: cover;
+    width: 56px;
+    height: 46px;
+    position: absolute;
+    top: -23px;
+    left: 30px;
+}
+
+.testimonials:after {
+    content: "";
+    background: url(/images/quote-close.svg) center no-repeat;
+    background-size: cover;
+    width: 56px;
+    height: 46px;
+    position: absolute;
+    bottom: -23px;
+    right: 30px;
+}
+
+.testimonials__container {
+    overflow: hidden;
+    position: relative;
+}
+
+.testimonials__slider {
+    padding-bottom: 90px;
+    position: relative;
+}
+
+.testimonials__slider .owl-nav {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    pointer-events: none;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.testimonials__nav-buttons {
+    display: flex;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.testimonials__slider .owl-nav button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: transparent!important;
+    border: 1px solid #291f69!important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: all;
+    transition: all .3s ease;
+    outline: 0;
+}
+
+.testimonials__slider .owl-nav button span {
+    font-size: 13px;
+    color: #291f69;
+    line-height: 1;
+}
+
+.testimonials__slider .owl-nav button:hover {
+    background-color: #fff!important;
+    -moz-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    -webkit-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+}
+
+.testimonials__view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #291f69;
+    font-weight:bold;
+    font-size: 14px;
+    text-decoration: none;
+    pointer-events: all;
+    transition: color 0.2s ease;
+}
+
+.testimonials__view-all:hover {
+    color: #5a4db6;
+}
+
+.testimonials__view-all span {
+    font-size: 11px;
+    line-height: 1;
+}
+
+@media (max-width: 768px) {
+    .testimonials__slider .owl-nav {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+    }
+    
+    .testimonials__view-all {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+.testimonials__item {
+    background-color: #f6f5ff;
+    padding: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    height: 244px;
+}
+
+.testimonials__item-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.testimonials__item-title {
+    margin: 0 0 5px;
+    font-weight: 600;
+    font-size: 18px;
+    color: #291f69;
+}
+
+.testimonials__item-img {
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.testimonials__item-content {
+    font-size: 16px;
+    color: #000;
+    font-weight: 400;
+}
+
+.testimonials__item-content p {
+    margin: 0;
+}
+
+@media(max-width: 767px) {
+    .campaigns__item-img img {
+        width: 100%;
+    }
+    .testimonials {
+        padding:45px 15px 60px;
+    }
+}
+
+@keyframes scroll {
+    to {
+        transform: translate(calc(-50% - .5rem));
+    }
+}
+
+.why-us {
+    padding: 90px 0 45px;
+}
+
+.why-us .col-md-3:first-child .why-us__item {
+    border-bottom-left-radius: 0;
+}
+
+.why-us .col-md-3:last-child .why-us__item {
+    border-top-right-radius: 0;
+}
+
+.why-us__item {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.why-us__item-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 30px;
+    height: 102px;
+}
+
+.why-us__item-img img {
+    max-height: 100px;
+}
+
+.why-us__item-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #291f69;
+    margin: 0 0 20px;
+}
+
+.why-us__item-desc {
+    color: #000;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+}
+
+@media(max-width: 767px) {
+    .why-us {
+        padding:45px 0 15px;
+    }
+
+    .why-us__container {
+        padding: 0 20px;
+    }
+
+    .why-us__item {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 20px;
+        text-align: center;
+        margin: 0 -5px;
+    }
+
+    .why-us__item-img {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 0 20px;
+    }
+
+    .why-us__item-img img {
+        max-height: 120px;
+    }
+
+    .why-us__item-title {
+        font-size: 16px;
+        margin: 0;
+    }
+
+    .why-us__item-desc {
+        display: none;
+    }
+}
+
+.banner-area {
+    padding: 45px 0 90px;
+}
+
+.banner-area__container {
+    position: relative;
+}
+
+.banner-area__static-img {
+    position: absolute;
+    z-index: 100;
+    left: 100px;
+    bottom: -150px;
+}
+
+.banner-area__slider {
+    height: 560px;
+    border-radius: 20px;
+    position: relative;
+}
+
+/* Her slide için ayrı background */
+.banner-area__item {
+    position: relative;
+    height: 100%;
+}
+
+.banner-area__item[data-slide-id="1"] {
+    background: url(/images/mainpage/01-Bir-Tik-Uzaginda.jpg) center no-repeat;
+    background-size: cover !important;
+    border-radius: 20px;
+}
+
+.banner-area__item[data-slide-id="2"] {
+    background: url(/images/mainpage/02-Aninda-Karsilastir-Teklif-Al.jpg) center no-repeat;
+    background-size: cover !important;
+    border-radius: 20px;
+}
+
+.banner-area__item[data-slide-id="3"] {
+    background: url(/images/mainpage/03-Canli-Destek-Hattimiza-Baglan.jpg) center no-repeat;
+    background-size: cover !important;
+    border-radius: 20px;
+}
+
+.banner-area__item-content {
+    padding: 60px 30px 45px 60px;
+    height: 560px;
+}
+
+.banner-area__item-content h3 {
+    color: #e2b560;
+    font-size: 36px;
+    font-weight: 800;
+    margin: 0 0 20px;
+}
+
+.banner-area__item-content p {
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 25px;
+}
+
+.banner-area .owl-dots {
+    padding-left: 60px;
+    display: flex;
+    margin-top: -90px;
+    position: relative;
+    z-index: 10;
+    max-width: 400px;
+    gap: 45px;
+}
+
+.banner-area .owl-dots .owl-dot {
+    color: #8173E0;
+    font-size: 50px;
+    font-weight: 800;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    width: 46px;
+    height: 46px;
+    background: url(/images/slider-number-bg-passive.svg) center no-repeat;
+    line-height: 46px;
+}
+
+.banner-area .owl-dots .owl-dot.active {
+    background-image: url(/images/slider-number-bg.svg);
+    color: #fff;
+}
+
+@media(max-width: 991px) {
+   
+    .banner-area__static-img {
+        position:absolute;
+        z-index: 100;
+        position: absolute;
+        left: 50%;
+        -moz-transform: translateX(-50%);
+        -o-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+        bottom: 0;
+    }
+
+    .banner-area__static-img img {
+        max-width: 300px;
+    }
+
+    .banner-area__slider {
+        height: 660px;
+    }
+
+    .banner-area__item {
+        height: 660px;
+    }
+
+    .banner-area__item-content {
+        padding: 45px 30px;
+        height: 400px;
+    }
+
+    .banner-area__item-content h3 {
+        color: #e2b560;
+        font-size: 36px;
+        font-weight: 800;
+        margin: 0 0 20px;
+    }
+
+    .banner-area__item-content p {
+        font-size: 16px;
+        color: #fff;
+        margin-bottom: 25px;
+    }
+}
+.partners {
+    padding: 45px 0 200px;
+}
+@media(max-width: 767px) {
+    .partners {
+        padding: 45px 0 75px !important;
+    }
+
+    .banner-area__static-img {
+        position:absolute;
+        z-index: 100;
+        width: 200px;
+        bottom: 60px;
+    }
+
+    .banner-area__static-img img {
+        max-width: 200px;
+    }
+
+    .banner-area__slider {
+        height: 600px;
+    }
+
+    .banner-area__item {
+        height: 600px;
+    }
+
+    .banner-area__item-content {
+        padding: 35px 30px;
+        height: fit-content;
+        min-height: 400px;
+    }
+
+    .banner-area__item-content h3 {
+        color: #e2b560;
+        font-size: 24px;
+        font-weight: 800;
+        margin: 0 0 20px;
+    }
+
+    .banner-area__item-content p {
+        font-size: 16px;
+        color: #fff;
+        margin-bottom: 25px;
+    }
+    .banner-area__item[data-slide-id="2"] {
+        background: url(/images/mainpage/02-Aninda-Karsilastir-Teklif-Al.jpg) calc(55% - 50px) no-repeat;
+    }
+    .banner-area__item[data-slide-id="3"] {
+        background: url(/images/mainpage/03-Canli-Destek-Hattimiza-Baglan.jpg) calc(55% - 50px) no-repeat;
+    }   
+    .banner-area__item[data-slide-id="1"] {
+        background: url(/images/mainpage/01-Bir-Tik-Uzaginda.jpg) calc(55% - 50px) no-repeat;
+    }
+}
+
+
+
+.partners__item {
+    border: 1px solid #d9d9d9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    height: 190px;
+    border-radius: 20px;
+    background-color: #fff;
+}
+
+.partners__item-img {
+    max-width: 100%;
+    max-height: auto;
+    transition: all .2s ease-in-out;
+}
+
+.partners__item:hover .partners__item-img {
+    -moz-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    -webkit-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+    transform: scale(1.1);
+}
+
+@media(max-width: 1199px) {
+    .partners__item {
+        height:150px;
+        margin: 0 -10px;
+    }
+}
+
+@media(max-width: 767px) {
+    .partners__container {
+        padding:0;
+    }
+
+    .partners__item {
+        padding: 10px;
+        height: 160px;
+        margin: 0;
+    }
+
+    .partners__scroll {
+        flex-wrap: nowrap!important;
+        overflow-x: auto;
+        padding: 0 15px 10px 15px;
+        margin: 0;
+    }
+
+    .partners__scroll::-webkit-scrollbar {
+        height: 5px;
+    }
+
+    .partners__scroll::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+
+    .partners__scroll::-webkit-scrollbar-thumb {
+        background: #d9ae5f;
+        border-radius: 10px;
+    }
+
+    .partners__scroll .col-5,.partners__scroll .col-md-2 {
+        flex: 0 0 140px;
+        max-width: 140px;
+        margin-right: 10px;
+        padding: 0;
+    }
+
+    .partners__scroll .col-5:last-child,.partners__scroll .col-md-2:last-child {
+        margin-right: 15px;
+    }
+}
+
+.faq {
+    padding: 45px 0 60px;
+    background: url(/images/faq-bg-bottom.png) left bottom no-repeat;
+}
+
+@keyframes bounce {
+    0%,20%,50%,80%,100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    40% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+
+    60% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}

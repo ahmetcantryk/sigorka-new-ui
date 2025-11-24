@@ -1,0 +1,278 @@
+[
+  {
+    "id": 1,
+    "title": "Katılım Sigortacılığı",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Katılım Sigortacılık Sistemi Nasıl İşler?",
+        "answer": "Geleneksel sigortacılıkta sigortalı ile sigortacı arasında karşılıklı sorumluluklar yükleyen bir sözleşme söz konusudur. Sigortalı primini ödeyecek sigortacı da poliçe şartları çerçevesinde gerektiğinde tazminat ödeyecektir. Toplanan primler tazminatlara yetmez ise sigortacı zarar etmiş olmaktadır. Buna karşın toplanan primler ödenen tazminatlardan fazla ise sigortacının karıdır. Sigorta döneminde riziko gerçekleşmez ise sigortalının ödediği prim tamamen sigortacının olmaktadır. Katılım sistemin de ise geleneksel sigortaların aksine toplanan primler Katılım sigorta kuruluşu’nun sigortalılara vekaleten faizsizlik esasına uygun olarak işletmesi amacıyla bir fonda toplanmakta ve gerektiğinde sigortalıların birbirlerine bağış olarak alınmaktadır. Bu havuzda biriken meblağ Katılım sigorta kuruluşu tarafından faizsizlik esasına göre işletilmekte ve Katılım sigorta kuruluşu’nun vekalet ya da ortaklık gibi doğal haklarının dışındaki kar sigortalıların primlerinden oluşan havuza aktarılmaktadır. Bu havuz ayrıca sigortanın gereği olarak hasar gerçekleşmesi halinde mağdur olan poliçe sahibinin mağduriyetini gidermede kullanılmaktadır."
+      },
+      {
+        "id": 2,
+        "question": "Katılım Anlaşması Ticari midir?",
+        "answer": "İsminden de anlaşılacağı üzere katılım, karşılıklı dayanışma esaslıdır. Bu sistemde sigortalıların kendi aralarındaki ilişki ortaklık, yardımlaşma ve dayanışmadır. Primleriyle (katkı paylarıyla) oluşturdukları havuz, Katılım sigorta şirketinin faizsiz şekilde işletmesi ile kar eder ise başlangıçta Katılım sigorta kuruluşuyla yaptıkları sözleşme hükümlerine uygun olarak karda ortaklıkları söz konudur. Sigortalılar ile Katılım sigorta kuruluşu arasındaki ilişki ise sigortalıların sigortadan arzu ettikleri bütün teminatları sağlamakla birlikte klasik sigortacı sigortalı ilişkisinden öte sigortalıların fonunu onlara vekaleten işleten vekil müvekkil ilişkisidir. Klasik sigortada ise ticari faaliyet esastır. Sigortacı topladığı primler ile ödediği tazminatlar arasındaki farkı kendisine kar olarak alır. Katılım sigortasında karşılıklı dayanışma esastır ve amaç kar değildir."
+      },
+      {
+        "id": 3,
+        "question": "Katılım Fonu ile Sermayedarlar Fonu Arasındaki İlişki Nasıldır?",
+        "answer": "Katılım sisteminde katılım, katılımcılarından (sigortalılar) toplanan fon ile sermayedarların hesapları arasında tam bir ayrım vardır. Katılım fonu Katılım sigorta kuruluşu’nun mülkiyetine geçmez. katılım fonu katılımcılarına vekaleten işletmesi ve sözleşmede belirlenen rizikoya maruz kalan katılımcılara tazminat ödemelerini organize etmesi amacıyla Katılım sigorta kuruluşu’na emanet edilmiştir. Halbuki klasik sigortada bütün primler ile bu primlerden sağlanan karlar sermayedarlara aittir."
+      },
+      {
+        "id": 4,
+        "question": "Ödenen Hasar Tutarları Katılım Havuzunu Aşarsa Ne olur?",
+        "answer": "Katılım sisteminde katılımcıların ödediği katılım fonları ödenen tazminatları karşılamaz ise katılım fonunu yöneten katılım sigorta kuruluşu (vekil) katılımcıların oluşturduğu Katılım fonuna faizsiz borç (karz-ı hasen) verir. Yani katılım sistemine katılımcıların ödediği fon toplam sigorta ödemelerini karşılayamaz ise Katılım sigorta kuruluşu hiçbir faiz almadan katılım fonuna borç verir (Karz-ı Hasen) ve katılımcıların hak ettikleri tazminatları öder. Bu faizsiz borç fonun daha sonraki gelirlerinden tahsil edilir. Klasik sigortacılıkta ise şirketlerin topladıkları primler toplam tazminat ödemelerini karşılayamayacak duruma düşerse zarar şirkete aittir."
+      },
+      {
+        "id": 5,
+        "question": "Katılım Sistemi Faiz İçeriyor mu?",
+        "answer": "Klasik sigortayla ilgili en önemli eleştirilerden biri söz konusu sigortacılık işleminin faiz içerdiğidir. Zira klasik sigorta şirketleri topladıkları primi neredeyse bütünüyle faizli işlemlerde değerlendirirler. Sigortalıya ödedikleri tazminatları da faizli işlemlerden kazandıkları fonlarla karşılarlar. Yine sigortacının sigortalıdan aldığı ve mülkiyetine geçirdiği prime karşılık riziko gerçekleşmesi halinde sigortalıya primden kat kat fazla tazminat ödemeyi garanti etmesi de kimi İslam alimlerince faizli işlem olarak görülmüştür.<br>Katılım sisteminde katılımcıların katkılarıyla oluşan fon faizsiz enstrümanlarda değerlendirilir. Bu bakımdan fonun karı faizden değil kar ya da kira gibi faiz dışı gelirlerden oluşur. Katılımcıya ödenen tazminatlar da bu fondan karşılandığından sigortalıya faiz ödemesi yapılmamış olur. Yine katılım sisteminde katılım sigorta kuruluşu sigorta primi karşılığında sigortalıya tazminat ödemeyi garanti eden taraf değil katılımcıların ödedikleri katkı paylarından oluşan Katılım fonunu işleten vekildir. Dolayısıyla prim karşılığı ödenen tazminat arasındaki fark faiz olarak değerlendirilemez. Katılımcıların katılım sigorta kuruluşu’na emanet ettikleri katkı payları ile rizikoya maruz kalan katılımcıya yaptıkları bağış niteliğindedir."
+      },
+      {
+        "id": 6,
+        "question": "Katılım Sigortacılığında Fonlar Nerelerde Değerlendirilir?",
+        "answer": "Katılım sisteminde katılım sigorta şirketikatılım sigorta kuruluşu toplanan fonu faizsiz işlemlerde değerlendirmek zorundadır. Fonun değerlendirileceği işlemin faizsiz olup olmadığına katılım sigorta kuruluşukatılım bünyesinde bulunan danışma kurulu karar verir. Buna göre kuruluş, faiz yerine kar ve kira gibi gelirler elde etmek üzere faaliyette bulunur. Dolayısıyla katılımcıların katkı paylarıyla oluşan fon katılım bankalarının özel cari ve katılma hesaplarıyla, altın ve döviz alım satımı, kıymetli maden alım satımı, emtia alım satımı, katılım endeksine tabi hisse senetlerinin alım satımı, proje ortaklıkları, hazine ve özel sektör kira sertifikalarında değerlendirilebilir."
+      },
+      {
+        "id": 8,
+        "question": "Katılım Sigortacılığında Sigorta Primi Ne Anlama Gelir?",
+        "answer": "Sigortalıların ödediği primler, onların fonlarıyla oluşturulan bir havuza katkı anlamı taşır. Bu fon, katılım sigorta kuruluşu tarafından faizsizlik esasına göre işletilir. Bu fon, aynı zamanda katılımcıların yaşadıkları rizikolar için sigortalıların birbirlerine bağışı mahiyetindedir."
+      },
+      {
+        "id": 9,
+        "question": "Katılım Sigortacılığında Hasar Gören Müşterinin Hasarı Nereden ve Nasıl Karşılanır?",
+        "answer": "Sigortacılıkta sigortalıların maruz kaldıkları riziko sebebiyle aldıkları tazminatlar kısmen sigorta şirketi tarafından kısmen de sigortacının sigortacısı yani reasürans kuruluşunca karşılanır. Zira sigortacılar, maruz kalacakları rizikoyu dağıtmak üzere belirli bir prim karşılığı üst sigorta kuruluşlarına kendilerini sigortalatırlar. Klasik sigortada reasürans şirketleri de faizli işlemlerle fonlarını işletirler.<br>Katılım sigortacılığı sisteminde ise sigortalılara ödenen tazminatlar, kısmen faizsizlik esasına göre işletmesi için katılım sigorta kuruluşu’na emanet edilen fondan karşılanır. Klasik sigortadaki reasüransın yerini katılım sisteminde Re-Katılım (retekafül) alır. Buna göre katılım sigorta kuruluşu, katılım fonunu bir üst katılım sigorta reasürans kuruluşu’na sigortalatır. Reasürans kuruluşu da kendisine emanet edilen fonu faizsiz işlemlerde değerlendirmek durumundadır. İşte rizikoya maruz kalan sigortalıların aldığı tazminatların bir kısmı da bu re-katılım kuruluşlarınca karşılanır."
+      },
+      {
+        "id": 11,
+        "question": "Katılım Sigortacılığında Danışma Kurulu Nedir?",
+        "answer": "Bir şirketin katılım şirketi olabilmesi için şirket bünyesinde faizsiz finans ve katılım sistemi hakkında uzmanlaşmış ilim adamlarından oluşan bir danışma kurulunun bulunması gerekir. Aksi takdirde bu şirketin katılım sigorta kuruluşu olması mümkün değildir. İslami ilimler alanında uzman ilim adamlarından oluşan danışma kurulu bir katılım sigorta şirketinin yapmış olduğu tüm anlaşmaları, hazırladığı poliçeleri, sigortaladığı varlıkları ve fonu işletme yöntemlerini faizsizlik esasına göre inceler ve uygun olmayan durumları engeller. Buna göre katılım sigortası sisteminde olması veya olmaması gereken hususlar danışma kurulu tarafından belirlenmekte ve denetlenmektedir. Yapılan tüm işlemler ve değişiklikler danışma kurulu onayı alındıktan sonra devreye alınmaktadır."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Katılım Kasko Sigortası",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Tazminat Nasıl Hesaplanır ve Ödeme Nasıl Yapılır?",
+        "answer": "Hasar tazmininin ne şekilde yapılacağı poliçede açıkça belirtilir. Onarım yapılacak olması halinde poliçede, onarımın şirketçe belirlenecek servislerde veya sigortalı tarafından belirlenecek servislerden hangisinde yapılacağı yer alır. Ayrıca hasarın tazmininde orijinal parça veya eşdeğer gibi parça seçeneklerinden hangisinin kullanılacağı belirtilir. Bu bilgiler kasko poliçesi üzerinde bulunmaktadır."
+      },
+      {
+        "id": 2,
+        "question": "Kasko Yaptırmak İçin Nelere Dikkat Edilmeli?",
+        "answer": "Araçlarına kasko sigortası yaptırmayı düşünen araç sahiplerinin yanıt aradıkları soruların en başında “Kasko yaptırırken nelere dikkat edilmelidir?” yer almaktadır. Kasko yaparken dikkat edilmesi gerekenlerden biri hangi sigorta şirketi ile anlaşma yapılacağı olmaktadır. Kasko poliçesi yaptırılacak olan sigorta şirketinin seçilmesi son derece önem taşımaktadır. Güvenilir sigorta şirketleri ile çalışılması önerilmektedir. Kasko kapsamında olan durumlar ile kapsam dışı durumların detaylı olarak bilgisinin alınması gerekmektedir. Kasko sigortası yaptırırken araç sahiplerinin önceliğinin kasko ücretleri değil, kasko kapsamı olması tavsiye edilmektedir. Kasko sigortası genel ve özel şartlarının dikkatli olarak incelenmesi son derece önemlidir. Kasko sigortasında kasko araç temininin bulunması, aracın onarım sürecinde araç sahiplerinin araçsız kalmalarının önüne geçmektedir. Kasko sigortası yaptırırken dikkat edilmesi gereken diğer durumlar ise şu şekilde belirtilebilir: • Güvenilir sigorta şirketleri ile çalışılması • Poliçe kapsamının öğrenilmesi • Poliçedeki özel şartlar hakkında bilgi sahibi olunması • Ödeme seçeneklerinin değerlendirilmesi • İkame araç teminatının bulunması • Sigorta poliçesinde gösterilen miktarın aracın değerini yansıtması • Kasko poliçesindeki muafiyet uygulamasını kontrol ettirmek • Kasko hasarsızlık indirimi ile ilgili bilgi almak • Kasko primlerinin düzenli olarak ödenmesi"
+      },
+      {
+        "id": 3,
+        "question": "Araç, noter satışı olmaksızın, el senedi ile satılmış ve alan kişi kazaya karışmış ise, satan açısından sorumluluk söz konusu olur mu?",
+        "answer": "Araçlara ilişkin mülkiyet değişikliği noter satışı ile mümkündür. Noter satışı olmayan araç için işleten sıfatı değişmez. Her iki tarafın kendi aralarında yapmış olduğu el sözleşmesi satan kişinin sorumluluğunu kaldırmaz."
+      },
+      {
+        "id": 4,
+        "question": "Hasarsızlık indirimleri şirket değişiklerinde ve araç değişiklerinde devam eder mi?",
+        "answer": "Kasko sigortasında genel bir prensip vardır: hasarsızlık indirimi araç sahibini takip eder. Bundan dolayı eski sigorta şirketini bırakıp kasko sigorta poliçesini başka bir şirkete yaptırdığınızda indirim hakkınız devam eder. Ya da eski aracınızı satıp yeni bir araç satın aldığınızda indirimden faydalanmaya devam edersiniz. Fakat bunun için yeni bir poliçe yaptırmalısınız. Geçmişte yaptırdığınız kasko poliçeleri ve hasarsızlık indirimlerinin kaydı tramer üzerinde tutulur. Kasko hasarsızlık indiriminiz böylelikle muhafaza edilmiş olur."
+      },
+      {
+        "id": 5,
+        "question": "Hasarsızlık indirimine hak kazanmış bir aracın sigorta yenilemesinin başka şirkete yaptırılması durumunda hasarsızlık indirimi devam eder mi?",
+        "answer": "Evet devam eder, hasarsızlık indirim hakkının kaybolmaması için sigortaya ara verilmemesi esastır. Kasko Sigortasında hasarsızlık indirim kademesi Sigorta Bilgi ve Gözetim Merkezi aracılığıyla bütün sigorta şirketleri tarafından çevrimiçi olarak takip edilebilmektedir."
+      },
+      {
+        "id": 6,
+        "question": "Araç el değiştirdiğinde, kasko poliçesi de el değiştirir mi?",
+        "answer": "Araç el değiştirdiğinde, kasko poliçesi el değiştirmez. Poliçe iptal edilerek işlememiş günlerin primi gün esasına göre sigortalıya iade edilir. Aracı yeni satın alan kişinin kendi adına poliçe yaptırması gerekir."
+      },
+      {
+        "id": 7,
+        "question": "Sigortalı Vefat Ederse Kasko Poliçesi Devam Eder mi?",
+        "answer": "Sigortalının tüm hakları ve menfaatleri, borçları, kanuni varislere devir olur. Sigorta devri için ise veraset ilamının Sigorta firmasına ibrazını varisin bildirmesi gerekir."
+      },
+      {
+        "id": 8,
+        "question": "Plakası Çıkmamış Aracıma Kasko Poliçesi Düzenleyebilir miyim?",
+        "answer": "Evet , henüz plakası çıkmamış aracınıza geçici plaka üzerinden bulunduğunuz ilin plaka kodu ve YK (Yeni Kayıt) üzerinden poliçe düzenleyebilirsiniz. Ruhsatı çıkmayan sıfır araçlarda Kasko Sigortası düzenlenirken öncelikle motor,şasi numarası,yıl,marka ve modeli esas alınarak düzenlenir."
+      },
+      {
+        "id": 9,
+        "question": "Kasko Poliçesi Satın Alırken Nelere Dikkat Etmeliyim?",
+        "answer": "Kasko poliçesi yaptırırken muhakkak aracınızın kasko bedeline göre düzenlenmesi gerekir. Ayrıca daha önce hasarınız yoksa hasarsızlık indirimini de yaptırmanız gerekmektedir. Bunlar dışında poliçenizde, servis seçimlerine, orijinal yedek parça teminatına, araç model ve yılının doğru yazıldığını dikkat etmelisiniz."
+      },
+      {
+        "id": 10,
+        "question": "Araç Satıldığında Kasko Sigortası Yeni Sahibi Adına Devam Edebilir mi?",
+        "answer": "Sözleşme süresi içinde, araç satıldığında araç sahibinin ilgili mevzuata uygun olarak değişmesi halinde Sigorta sözleşmesi araç sahibinin değiştiği anda kendiliğinden feshedilmiş olur ve feshin hüküm ifade ettiği tarihe kadar geçen sürenin primi gün esasına göre hesap edilir ve fazlası Sigorta ettirene geri verilir. Ancak, Sigorta sözleşmesinde araç sahibinin değişmesine rağmen tarafların (aracın önceki sahibi, aracın yeni sahibi ve Sigorta şirketi) poliçe iptal edilmeden aracın yeni sahibi adına devamı hükme bağlanabilir."
+      },
+      {
+        "id": 11,
+        "question": "Araç Çalındığında veya Pert Olduğunda Sigorta Şirketi Hangi Meblağı Ödemektedir?",
+        "answer": "Poliçe üzerinde araç sigorta bedeli belirtilmemektedir. Sigorta şirketleri aracı hasar tarihi itibariyle rayiç değerine kadar teminat altına almaktadır. Tam ziya hasar olması durumunda piyasa rayiç değer esas alınmaktadır. Hasar durumunda eksik/aşkın sigorta uygulanmaz."
+      },
+      {
+        "id": 12,
+        "question": "Kasko Sigortalı Aracın Çalınması Halinde, Tazminat Ödenmeden Bekleme Süresi Var mıdır?",
+        "answer": "Çalınan aracın bulunması için ilgili makamların yapacakları araştırmalar 30 gün içinde sonuç vermediği takdirde, ilgili makamdan aracın bulunamadığına dair yazı alınarak, sigortacı tazminatı öder. Bu ödemeyi takiben çalınan araç bulunduğu takdirde, bu durumu sigortalı yazı ile sigortacıya derhal bildirmekle yükümlüdür; Sigortalı, aldığı tazminatı iade ederek aracını geri alabilir veya aracın mülkiyetini sigortacıya devreder."
+      },
+      {
+        "id": 13,
+        "question": "Anlaşmalı ve Anlaşmasız Servisler Arasındaki Hasar Uygulama Farkı Nedir?",
+        "answer": "Anlaşmalı servislerle anlaşmasız servisler arasında önemli farklar vardır. Anlaşmalı servislerde bakım-onarım için hiçbir ücret ödemeniz gerekmez. Tüm işlemler, sigorta şirketin ve servis arasında gerçekleşir. Kasko anlaşmasız servislerde ise araç sahibi olarak sizin ödeme yapmanız gerekir. Yapılan ödemenin alınması için servisten verilen fatura ile birlikte sigorta şirketinden talep edilir. Ayrıca anlaşmasız serviste onarım yapılması durumunda bazı sigorta şirketleri tarafından muafiyet uygulamalarına dikkat etmek gereklidir."
+      },
+      {
+        "id": 14,
+        "question": "Aracın Aksesuarları Kasko Sigortalarına Dahil midir?",
+        "answer": "Sigortalanan aracın fabrika çıkışı orijinalinde olmayan aksesuarlar poliçede belirtilmediği sürece teminata dâhil değildir. Araca sonradan monte edilen aksesuarlar (radyo-teyp, kolon, çelik jant, özel lastik, telsiz, telefon ve diğer aksesuarlar) sigorta bedeli belirtilerek ve primi ödenerek teminata dâhil edilebilir."
+      },
+      {
+        "id": 15,
+        "question": "Kasko Sigortası ile Trafik Sigortası Arasındaki Fark Nedir?",
+        "answer": "Kasko Sigortası ile kendi aracınızda meydana gelen maddi zararları teminat altına almaktadır. Trafik Sigortası ise, aracınızın üçüncü kişilere vereceği maddi ve bedeni zararları teminat altına alan ve yaptırılması zorunlu olan bir sigortadır. Trafik Sigortası, sadece üçüncü kişilere verilen zararları karşılamakta olup, kendi aracınızın hasarını ödemez. Bu durumda, kendi aracınızdaki hasarın karşılanması için Kasko Sigortası yaptırılması gerekmektedir."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Ferdi Kaza Sigortası",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Ferdi Kaza Sigortası Zorunlu mudur?",
+        "answer": "Hayır, Ferdi Kaza Sigortası isteğe bağlı bir sigorta ürünüdür. Ancak riskli meslek gruplarında çalışan kişiler için ferdi kaza sigortası hayati nitelik taşımaktadır. 26/1/2015 tarihli 2015/7249 sayılı Bakanlar Kurulu Kararı ile yürürlüğe konulan Maden Çalışanları Zorunlu Ferdi Kaza Sigortası ile yeraltı ve yerüstü kömür madenciliği faaliyetinde bulunan gerçek ve tüzel kişilerin söz konusu faaliyetlerin icrası sırasında oluşabilecek kazalar sonucunda tesislerinde üretim hazırlığı faaliyetinde bulunan personeller için sigorta poliçesi yaptırmak zorundadırlar."
+      },
+      {
+        "id": 2,
+        "question": "Ferdi Kaza Sigortası Ne İşe Yarar?",
+        "answer": "Ferdi Kaza Sigortası, sigortalının kazada oluşan maddi kayıplarını karşılamakta ve kaza sonucu oluşan maddi hasarın yanı sıra, ölüm veya sakatlanma gibi sonuçları da kapsamaktadır. Bu sigorta, genellikle özel bir poliçe şeklinde satılır ve sigortalının yaşamında herhangi bir zamanda meydana gelebilecek riskleri teminat altına alır."
+      },
+      {
+        "id": 3,
+        "question": "Ferdi Kaza Sigortası Fiyatları Ne Kadar?",
+        "answer": "Ferdi kazada sigorta ücreti sigorta şirketlerine göre farklılık göstermektedir. Ferdi Kaza Sigortası kapsamında bulunan ek teminat seçenekleri ile poliçe primlerinde değişiklik olabilmektedir. Ferdi kaza sigortası hesaplamaları yaş, meslek risk durumu, seçilen sigorta poliçesi gibi birkaç temel faktöre bağlı olarak yapılmaktadır."
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "İMM Sigortası",
+    "questions": [
+      {
+        "id": 1,
+        "question": "İMM Ne Zaman Devreye Girer?",
+        "answer": "İMM, trafik sigortasının tavan sigorta bedelinin toplam hasarı karşılamaya yetmediği zaman devreye giren bir teminattır. Yani kalan hasarı poliçede yer alan limitlere göre karşılar."
+      },
+      {
+        "id": 2,
+        "question": "IMM poliçem en az ne kadar olmalı?",
+        "answer": "3.000.000 TL, 10.000.000 TL gibi limitli ve sınırsız İMM olarak adlandırılan limitsiz paket seçenekleri mevcuttur. İhtiyaçlarına ve bütçene göre İMM paketini kendin seçebilirsin. 10.000.000 TL gibi limiti olan paketler belirli bir sınır dahilinde hasarı karşılar."
+      },
+      {
+        "id": 3,
+        "question": "Sınırsız IMM nasıl yapılır?",
+        "answer": "Limitsiz İMM Sigortası yaptırmanız için Kasko Poliçesi zorunluluğu bulunmamaktadır. Trafik Sigortanızın olması yeterlidir. Trafik Sigortanız hangi şirketten olursa olsun limitsiz İMM Sigortasını başka bir katılım sigortasından alabilirsiniz. Size en uygun IMM Sigortası için Sigorka.com web sitemizden teklif alabilir veya Çağrı Merkezimizi arayarak soru ve taleplerinizi uzman danışmanlarımıza iletebilirsiniz."
+      },
+      {
+        "id": 4,
+        "question": "Motorlu kara taşıtları IMM Sigortası neden önemli?",
+        "answer": "İMM, kaza sonrası karşı tarafa verilen zarar bedelinin Zorunlu Trafik Sigortası poliçe limitlerinin üzerinde kalması durumunda, aşılan tutarın sigorta şirketi tarafından güvence altına alınmasını sağlayacağından yüksek araç hasarlı bir trafik kazası durumunda karşı tarafın hasar bedelini teminat altına alır."
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Özel Sağlık Katılım Sigortası",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Özel Sağlık Sigortası Poliçeme Çocuğumu Ekletmek İstiyorum Yaş Sınırı Var mı?",
+        "answer": "Evet, 24 yaş ve üzeri çocuk kapsamında değerlendirilmemektedir. 24 yaş altı çocuklarınızı aile poliçesi olarak ekletebilirsiniz."
+      },
+      {
+        "id": 2,
+        "question": "Özel Sağlık Sigortası Yurt Dışında Geçerli mi?",
+        "answer": "Poliçenize yurtdışı tedavi teminatı ekletmeniz durumunda geçerlidir."
+      },
+      {
+        "id": 3,
+        "question": "Özel Sağlık Sigortasında Anlaşmasız Kurumlardaki Tedavi Giderlerim Karşılanıyor mu?",
+        "answer": "Evet, poliçenizin anlaşmasız kurum teminat ve limitleri dâhilinde fatura ve evraklarınızı sigorta şirketine ilettiğinizde sonradan ödeme yapılabilmektedir."
+      },
+      {
+        "id": 4,
+        "question": "Sağlık Sigortasında Anlaşmalı Kurum Nedir?",
+        "answer": "Anlaşmalı kurum, poliçenizi yaptırdığınız sigorta şirketiyle anlaşmalı olan özel hastanelere denilmektedir."
+      },
+      {
+        "id": 5,
+        "question": "Özel Sağlık Sigortasında Doğum Teminatı Satın Aldım Bekleme Süresi Var mı?",
+        "answer": "Evet, Özel Sağlık Sigortalarında doğum teminatıyla ilgili 5 ay bekleme süresi bulunmaktadır."
+      },
+      {
+        "id": 6,
+        "question": "Özel Sağlık Sigortalarında Ömür Boyu Yenileme Garantisi Hakkı Nasıl Kazanılır?",
+        "answer": "Ömür boyu yenileme garantisi sigorta şirketlerinin genel ve özel şartlarına göre değişkenlik göstermektedir. Ancak en genel ifade ile kesintisiz 3 yıl sigortalı olmak ve hasar prim oranınızın %100’ün altında olması olarak ifade edebiliriz."
+      },
+      {
+        "id": 7,
+        "question": "Özel Sağlık Sigortalarında İndirim Var mı?",
+        "answer": "Evet, Özel Sağlık Sigortalarında aile indirimi vardır. Sigorta şirketine göre özel indirimler uygulanabilmektedir."
+      },
+      {
+        "id": 8,
+        "question": "Özel Sağlık Sigortam Var. Eş ve Çocuklarımı Dâhil Edebilir miyim?",
+        "answer": "Evet, poliçe satın alırken eş ve çocuklarınızı poliçenize dâhil edebilirsiniz. Mevcut poliçenize sadece yeni evlilik ile eş, yeni doğum ile çocuk eklenebilmektedir. Bunlar dışında poliçenizin vade ortasında ekleme yapılmamaktadır."
+      },
+      {
+        "id": 9,
+        "question": "Özel Sağlık Sigortası Süresi Nedir?",
+        "answer": "Poliçe başlangıç tarihi itibariyle 1 yıldır."
+      },
+      {
+        "id": 10,
+        "question": "Özel Sağlık Sigortasından Kimler Faydalanabilir?",
+        "answer": "Özel sağlık sigortası için SGK şartı yoktur. 0-64 yaş arası herkes faydalanabilir. Türkiye’de ikamet eden yabancı kimlik sahibi kişiler de özel sağlık sigortasından yararlanabilirler."
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Seyahat Sağlık Katılım Sigortası",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Yurt dışına çıktıktan sonra poliçe yaptırabilir miyim?",
+        "answer": "Hayır yaptıramazsınız, poliçe yapılması durumunda geçerliliği olmayacaktır.<br>Ülkeden çıkış tarihinizin şirketler tarafından tespit edilmesi durumunda ödeme yapılmamaktadır."
+      },
+      {
+        "id": 2,
+        "question": "Seyahatim Sırasında Başıma Gelebilecek Kaza ve Hastalık Durumunda Teslim Etmem Gereken Belgeler Nelerdir?",
+        "answer": "Sigorta ettiren veya sigortalı kaza veya hastalık sonucu ödenmesi gereken muayene, tedavi ilaç ve hastane masraflarını gösteren belgelerin asıllarını veya onaylı suretlerini, tedaviyi yapan hekim veya hastanece doldurulacak ihbar ve tedavi formları ekinde teslim etmekle yükümlüdür."
+      },
+      {
+        "id": 3,
+        "question": "Seyahatim Sırasında Başıma Gelebilecek Kaza ve Hastalık Durumunda Teslim Etmem Gereken Belgeler Nelerdir?",
+        "answer": "Sigorta ettiren veya sigortalı kaza veya hastalık sonucu ödenmesi gereken muayene, tedavi ilaç ve hastane masraflarını gösteren belgelerin asıllarını veya onaylı suretlerini, tedaviyi yapan hekim veya hastanece doldurulacak ihbar ve tedavi formları ekinde teslim etmekle yükümlüdür."
+      },
+      {
+        "id": 4,
+        "question": "Yurt Dışı Seyahatim Sırasında Hastalanırsam Tedavi Giderlerim Karşılanır mı?",
+        "answer": "Önceden var olan kronik hastalıklar haricinde acil durum ve kaza halinde poliçeniz teminat ve limit kapsamında karşılanır."
+      },
+      {
+        "id": 5,
+        "question": "Seyahat Sağlık Sigortasını Seyahatimden Kaç Gün Önce Başlatmalıyım?",
+        "answer": "Seyahat Sağlık Sigortaları, poliçe genel şartlar gereği öğlen 12.00’de başlayıp öğlen 12.00’de sona ermektedir. Bu sebeple seyahat başlangıç saatiniz öğlen 12.00’den önce ise poliçenizi 1 gün öncesinden başlatmanız gerekmektedir. Aynı durum seyahat bitimi için de geçerlidir."
+      },
+      {
+        "id": 6,
+        "question": "Seyahat Sigortasının Geçerlilik Süresi Nedir?",
+        "answer": "Seyahat Sigortası, sigortalı tarafından belirtilen poliçe başlangıç ve bitiş tarihleri arasında geçerlidir."
+      },
+      {
+        "id": 7,
+        "question": "Seyahat Sigortası Nedir?",
+        "answer": "Yurt dışı seyahatlerde olası hastalık, kaza, bagaj kaybı gibi riskleri teminat altına alan bir sigorta türüdür."
+      }
+    ]
+  }
+]

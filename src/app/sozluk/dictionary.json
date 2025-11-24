@@ -1,0 +1,614 @@
+[
+  {
+    "id": 1,
+    "title": "Akreditif",
+    "summary": "Alıcı ve satıcının birbirini tanımadığı, karşılıklı ilk kez ticaret yaptığı durumlarda tercih edilen bir ödeme yöntemi olan akreditif, tarafların birbirlerine olan yükümlülüklerini bankalar aracılığı ile resmileştirdiği kredi belgesidir. \"Kredi mektubu\" olarak Türkçeye çevrilebilecek olan \"Letter of Credit\" işlemleri kredi limiti gerektirir. Büyük miktarlarda ödemelerin söz konusu olduğu veya uzun vadeli işlemlerde de tercih edilen akreditifler, peşin veya vadeli olarak açılabilir.Dış ticaret işlemleri, ithalatçı ve ihracatçı açısından bazı riskler taşır. Akreditifli işlemler, her iki tarafın taşıdığı riskleri kendi lehlerine minimuma indirdiği yöntemdir. Açılan akreditif metninde ithalatçı, ihracatçıya hangi belgeleri ne zamana kadar ibraz etmesi halinde ödeme yapacağını bildirir. Bunun karşılığında ise ihracatçı, yüklemeyi istenen koşullarda ve belirtilen tarihe kadar yaptığı takdirde ödemesini alacağını bilir. İthalatçı ise istediği koşullarda ve kalitedeki malın gecikmeksizin yükleneceğinden emin olur.",
+    "slug": "akreditif"
+  },
+  {
+    "id": 2,
+    "title": "Aktüer",
+    "summary": "Aktüer, sigorta rizikolarını ve sigorta prim bedellerini istatistiksel ve olasılık hesaplamaları ile belirleyip tespit eden ve bu neticeden yola çıkarak gelecek vadedeki sürece yönelik stratejik değerlendirmeler yapan kişidir.Bu değerlendirmeler, sigorta sözleşme maddelerini belirleyen faktörler olduğu için Aktüer'in sigorta sektöründeki önemi büyüktür. Görevleri arasında istatistik, ihtimal hesapları ve sigortacılığın yasal düzenlemeleri yer alan aktüer, sigorta prim bedellerini, kar paylarını ve rezervleri de hesaplamaktan sorumlu olan kişidir.</br>Aktüer, ihtimal dahilindeki rizikoların olası etkilerini öngören ve bundan kaynaklanması muhtemel finansal zararların azaltılmasının ve ekonomik olarak istikrarlı bir süreç oluşmasının sorumluluğunu taşıyan kişidir. İnsan hayatında birçok çeşitli olay meydana gelebilir. Örneğin insan yaşamını oldukça güçlü bir şekilde etkileyen doğum, ölüm, hastalık, sakatlık ya da emeklilik gibi durumlarla; insanların maddi mal varlığını olumsuz ölçüde etkileme ihtimali bulunan sel, kaza, yangın, hırsızlık, deprem ya da doğal veya insan eliyle gerçekleşme ihtimali bulunan her türlü afet, insan hayatında her dakika karşılaşılma ihtimali bulunan olaylardır. Bu ihtimal dahilindeki risklerin ölçümünün yapılması, değerlendirilmesi ve bu koşulların en etkin biçimde yönetilmesi şartıyla aktüerler, hem bireysel yaşama hem de toplumsal hayata katkıda bulunarak refahın ve yaşam kalitesinin sürekliliğini sağlarlar.",
+    "slug": "aktuer"
+  },
+  {
+    "id": 3,
+    "title": "Akile",
+    "summary": "Kelimenin kökünde \"bağlamak, engellemek; anlamak\" mânaları vardır. Diyete akl (çoğulu ukul) veya ma'kule (çoğulu meâkıl), ödemede bulunacak kimselere de âkıle denmesi, diyet olarak verilen develerin mağdurun veya velîlerinin avlusuna getirilip \"bağlanması\" yahut diyetin ödenmesiyle diğer tarafın intikam almasına \"engel olunması\" gibi mülâhazalara dayandırılmaktadır.",
+    "slug": "akile"
+  },
+  {
+    "id": 4,
+    "title": "Aktüeryal Matematik Karşılık",
+    "summary": "Sigorta şirketlerinin toplam prim gelirlerinin bugünkü değeri ile poliçeden doğan yükümlülüklerinin bugünkü değeri arasındaki fark, aktüeryal matematik karşılık olarak adlandırılır. Aktüeryal matematik karşılıklar, Hazine Müsteşarlığı’ndan onay almış ürün teknik şartnamesinde belirtildiği şekilde hesaplanarak muhasebeleştirilir. Sigorta şirketlerinin bilançolarında karşılık bulan aktüeryal karşılıklar, tüm sigorta sisteminin sağlıklı bir şekilde işleyebilmesi ve yükümlülüklerin aksamadan faaliyetlerin devam edebilmesi için tesis edilmiş bir sistemdir.",
+    "slug": "aktueryal-matematik-karsilik"
+  },
+  {
+    "id": 5,
+    "title": "Asistant",
+    "summary": "Sigortacılık sektöründe, sigorta türüne göre farklı şekillerde sunulabilen teminatlar arasında yer alan asistans hizmetleri, sigortalının sağladığı faydaları zenginleştiren bir teminat türüdür. Sigorta ürününe göre, sigortalıya çeşitli ilave hakları kullanabilme imkânı sağlar. Bazı poliçelerde standart olarak bulunan asistans hizmeti, bazen de talep edilmesi halinde ilave primlerle sigorta sözleşmelerine dahil edilebilir. Asistans hizmetlerinde genel yönelim, sigortalıların poliçe süresince sigorta konusuyla ilgili daha kapsamlı hizmet almasını sağlamak ve sunulan güvencelerin niteliğini artırmaktır.",
+    "slug": "asistant"
+  },
+  {
+    "id": 6,
+    "title": "Avarya",
+    "summary": "Sigorta sektörü, hayatın her alanda karşılaşma ihtimali olan olumsuz durumlara karşı her geçen gün kapsamını artırmaktadır. Bunun sonucu olarak farklı sigorta çeşitleri, geleceğini güvence almak isteyenler için hizmete sunulur. Sigorta çeşitleri sağlık, konut ve emeklilik gibi kişisel konular üzerine olabileceği gibi, ticari hayatta da kullanışlı alternatifler sunar. İş sahibi olanlar, yaptıkları iş konusunu ya da iş yaptıkları araçları farklı tehlikelere karşı korumak, oluşabilecek hasarlardan olabildiğince az kayıpla çıkabilmek adına sigortalama işlemlerine başvurabilir. İhracat ve ithalat yaparken sıklıkla başvurulan gemi taşımacılığı, sigorta şirketlerinin yoğun bir hizmet sunduğu ticari alanlar arasındadır. Deniz ticareti, tahmin edilemeyen birbirinden farklı tehlikeler içerdiğinden dolayı ticareti gerçekleştiren firma sahipleri, gemileri ve yükleri sigortalatarak iş hayatında karşılarına çıkabilecek riskleri en aza indirmeyi amaçlar. Deniz ticaretini kapsayan sigorta işlemlerinde ise en önemli kavramlardan bir tanesi avaryadır.",
+    "slug": "avarya"
+  },
+  {
+    "id": 7,
+    "title": "Ayb-ı Zati",
+    "summary": "Ayb-ı zati, taşınan malın nakliyecinin kusurundan ve hatalarından dolayı değil, kendi kusurundan dolayı zarar gördüğü anlamına gelir. Ayb-ı zati durumunun ispatlanması durumunda, nakliye işlemleri esnasında mallar zarar görse dahi nakliyeci tarafı hatalı bulunmaz ve karşı tarafa herhangi bir tazminat ödemek zorunda kalmaz. Ayb-ı zati durumunu oluşturabilecek koşullar: Taşınacak ürünlerin nakliyeciye taahhüt edilenden daha zayıf, güçsüz ve dayanıksız bir şekilde imal edilmiş olması, paketlemenin kötü, eksik ve zayıf şekilde yapılması sebebiyle paket içindeki malların zarar görmesi, nakliye ettiren tarafın nakliyeciye malın ve kolilerin mahiyeti hakkında yanlış bilgi vermesi ve bu bilgi yanlışlığı yüzünden malların yanlış şekilde taşınarak hasar alması şeklinde sıralanabilir.",
+    "slug": "ayb-i-zati"
+  },
+  {
+    "id": 8,
+    "title": "Beher",
+    "summary": "Sigortacılıkta beher, sigortacılık işlemlerinde en çok kullanılan kavramlardan biridir. “Her bir” anlamına gelen beher ifadesi, sigorta poliçelerinde belirsizlik yaşanmasının önüne geçer ve sigorta şirketlerinin sigortalılara karşı yükümlülüklerinin net bir şekilde tanımlanmasını sağlar. Pek çok sigorta türünde kullanılabilen beher ifadesi, sigortalı ve sigortacı arasında anlaşmazlık oluşmasını önlerken sigorta poliçelerinin güvenilirliğini de artırır.",
+    "slug": "beher"
+  },
+  {
+    "id": 9,
+    "title": "Beyan",
+    "summary": "Sigortacılıkta beher kavramı şöyle açıklanmaktadır: Bir sigorta poliçesi yaptırmak için gereken bazı durumlar vardır. Bunlar sigortalanacak bir mal veya hizmet, bir sigortalı ve bir de sigorta şirketidir. Sigortalının beyanı ise bu üç durumu meydana getiren, bu durumları birleştiren yani birbirine bağlayan en önemli hususlardan biridir.</br>Sigorta şirketi, sizin başvurunuz ve beyanınız sonucunda sizin için gerekli teminatları belirler. Ardından sizin için bir sözleşme oluşturulur ve poliçeniz de bunların sonucunda hazırlanır. Kısacası, sizin beyanınız olmadan teminat, sözleşme ve poliçe hazırlama gibi durumların hiçbiri gerçekleşmez.",
+    "slug": "beyan"
+  },
+  {
+    "id": 10,
+    "title": "Cam Kırılması",
+    "summary": "Cam kırılması sigortası, cam yüzeylerin hasar görmesine neden olabilecek hemen hemen tüm tehlikelere karşı güvence sağlayan özel bir teminattır. Sigorta ile hasar görmüş camın değiştirilmesi ve onarılması ile ortaya çıkan masrafların tazmin edilmesini sağlanır. Poliçedeki özel şartlarla, sigortalı nesnenin kaybı ile aynı olaydan kaynaklanmak koşulu ile bina ya da diğer eşyalarda meydana gelebilecek hasarlar da tazmin edilebilir. Cam, genellikle pencere ve kapılar şeklinde mülklerin bir parçası olduğundan, cam kırılma sigortası genellikle konut ya da İş Yeri Paket Sigortası gibi diğer sigorta poliçelerinin içinde isteğe bağlı bir teminat olarak sunulur.</br>Cam Kırılması Sigortası Primleri</br>Cam kırılması sigortaları genellikle pencere, kapı, ayna, duşakabin, reklam panosu, akvaryum ve vitrin gibi camdan yapılmış yapıları kapsar. Prim miktarı, sigortalı camın türü, kalınlığı, kırılmaya karşı korunmalı olup olmadığı, montaj yöntemi, konumu ve toplam sigorta bedeli gibi çeşitli faktörlere bağlı olarak değerlendirilir. Sigorta bedeli, riskin ortaya çıkması durumunda ödenecek maksimum tazminat olarak sigortalı nesnenin tam değeri olarak ifade edilebilir ya da olası zarar miktarına bağlanabilir. Poliçe koşullarına göre değişiklik göstermekle birlikte riskin gerçekleşmesi durumunda yeni bir camın veya aynı tip ve kalitedeki başka bir nesnenin sabitlenmesi ya da cam yüzey üzerine yeni bir resim, tabela ya da dekorasyon yapılması için kararlaştırılan tutarı geçmeyecek şekilde tazminat ödenebilir. Ayrıca tazminat, geçici maliyetlerin geri ödenmesini ya da zararın ortadan kaldırılması ve hafifletilmesi ile ilgili diğer masrafları da kapsayacak şekilde genişletilebilir.</br>Ayrı bir sigorta ile teminat altına alınmamış olmak şartıyla \"Cam Kırılması Sigortası\" kapsamı dışında kalan durumlar da bulunmaktadır.</br>Yangın, yıldırım, patlama ve kurtarma faaliyetleri sonucunda meydana gelen kayıp ve hasarlar</br>• İnşaat ve tadilat nedeniyle meydana gelen hasar ve kayıplar</br>• Sigortalanan camın üzerindekilerin zarar görmesinden meydana gelen hasar ve kayıplar</br>• Toplumsal hareketler (grev, lokavt, kargaşa) ve bu hareketlere kolluk kuvvetleri tarafından yapılan müdahaleler sonucunda meydana gelen hasar ve kayıplar</br>• Terör faaliyetleri ve bu faaliyetleri önlemek amacıyla yetkili merciler tarafından yapılan müdahaleler sonucunda meydana gelen hasar ve kayıplar",
+    "slug": "cam-kirilmasi"
+  },
+  {
+    "id": 11,
+    "title": "Daini Mürtehin Şerhi",
+    "summary": "Daini mürtehin, çok fazla bilinmeyen bir kavramdır. Kelime anlamları değerlendirildiğinde dain \"alacaklı\", mürtehin ise \"rehin\" anlamındadır. Daini mürtehin, bir riskin ortaya çıkması halinde alacaklının haklarını korumak amacıyla uygulanan bir prosedürdür. Daini mürtehinin amacı, alacaklının teminat altına alınmasını sağlamaktır. Bu durumu bir örnekle açıklamak gerekirse; banka kredisi aracılığı ile bir otomobil almak ve araca kasko yaptırmak isterseniz, poliçe üzerindeki finans kurumunun \"rehinli alacaklı\" olarak gösterildiğine tanık olursunuz. Aslında bu durum kredi veren banka tarafından talep edilen bir prosedürdür. Böyle bir durumda taşınır bir mal olan aracınıza ilgili yasalar gereğince menkul rehini uygulanır. Aracınızla ilgili tüm tarafların menfaatleri, sigorta sözleşmesi yapılarak güvence altına alınmalıdır. Böyle bir durumda iki farklı yol izlenebilir. Bunlardan ilki, araç sahibinin araç üzerinde bulunan menfaatlerini sigortalatmasıdır. İkinci yol ise rehinli alacağı bulunan kişinin aracını, alacak miktarı kadar sigortalatmasıdır.</br>Aracın değer kaybetmesi halinde veya alınacak tutarın aracın satış bedelinden tahsil edilme durumu söz konusu değilse, ödenmesi gereken zorunlu sigorta tazminatı, rehinli alacaklı olan kişinin alacağı sigortalı aracın yerine geçirilir. Daini mürtehin, aynı zamanda ev alırken yapılan konut sigortalarında da uygulanabilir.</br>Daini Mürtehin herhangi bir nedenden dolayı kredi çektikten sonrası \"rehinli alacaklı\" konumunda bulunan bankanıza, kredinizin son taksitini ödeyene kadar rehin durumu kaldırılmaz. Bütün borcunuzu ödedikten sonra daini mürtehin iptali anlamına gelen konut veya taşıt rehin kaldırma işlemini gerçekleştirebilirsiniz. Bu işlem için mutlaka bankanızın şubesini ziyaret etmeniz gerekir.",
+    "slug": "daini-murtehin-serhi"
+  },
+  {
+    "id": 12,
+    "title": "Dar Kasko",
+    "summary": "Dar kasko, standart bir kasko paketinde yer alan ana teminat maddelerinin yalnızca bir kısmını içeren, tabiri caizse mini bir kasko sigorta türüdür. Kasko için düzenlenen genel ve standart şartlardan herhangi bir tanesi paketten çıkarılırsa o durumda ortaya çıkan poliçe türü, dar kaskonun cevabı olarak tanımlanabilir. Dar kasko poliçesinin en dikkat çekici noktası, fiyat anlamında standart kasko paketlerine göre daha uygun seçenekler sunmasıdır.",
+    "slug": "dar-kasko"
+  },
+  {
+    "id": 13,
+    "title": "Dask",
+    "summary": "Kısa yazılışı DASK olan terimin açılımı Doğal Afet Sigortaları Kurumu’dur. DASK’ın başlıca görevi, devletin özel sigorta şirketleri ile işbirliği yaparak oluşturduğu deprem teminat sistemini düzenlemek ve denetlemektir. Türkiye’de tüm gayrimenkul sahiplerinin yaptırmak mecburiyetinde olduğu, zorunlu deprem sigortası olarak da bilinen DASK poliçesi ise diğer konut sigortaları ile birbirini tamamlayıcı özelliğe sahiptir. Zorunlu deprem sigortası olarak bilinen DASK sisteminin ana amacı, sahibi olduğunuz binada deprem sebebi ile oluşacak maddi hasarları güvence altına almaktır. DASK’ın yapısal karakterleri şöyledir:</br>• DASK poliçesi devlet tarafından yapılması mecburi kılınan bir sigorta türüdür. Her yıl yenilenmesi mecburidir.</br>• Gayrimenkulünüzü kiraya vermek, doğalgaz, su ve elektrik bağlatmak için düzenli olarak yaptırmanız ve primlerini ödemeniz gerekir.</br>• DASK poliçesi sadece binaya gelecek zararları karşılar, eşyaların ve bina içindeki diğer değerlerin hasar riskini üstlenmez.</br>• DASK poliçesi, deprem nedeni ile oluşan zararları karşılar. Bunlara deprem kaynaklı; yangın, yer kayması, infilak ve tsunami dahildir.</br>• DASK poliçesinde konutun teminat değeri her yıl düzenli olarak açıklanan metrekare birim fiyatına göre hesaplanır.</br>• Konutların azami teminat değeri ya da risk oluştuğu takdirde alınacak en yüksek tazminat bedeli tavan değer ile sınırlandırılır.</br>• Primlerin hesaplanması ise her yıl DASK tarafından ilan edilen bölgesel katsayılara göre hesaplanır.</br>DASK Hakkında Bilmeniz Gerekenler</br>Zorunlu deprem sigortası, yaşadığımız coğrafya itibari ile tüm gayrimenkul sahiplerini devlet güvencesi altına alan şemsiye sigorta sistemidir. DASK’a ek olarak yaptıracağınız konut sigortası ise riskin oluşması halinde DASK poliçeniz tarafından sınırlandırılan azami teminat değerini artırdığı gibi poliçenizin içeriğine ve ek teminatlarına göre kapsamını da genişletir. DASK yaptırdığınız da bilmeniz gereken diğer hususlar ise şu şekildedir:</br>• Aynı gayrimenkul için iki farklı DASK poliçesi düzenlenmez.</br>• Hasar tazminatları ekspertiz işlemlerini takiben Doğal Afetler Sigorta Kurumu tarafından ödenir.</br>• Binanın bulunduğu bölgenin risk değeri, bina yaşı ve metrekaresi ödeyeceğiniz primi belirleyen faktörlerdir.</br>• Sigorta poliçesi kesilmiş olsa bile prim ödenmediği takdirde başlamış sayılmayacağı için risk oluştuğu durumlarda ödeme alamazsınız.</br>DASK adres kodu, taşınmazınız için devlet tarafından atanan 10 haneli kimlik numarasıdır.",
+    "slug": "dask"
+  },
+  {
+    "id": 14,
+    "title": "Dispeç",
+    "summary": "Dispeç, müşterek avarya ve deniz sigortası hukuku kapsamındaki zararların paylaştırılması işlemidir. Dispeç, müşterek avaryayla ilgili bir uzmanlık alanıdır ve denizcilik sektörüne özgüdür. Genel bir tanım olarak, bir deniz kazası ile mülk (gemi, kargo, bunker, navlun vb.) tehlikede olduğunda, bu mülkü kurtarmak için gönüllü ve makul şekilde yapılan herhangi bir olağanüstü fedakarlık veya harcamanın tanımlanmasıdır. Gemi ve taşınan kargo, örneğin yangın gibi ortak tehlikeye maruz kaldığında ve gemiyi ve malları ortak tehlikeden kurtarmak için çaba gösterildiğinde, bu durum genellikle müşterek avarya olarak nitelendirilir. Örneğin, gemi sahibi gemiyi ve kargoyu ortak bir tehlikeden kurtarmak için harcama yaparsa bu şekilde oluşan maliyetler taraflar arasında paylaştırılır. Söz konusu maliyetin müşterek avarya beyanında paylaştırılmasını sağlayan kişi dispeççidir.",
+    "slug": "dispec"
+  },
+  {
+    "id": 15,
+    "title": "Dispeççi",
+    "summary": "Dispeççi, bir geminin hasar (hasar), arıza, örneğin yangın, çarpışma veya karaya oturması gibi durumlarını inceleyen ve araştıran bir profesyoneldir. Gemiler, kazaların da meydana gelebileceği çok zorlu bir ortamda çalışır. Gemi ve taşınan yük ile birlikte düşünüldüğünde olayın tarafları genellikle farklı ülkelerin vatandaşlarıdır. Böyle bir durumda her bir kazazedenin zararını karşılamak için ortak bir yasal ve teknik sisteme ihtiyaç duyulur. Armatörler ve sigorta şirketleri açısından hem deniz olaylarının karmaşıklığı hem de tarafların farklı mevzuatlara tabi olabilmesi, alanında uzman bir kişi tarafından dispeç işlemini zorunlu hale getirir. Büyük ya da küçük olması fark etmeksizin her türden hak iddiası dispeççi tarafından ele alınır. Dispeççi tarafından hazırlanan bir rapor, yasal olarak bağlayıcı değildir; ancak bağımsız bir uzman tarafından hazırlandığı için sigorta şirketleri tarafından kolaylıkla kabul edilebilir. Raporlarına mahkemelerde nadiren itiraz edilir. Dispeççiler genellikle armatörler tarafından tayin edilmekle birlikte, ücretler sigorta şirketi tarafından ödenir ve talebin bir parçasını oluşturur. Ücretler sigortacı tarafından ödenmesine rağmen dispeççiler tarafsızlığını korur.",
+    "slug": "dispecci"
+  },
+  {
+    "id": 16,
+    "title": "Eksedan",
+    "summary": "Eksedan anlaşmaları, reasürör ile sedan şirket arasında yapılan ve risklerin karşılıklı olarak bölüşülmesini ifade eden otomatik bölüşmeli reasürans anlaşmaları arasında yer alır. En yaygın reasürans yöntemlerinden biri olan eksedan metodunda, reasürörün de her bir riske iştirak etmesi gerekmez.Reasürans işlemleri, sigorta şirketlerinin düzenledikleri poliçeler nedeni ile üstlendikleri riskleri bir başka sigorta şirketine sigortalattırmasıdır. Üzerlerinde taşıdıkları risklerin bir kısmını reasürans işlemleri sayesinde reasürörlere devreden sigorta şirketleri, mali açıdan yeni poliçeler kesebilmek için esneklik kazanmış olurlar. Karşılığında ise ürettikleri primlerin bir kısmını reasürans şirketleri ile paylaşmak zorunda kalırlar. Eksedan yöntemi, reasürör ve sedan arasında kullanılan sigortalama yöntemlerinden bir tanesidir. Sigorta şirketi (sedan) rizikolarının ağırlığına bağlı olarak farklı tiplerde saklama payları belirler. Sedan, bu yöntemde hesaplamalarını tamamen kendi mali gücü ve teknik anlayışına bağlı olarak yapar. Belirlediği saklama paylarından fazlasını ise anlaşmalı olduğu reasüröre otomatik olarak devreder.",
+    "slug": "eksedan"
+  },
+  {
+    "id": 17,
+    "title": "Ekspertiz Raporu",
+    "summary": "Sigortacılık sektöründeki birçok sigorta ürününde, oluşan hasarın tespiti aşamasında teminatların ödenebilmesi için ekspertiz raporuna başvurulur. Araç sigortaları, konut sigortalarının yanı sıra ticari ve finansal sigorta ürünlerinde risklerin gerçekleşmesi durumunda sigorta şirketi tarafından poliçe şartlarına uygun bir şekilde ödenecek teminatların belirlenmesinde ekspertiz raporları büyük önem taşır. Örneğin, trafik kazalarında araçlarda oluşan hasarın belirlenmesi ve bu hasara uygun şekilde teminat ödenebilmesi için uzmanlar tarafından hasar tespit çalışması neticesinde hazırlanan ekspertiz raporu hasar dosyasına eklenir. Bu raporlar risklerin gerçekleştiği sigorta süreçlerinin işleyebilmesi için gerekli olan hukuki evraklar arasındadır. **Gayrimenkul sektöründe ekspertiz raporu şöyle açıklanabilir:** Özellikle ikinci el konut alışverişinde ihtiyaç duyulan finansman için zaman zaman söz konusu taşınmazın değerinin belirlenmesi gerekebilir. Yaygın olarak konut kredilerinde ekspertiz raporu, alıcının ve satıcının üzerinde anlaştığı fiyatın uygunluğunun saptanabilmesi için krediyi verecek olan finans kuruluşunca talep edilen belgeler arasındadır. Bankacılık Kanunu’na göre, kredi süreçlerinde müşterilerden talep edilebilecek hukuki belgeler arasında da yer alır. Bağımsız gayrimenkul değerleme kuruluşları ya da gayrimenkul değerleme uzmanları tarafından, konum, binanın yaşı, nitelikleri, emsal incelemesi gibi belirli kriterlere göre hazırlanan ekspertiz raporu doğrultusunda gayrimenkulün doğru fiyatının belirlenmesini sağlar. **Otomotiv Sektöründe Ekspertiz Raporu ise**; ikinci el araç alım satım işlemlerinde, aracın yaşı, aracın geçmişi, motor ve mekanik aksamların durumu, araç üzerindeki mevcut hasarlar gibi risklerin önceden belirlenerek alışverişin güvenli bir şekilde gerçekleştirilebilmesi tercih edilen bir belgedir. Kanuni olarak, 2019 öncesinde oto ekspertiz raporu zorunlu değilken bu yıldan itibaren Ticaret Bakanlığı tarafından yapılan mevzuat değişikliği ile birlikte 2. El otomobil alım satımı öncesinde oto ekspertiz raporu zorunlu hale getirilmiştir. Son değişiklikle birlikte 8 yaş ve 160 bin kilometrenin altındaki araçların satışında oto ekspertiz raporu alınması zorunludur. Oto ekspertiz raporu sayesinde alışveriş sonrasında hem alıcının hem de satıcının yaşayabileceği mağduriyetler ortadan kaldırılabilir.",
+    "slug": "ekspertiz-raporu"
+  },
+  {
+    "id": 18,
+    "title": "Fakülatif Reasürans",
+    "summary": "Fakültatif ya da isteğe bağlı reasürans tek tek poliçeleri veya bir araya toplanan birkaç poliçenin farklı bölümlerini kapsayabilen sözleşme türüdür.",
+    "slug": "fakulatif-reasurans"
+  },
+  {
+    "id": 19,
+    "title": "Fıkıh",
+    "summary": "Kur'an'da, en genel çerçevede zorunlu veya gönüllü olarak yapılan her türlü maddî harcamayı ifade eden “sadaka”, bazı ayetlerde yalnızca zekât, gönüllü bağış veya kamu harcamaları ya da fakirler için oluşturulan fonda toplanan bir tür vergi anlamında kullanılmıştır.",
+    "slug": "fikih"
+  },
+  {
+    "id": 20,
+    "title": "Flotan Poliçe",
+    "summary": "Nakliye sigortaları branşında kullanılan flotan poliçe tipi, karşılıklı güven esasına dayalı olarak düzenlenen sigorta poliçeleri arasında yer alır. Geçici süreli poliçeler olarak da adlandırılan bu tip poliçeler, özellikle bürokratik işlemlerin uzun sürebildiği dış ticaret uygulamalarında önemli bir yere sahiptir. Dış ticarete bağlı uluslararası nakliye işlemlerinde sıklıkla başvurulan bir tür geçici sigorta poliçesi olan flotan sigortalar, yüklenme aşamasına geldiği halde nakliye yapacak taşıtın plakası ve/veya ismi bilinmediği için, malların sigortasız kaldığı dönemde geçici bir çözüm sunmayı hedefler.",
+    "slug": "flotan-police"
+  },
+  {
+    "id": 21,
+    "title": "Garar",
+    "summary": "Belirsizlik, tehlike, şans veya risk anlamına gelir. İslam Hukuku'nun muamelat kısmında, riba (faiz) ve meysir (kumar) gibi olumsuz bir unsurdur.",
+    "slug": "garar"
+  },
+  {
+    "id": 22,
+    "title": "Hadis",
+    "summary": "İslâm Peygamber’ine atfedilen ve onun sözleri, fiilleri, onaylamaları ve sıfatlarını içeren bilgilerdir. Hadis âlimleri buna sahabe ve tabiînin söz ve fiillerini de eklemişlerdir. Ancak bunlar kaynak olma bakımından peygamberin fiil ve sözleri ile aynı seviyede değildirler ve hadis ilmi içerisinde farklı şekilde isimlendirilirler.",
+    "slug": "hadis"
+  },
+  {
+    "id": 23,
+    "title": "Halefiyet",
+    "summary": "Halefiyet, kelime anlamı olarak bir başkasının yerine geçme şeklinde tanımlanabilir. Esasında bir hukuk terimi olmakla birlikte borçlar hukukunun konusu olmakla beraber sigortacılık sektöründe \"Halefiyet\" genellikle zarar ve sorumluluk sigortaları kapsamındadır. Sigorta konusunun, sigorta ettirenin ya da sigortalının üçüncü kişilere verdiği zararlar olduğu sigorta türlerinde, borç ifa yükümlülüğü sigorta şirketine devredilir. Bu gibi durumlarda zarara uğrayan kişi, zarara sebebiyet veren kişinin sigorta poliçesine dayanarak zararın karşılanmasını sigorta şirketinden talep edebilir. Yani, üçüncü kişinin tazminat talepleri, poliçede sigortalı taraf olan kişinin ya da kurumun teminatlarından karşılanır. Bir başka deyişle, sigorta şirketi üçüncü kişinin zararlarının karşılanması hususunda sigortalının halefi olur. Sigorta hukuku, borçlar hukuku ve ticaret hukukunun ortak çalıştırıldığı bir konu olan zarar sigortalarında alacağın devri söz konusudur. Zarar sigortalarının hizmet alanı olan bu durumlarda, sigortalılar satın aldıkları poliçelerle, üçüncü kişilere karşı ilgili risklerin gerçekleşmesi durumunda doğacak olan borçlarını ve sorumluluklarını teminatlar kapsamında sigorta şirketine devreder. Bu açıdan bakıldığında sigorta ettirenler, halefiyet kavramıyla birlikte üçüncü kişilerin çıkarını poliçeler ve sigorta şirketleri aracılığıyla korumuş olur. Hukuki literatüre göre, bazı sigorta ürünleri üçüncü kişilerin yararına düzenlenen sözleşme örneği olarak da gösterilebilir.",
+    "slug": "halefiyet"
+  },
+  {
+    "id": 24,
+    "title": "Hamule Senedi",
+    "summary": "Hamule senedi, hem yurt içi hem de yurt dışı nakliye işlemlerinde kullanılan bir evraktır. Ağırlıklı olarak trenle mal taşıma amacıyla düzenlenen hamule senedi, aynı zamanda kamyonla ve tırla gerçekleştirilecek nakliye işlemlerinde de kullanılır.",
+    "slug": "hamule-senedi"
+  },
+  {
+    "id": 25,
+    "title": "Hasar",
+    "summary": "Hasar, sigorta poliçesi ile güvence altına alınan varlıklarda meydana gelen zarardır. Ancak burada dikkat edilmesi gereken hasarın yine poliçede belirtilen riziko kapsamında ortaya çıkmış olması gerektiğidir. Hasarın meydana gelmesinden sonra sigortalı taraf, sigorta şirketine bildirimde bulunur ve poliçe kapsamında ise hasarının karşılanmasını talep eder. Buna hasar ihbarı adı verilir. Hasar ihbarı ile başlayan süreç, sigorta şirketinin hasar tespiti amacıyla eksper tayin etmesi ile devam eder. Sigorta şirketinin tayin ettiği eksper, sigortalının bildirdiği hasar hakkında değerlendirme yapar. Bazı durumlarda sigorta şirketi eksper tayin etmeye gerek duymaz. Bu aşama hasar dosyasının açılması olarak adlandırılır. Eksper ya da sigorta şirketi tarafından bildirilen hasar kaydına ilişkin değerlendirme işleminin sonuçlanması için sigortalı kişinin gerekli belgeleri ve evrakları ekspere ya da eksper atanmamışsa sigorta şirketine ulaştırması gerekir. İnceleme işlemleri bittiğinde hasar tespit edilir ve onay işleminin sonrasında sigortalının uğradığı zarar poliçe limitleri dahilinde karşılanır.",
+    "slug": "hasar"
+  },
+  {
+    "id": 27,
+    "title": "Hükmi Tam Ziya",
+    "summary": "Hükmi tam ziya; sigortalı, sigorta şirketi ve olası durumlar sonucu oluşan bir sigorta terimidir. Genellikle nakliyat sigortalarında ortaya çıkan bu terim, nakliye aracı veya yükün uğradığı kaza sonucu harcanacak masraflar ile ilgilidir. Nakliye aracı ve aracın taşıdığı yük herhangi bir kaza ile karşılaştığında kurtarma işlemi için yapılacak masrafların toplamı ve kurtarılacak değerin değerini aşma durumunda sigorta işlemlerinde hükmi tam ziya söz konusu olur. Hükmi tam ziya söz konusu olduğunda sigorta konusu olan şeyin tamamen ortadan kalkmadığı, ancak belirli bir hasara uğradığı bilinir. Bu gibi durumlarda sigorta konusu olan mal ve araçlar tamamen hasara uğrayıp yok olursa hakiki, yani gerçek tam ziya meydana gelir. Hakiki (gerçek) tam ziya durumunda sigortalı ve sigorta şirketi arasında imzalanan sigortanın fiziki varlığı ortadan kalkar. Sigortanın fiziki varlığı ortadan kalktığı için bu durumda tazminat söz konusu olabilir. Gerçek tam ziya halinin kaçınılmaz olduğu yani düzeltme imkanının bulunmadığı durumlarda sigortalı ve sigorta şirketi arasında hükmi tam ziya devam eder. Dolayısıyla, meydana gelen zarar ile kurtarma, tamir, yerine ulaştırma gibi gerekli masraflar hükmi tam ziya kapsamında yer alır. Öte yandan, kurtarma ve tamir etme değerlerinin aşılması gibi durumlar da hükmi tam ziya kapsamında ele alınan unsurlar arasındadır.",
+    "slug": "hukmi-tam-ziya"
+  },
+  {
+    "id": 28,
+    "title": "İcmal",
+    "summary": "İcmal, sigortacıların düzenli olarak çıkarttığı ve uyguladıkları işlemlerin mali detaylarına yer verdiği resmi belgeler arasında yer alır. Aylık ve yıllık gibi farklı çeşitleri bulunan icmaller, Aylık Sigorta Bildirgesi’nde yer alan bilgilerin doğruluğunun kontrol edilmesini ve SGDP bordrolarındaki bilgilerin teyidini sağlar. Sigorta şirketlerinin mali denetimlerini kolaylaştıran icmaller, farklı sahalardaki bilgilere aynı anda yer vermeleri sayesinde, sigorta şirketlerinin kendi denetim süreçlerini hızlandırır ve yasal denetimleri de kolaylaştırır.",
+    "slug": "icmal"
+  },
+  {
+    "id": 29,
+    "title": "İkame",
+    "summary": "İkame, kelime anlamı olarak \"yerine koyma, yerine kullanma\" anlamı taşır. Sigorta sektöründe de bu kelime aynı anlamda kullanılıyor sayılabilir. Sigorta ettiren kişinin aracı trafiğe çıkamayacak kadar hasarlı bir durumdaysa, sözleşme şartları kapsamında belirli bir süre geçtikten sonra sigortalı araçla aynı özellikleri taşıyan bir araç, sigorta ettiren tarafa verilir. Bu duruma da sigorta jargonunda \"ikame\" denir. Verilen araca ise \"ikame araç\" denir.",
+    "slug": "ikame"
+  },
+  {
+    "id": 30,
+    "title": "İkraz",
+    "summary": "Tüm birikimli sigortaların, nominal değer veya ölüm yardımı ve bir tasarruf hesabı işlevi gören nakit değer olmak üzere temelde iki değeri vardır. Sigortalının, uzun süreli ve belirli sigorta türlerinde geçerli olmak üzere, ödediği primlerden oluşan birikimlerini belirli bir faiz karşılığında borç alabilmesine ikraz adı verilir. Teminat süresi üzerinde belirli bir zaman sınırı olan ve nakit değeri biriktirmeyen sigorta türlerinden farklı olarak, birikimli hayat sigortalarının nakit bileşeni kredi aracı olarak kullanılabilir. Bu sigortalarda poliçenin ilk yıllarında, primin çoğu tazminat ödeneğinin finanse edilmesine gider. Prim ödeme süreleri uzadıkça poliçenin nakit değeri de artar. Sigortalının yatırdığı primlerle belirli bir nakit değere ulaşan sigortalar, vergiden muaf nakit değeri karşılığında (%95) sigorta şirketi tarafından faiziyle birlikte ödenmek üzere borç olarak verilebilir. İkraz söz konusu olduğunda poliçe kredisi vefat ödeneğinden alınmaz. Borç, ödeneğe karşı ödünç verilir ve sigorta şirketi poliçeyi kredi için teminat olarak kullanır.",
+    "slug": "ikraz"
+  },
+  {
+    "id": 31,
+    "title": "İndikatif",
+    "summary": "İndikatif teklif, sigorta şirketlerinin ya da acentelerinin müşterilerine gösterge niteliğinde sunduğu, bağlayıcılığı olmayan ve maliyetler açısından referans olması amacıyla oluşturulmuş bir teklif formudur. Teminat seçenekleri ve hasar geçmişi gibi başvuru sahibinin verdiği yanıtlara dayalı olarak tahmini şekilde oluşturulan teklif gösterge niteliğinde olup poliçe fiyatının makul bir tahminidir. Örneğin, bir acente ya da online poliçe hesaplama aracı gösterge niteliğinde bir fiyat teklifi verdiğinde, karşı taraf işlem yapmayı seçerse, acente teklifte belirtilen fiyatı uygulamak zorunda değildir. Risk basamağına göre oluşturulan indikatif tekliflerin tutarı, beyan edilen bilgilere bağlı olarak belgelerin sunulması ya da ek bilgi sağlanmasına bağlı olarak değişiklik gösterir. Nihai teklif ise kişiye özgü olarak tüm risklerin değerlendirilmesi sonucunda, resmi bir başvuru ile sağlanan bilgilere dayanan nihai prim tutarını içerir. İndikatif teklif ve nihai teklif arasındaki en önemli fark, nihai teklifin sigorta şirketi ve sigortalı açısından bağlayıcı olmasıdır. Nihai bir teklif kabul edilirse, ödeme koşulunun yerine getirilmesine bağlı olarak bir sigorta sözleşmesi yapılır.",
+    "slug": "indikatif"
+  },
+  {
+    "id": 32,
+    "title": "İhtihsal",
+    "summary": "İstihsalin kelime anlamı üretim olup acentelerin, sigorta şirketi adına satışını yaptıkları poliçelerin üretimine karşılık olarak ödenen aracı komisyona istihsal ya da üretim masrafı denir. Özel bazı sigorta türleri hariç olmak üzere, aracı komisyonun ne kadar olacağına dair bir yasal sınırlandırma yoktur. İstihsal masrafı ya da aracı komisyonu, risk primleri ve gider paylarıyla birlikte tarife primlerinin hesaplanmasında dikkate alınır. Aracı komisyonu, sigorta türüne ve yönetmeliklere göre sigortalıya ya da sigorta ettirene belirli bir oran dahilinde yansıtılabilir. Örneğin hayat sigortaları için bu oran en fazla %10’dur. Bireysel ya da diğer grup sigorta ürünleri için bu oran tek prim ödemeleri için % 15, diğer durumlarda ise %20 ile sınırlandırılmıştır.",
+    "slug": "ihtihsal"
+  },
+  {
+    "id": 33,
+    "title": "İstisna",
+    "summary": "Sigortacılıkta istisna, bazı risk türlerinin kapsamını ortadan kaldıran bir politika hükmüdür. İstisnalar, sigorta sözleşmesi tarafından sağlanan teminat kapsamını daraltır. Birçok sigorta poliçesinde sigorta kapsamı çok geniştir. Sigorta şirketleri, sigorta ettirmek istemedikleri risklerin kapsamını ortadan kaldırmak için istisnaları kullanır.",
+    "slug": "istisna"
+  },
+  {
+    "id": 34,
+    "title": "Jeran",
+    "summary": "Reasürör ya da reasürans şirketi, sigorta şirketlerine finansal koruma sağlayan ve şirketlerin tek başlarına başa çıkamayacakları kadar büyük risklerine ortak olan şirkettir. Birden fazla reasürörün bir reasürans sözleşmesine katılmasına koasürans adı verilir. Bu durumda reasürans şirketleri, sigorta şirketinin bir poliçe ile devraldığı riskin karşılanmasını sağlamak için birlikte hareket eder. Şirketler arasındaki risk üstlenme sürecini yöneten tarafa ise jeran şirket adı verilir.</br>Koasürans anlaşmaları, genellikle sedan şirket olarak bilinen sigorta şirketi ile jeran şirket arasında müzakere edilir. Sedan şirket, sigorta poliçesindeki risklerinin bir bölümünü ya da tamamını reasürans şirketine geçiren sigorta şirketidir. Jeran şirket ise koasürans sözleşmelerine katılan, diğer reasürans şirketleri adına kararlar veren ve sözleşmenin şartlarını ve oranlarını müzakere etmekten sorumlu ana reasürördür. Jeran, sözleşmenin müzakeresinden sorumlu olmasına karşın, her zaman en büyük risk payını alması gerekli değildir.</br>Jeran seçimi genellikle şirketin uzmanlık ve deneyim seviyesine bağlıdır. Koasürans sözleşmesi ile her reasürörün sorumlu olduğu zarar miktarı genellikle orantılı olarak hesaplanır ve sözleşmede daha büyük bir paya sahip reasürörler daha fazla tazminat talebinden sorumlu tutulur. Kayıplarda orantılı bir paya sahip olmanın yanı sıra ortak reasürörlerin riski üstlendikleri için aldıkları primlerde de orantılı bir payı vardır. Bazı durumlarda koasürans orantılı değildir ve reasürans şirketleri yalnızca, sedan şirketin önceden belirlenmiş bir dönemde maruz kaldığı toplam hasar belirli bir miktarı aştığında ödeme yapar.",
+    "slug": "jeran"
+  },
+  {
+    "id": 35,
+    "title": "Karz-ı Hasen",
+    "summary": "Kelime manası olarak \"güzel borç\" anlamına gelen ve Kur’ani bir terim olan **\"karz-ı hasen\"**, kişinin herhangi bir çıkar gözetmeden, karşılığını sadece Allah’tan bekleyerek verdiği borçtur.",
+    "slug": "karz-i-hasen"
+  },
+  {
+    "id": 36,
+    "title": "Kasko Poliçesi",
+    "summary": "KASKO poliçeleri aracınızda meydana gelebilecek trafik kazaları, çarpma, çarpılma, çalınma, yangın, doğal afetler, terör olayları, yurt dışı teminatları ve buna benzer temel risklere karşı koruma sağlar. Trafik kazalarından doğan hasarlar, hırsızlık ve yangın gibi olaylar birçok KASKO poliçesinde ortak olarak yer alan teminat türleridir. Bu temel risklere ek olarak ilave teminatlar içeren KASKO poliçeleri için geniş KASKO ifadesi kullanılır. Poliçelerinizde yer alan teminatların sayısı ve kapsamı arttıkça daha fazla riske karşı güvence satın almış olursunuz.",
+    "slug": "kasko-policesi"
+  },
+  {
+    "id": 37,
+    "title": "Katılım Sigortası",
+    "summary": "Katılım sigortacılığı veya tekâfül; farklı bireylerin birleşerek, havuz içindeki birinin zarar görmesi halinde hasarın toplanan fondan karşılanmasına dayanan bir yardımlaşma biçimidir.",
+    "slug": "katilim-sigortasi"
+  },
+  {
+    "id": 38,
+    "title": "Koasürans",
+    "summary": "Sigorta şirketleri, riskin gerçekleşmesi durumunda sorumluluklarını sınırlandırmak için, reasürans şirketleri ya da reasürans sunan diğer sigorta şirketleriyle birlikte çalışır. Sigorta şirketleri, bu işlemi sigorta primlerinin bir kısmına sahip olan reasüröre poliçeler yazarak, riskinin bir kısmını ya da tamamını transfer ederek yapar. Reasürans sözleşmeleri sigorta şirketi ile reasürör arasındaki ilişkiyi kurar ve reasürörün tazmin edeceği riskleri ve sedan sigortacının teminat için ödemek zorunda olduğu ücreti ana hatlarıyla belirtir. Bazı durumlarda, birden çok reasürans şirketi reasürans sözleşmesine katılır. Toplam riski paylaştıran birden fazla reasürör, tek bir reasürörün iflas etmesi nedeniyle sigortacının yükümlülüklerinin karşılanamama olasılığını azalttığından, şirketler, sigortacıdan devralınan risk miktarının karşılanabilmesini sağlamak için koasürans oluşturur. Koasüransa katılan reasürörler genellikle küçük reasürans şirketleridir ve sözleşmenin gerektirdiği kadar riski tek başlarına üstelenmeleri zordur. Ayrıca bu reasürörler belirli bir risk türü hakkında yeterli deneyime sahip olmadığı için, daha fazla deneyim kazanana kadar riskin büyük bir kısmını üstlenmek istemeyebilir ve koasürans havuzu oluşturacak şekilde diğer şirketlerle ortaklık kurabilir.",
+    "slug": "koasurans"
+  },
+  {
+    "id": 39,
+    "title": "Kaza Sigortası",
+    "summary": "Kaza sigortaları, kapsamları sigorta şirketleri tarafından belirlenen ve sigortalıları beklenmedik hastane, bakım, nakil ve maluliyet masraflarına karşı güvence altına alan özel paketlerdir. Ferdi kaza sigortası seçenekleri kapsamında kaza olarak değerlendirilen durumlardan en önemlileri şöyledir:</br>• Trafik kazası</br>• Merdivenden yuvarlanma</br>• Zehirli ya da zararlı gaz soluma</br>• Vahşi hayvan saldırısına uğrama</br>• Zararlı hayvanlar tarafından sokulma ya da ısırılma</br>• Deprem ya da doğal afetler sebebiyle oluşabilecek durumlarda yaralanma.",
+    "slug": "kaza-sigortasi"
+  },
+  {
+    "id": 40,
+    "title": "Kısmi Hasar",
+    "summary": "Kısmi hasar, sigorta kapsamında yer alan bir gayrimenkul, mal ya da taşıtın sigorta poliçesinde belirtilen koşullar dahilinde onarılabilecek seviyede hasar görmesi durumunu tanımlar. Kısmi hasar durumlarında sigorta konusu olan mal, araç, eşya ya da gayrimenkul, ekonomik değerini tamamen yitirmez ve onarım masrafları sigorta poliçesinde belirlenen teminatlardan düşük olursa tamirat yoluna gidilir.",
+    "slug": "kismi-hasar"
+  },
+  {
+    "id": 41,
+    "title": "Kloz",
+    "summary": "Kloz, Fransızca “clause” kelimesinin Türkçeleşerek kloz halini alması ile ortaya çıkmış hukuki terimdir. Sigorta sözleşmelerinde “kloz” terimine bakıldığında şart, koşul anlamına gelen kloz, sigorta poliçelerinde özel şartları bildiren ek maddeler anlamına gelir. İki taraflı bir sözleşme olan sigorta poliçelerinin standart maddelerinin yanı sıra sözleşmeye sonradan eklenen özel maddeleri de bulanabilir.",
+    "slug": "kloz"
+  },
+  {
+    "id": 42,
+    "title": "Konservasyon",
+    "summary": "Tam karşılığı saklama payı olan konservasyon, reasürans işlemlerinde kullanılan teknik bir terimdir. Eksedan işlemlerinde sedan olarak anılan sigorta şirketi, kendisinde kalacak sigorta paylarını hesaplayarak kalanı reasüröre devreder. Sigorta şirketi üzerinde kalan paylara konservasyon denir. Sigorta şirketleri düzenledikleri her poliçe ile birlikte bir riziko üstlenir. Düzenlenen poliçeler karşılığında risk gerçekleştiğinde ise hasar ödemesi yapılması gerekir. Herhangi bir sigorta şirketinin farklı branşlarda binlerce poliçe düzenlediği ve riskler üstlendiği düşünüldüğünde, taşınan riskler mali açıdan bilançolara yük bindirir. Reasürans işlemleri bu anlamda sigorta şirketlerinin üzerindeki risk yükünü hafifletmek ve sektörün devamlılığını sağlamak açısından kullanılır. Eksedan anlaşmalarda uygulanan konservasyon metodu sedan ile reasürör arasındaki bölüşümlü risk ve prim paylaşımının temelini oluşturur.",
+    "slug": "konservasyon"
+  },
+  {
+    "id": 43,
+    "title": "Konşimento",
+    "summary": "Konşimento terimi genel anlamı itibari ile bir taşıyıcı tarafından bir göndericiye verilen ve taşınan malların türünü, miktarını ve varış yerini detaylandıran yasal bir taşıma belgesidir. Taşınacak ürünlerinizi sigorta yaptırırken; deniz ve hava taşımacılığında yaptıracağınız kurumsal sigorta poliçelerinizde sıklıkla karşınıza çıkacak bir terimdir.",
+    "slug": "konsimento"
+  },
+  {
+    "id": 44,
+    "title": "Kotpar",
+    "summary": "Reasürans anlaşma tiplerinden biri olan kotpar sözleşmeleri, bölüşümlü tereteler arasında sınıflandırılır. Sedan şirketin anlaşma gereği üstlendiği poliçe risklerinin ve primlerinin bir kısmını reasüröre devrettiği kotpar, aynı zamanda belirli paylı sözleşme olarak da anılır.</br>Sigorta şirketleri, düzenledikleri poliçeler gereği belirli oranlarda riskler üstlenir. Mali yapılarının izin verdiği ölçüde poliçe üretmek zorunda olan sigorta şirketleri, yeni poliçe üretebilmek için üzerlerindeki risklerin bir kısmını reasürör olarak adlandırılan sigorta şirketlerine devreder. Reasürans işlemleri kapsamında yapılan prim ve risk devri, standart anlaşmalar ile yapılabildiği gibi, arada rutin bir anlaşma olmadan da gerçekleşebilir. Kotpar sözleşmeleri, reasürör ve sedan olarak adlandırılan sigorta şirketi arasında her yıl yenilenen risk ve prim devir anlaşmasıdır.",
+    "slug": "kotpar"
+  },
+  {
+    "id": 45,
+    "title": "Kuvertür",
+    "summary": "Kelime anlamı \"teminat\" olan kuvertür, sigortalıyla sigortacı arasındaki sözlü anlaşma sonrasında yürürlüğe giren bir güvencedir. Tarafların bir sigorta paketi üzerinde karar birliğine varmasıyla sigorta poliçesinin hazırlanıp imzalanması arasında geçen süreyi kapsayan kuvertür, poliçe imzalanmadan önce sigorta konusu olan gayrimenkul, araç ya da eşyanın zarar görmesi durumunda sigortalıya tazminat ödenmesini sağlar. Kuvertür, sigortacılıkta en çok kullanılan kavramlardan biridir. Kimi durumlarda sigorta ettiren ve sigortacı arasında poliçe koşulları üzerinde sözlü mutabakata varılsa da sigorta edilecek nesnenin maddi değerinin hesaplanması, poliçe detaylarının belirlenmesi ve ödenecek primlerin tespit edilmesi gibi detaylar vakit alabilir. Bu vakit sebebiyle poliçenin hazırlanıp imzalanması da ileri bir tarihe kalır. Bu süre zarfında sigorta konusu olan araç, yapı ya da eşyanın herhangi bir zarara uğraması, sigortalının mağduriyet yaşamasına yol açabilir. Bu mağduriyeti engellemek amacıyla başvurulan kuvertür, sigortalıyla sigortacı arasında anlaşmaya varılmasıyla poliçenin imzalanması arasında geçen sürede, sigorta konusu olan varlığın zarar görmesi durumunda sigortalının tazminat almasını sağlar ve böylece sigortalının haklarını korur.",
+    "slug": "kuvertur"
+  },
+  {
+    "id": 46,
+    "title": "Lehtar",
+    "summary": "Lehtar, sigorta poliçeleri açısından sigortadan faydalanan kişiye işaret eder. Sigortayı yaptıran kişi lehtar sıfatı kazanabileceği gibi, bir başkası tarafından yaptırılan sigortadan, doğrudan veya dolaylı olarak faydalanan kişiler de lehtar sıfatı kazanabilir. Daha çok hayat sigortalarında görmeye alışkın olduğunuz lehtar kavramı, sigorta poliçesine konu olmasa bile rizikonun gerçekleşmesi durumunda sigortadan faydalanacak menfaattarları kapsar. Herhangi bir sigorta poliçesinde yer alan lehtar veya lehtarlar gerçek ya da tüzel kişiler olabilir. Ölüm teminatı, cenaze masrafları teminatı ve benzerlerini sunan hayat sigortası, sağlık sigortası ve emeklilik sigortalarında, sigorta ettiren kişiden lehtarı veya lehtarları belirlemesi istenir. Lehtarın belirlenmediği durumlarda, kanunen yasal varis olarak kabul edilen kişiler lehtar statüsünde değerlendirilir.",
+    "slug": "lehtar"
+  },
+  {
+    "id": 47,
+    "title": "Maluliyet",
+    "summary": "Maluliyet; kaza, hastalık, saldırı, doğal afet gibi sebeplerden ötürü vücudun bir kısmının ya da tamamının kullanılamaz hâle gelmesine verilen isimdir. Ferdi Kaza Sigortası, Hayat Sigortası, Sağlık Sigortası gibi pek çok sigorta türü, tam ya da kısmi maluliyet durumlarını güvence altına alır ve poliçe kapsamına giren durumlar sonucunda oluşan maluliyetlerde sigortalının zararını ve tedavi masraflarını karşılar.",
+    "slug": "maluliyet"
+  },
+  {
+    "id": 48,
+    "title": "Mebdei",
+    "summary": "Mebde ifadesi, Arapçada \"başlangıç\" anlamına gelir. Hukuk dilinden sigortacılığa geçmiş kavramlar arasında yer alan \"mebdei\" ifadesi ise “başlangıcı, başladığı tarih” anlamında kullanılır. Sigorta poliçelerinin başlangıç tarihlerini ifade etmek için kullanılan “mebdei” bilgisi, sigorta işlemlerinin doğru yapılabilmesi ve tazminat kazanımlarının sağlıklı bir şekilde hesaplanabilmesi açısından büyük önem taşır. Mebdei ifadesi, sigorta poliçesi üzerine yazıldığında “poliçenin başladığı tarih” anlamına gelir. Sigortanın başlangıç tarihinin net olarak belirlenmesi, tazminatların hesaplanması ve sigorta kapsamında doğacak hakların saptanması için son derece önemlidir. Mebdei, yani başlangıcı belirtilmemiş poliçeler, eksik düzenlenmiş kabul edilir ve bu durum da çeşitli yasal problemler doğurur. Başlangıç tarihi belirtilmemiş sigorta sözleşmeleri, hem sigortalı hem de sigortacı açısından çeşitli sorunlara yol açar ve kanunlar karşısında çözülmeye çalışır.",
+    "slug": "mebdei"
+  },
+  {
+    "id": 49,
+    "title": "Meriyet",
+    "summary": "Sigorta primi ödemelerinin aksatılması; sigortalının ciddi maliyetlerle sonuçlanabilecek hasarları kendi olanakları ile karşılaması, sigortasız kalma, gelecekteki sigorta primlerinde artma ve kredi puanın düşmesi gibi hem kısa hem de uzun vadede önemli etkilere sahip olabilir. Meriyete alma gerçekleşse bile sigortalı eski poliçesinin kapsamından ya da avantajlarından yararlanamayabilir. Sigorta primi, sigortadan yararlanmak için ödenen poliçe bedelidir. Sigorta primlerini ödemenin birçok yolu olmakla birlikte, ödeme seçenekleri çoğunlukla aylık ödeme emri ve taksitler şeklindedir. Çoğu şirket, aylık ödeme yapmak yerine yıllık primlerini tek seferde ödeyen müşteriler için indirimli fiyatlar sunar. Herhangi bir nedenle primlerin belirtilen vade tarihinde ve gecikme halinde ek süreler içinde ödenmemesi, çok hızlı bir şekilde sigorta poliçesinin iptali ile sonuçlanır. Sigortanın türüne bağlı olarak, poliçeyi eski haline getirmek zor olabilir veya bunun için daha yüksek primlerin ödenmesi gerekebilir. Sigorta poliçesi iptal edildikten sonra, sigortalının belirtilen süre içinde sigorta şirketine başvurarak poliçesinin aktif hale getirmesi ya da yeniden yürürlüğe girmesine ‘’meriyet’’ adı verilir. Sigortanın yeniden yürürlüğe girmesi durumunda, sigorta şirketleri sigortalıdan ek işlemler talep edebilir. Örneğin bir sağlık sigortası söz konusu olduğunda yeniden muayene, yeni tetkikler ve ek prim ödemeleri söz konusu olabilir.",
+    "slug": "meriyet"
+  },
+  {
+    "id": 50,
+    "title": "Kasko Mini Onarım Hizmeti",
+    "summary": "Mini onarım hizmeti, sigorta kuruluşlarının bazılarında ek teminatlar arasında yer alır ve bu hizmete sahip olmak için poliçenize ek ücret yansıtılır. Bazı kuruluşlarda ise bu hizmet ücretsiz olarak verilir ve kasko sigortanızın ana teminat maddeleri kapsamındadır. Mini onarım hizmeti sayesinde kısa ya da uzun yolculuklarınızın yanı sıra, aracınız park halindeyken meydana gelen küçük hasarların tamamı ücretsiz olarak karşılanır. Kasko poliçeniz süresince geçerli olan bu hizmeti, sigorta poliçenizin başlangıç ve bitiş tarihleri arasında kullanabilirsiniz.",
+    "slug": "kasko-mini-onarim-hizmeti"
+  },
+  {
+    "id": 51,
+    "title": "Mortalite Tabloları",
+    "summary": "Mortalite tabloları, belirli zaman dilimi içerisinde hedef popülasyon için ölüm oranını gösteren diyagramdır. Başka bir adı ile aktüeryal tablo olarak da bilinen mortalite tabloları, sigorta şirketleri tarafından aktif şekilde kullanılır. Sigorta yapılacak bireylerin ürünlerini ve planlarını fiyatlandırmak için tercih edilir. Bu tablolar belirli bir nüfusun hayatta kalma oranlarını ortaya koyan, karmaşık matematiksel modeller geliştirmek amacıyla da kullanılabilir. Tıp ya da biyoloji gibi bazı sağlık bilimlerinde de kullanılabilen mortalite tabloları, kişilerin sürdürmesi gereken tedavi türü ile birtakım ilaçların kullanımı için olası teşhis kriterlerinin geliştirilmesi konusunda yardımcı olabilir.",
+    "slug": "mortalite-tablolari"
+  },
+  {
+    "id": 52,
+    "title": "Muafiyet",
+    "summary": "Muafiyetler, sigorta sözleşmesinin önemli bir parçasıdır ve riskin poliçe sahibi ve sigorta şirketi arasında paylaşılma şeklidir. Genel olarak, poliçeden düşülebilir muafiyet miktarı ne kadar büyükse, sigorta poliçesi için o kadar az prim ödenir. Sigorta satın alırken muafiyetlerin oynadığı rolü anlamak, poliçeden en iyi şekilde yararlanmaya ve maliyetleri azaltmaya yardımcı olur. Sigortacılık açısından entegral muafiyet ve tenzili muafiyet olmak üzere iki tür muafiyet uygulaması söz konusudur. Entegral muafiyet ya da franchise, sigorta poliçesindeki bir hükümdür ve sigorta şirketlerinin mali sorumluluğunun asgari eşiğini belirler. Sigorta şirketi, hasar veya kayıp sigorta poliçesinde belirtilen franchise tutarını aşmadığı sürece ödeme yapmaz.",
+    "slug": "muafiyet"
+  },
+  {
+    "id": 53,
+    "title": "Meysir",
+    "summary": "Sözlükte \"kolay olmak\" anlamındaki yesr (yüsr) kökünden türeyen meysir, İslâm öncesi Hicaz-Arap toplumunda bir talih oyunu şeklindeki kumar çeşidini ifade eder. Bu oyun, kesildikten sonra eti muhtelif hisselere ayrılan bir hayvandan (çoğunlukla dişi deve) pay kazanmak amacıyla üzerlerinde pay ve risk değerleri yazılı, her biri ayrı isimle anılan belirli sayıdaki okların çekilmesi suretiyle oynanırdı. Kelimenin terim anlamı, hem çaba göstermeden bir malı kolayca ele geçirmeyi hem de maddî kazanç sağlamayı ifade ettiği için sözlük mânasıyla paralellik göstermektedir. Bir diğer görüşe göre ise meysir kelimesinin kökünde “bölüşmek” anlamı olup oyun için kesilen hayvan bölüştürüldüğünden bu şekilde adlandırılmıştır. Meysirde etlerin bölüştürülmesini yöneten kişiye yâsir yahut kaddâr, bu oyunu oynayan topluluğa eysâr (tekili yeser ve yâsir) adı verilir.",
+    "slug": "meysir"
+  },
+  {
+    "id": 54,
+    "title": "Tenzili Muafiyet",
+    "summary": "Tenzili muafiyet, kasko sigortası kapsamında en çok kullanılan muafiyet türlerinden biridir. Tenzili muafiyet durumunda sigortalı, poliçede belirtilen miktar kadarıyla hasardan sorumludur. Sigortalının ödediği miktar toplam hasardan düşülür ve hasarın kalanı sigorta şirketi tarafından ödenir. Entegral muafiyet uygulamalarında olduğu gibi, tenzili muafiyet miktarı belirli bir tutar veya bir poliçedeki toplam sigorta tutarının bir yüzdesi şeklinde olabilir. Tutar, teminatın koşullarına göre belirlenir ve poliçelerin genellikle ön sayfasında bulunabilir. Örneğin, poliçe 500 TL’lik bir muafiyet belirtiyorsa ve sigorta şirketi 10,000 TL değerinde zarar olduğunu belirlerse sigortalıya, 9,500 TL’lik bir ödeme yapar. Yüzdelik muafiyetler de benzer şekilde sigorta değerinin önceden belirlenmiş bir yüzdesine göre hesaplanır. Sigortası poliçesi maliyetlerini düşürmenin en kolay yollarından biri, muafiyet miktarını artırmaktır. Özellikle kasko sigortası için muafiyet bedelini artırmak, çarpışma ve kapsamlı sigorta primi maliyetlerini önemli ölçüde azaltmaya yardımcı olabilir. Bununla birlikte muafiyet bedelini ya da oranını artırmak sigortalının daha fazla ödeme yapması anlamına gelir. Muafiyetler açısından ideal olan, sigortalının ödeme zorluğu yaşamadan sigorta maliyetlerinden tasarruf edebildiği ve büyük risklerini güvence altına alabileceği bir poliçe satın almasıdır.",
+    "slug": "tenzili-muafiyet"
+  },
+  {
+    "id": 55,
+    "title": "Muallak Hasar Karşılığı",
+    "summary": "Bir sigorta şirketi, ödeme ihtimalinin bulunduğu veya ödemeyi düşündüğü ancak henüz ödemediği hasarları için bir teknik karşılık ayırabilir. Buna muallak hasar karşılığı adı verilir. Muallak hasar karşılığı, sigortalının bir hasar ihbarını vermesiyle işleme koyulur. Sigortacı hasar ihbarını alınca herhangi bir incelemede bulunmadan önce hasarın getirdiği maddi boyutun tahmininde bulunur. Tahmin ettiği tutarı muallak hasar karşılığı olarak ayıran sigorta şirketi, bu tutarı bilanço dönemlerinde kârdan düşürür. Kârdan düşürülen muallak hasar karşılığı sayesinde sigorta şirketinin sahip olduğu kârın, olduğundan daha yüksek görünmesi önlenmiş olur. Aynı zamanda bilanço hesaplanırken daha önceki dönemden devredilen muallak hasar karşılıkları da kâra eklenir. Zincir merdiven yöntemi, ayırma yöntemi ve ihbar başına düşen hasar yöntemi muallak hasar karşılığının hesaplanmasında sıklıkla kullanılan üç istatistiksel yöntemdir.",
+    "slug": "muallak-hasar-karsiligi"
+  },
+  {
+    "id": 56,
+    "title": "Muallak Tazminat Karşılığı",
+    "summary": "Muallak tazminat karşılığı hem kayda geçen ancak ödenmeyen tutarlar için hem de ödemesi gerçekleşen ancak henüz kayda geçmeyen tutarlar için kullanılan ifadedir. Burada tahmini tazminat tutarıyla bu tazminat için yapılan gerçek ödeme arasındaki fark göz önünde bulundurulur. Giderlerin ve tutarın yetersiz kalması durumunda yeterlilik için bazı esaslar çerçevesinde ek karşılıklar alınabilir. Bu ek karşılıklar müsteşarlıkça belirlenebilir. Kısacası muallak kelimesi, sigortacılık işlemleri için önemli olan ve sigortalı ile sigortacı arasındaki çeşitli ilişkilerde kullanılan bir kavramdır.",
+    "slug": "muallak-tazminat-karsiligi"
+  },
+  {
+    "id": 57,
+    "title": "Mücbir Sebep",
+    "summary": "Sigorta poliçelerinde mücbir sebeplerin çok açık bir tanımı yapılır. Bu tanımın kapsamı dahilinde bulunan durumlar ve olaylar karşısında sigorta şirketinin herhangi bir ödeme yükümlülüğü olmadığı ifade edilir. Bazı sigorta poliçelerinde ise mücbir sebeplerin bir kısmı için ek teminat alma hakkı verilir. Bunun en yaygın örneği kasko poliçelerinde görülür. Çoğu kasko poliçesi; deprem, toprak kayması, çığ, sel ve su baskını gibi olayları mücbir sebep olarak görür. Aynı şekilde terör, kötü niyetli halk hareketleri, grev, lokavt ve bunlara karşı alınan önlemlerin neden olduğu durumlar da mücbir sebep olarak değerlendirilir. Aksi belirtilmiyor ise ya da bir diğer deyiş ile ek teminat paketi düzenlenmediyse bu tip durumlarda meydana gelen zararların ödenmeyeceği belirtilir.",
+    "slug": "mucbir-sebep"
+  },
+  {
+    "id": 58,
+    "title": "Müşterek Avarya",
+    "summary": "Birçok alanda olduğu gibi, ticaret alanında da kendini gösteren sigorta sektörü, ticarete atılmış olan ya da yıllardır bu işlerin içinde olan insanlara muhtemel kayıplar için güvence imkânı sunar. Sözleşmenin kapsamına göre ticari bir aracın, eşyanın ya da farklı varlıkların konu olabileceği sigorta hizmetlerinden faydalanan sigorta ettiren taraf, böylelikle iş hayatının olumsuz sürprizlerine karşı hazırlıklı olur. Deniz ticareti, sıklıkla sigorta sözleşmelerine başvurulan en büyük sektörler arasında yer alır. Kullanılan ticaret yöntemleri ve koşullar göz önünde bulundurulduğu zaman deniz ticareti, tehlikelerle karşılaşma ihtimali bir hayli yüksek bir alan sayılabilir. Denizlerdeki hava koşullarının ani ve kimi zaman beklenmedik değişimler göstermesi bunun en önemli sebepleri arasında yer alır. Ayrıca gemilerin taşıdığı yükün, kapasiteleri itibarıyla fazla olması da ağır kayıpların yaşanmasına sebep olabilir. Deniz ticaretinde gemiye ya da yüke gelen zarara da sigorta sözlüğünde avarya denir. Avarya, müşterek avarya ve hususi avarya olmak üzere ikiye ayrılsa da, sigorta sözleşmeleri müşterek avaryayı kapsar.",
+    "slug": "musterek-avarya"
+  },
+  {
+    "id": 59,
+    "title": "Mutabakat",
+    "summary": "Sigorta yaptırırken mutabakat, poliçe imzalanma safhasında sigorta ettirenle sigorta eden tarafların anlaşmaya varması anlamına gelir. Gayrimenkul, konut, araç ve ürün gibi varlıkların sigortalanması esnasında mutabakata varılırsa, imzalanan poliçeye “mutabakatlı poliçe” ismi verilir. Mutabakatlı poliçe imzalanması durumunda sigortalanan mal ya da aracın tam ziyaya uğraması, yani kullanılamaz hâle gelmesi durumu da sigorta teminatı altına alınır. Mutabakat değerinin belirlenmesi için, aşağıdaki adımlar atılır:</br>• Sigortalanacak ürün, uzmanlar tarafından incelenir ve sigorta yapıldığı tarihteki değeri saptanır.</br>• Sigortacı ve sigortalı, ürünün sigorta başlangıç tarihindeki değeri üzerinde görüş birliğine varmalıdır. İki taraftan birinin mutabakat değerini onaylamaması durumunda değer tespit işlemlerine geri dönülür.</br>• Her iki tarafın da sigortalanacak ürünün değeri hakkında hemfikir olması durumunda mutabakat sağlanır ve sigorta poliçesi hazırlanır.</br>Tam ziya durumunun koşulları ise şöyledir:</br>• Sigortalanan ürünün tamamen zarar görmesi ve tam değer kaybına uğraması</br>• Sigortalı ürün içindeki diğer değerli varlıkların zarar görmesi</br>• Sigortalının bu zararlar sebebiyle maddi kayba uğraması</br>Mutabakatın Avantajları Nelerdir?</br>Mutabakat işlemi, sigortalı tarafın haklarını ve avantajlarını genişletir ve sigortalanan ürünün daha etkili bir şekilde korunmasını sağlar. Mutabakatlı poliçeler sayesinde sigortalılar aşağıdaki avantajlardan yararlanabilir.</br>• Nakliyat sigortalarında mutabakatlı poliçeye başvurulması, hem nakliye işleminin gerçekleştirildiği aracı hem de taşınan ürünleri korur ve bu sayede olası zarar durumlarında nakliyeci tarafın maddi kayıp yaşamasını önler.</br>• Mutabakatlı sigorta, piyasa koşullarından olumsuz yönde etkilenilmesini engeller. Sigortalattığınız ürünler, zamanla değer kaybetse bile zarar durumunda ilk günkü değerlerinden işlem görür.</br>• Konut sigortanızı mutabakatlı yapmanız durumunda yangın, yıkılma gibi büyük etkili durumlarda hem evinizin hem de eşyalarınızın maddi değeri kadar tazminat elde etme şansınız bulunur.</br>• Mutabakatlı sigortalar, kayıp riskini de karşıladığı için ticari işlemleriniz esnasında mallarınızın çalınması, kaçırılması, kaybolması gibi durumlar yaşamanız hâlinde sigortanızdan tazminat alabilmenize yardımcı olur.</br>• Tam ziya durumunda sigortalıya ödenecek tazminatın en baştan belirlenmesi, proporsiyonla karşılaşmanızın önüne geçer ve tazminat kesintisi yaşamanızı engeller.</br>• Mutabakatlı poliçe işlemi, sigorta sahtekârlıklarının önlenmesi ve kötü niyetli işlemlerin durdurulması açısından da etkilidir. Hem sigortacının hem de sigortalının haklarını koruyan işlem, tarafların birbirine olan güvenini de artırır.",
+    "slug": "mutabakat"
+  },
+  {
+    "id": 60,
+    "title": "Muvakkat",
+    "summary": "Geçici, belli bir süresi bulunan, kalıcı olmayan gibi şekillerde tanımlanabilen muvakkat, günümüzde günlük dilde sıkça kullanılmaz, ancak sigortacılık gibi bazı dallarda bir terim olarak kullanılabilir Sigortacılıkta muvakkat terimi, bir poliçe türü için kullanılır. Muvakkat poliçe, nakliyat şirketleri için sıklıkla tercih edilir. Diğer şirketler ve gerçek kişiler için muvakkat poliçe genellikle kullanılmaz. Sigortalıları teminatsız bırakmamak adına gerçekleştirilen muvakkat poliçe işlemi, sevkiyatı güvence altına alır. Bu güvence işlemi, bazı teminatlar ve hususlar doğrultusunda gerçekleştirilir. Belli bir süre zarfı sonunda geçerliliği sona eren muvakkat poliçe, \"Flotan poliçe\" şeklinde de sıklıkla adlandırılabilir. Muvakkat poliçenin kati poliçeye dönüştürülmesi de mümkündür. Bu işlem için de bazı durumların gerçekleştirilmesi büyük önem arz eder.",
+    "slug": "muvakkat"
+  },
+  {
+    "id": 61,
+    "title": "Navlun",
+    "summary": "Navlun; malları kara yolu, intermodal taşımacılık (demir yolu ve kara yolu), gemi veya hava yoluyla taşınması için nakliye şirketine ödenen ücrettir. Sigortacılıkta Navlun, nakliye sırasında müşterilerin mallarında meydana gelen hasar ve ya kayıplar için nakliye şirketinin sorumluluğunu kapsar. Bu tür hasar ya da kayıpların sigorta kapsamında değerlendirilebilmesi ve tazminat talebinin ödenebilmesi için nakliye şirketinin ihmalinden kaynaklanması gerekir. Nakliye şirketinin sorumluluk koşulları, seçilen taşıma şekline bağlı olarak değişen sözleşmelerle belirtilir. Navlun sigortası, nakliye komisyoncusu ücretlerinin bir yüzdesi olarak hesaplanır. Sigorta masrafları nakliye şirketi tarafından ödenebilir ve müşteriye, nakliye şirketinin hizmet teklifine dahil edilen bir maliyet olarak iletilir.",
+    "slug": "navlun"
+  },
+  {
+    "id": 62,
+    "title": "Poliçe",
+    "summary": "Poliçe veya sigorta senedi, sigorta hizmeti sunan kurumlar ya da şirketler ile sigorta hizmetinden yararlanacak olan kişiler arasındaki karşılıklı hakların ve sorumlulukların belirtildiği sigorta anlaşmasıdır. Sigorta hizmeti sırasında hem sigortacı hem de sigortalı tarafın sorumluluklarının net bir şekilde belirlenmesi ve haklarının korunmasını sağlayan poliçe, sigorta işlemlerindeki güvencenin teminatıdır. Sigorta hizmeti sunan kuruluşlar bu güveni sigorta hizmetinden yararlanan kişilere sunmak için belirli riskleri göze alır ve bunun karşılığında da sigortalı kişiden prim alır. Poliçenin buradaki rolü, bu karşılıklı ilişki bağındaki güveni temin etmektir. Poliçe için sigorta hizmetinden yararlanacak olan kişilerin, gerekli olan bütün bilgileri doğru ve tam bir şekilde sigorta kuruluşuna sunması gerekir. Ayrıca Türk Ticaret Kanunu'na göre sigorta şirketleri de hizmet başladıktan sonraki 24 saat içinde poliçeyi kesin olarak düzenlemiş ve sigorta hizmetini sunduğu kişiye teslim etmiş olmalıdır. Bu hususta meydana gelecek olan bütün aksaklıklardan sigorta şirketi sorumludur. AK Sigorta, bütün sigorta hizmeti türlerinde poliçenizi güvenilir bir şekilde düzenleyerek siz değerli müşterilerine zamanında teslim eder.",
+    "slug": "police"
+  },
+  {
+    "id": 63,
+    "title": "Prim",
+    "summary": "Sigortacılık sisteminde prim, hizmetin satışını gerçekleştiren yetkili tarafından sağlanan teminatı satın alan kişilerin ödediği ücrettir. Sigorta hizmetinden yararlanmak isteyen kişiler tarafından ödenmesi gereken bu primler, sigorta hizmetinin türüne ya da sigorta hizmetini sağlayan kuruluşla hizmet alan kişinin arasındaki anlaşmaya göre belirlenen bir süre zarfında ya da ömür boyunca düzenli bir şekilde ödenebilir. Sigorta primleri, temel anlamıyla sigorta kuruluşunun satın aldığı risk karşılığında ödenir ve buna ek olarak genel giderler, sigorta şirketinin karşılamak zorunda olduğu maliyetler, komisyonlar da prim bedeline dahildir. Satın aldığınız sigorta hizmetinin kapsadığı bütün koşullar sağlansa dahi sistem gereğince belirlenmiş olan primleri ödemezseniz sigorta sözleşmeniz askıya alınır ve çeşitli risklere karşı sigorta koruma hizmetinden yararlanmanız mümkün olamaz.",
+    "slug": "prim"
+  },
+  {
+    "id": 64,
+    "title": "Rayiç",
+    "summary": "Rayiç, sigortası yaptırılan malın piyasa değerine denir. Rayiç değeri, genellikle arsa ve konut sigortalarında öne çıkar. Araç piyasasında da kullanılan rayiç bedeli, bir malın değerinin belirlenerek bu değere bağlı işlemlerin yapılabilmesini sağlar. Rayiç bedeli her sene değişiklik gösterebilir. Bu değişiklik genellikle arz-talep dengesine göre gerçekleşir. Rayiç bedeli alım-satım yaparken fazlasıyla önem taşır. Rayiç bedeli hesaplanırken taşınmaz malın her özelliği göz önüne alınır. Bunların başında konutun yer aldığı il, ilçe, mahalle ve bunun gibi lokasyon bilgileri gelir. Malın değerini etkileyen bir başka değişken ise metrekaredir. Son olarak da piyasadaki arz-talep dengesi, rayiç bedelini oluşturan faktörler arasında yer alır. Rayiç bedeli, çoğu zaman piyasada oluşan değer ve emlak vergisine göre değer olarak iki alanda ele alınır. Piyasada oluşan değer, malın piyasa değerini gösterirken emlak vergisine göre değer, mülkün minimum değerini ortaya çıkarır. Gayrimenkul hesaplamalarında aynı lokasyonda bulunan 3 ev baz alınır. Bu evlerin fiyatlarının toplamı, metrekarelerinin toplamına bölünerek bir metrekarenin ortalama fiyatını bulunur. Ardından rayiç bedeli, hesaplanmak istenen evin metrekaresi ile çarpılır.Eve ait ekstra özellikler varsa buna da bağlı olarak fiyatta artış yapılabilir. Bulunan değer, malın en yakın değeridir. Araçlarda rayiç bedeli hesaplanırken önceden Türkiye Sigorta Birliği tarafından hazırlanan değer listesine bakılırdı. Artık bu listeyle beraber farklı yöntemler de ortaya çıktı. İkinci el alım-satım yapılan siteler, araç rayiç bedeli belirlenirken en sık kullanılan platformlar arasında gösterilebilir. Bir aracın rayiç bedeli ise aracın yaşı, üretim yılı ve modeli başta olmak üzere diğer özelliklerine bağlı olarak da değişir. Özellikle aracın hasar kaydının olması ya da halihazırda bir hasarının olması değeri etkileyen önemli bir faktördür. Bunun yanında kimi zaman sahipleri, araçlarına farklı modifiye uygulamaları yapar. Bu uygulamalar da aracın orijinalliğini bozduğu için rayiç değerini olumsuz etkileyebileceği gibi, orijinal bir görünüm sevenler açısından olumlu da karşılanabilir. Son olarak, rayiç bedeli sorgulamak için, E-devlet sitesinden belediye hizmetleri sekmesine gelerek rayiç bedelini sorgulamak istediğiniz bölgenin belediyesinden bu hizmeti alabilirsiniz.",
+    "slug": "rayic"
+  },
+  {
+    "id": 65,
+    "title": "Reasürans",
+    "summary": "Reasürans, sigorta şirketlerinin taşıdığı poliçe risklerini başka bir sigorta şirketine sigortalatmasına denir. Her sigorta şirketi reasürör kimliği taşımaz. Reasürans işlemleri, oldukça yüksek teknik bilgi ve birikim gerektirdiği gibi, ciddi anlamda da finansal şeffaflık ve sermaye tabanı açısından mali güç gerektirir. Sigortacıların sigorta şirketi olarak tanımlanabilecek reasürans şirketleri, konusunda uzmanlaşmış ekiplerden oluşur. Reasürans işlemlerine başvuran sigortacılar, kendilerini güvence altına aldıkları gibi, mali güçlerini aşan durumlarda kapasitelerinin üstündeki risklere de teminat verebilecek duruma gelirler. Sigorta sektörü için oldukça mühim olan reasürans kavramı, kurumsal ve ticari anlamda risklerin paylaşılması ve güven ortamının korunması amacını taşır. Üzerlerinde taşıdıkları riskleri sigorta ettiren şirketlere mali açıdan güç veren reasürans kurumu, aynı zamanda sigorta sektörünün büyümesine ve daha geniş çapta çalışmasına da zemin hazırlar. Reasürans işlemleri söz konusu olduğunda bir tarafta reasürör olarak geçen reasürans şirketi, diğer tarafta ise sigorta yaptıran ve sedan olarak anılan sigorta şirketi bulunur. Türkiye’de sigortacılık sektörü belirli kanun ve kararnamelere uygun olarak hareket eder. Her bir sigorta şirketinin faaliyet alanları ve sermaye yeterliliği tıpkı dünyanın diğer ülkelerinde olduğu gibi, belirli rasyolarla ölçümlenir. Sigorta şirketleri, kanunlar gereği ve denetçi şirketlerin uyarısı ile sermaye tabanlarını güçlü tutmak için, yıllık anlaşmalar yaparak reasürans işlemlerine başvurur. Sigortacılar açısından mali şeffaflık gereği reasürans işlemleri ve anlaşmaları rutindir. Kasko, sağlık sigortası, konut poliçeleri ve diğer branşlar özelinde tüketicileri doğrudan ilgilendirmeyen bu teknik konu, bir sigorta şirketinin sürekliliğini ve kestiği poliçe miktarını artırarak daha çok prim yaratmasına katkıda bulunur.",
+    "slug": "reasurans"
+  },
+  {
+    "id": 66,
+    "title": "Reasürör",
+    "summary": "Reasürans konusunda faaliyet gösteren şirketlere veya bu alandaki uzman kişilere reasürör, sigorta şirketine ise sedan şirket adı verilir. Reasürör ve sedan şirket arasında yapılan reasürans anlaşması, sigorta şirketinin tüm poliçelerini kapsayan özel ve geniş bir kapsam satın almasını içerir. Reasürörler, öncelikle sigorta sistemindeki en büyük ve en karmaşık risklerle ilgilenir. Bunlar, standart sigorta şirketlerinin istemediği veya içselleştiremediği risk türleridir. Bu tür riskler, doğası gereği savaş, şiddetli durgunluk veya emtia piyasalarındaki sorunlar gibi uluslararası olma eğilimindedir. Bu nedenle reasürans şirketleri küresel bir varlığa sahip olma eğilimindedir.",
+    "slug": "reasuror"
+  },
+  {
+    "id": 67,
+    "title": "Retekafül",
+    "summary": "Retekafül uygulaması, tekafül sigortacılığı ile toplanan risklerin daha büyük şirketlerle paylaşılarak riskin dağıtılması mantığına dayanmaktadır. Bu açıdan, reasürans yani sigortanın sigorta edilmesi mantığına çok benzemektedir. Swiss Reinsurance gibi büyük reasürans şirketleri retekafül hizmeti sunan grup şirketleri (örneğin Swiss Retakaful) kurmaya başlamışlardır.",
+    "slug": "retekaful"
+  },
+  {
+    "id": 68,
+    "title": "Rezerv Zabtı",
+    "summary": "Rezerv zaptı, nakliye işlemlerinde düzenlenen bir evraktır. Nakliye edilen malların zarar ve hasar görmesi durumunda zararın sigorta tarafından karşılanabilmesini sağlayan rezerv zaptı; nakliyat hacminin, içeriğinin ve nakil esnasında zarar gören malların tutanağından oluşur. Nakliyat sigortaları kapsamında tazminat alabilmek için sigorta şirketine mutlaka sunulması gereken evraklar arasında yer alan rezerv zaptı, her türlü taşıma yönteminde oluşturulabilir.",
+    "slug": "rezerv-zabti"
+  },
+  {
+    "id": 69,
+    "title": "Ribâ",
+    "summary": "Ribâ tefecilik olarak tercüme edilebilecek Arapça bir kelime veya şeriat kapsamında ticarette veya ticarette elde edilen haksız, sömürücü kazançtır. Kur'an'da birkaç farklı ayette ribâ bahsedilir ve kınanır. Ayrıca birçok hadiste bahsedilmektedir.",
+    "slug": "riba"
+  },
+  {
+    "id": 70,
+    "title": "Risk",
+    "summary": "Olumsuz koşulların gerçekleşme ihtimali risk olarak tanımlanır. Belirsizliğin ortaya çıkardığı risk kavramı, olasılıklar üzerinden anlatılır. Riskin oluşması durumunda ortaya çıkan zarar ise sonuçtur.",
+    "slug": "risk"
+  },
+  {
+    "id": 71,
+    "title": "Risk Primi",
+    "summary": "Risk Primi herhangi bir poliçe için ödenmesi gereken prim, risk ve yük olmak üzere iki temel prim kaleminden meydana gelir. Risk primi poliçe kapsamında güvence altına alınan zararların tazminini sağlamak için, istatistik başta olmak üzere çeşitli hesaplama yöntemleri ile elde edilen tutardır. Risk primi haricindeki sigorta şirketinin kâr yüzdesi, komisyon giderleri, genel yönetim giderleri ve diğer giderler yük primi kapsamında değerlendirilir.",
+    "slug": "risk-primi"
+  },
+  {
+    "id": 72,
+    "title": "Risturn",
+    "summary": "Sigortacılıkta risturn, sigortalıya tahakkuk ettirilen komisyon gibi ek ücretlerden yapılan indirimleri ifade eden bir terimdir. Bununla birlikte diğer ürün veya hizmet için ödenen miktarlardan farklı olarak sigorta ürünlerinde, tüketicinin belirli güvenceler için fiyatı (yıllık prim) müzakere etme yeteneği genellikle sınırlıdır. Sigorta ürünleri ya da poliçe değeri için fiyatı belirleyen temel faktör, sigortanın kapsamı ve güvence altına aldığı risklerdir.",
+    "slug": "risturn"
+  },
+  {
+    "id": 73,
+    "title": "Riziko",
+    "summary": "Riziko kelimesi, sözlük anlamı olarak \"risk\" demektir. Bu manada genel olarak bütün riskleri kapsayan riziko, sigorta sözlüğünde biraz daha farklı bir anlama gelir. Sektörde riziko kelimesi, gerçekleştiği takdirde sigortalı kişiye maddi olarak zarar verebilecek ve maddi taleplerde bulunma hakkı doğurabilecek tehlike ve durumlar için kullanılır. Bu durumlar, aslında sigorta sözleşmesinin, sigortalının maddi zararlarını kapatmak ya da en aza indirmek konusunda işleve geçmesine sebep olabilecek olaylar olarak düşünülebilir.",
+    "slug": "riziko"
+  },
+  {
+    "id": 74,
+    "title": "Rücu",
+    "summary": "Sigorta süreciniz boyunca karşınıza çıkması muhtemel sözcüklerden biri olan Rücu; özetle vazgeçmek, caymak veya sözünden dönmek şekillerinde tanımlanabilir. Bu özel veya tüzel kişilerin sözleşmelerini feshetmeleri olarak adlandırılır. </br>Sigorta şirketinin sorumluluklarından vazgeçmek için mahkemeye başvurması ile oluşturulan rücu talebi ise, sigortacılıkta sıklıkla kullanılan önemli kavramlar arasında yer alır. Kasko sigortası hizmetinden yararlanmak istiyorsanız rücu talebi hakkında bilgi sahibi olmak sizin için son derece yararlı olur. Kazalarda ortaya çıkan hasarların tespit edilmesi ve zararın karşılanması, çalıştığınız sigorta şirketinin rücu talebinde bulunması sonucunda gerçekleşir. Sigorta şirketleri, aynı zamanda sigortalı kişilere de rücu talebinde bulunabilir. Sigorta şirketlerinin rücu edebilmesi için hizmet verdikleri kişiye poliçe üzerinde belirtilen tutarı ödemesi gerekir. Aksi halde sigorta şirketi rücu hakkından faydalanamaz. Rücu hakkını kullanabilmek için sorumlu sigorta şirketinin halefiyet ilkesini sağlaması temel esaslar arasında yer alır.",
+    "slug": "rucu"
+  },
+  {
+    "id": 75,
+    "title": "Sadaka",
+    "summary": "Kur'an'da, en genel çerçevede zorunlu veya gönüllü olarak yapılan her türlü maddî harcamayı ifade eden \"sadaka\", bazı ayetlerde yalnızca zekat, gönüllü bağış veya kamu harcamaları ya da fakirler için oluşturulan fonda toplanan bir tür vergi anlamında kullanılmıştır.</br></br>Sigorta Bilgi ve Gözetim Merkezi (SBGM/SBM) Nedir?</br></br>SBM, SBGM veya Sigorta Bilgi ve Gözetim Merkezi, Türkiye Cumhuriyeti Hazine ve Maliye Bakanlığına bağlı olarak çalışan bir kurumdur. 2003 yılında Resmi Gazete'de yayımlanan yönetmelikle kurulan bu kurum, sigorta uygulamalarında birliğin sağlanmasını amaçlar. Sigortalı oranının artışı, sigorta işlemleri sırasında oluşabilecek olumsuz durumların önlenmesi ve tüketicilerin sigorta sistemine güveninin artması amaçlarıyla da kurulan Sigorta Bilgi ve Gözetim Merkezi, Trafik Sigortası Bilgi Merkezi Yönetmeliği ile ve TRAMER adıyla da kurulmuştur.</br>Türkiye Sigorta ve Reasürans Şirketleri Birliği bünyesinde kurulan SBGM, tüzel kişiliği haiz bir kurumdur. Bu kurumun faaliyetleri Hazine ve Maliye Bakanlığı tarafından sürekli ve düzenli olarak takip edilir. Çeşitli branşlar ve dallarda ruhsata sahip olan çeşitli sigorta şirketleri bu merkeze doğal olarak üyedir.",
+    "slug": "sadaka"
+  },
+  {
+    "id": 76,
+    "title": "Sedan Şirket",
+    "summary": "Sedan şirket, bir sigorta poliçesiyle ilişkili riskin bir kısmını veya tamamını başka bir sigortacıya geçiren bir sigorta şirketidir. Reasürans ya da koreasürans yoluyla devir işlemi, riski aşan sedan şirket açısından istenmeyen kayıplara karşı korunma sağladığından, sigorta şirketleri için yararlı bir uygulamadır. Sigorta şirketleri sadece risk paylaşımı değil, yeni poliçelere teminat olarak tutması gereken sermaye miktarını kontrol etmek için reasürans da kullanabilir.",
+    "slug": "sedan-sirket"
+  },
+  {
+    "id": 77,
+    "title": "Sermaye Ayrımı",
+    "summary": "Sermaye ve öz sermaye, temelde birbirinden ayrı fakat pratikte aynı çerçevede olabilen iki kavramdır. Sermaye, bir şirketin kâr ve zararlarını kapsarken; öz sermaye ise şirketin tüm borçlarını ödedikten sonra elinde kalan kâr olarak tanımlanmaktadır. Sermaye ve öz sermaye, temelde birbirinden ayrı fakat pratikte aynı çerçevede olabilen iki kavramdır. Sermaye, bir şirketin kâr ve zararlarını kapsarken; öz sermaye ise şirketin tüm borçlarını ödedikten sonra elinde kalan kâr olarak tanımlanmaktadır.",
+    "slug": "sermaye-ayrimi"
+  },
+  {
+    "id": 78,
+    "title": "Sesyon",
+    "summary": "Sigortacılık sektörünün temel iş modeli, riskin kabulü ve yönetimidir. Sigorta satın alırken, sigortacı ödeme karşılığında belirli bir kayıp veya kayıp için belirli bir tutara kadar poliçe hamilini tazmin etmeyi kabul eder. Bununla birlikte bazı riskler, sigorta şirketlerinin tek başına kaldıramayacağı kadar büyüktür. Reasürans burada devreye girer. Sigorta şirketleri çok fazla risk üstlenmekten kaçındıklarında, fazla riski reasürans şirketlerine devreder. Reasürans, sigorta şirketlerinin büyük ve yıkıcı olaylardan kaynaklanan hasarlarla ilişkili riskleri yönetmesine yardımcı olduğu için, genellikle \"sigorta şirketleri için sigorta\" olarak adlandırılır. Sesyon ya da devir, belirli bir ödeme karşılığında sigorta şirketinin ( sedan şirket) üstlendiği risk ve kayıpların sorumluluğunun reasüröre aktarılmasıdır. Örneğin, bir sigorta şirketi rutin olarak maksimum yükümlülüğünü 10 milyon TL ile sınırlayan poliçeler yazabilir. Ancak, daha yüksek maksimum tutarlar gerektiren poliçeler üstlenebilir ve ardından 10 milyon TL’yi aşan riskin geri kalanını bir reasüröre aktarabilir. Bu alt sözleşme genellikle büyük bir kayıp meydana gelirse devreye girer.",
+    "slug": "sesyon"
+  },
+  {
+    "id": 79,
+    "title": "Sınırlı Reasürans",
+    "summary": "Sınırlı reasürans, reasüröre sınırlı miktarda risk aktaran bir reasürans kategorisidir. Sigortacı, reasüröre daha az risk aktararak potansiyel talepleri için geleneksel reasüransa göre daha düşük bir maliyetle teminat alır. Riskin azaltılması, muhasebe veya finansal yöntemlerin yanı sıra riskin başka bir şirkete fiilen aktarılmasıyla sağlanır.</br>Sigorta şirketleri, sigorta poliçelerini yazarken üstlendikleri riski yaymak için sınırlı reasürans kullanır. Bir reasürans poliçesi, sigorta şirketinin bu riskin bir kısmını reasüröre devretmesine izin verir. Ancak, çoğu reasürans sözleşmesinin aksine, sınırlı bir reasürans sözleşmesi riski belirli bir zaman dilimine, genellikle birkaç yıla yayar. Sonlu reasürans satın alan sigorta şirketlerinin temel avantajı, gelecekteki potansiyel talepler için nispeten düşük bir maliyetle teminat almasıdır.</br>Sınırlı reasürans, birincil sigortacının veya sedan şirketin reasürörden veya üstlenici sigortacıdan satın aldığı reasüranstır. Reasürans, yalnızca belirli riskleri ve belirli koşulları kapsadığında sınırlı olur. Bu durumda reasürör, belirtilen koşullar karşılanmazsa birincil sigortacıya ödeme yapmaz. Örneğin sigorta şirketleri, sağlık, kaza, hayat ve seyahat sağlık sigortası gibi poliçe kapsamındaki tazminat taleplerinin belirli bir yüzdesine karşılık gelen bir talep rezervi ayırır. Ayrılan miktar ödemeleri yeterince karşılamadığında reasürör riski karşılar. Bu hüküm, reasürör için potansiyel riski sınırlar ve düşük risk, sedan şirket için daha uygun maliyetli bir reasürans politikası anlamına gelir.",
+    "slug": "sinirli-reasurans"
+  },
+  {
+    "id": 80,
+    "title": "Seyahat Sigortası",
+    "summary": "Bilinen sağlık sigortalarından farklı olarak Seyahat Sigortası, yurt dışı ve dilerseniz yurt içi seyahatlerinizde devreye girer ve ihtiyacınız olan durumlarda acil şekilde size tedavi ve nakil imkanı sağlar. Yolculuğa çıkarken olası aksiliklere karşı tedbir almak isteyen pek çok kişi, “Seyahat sigortası nedir?” sorusuna yanıt arıyor. Seyahat sağlık sigortası, yurt içindeki ve yurt dışındaki tüm seyahatlerinizde size maksimum güvence sağlayan; tatil ve gezileriniz esnasında geçireceğiniz her türlü kazaya, yakalanabileceğiniz her türlü hastalığa ve uğrayabileceğiniz her türlü saldırıya karşı sizi teminat altında tutan seyahat sağlık sigortası, yolculukların sebebiyle karşınıza çıkabilecek sağlık masraflarınızı karşılar.",
+    "slug": "seyahat-sigortasi"
+  },
+  {
+    "id": 81,
+    "title": "Seyrüsefer Sahası",
+    "summary": "\"Seyrüsefer sahası\" sigortacılık işlemlerinde en çok dikkat edilmesi gereken detaylardan biridir. Aslen bir ulaşım terimi olan “seyrüsefer sahası”; havacılıkta, denizcilikte ya da kara yolculuklarında araçların hareket alanını tanımlar. Sigortacılıkta kullanılan “seyrüsefer sahası” ifadesi ise benzer bir anlama sahiptir. Sigortanın geçerli olacağı coğrafi sınırların belirlenmesinde kullanılan ifade, sigortacı ve sigortalının ortak kararıyla her türlü poliçede kullanılabilir.Seyrüsefer sahası, sigorta poliçesinin sınırlarını ve koşullarını belirlemek için kullanılan kriterlerden biridir. Sigorta edilen kişinin ya da aracın hangi coğrafi sınırlar dahilinde sigorta kapsamında değerlendirileceğini belirten seyrüsefer sahası ifadesi, her türlü taşıt sigortasında mutlaka kullanılması gereken bir bilgidir. Kara taşıtlarının, hava taşıtlarının ve deniz taşıtlarının risk alınarak güvenli olmayan bölgelere sürülmesi ve bu bölgelerde yüksek risk teşkil eden tehlikeler sonucunda zarar görmesi gibi durumlarda tazminat ödenmesini önleyen seyrüsefer sahası, ihtiyaç durumunda bireysel sigorta türlerine de eklenebilir.",
+    "slug": "seyrusefer-sahasi"
+  },
+  {
+    "id": 82,
+    "title": "Sigorta Eksperi",
+    "summary": "Sigorta eksperleri, taşıdıkları riskler itibarıyla maddi karşılığı korunmak istenen menkul ve gayrimenkul kıymetlerin değerlerini tespit eden, bu değere atıfta bulunarak risk gerçekleştiğinde hasar tespiti yapmakla görevlendirilen kişilerdir.",
+    "slug": "sigorta-eksperi"
+  },
+  {
+    "id": 83,
+    "title": "Sigorta Primi",
+    "summary": "Sigorta primi, sigorta poliçesi için ödenen para miktarıdır. Tüm poliçe türleri için prim ödemesi yapılır. Primin ödenmemesi, poliçenin feshedilmesi ve teminat kaybı ile sonuçlanır. Sigorta priminin miktarı sigortanın sağladığı güvencelerin kapsamı, sigortalının yaşı, yaşadığı yer ve geçmişteki olaylar (trafik sicil kaydı ya da sağlık öyküsü) gibi risk faktörlerine göre belirlenir. Sigorta şirketleri ürüne göre farklı seçenekler sunar. Sigortalı ne kadar fazla teminat alırsa ya da ne kadar kapsamlı bir teminat seçerse, sigorta primi o kadar yüksek olur. Sigorta primi hesabında risk ve birikim primlerinin yan sıra gider payları ve aracı komisyonları da dikkate alınır. Poliçe türüne göre iştira (satın alma, tenzil (dondurma) ve ikraz (ödünç alma) gibi özel şartların da dahil edildiği, istatiksel verilerin yoğun olarak kullanıldığı bir hesaplama sistemi sonucunda, kişiye özel prim oranları belirlenir. Her birey farklı risk seviyelerine sahip olduğundan, aynı sigorta ürünü için ödenmesi gereken primler ve istihsal masrafları da farklılık gösterir.",
+    "slug": "sigorta-primi"
+  },
+  {
+    "id": 84,
+    "title": "Sorumluluk Sigortası",
+    "summary": "Sorumluluk sigortası; sigortalıyı, sigortalının aile bireylerini ya da çalışanlarını çeşitli ihmal durumlarında doğabilecek maddi ve bedensel zararlara karşı güvence altına alan bir sigorta türüdür. Farklı çeşitleri bulunan sorumluluk sigortalarının kapsamları imzalanan poliçelerde belirlenir ve sigortalı kişinin sorumlu olduğu olumsuz durumlar sonucunda tazminat hakkı doğan kişilerin karşılaştıkları zarar, poliçe sınırları dahilinde ödenir. Sorumluluk sigortaları, iş yerlerinde oluşabilecek iş kazalarından, ticari ürünlerin görebileceği hasarlardan, mesleki koşullardan doğabilecek sorumluluklardan zarar görülmemesi amacıyla düzenlenir. Sorumluluk sigortaları kişisel sorumluluk sigortaları ve iş yeri sorumluluk sigortaları  olarak iki ana grupta incelenir. </br>Kişisel sorumluluk sigortaları bireyler tarafından yapılır ve bireysel sorumluluk alanlarını kapsar. Yaşam alanınızda yaptığınız yanlış dekorasyonun komşularınıza zarar vermesi, evinizde çalışan görevlinin misafirlerinizi yanlışlıkla yaralaması, çocukların istemsiz bir şekilde üçüncü şahıslarda bedensel ya da maddi kayıp oluşturması gibi durumlar, kişisel sorumluluk sigortaları kapsamında değerlendirilir.</br>İş yeri sorumluluk sigortaları ise iş yerinde ihmal ve tedbirsizlik sonucunda oluşabilecek kaza ve olumsuz durumların doğuracağı maddi yükümlülüğü karşılamayı taahhüt eder.",
+    "slug": "sorumluluk-sigortasi"
+  },
+  {
+    "id": 85,
+    "title": "Sovtaj",
+    "summary": "Sovtaj, sigorta şirketlerinin giderlerinin azaltılması amacıyla hasara uğrayan kıymetlerin satılması şeklinde tanımlanabilir. Sigorta şirketleri, sigortalının hasar gören malının veya bu malın hasar görmeyen kısımlarının sigortalı onayı ile satılmasını sağlar. Satılan ve gelir olarak geri gelen bu malın değerli kısmı sigorta şirketler tarafından sigortalıya bırakılır. Bırakılan bu miktar ise sigortalının şirketten alacağı tutardan ve tazminatından düşer. Sigortalı ile sigorta şirketi arasında oluşan bu durumda ortaya çıkan miktarlar sigorta dosyasına sovtaj olarak eklenir.</br>E-sovtaj ise hasar görmüş malların online olarak satılması anlamına gelir. Online ihale olarak da tanımlanabilen e-sovtaj ile kişiler hasarlı araçlarını ve diğer mallarını satabilir.",
+    "slug": "sovtaj"
+  },
+  {
+    "id": 86,
+    "title": "Suhunet",
+    "summary": "Kelime anlamı \"sıcaklık\" olan suhunet, sigorta poliçelerinde sıklıkla geçen terimlerden biridir. Aslen Arapça bir tabir olan “suhunet” ifadesi, çeşitli kaza sigortalarında koşulları belirlemek için kullanılır. Ferdi kaza sigortalarında, eşya ve nakliye sigortalarında bahsi geçen “suhunet” ifadesi, sigortalının yükümlülüklerinin belirlenmesine de yardımcı olur. Sühunet ifadesinin sigorta sözleşmelerinde yer almasının sebebi ise sigorta içeriğinde sıcaklıktan doğan durumlarla ilgili hüküm ve koşullar bulunmasıdır. “Suhunet”, doğal sıcaklık olması sebebiyle kaza konulu sigorta poliçelerinde teminat dışı kabul edilir ve tazminat ödenmeyecek durumlar arasında yer alır. Sorumluluk ve sağlık sigortalarında ise suhunet kaynaklı zararlar, ağırlıklı olarak teminat kapsamında değerlendirilir. Suhunet ifadesi; ferdi kaza sigortası, sağlık sigortası, sorumluluk sigortası gibi sigorta türlerinde bulunur. Havanın doğal sebeplerden ötürü sıcak olması anlamına gelen suhunet kelimesi, bu sigorta türlerindeki maddelerin ve hükümlerin net bir şekilde tanımlanabilmesini sağlar.",
+    "slug": "suhunet"
+  },
+  {
+    "id": 87,
+    "title": "Sürprim",
+    "summary": "Sigorta ürünlerinde belirlenen teminatlar karşılığında sigorta ettirenler bir prim ödemesi yapar. Sigorta türlerine göre değişiklik göstermekle birlikte, çeşitli gerekçelerle mevcut prim bedeline ek olarak sigorta şirketlerince talep edilen ilave ödemelere sürprim adı verilir. Sigorta şirketleri, sektördeki ortalamalara göre sigorta ürünleri tasarlama ve standart primler belirleme eğilimindedir. Ancak sigortalıya göre değişiklik gösterebilen faktörler devreye girdiğinde farklı prim bedelleri ortaya çıkabilir. Bazı durumlarda ise sigorta şirketleri, teminatlara dahil edilmeyen riskleri sürprim uygulamasıyla ek primler talep ederek teminat kapsamına ekleyebilir.</br>Sürprim, çeşitli sigorta türlerinde farklı gerekçelerle ve oranlarla uygulanabilir. Genellikle zorunlu sigorta ürünlerinde, mevcut sigorta poliçesinin zamanında yenilenmediği durumlarda sürprim söz konusu olabilir. Bir diğer uygulamada ise sigorta poliçelerinde kapsam dışı olan teminatlar karşılığında talep edilen bedeller, sürprim olarak karşınıza çıkabilir. Yani, standart poliçelerde sigorta edilemeyen teminatların sözleşmeye eklenmesi ile yeniden prim hesaplaması yapılır ve sürprim bedelleri belirlenir. Birçok farklı sigorta ürününde kullanılmasına karşın zorunlu trafik sigortaları, DASK, KASKO, konut, sağlık ve hayat sigortalarında yaygın olarak kullanılan bir uygulamadır.",
+    "slug": "surprim"
+  },
+  {
+    "id": 88,
+    "title": "Tahkim (Sigorta Tahkim Komisyonu)",
+    "summary": "Tahkim ya da Sigorta Tahkim Komisyonu, sigorta şirketleri ile sigortalı arasında meydana gelen anlaşmazlıkların giderilmesi için kurulan, faaliyetleri kanunlar ile belirlenmiş bir komisyondur. Tahkime sigorta ettiren ya da sigorta sözleşmesi ile fayda sağlayan kişiler başvurabilir. Sigorta ve Reasürans Şirketleri Birliği bünyesinde kurulan Sigorta Tahkim Komisyonu; bir müsteşarlık, iki birlik, bir tüketici derneği ve bir akademisyen hukukçunun katılımından oluşur. Komisyona gelen anlaşmazlıklar ilk olarak raportörlere iletilir. Anlaşmazlığın raportör aşamasında sonuçlandırılamaması durumunda, başvuru bağımsız sigorta hakemlerine yönlendirilir.",
+    "slug": "tahkim-sigorta-tahkim-komisyonu"
+  },
+  {
+    "id": 89,
+    "title": "Tarsim",
+    "summary": "TARSİM devlet destekli tarım sigortasıdır. TARSİM’in açılımı “Tarım Sigortaları Havuzu”dur. 14/06/2005 tarihli 5363 sayılı \"Tarım Sigortaları Kanunu\" kapsamında kurulan Tarım Sigortaları Havuz İşletmesi A.Ş. çiftçilerin ürünlerini oluşabilecek hasarlara karşı güvence alınmasını amaçlar. TARSİM tarım sigortası anlaşmalı acenteler aracılığıyla yapılır. Havuz sistemi tüm işlemlerin tek bir elden ve bir standarta bağlı olarak yapılabilmesini sağladığı gibi güvenilirlik ve devamlılık açısından da önemlidir.",
+    "slug": "tarsim"
+  },
+  {
+    "id": 90,
+    "title": "Tazminat",
+    "summary": "Tazminat, belirli bir sınıra kadar belirli ya da beklenmedik hasarları veya kayıpları (genellikle zararın kendisinin miktarını) tazmin eden bir ödemedir. Sigorta şirketleri, sigortalılar tarafından ödenen primler karşılığında teminat sağlar. Bir sigorta bağlamında tazminat, bir tarafın, diğer tarafın zarar görmesi durumunda sözleşmeye dayalı ödeme yapma yükümlülüğünü ifade eder. Tazminat ve sigorta bazı benzerliklerine rağmen aynı değildir. Sigorta ve tazminat tamamen ayrı varlıklardır ve temel fark, bir sigorta poliçesi olmadan da tazminat alabilmenizdir. Tazminat, kayıplara ilişkin sorumluluğun bir sözleşme ilişkisi içinde açıkça devredildiği bir süreçtir. Sigorta açısından, sigorta poliçesi olmadan tazmin yükümlülüğün tesis edilmesi mümkün değildir. Tazminat alan, zararlarla ilgili tazminat sorumluluğundan muaf olan taraftır. Tazminat veren, kayıp veya zararlardan sorumlu taraftır. Bir aksaklık, kaza veya kayıplara yol açabilecek başka bir sorun olması durumunda, mali ve yasal sorumluluğu tazminat veren üstlenir. Bir sigorta sözleşmesinde bu genellikle sigortacıdır.",
+    "slug": "tazminat"
+  },
+  {
+    "id": 91,
+    "title": "Tazminat Talebi",
+    "summary": "Sigorta poliçesi, poliçeyle kapsanan kayıplar veya devam eden hasarlar için teminat ve tazminat sağlar. Tazminat talebi, sigortalı bir kişi tarafından poliçe sağlayıcısına yapılan resmi bir ödeme talebidir. Örneğin, doğal afet, ev yangını veya araba kazası gibi sigorta poliçesi kapsamına giren bir olay meydana geldikten sonra tazminat talebi yapılır. Sigorta tazminat talebinden elde edilen ödeme ile sigorta poliçesi kapsamındaki mülkü değiştirme, onarma veya kişileri tıbbi olarak tedavi etme amacı güdülür.",
+    "slug": "tazminat-talebi"
+  },
+  {
+    "id": 92,
+    "title": "Teminat",
+    "summary": "Teminat, kişilerin bir kaza, afet ya da diğer olumsuz olaylarla karşılaşmaları sonucunda oluşan kayıpların giderilmesini sağlayan bedel ve güvencelerdir. Sigorta çeşitlerinin her birinde bir veya birden fazla teminat bulunur. Sigortaların teminat çeşitleri ise sigortalanan kişiye, gayrimenkule ya da araca göre değişiklik gösterir. Örneğin, zorunlu trafik sigortası teminatları ve kasko sigortası teminatları arasında büyük farklar bulunur. Teminatlar sigorta şirketlerinin politikalarına göre de değişebilir. Teminatlar, temel olarak maddi zararların giderilmesine yönelik olsa da kişilerin alacağı manevi hasarlar için de verilebilir. Bunun dışında bazı hizmet ve yardımlar da teminat olarak sunulabilir.",
+    "slug": "teminat"
+  },
+  {
+    "id": 93,
+    "title": "Tenezzüh Teknesi",
+    "summary": "Tenezzüh teknesi, denizcilikte günübirlik geziler yapan tekneleri tanımlamak için kullanılan bir ifadedir. Gezinti teknesi ismiyle de bilinen tenezzüh tekneleri, sigortacılık işlemlerinde büyük önem taşır. Tenezzüh tekneleri için düzenlenen sigortalar, bir yandan araçların mekanik yapılarını korurken öte yandan araç sahiplerinin yolculara karşı doğabilecek sorumluluklarını da güvence altına alır. Tenezzüh teknelerinin sigorta işlemleri, diğer tekne ve yat türlerinden farklıdır. Klasik yat ve tekne sigortaları, ağırlıklı olarak aracın görebileceği maddi zararlara odaklanır. Tenezzüh tekneleri ise insan taşımacılığında kullanılmaları sebebiyle sorumluluk açısından da sigortalanır. Tenezzüh teknesine sigorta yaptıran bir sigortalı, bu sigortanın avantajlardan yararlanır.",
+    "slug": "tenezzuh-teknesi"
+  },
+  {
+    "id": 94,
+    "title": "Tenzili Muafiyet",
+    "summary": "Tenzili muafiyet, sigorta şirketinin maliyetlerin bir kısmını veya tamamını ödemeye başlamadan önce, sigortalının her yıl veya olay başına harcaması gereken belirli bir tutardır. Muafiyetler, aynı zamanda, sigorta şirketlerinin çok büyük veya biriken çok sayıdaki küçük hak taleplerinin neden olduğu finansal strese karşı tampon görevi görür. Sigorta şirketlerinin poliçe sahipleriyle risk maliyetlerini paylaşmasına yardımcı olur. Bununla birlikte şirketlerin tenzili muafiyeti kullanmalarının başlıca iki nedeni, finansal istikrar sağlamak ve ahlaki tehlikelerden korunmaktır.",
+    "slug": "tenzili-muafiyet"
+  },
+  {
+    "id": 95,
+    "title": "Tevekkül",
+    "summary": "Bir başka anlatım ile; bir amaca ulaşmak için gerekli olan her türlü önlemi alarak; elinden gelen tüm gayreti gösterdikten sonra kalben Allah'a bağlanıp O'na güvenmek, sonucu Allah'tan beklemek anlamına gelmektedir.",
+    "slug": "tevekkul"
+  },
+  {
+    "id": 96,
+    "title": "Tramer",
+    "summary": "Açılımı Trafik Sigortası Bilgi Merkezi Kurumu olan Tramer, tüm sigortalara ait bilgilerin bir araya geldiği bir veri deposudur. Yeni adıyla Sigorta Bilgi Merkezi (SBM) olarak faaliyetini devam ettiren Tramer Sistemi aracılığıyla herhangi bir araca ait sigorta işlemleri incelenebilir. Tramer Sistemi ile bir aracın kaza bilgilerine ve ağır hasarlı olup olmadığı gibi bilgilere ulaşılabilir. Online hizmet kapsamı altında destek sağlayan Tramer, sigorta poliçeleriyle araca ait pek çok bilgiye ulaşımı sağlar.",
+    "slug": "tramer"
+  },
+  {
+    "id": 97,
+    "title": "Trete",
+    "summary": "Sigortacılıkta reasürans işlemleri kapsamında kullanılan terete terimi, teknik olarak reasürör ve sedan şirket (sigorta şirketi) arasındaki risk devir prosedürlerini belirleyen reasürans anlaşmalarına verilen genel isimdir. Sigorta şirketleri düzenledikleri poliçeler nispetinde rizikolar taşır. Mali güçleri oranında risk üstlenmesi gereken sigorta şirketlerinin, üzerlerinde taşıdıkları bir kısım riskleri devretmeleri reasürans işlemleri sayesinde gerçekleşir. Reasürans terimleri sözlüğünde sigorta şirketi sedan, reasürans şirketi ise reasürör olarak anılır. Tarafların karşılıklı risk ve prim devrine dair yaptıkları anlaşmalar ise terete, reasürans anlaşmaları olarak anılır.",
+    "slug": "trete"
+  },
+  {
+    "id": 98,
+    "title": "Tretin",
+    "summary": "Tretin veya trete, reasürans anlaşması olarak da bilinen bu kavram sözlükte \"ikili sigorta\" olarak tanımlanır. Bu sigorta, sigorta şirketi ve reasürör arasında yapılır. İki tarafı bağlayan reasürans anlaşması, risk devri konusu üzerinedir. Burada sigortacı devreden konumunda olur. Risk devrini sigortacı yapar ve reasürör de bu aşamada sigortacının tüm şartlarını, tüm risklerini ve anlaşmada yer alan tanımları ve açıklamaları kabul ederek devri alır. Sigortacının devreden olması ve reasürörün tüm devir işlemlerini kabul etmesi durumu söz konusu olduğundan, bu anlaşmaya zorunlu reasürans adı de verilir. Zorunlu reasüransın yanı sıra riskin farklı paylaşım yöntemleri, çeşitli devir şekilleri de bulunabilir. Kendi içinde farklı gruplara ayrılan tretin, trete veya reasürans anlaşması, hasar fazlası olması veya stop-loss durumu söz konusu olması gibi yönlerle de yakından ilgilidir.",
+    "slug": "tretin"
+  },
+  {
+    "id": 99,
+    "title": "Üçüncü Şahıs Mali Sorumluluk",
+    "summary": "Üçüncü Şahıs Mali Sorumluluk Sigortası, sigortalının bilmeden ve kazayla üçüncü kişilere zarar vermesi durumlarında geçerli olan bir sigorta türüdür. Sorumluluk sigortaları kapsamında yer alan Üçüncü Şahıs Mali Sorumluluk Sigortası, sigortalıyı haksız suçlamalara ya da kusur sebebiyle oluşacak tazminat haklarında karşılaşılabilecek aşırı seviyedeki taleplere karşı da korur.",
+    "slug": "ucuncu-sahis-mali-sorumluluk"
+  },
+  {
+    "id": 100,
+    "title": "Zekat",
+    "summary": "Zekât, dinen zenginlik ölçüsü kabul edilen miktarda (nisap) mala sahip olan kimselerin Allah rızası için muayyen kişilere vermesi gereken belli miktarı ifade eder. Zekâtın farz olması için; malların nisaba ulaşması yanında nâmî (hakikaten ya da hükmen üreyici/artıcı) olması, sahip olunduğu andan itibaren üzerinden bir yıl geçmesi, bir yıllık borcundan ve aslî ihtiyaçlardan fazla olması gerekir.",
+    "slug": "zekat"
+  },
+  {
+    "id": 101,
+    "title": "Zeyilname",
+    "summary": "Bir sigorta işlemi sırasında en önemli nokta, sigortalı kişi ve sigorta sağlayan şirket arasında yapılan sigorta sözleşmeleridir. Sigortalının hakları, hangi durumlarda ne kadar prim alabileceği, sigorta şirketinin sigortalıya karşı sorumlulukları ve sigortalının diğer bütün hakları bu sözleşmede yer alır. Sigorta yaptırılan bütün alanlarda bu sözleşmelerle iş yürütülür, sözleşmede yazan maddeler sayesinde işlemler yapılır. Ancak bu sözleşmelerin maddelerinde, sözleşmeyi yaptıktan sonra değişikliğe gidilmek zorunda kalınabilir. Bu değişiklik, sözleşmenin hazırlandığı ve tarafların imzaladığı zamandan sonra fark edilen bir hata sebebiyle olabileceği gibi, taraflardan birinin geçerli bir bahane göstermesiyle de uygulanabilir. Sözleşmelerde yapılan değişikliğe \"zeyil\" ismi verilir. Zeyil yapıldığına dair hazırlanan belgelere de \"zeyilname\" denir. Sigorta poliçelerinde, yani sözleşmelerinde o an yapılan bütün değişiklikler zeyilnamede yer alır. Zeyilname, sigorta sektörünün yanında ihale sözleşmelerinde de kullanılır. Yapılan ihalenin şartları gibi konularda değişikliğe gidilecekse zeyilname hazırlanarak ihaleye devam edilir.",
+    "slug": "zeyilname"
+  },
+  {
+    "id": 102,
+    "title": "Zorunlu Hekim Sorumluluk Sigortası",
+    "summary": "Zorunlu Hekim Sorumluluk Sigortası; kamu ya da özel sağlık kurum ve kuruluşlarında çalışan hekimler, serbest çalışan hekimler, diş hekimleri, tıpta uzmanlık mevzuatı çerçevesinde uzman olan hekimler için geçerli bir sigorta türüdür. Zorunlu Hekim Sorumluluk Sigortası’nın tam ismi, Tıbbi Kötü Uygulamaya İlişkin Zorunlu Mali Sorumluluk Sigortası’dır. Bu sigorta, hekimlerin poliçe süresi içinde ya da sözleşme tarihinden önceki on yıllık süre boyunca sürdürdüğü mesleki faaliyetler sonucunda verdiği zararlara bağlı olarak, sigorta poliçesi içinde geçerli tazminat taleplerine teminat sağlar.",
+    "slug": "zorunlu-hekim-sorumluluk-sigortasi"
+  },
+  {
+    "id": 103,
+    "title": "Zorunlu Sigorta",
+    "summary": "Zorunlu sigorta çeşitleri, özellikle kamu güvenliğini kontrol altına almak, kişilerin ve üçüncü şahısların emniyetini sağlamak gibi amaçlarla kamu kuruluşları tarafından satın alınması zorunlu hale getirilen sigortalardır. Yasal olarak mecburi olduğu öne sürülen bu sigorta çeşitlerinin satın alınmaması durumunda, devlet kuruluşları tarafından belirli yaptırımlar uygulanabilir. Özellikle üçüncü şahıslara verebileceğiniz herhangi bir zarar durumunda korunmanızı sağlayan ve gerçekleşecek kaza durumlarına karşı bütçenizi koruyan zorunlu sigortalar, bir kaza sonucunda karşı tarafa vereceğiniz zararların teminat altına alınmasını sağlar.",
+    "slug": "zorunlu-sigorta"
+  }
+]
