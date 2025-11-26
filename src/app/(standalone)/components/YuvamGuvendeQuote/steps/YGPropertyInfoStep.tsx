@@ -165,15 +165,15 @@ const initialKonutFormData: KonutPropertyFormData = {
   streetReference: '',
   buildingReference: '',
   apartmentReference: '',
-  buildingType: PropertyStructure.Unknown,
-  constructionYear: null,
-  floorCountRange: KonutPropertyFloorCountRange.Unknown,
-  floorNumber: '',
-  squareMeters: '',
-  usageType: PropertyUtilizationStyle.Unknown,
-  buildingMaterial: PropertyStructure.Unknown,
-  riskZone: PropertyDamageStatus.Unknown,
-  ownershipType: KonutPropertyOwnershipType.Unknown,
+  buildingType: PropertyStructure.SteelReinforcedConcrete, // Çelik betonarme
+  constructionYear: '1998', // Bina inşa yılı: 1998
+  floorCountRange: KonutPropertyFloorCountRange.Between8And18, // Kat: 8-18
+  floorNumber: '5', // Kaçıncı kat: 5
+  squareMeters: '100', // Metre kare: 100
+  usageType: PropertyUtilizationStyle.House, // Kullanım şekli: konut
+  buildingMaterial: PropertyStructure.SteelReinforcedConcrete, // Yapı tarzı: Çelik betonarme
+  riskZone: PropertyDamageStatus.None, // Hasar durumu: Hasarsız
+  ownershipType: KonutPropertyOwnershipType.Tenant, // Mülkiyet tipi: Kiracı
 };
 
 // Mapping functions
@@ -1352,105 +1352,8 @@ export default function YGPropertyInfoStep({ onNext, onBack }: YGPropertyInfoSte
                 </div>
               </div>
 
-              {/* Genel Bilgiler Section */}
-              <div className="yg-form-section">
-                <div className="yg-form-grid">
-                  <YGSelect
-                      name="buildingType"
-                      value={formik.values.buildingType === PropertyStructure.Unknown ? '' : formik.values.buildingType.toString()}
-                      onChange={(e) => formik.setFieldValue('buildingType', e.target.value ? Number(e.target.value) : PropertyStructure.Unknown)}
-                      options={structureTypeOptions.map(opt => ({ value: opt.value.toString(), label: opt.label }))}
-                      placeholder="Yapı Tarzı*"
-                      error={formik.touched.buildingType && formik.errors.buildingType ? String(formik.errors.buildingType) : undefined}
-                  />
-
-                  <YGInput
-                      name="constructionYear"
-                      value={formik.values.constructionYear || ''}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      placeholder="Yapım Yılı*"
-                      type="number"
-                      error={formik.touched.constructionYear && formik.errors.constructionYear ? String(formik.errors.constructionYear) : undefined}
-                  />
-                </div>
-              </div>
-
-              {/* Konut Kullanım Detayları Section */}
-              <div className="yg-form-section">
-                <div className="yg-form-grid">
-                  <YGSelect
-                      name="floorCountRange"
-                      value={formik.values.floorCountRange === KonutPropertyFloorCountRange.Unknown ? '' : formik.values.floorCountRange.toString()}
-                      onChange={(e) => formik.setFieldValue('floorCountRange', Number(e.target.value) || KonutPropertyFloorCountRange.Unknown)}
-                      options={KonutFloorCountRangeOptions.map(opt => ({ value: opt.value.toString(), label: opt.label }))}
-                      placeholder="Konut Toplam Kat Sayısı*"
-                      error={formik.touched.floorCountRange && formik.errors.floorCountRange ? String(formik.errors.floorCountRange) : undefined}
-                  />
-
-                  <YGInput
-                      name="floorNumber"
-                      value={formik.values.floorNumber}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        const value = e.target.value.replace(/[^-0-9]/g, '');
-                        if (value.length <= 3) {
-                          formik.setFieldValue('floorNumber', value);
-                        }
-                      }}
-                      onBlur={formik.handleBlur}
-                      placeholder="Dairenin Bulunduğu Kat*"
-                      maxLength={3}
-                      error={formik.touched.floorNumber && formik.errors.floorNumber ? String(formik.errors.floorNumber) : undefined}
-                  />
-
-                  <YGInput
-                      name="squareMeters"
-                      value={formik.values.squareMeters}
-                      onChange={(e) => {
-                        const value = e.target.value.replace(/[^0-9]/g, '');
-                        if (value.length <= 3) {
-                          formik.setFieldValue('squareMeters', value);
-                        }
-                      }}
-                      onBlur={formik.handleBlur}
-                      placeholder="Brüt Alan (m²)*"
-                      maxLength={3}
-                      error={formik.touched.squareMeters && formik.errors.squareMeters ? String(formik.errors.squareMeters) : undefined}
-                  />
-
-                  <YGSelect
-                      name="usageType"
-                      value={formik.values.usageType === PropertyUtilizationStyle.Unknown ? '' : formik.values.usageType.toString()}
-                      onChange={(e) => formik.setFieldValue('usageType', e.target.value ? Number(e.target.value) : PropertyUtilizationStyle.Unknown)}
-                      options={utilizationStyleOptions.map(opt => ({ value: opt.value.toString(), label: opt.label }))}
-                      placeholder="Kullanım Şekli*"
-                      error={formik.touched.usageType && formik.errors.usageType ? String(formik.errors.usageType) : undefined}
-                  />
-                </div>
-              </div>
-
-              {/* Bina Detayları Section */}
-              <div className="yg-form-section">
-                <div className="yg-form-grid">
-                  <YGSelect
-                      name="riskZone"
-                      value={formik.values.riskZone === PropertyDamageStatus.Unknown ? '' : formik.values.riskZone.toString()}
-                      onChange={(e) => formik.setFieldValue('riskZone', e.target.value ? Number(e.target.value) : PropertyDamageStatus.Unknown)}
-                      options={damageStatusOptions.map(opt => ({ value: opt.value.toString(), label: opt.label }))}
-                      placeholder="Hasar Durumu*"
-                      error={formik.touched.riskZone && formik.errors.riskZone ? String(formik.errors.riskZone) : undefined}
-                  />
-
-                  <YGSelect
-                      name="ownershipType"
-                      value={formik.values.ownershipType === KonutPropertyOwnershipType.Unknown ? '' : formik.values.ownershipType.toString()}
-                      onChange={(e) => formik.setFieldValue('ownershipType', e.target.value ? Number(e.target.value) : KonutPropertyOwnershipType.Unknown)}
-                      options={KonutOwnershipTypeOptions.map(opt => ({ value: opt.value.toString(), label: opt.label }))}
-                      placeholder="Mülkiyet Tipi*"
-                      error={formik.touched.ownershipType && formik.errors.ownershipType ? String(formik.errors.ownershipType) : undefined}
-                  />
-                </div>
-              </div>
+              {/* Genel Bilgiler Section - Hidden fields with default values */}
+              {/* Yapı Tarzı, Yapım Yılı, Kat Sayısı, Dairenin Bulunduğu Kat, Metre Kare, Kullanım Şekli, Hasar Durumu, Mülkiyet Tipi alanları gizlendi - default değerler otomatik gönderiliyor */}
 
               <div className="yg-button-container" style={{ justifyContent: 'flex-end' }}>
                 <YGButton

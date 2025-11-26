@@ -1264,10 +1264,10 @@ const PersonalInfoStep = ({ onNext, onBack, isFirstStep, isLastStep }: PersonalI
           }}
         >
           <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
-            Doktorum Benimle Ol
+            Doktorum Benimle
           </Typography>
           <Typography sx={{ mb: 3, fontSize: '1rem', color: 'text.secondary' }}>
-            Kurumsal müşterilerimize Doktorum Benimle Ol hizmeti verememekteyiz.<br />
+            Kurumsal müşterilerimize Doktorum Benimle hizmeti verememekteyiz.<br />
             <Box component="span" sx={{ display: 'block', mt: 2, textAlign: 'center' }}>
               <span> 
                 <Link href="/kasko-teklif" sx={{ fontWeight: 700, color: '#111', textDecoration: 'underline', mx: 0.5 }} target="_blank">Kasko,</Link>
@@ -1470,7 +1470,7 @@ const PersonalInfoStep = ({ onNext, onBack, isFirstStep, isLastStep }: PersonalI
         Eksik Bilgilerinizi Tamamlayın
       </Typography>
       <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-        Doktorum Benimle Ol teklifiniz için eksik bilgilerinizi doldurunuz
+        Doktorum Benimle teklifiniz için eksik bilgilerinizi doldurunuz
       </Typography>
 
       {error && (
@@ -1598,7 +1598,7 @@ const PersonalInfoStep = ({ onNext, onBack, isFirstStep, isLastStep }: PersonalI
           severity="warning" 
           sx={{ mb: 3 }}
         >
-          Kurumsal müşterilerimize Doktorum Benimle Ol hizmeti verememekteyiz. Diğer sigorta ürünlerimizden teklif alabilirsiniz.
+          Kurumsal müşterilerimize Doktorum Benimle hizmeti verememekteyiz. Diğer sigorta ürünlerimizden teklif alabilirsiniz.
         </Alert>
       )}
       

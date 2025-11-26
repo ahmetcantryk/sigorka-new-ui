@@ -98,7 +98,7 @@ export default function Footer() {
                 </Link>
                 <div className="footer-nav__group">
                   <Link href="/ozel-saglik-sigortasi" className="footer-nav__item">Özel Sağlık Katılım Sigortası</Link>
-                  {/* <Link href="/seyahat-saglik-sigortasi" className="footer-nav__item">Seyahat Sağlık Katılım Sigortası</Link> */}
+                  <Link href="/seyahat-saglik-sigortasi" className="footer-nav__item">Seyahat Sağlık Katılım Sigortası</Link>
                   <Link href="/tamamlayici-saglik-sigortasi" className="footer-nav__item">Tamamlayıcı Sağlık Katılım Sigortası</Link>
                   <Link href="/yabanci-saglik-sigortasi" className="footer-nav__item">Yabancı Sağlık Katılım Sigortası</Link>
                 </div>

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuthStore } from '../../../../store/useAuthStore';
 import { fetchWithAuth } from '@/services/fetchWithAuth';
-import { API_ENDPOINTS } from '@/config/api';
+import { API_BASE_URL, API_ENDPOINTS } from '@/config/api';
 import { useRouter } from 'next/navigation';
 import { createSessionViaAPI } from '../../../../services/paratika';
 import { customerApi } from '@/services/api';
@@ -124,11 +124,7 @@ export default function PurchaseStepNew({ onNext, onBack }: PurchaseStepNewProps
         }
 
         // API'den proposal detaylarını çek
-        const response = await fetchWithAuth(`https://api.insurup.com/api/proposals/${proposalId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetchWithAuth(`${API_BASE_URL}/api/proposals/${proposalId}`);
 
         if (!response.ok) {
           throw new Error('Teklif bilgileri alınamadı');
@@ -693,11 +689,7 @@ export default function PurchaseStepNew({ onNext, onBack }: PurchaseStepNewProps
 
   return (
     <>
-      {errorMessage && (
-        <div className="pp-error-banner">
-          {errorMessage}
-        </div>
-      )}
+  
 
       <div className="pp-payment-container">
           {/* Sol Taraf - Kredi Kartı Bilgileri */}
@@ -713,7 +705,7 @@ export default function PurchaseStepNew({ onNext, onBack }: PurchaseStepNewProps
             <div className="pp-radio-section">
               <div className="pp-radio-header">
                 <label className="pp-radio-label-text">
-                  Kart sahibi sigortalı ile aynı mı
+                  Kart sahibi sigortalı ile aynı mı?
                 </label>
                 <div className="pp-radio-options">
                   <label className="pp-radio-option">

@@ -485,7 +485,7 @@ export default function PurchaseStep({ onNext }: PurchaseStepProps) {
                     {selectedQuoteData.company || 'Bilinmeyen Şirket'}
                   </Typography>
                   <Typography variant="body2" color="text.secondary" gutterBottom>
-                    Doktorum Benimle Ol (
+                    Doktorum Benimle (
                     {currentPremium.installmentNumber === 1
                         ? 'Peşin'
                         : `${currentPremium.installmentNumber} Taksit`}
@@ -641,8 +641,8 @@ export default function PurchaseStep({ onNext }: PurchaseStepProps) {
         orderItems: [
           {
             productCode: proposalProductApiId,
-            name: 'Doktorum Benimle Ol',
-            description: `${proposalIdFromStorage} numaralı Doktorum Benimle Ol teklifi`,
+            name: 'Doktorum Benimle',
+            description: `${proposalIdFromStorage} numaralı Doktorum Benimle teklifi`,
             quantity: 1,
             amount: currentPremium.grossPremium,
           },

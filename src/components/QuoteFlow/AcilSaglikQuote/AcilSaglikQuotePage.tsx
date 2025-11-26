@@ -203,7 +203,7 @@ export default function AcilSaglikQuotePage() {
 
   const handleGetQuotesAndNavigate = async (): Promise<void> => {
     if (!customerId || !accessToken) {
-      alert('Lütfen tekrar giriş yapınız.');
+      // Acil sağlık sayfasında login sonrası state güncellemesi bekleniyor, alert gösterme
       return;
     }
 

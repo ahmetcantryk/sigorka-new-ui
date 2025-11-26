@@ -137,7 +137,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'trafik-teklif',
     'ozel-saglik-teklif',
     'ferdi-kaza-teklif',
-    'seyahat-saglik-teklif',
+    // 'seyahat-saglik-teklif',
     'yabanci-saglik-teklif',
   ].map((route) => ({
     url: `${baseUrl}/${route}`,

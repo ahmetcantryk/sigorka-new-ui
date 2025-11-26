@@ -49,12 +49,12 @@ export const productAnchors: ProductNavConfig = {
     { id: 'avantajlar', label: 'Avantajlar' },
     { id: 'nasil-teklif-alinir', label: 'Nasıl Teklif Alınır?' }
   ],
-  'acil-saglik-sigortasi': [
-    { id: 'sigorta-nedir', label: 'Doktorum Benimle Ol Nedir?' },
-    { id: 'avantajlar', label: 'Avantajlar' },
-    { id: 'teminat-kapsami', label: 'Teminat Kapsamı' },
-    { id: 'nasil-yaptirilir', label: 'Nasıl Yaptırılır?' }
-  ],
+  // 'acil-saglik-sigortasi': [
+  //   { id: 'sigorta-nedir', label: 'Doktorum Benimle Nedir?' },
+  //   { id: 'avantajlar', label: 'Avantajlar' },
+  //   { id: 'teminat-kapsami', label: 'Teminat Kapsamı' },
+  //   { id: 'nasil-yaptirilir', label: 'Nasıl Yaptırılır?' }
+  // ],
   'konut-sigortasi': [
     { id: 'sigorta-nedir', label: 'Katılım Sigortası Nedir?' },
     { id: 'teminatlar', label: 'Teminatlar' },
@@ -82,7 +82,7 @@ export const getOfferLink = (productSlug: string): string => {
     'zorunlu-trafik-sigortasi': '/trafik-teklif',
     'imm-sigortasi': '/imm-teklif',
     'ozel-saglik-sigortasi': '/ozel-saglik-teklif',
-    'seyahat-saglik-sigortasi': '/seyahat-teklif',
+    'seyahat-saglik-sigortasi': '/seyahat-saglik-teklif',
     'tamamlayici-saglik-sigortasi': '/tss-teklif',
     'yabanci-saglik-sigortasi': '/yabanci-saglik-teklif',
     'acil-saglik-sigortasi': '/acil-saglik-teklif',

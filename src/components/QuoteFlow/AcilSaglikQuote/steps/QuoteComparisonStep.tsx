@@ -326,7 +326,7 @@ export default function QuoteComparisonStep({
       const pid = Array.isArray(params.proposalId) ? params.proposalId[0] : params.proposalId;
       setProposalId(pid || null);
     } else {
-      setError('Doktorum Benimle Ol teklif ID bilgisi bulunamadı. Lütfen önceki adıma dönüp tekrar deneyin.');
+      setError('Doktorum Benimle teklif ID bilgisi bulunamadı. Lütfen önceki adıma dönüp tekrar deneyin.');
       setIsLoading(false);
     }
   }, [params.proposalId]);
@@ -756,10 +756,10 @@ export default function QuoteComparisonStep({
       <>
         <Box sx={{ mb: 4 }}>
           <Typography variant="h5" component="h1" fontWeight="600" gutterBottom>
-            Doktorum Benimle Ol Teklifleri
+            Doktorum Benimle Teklifleri
           </Typography>
           <Typography variant="body1" color="text.secondary" sx={{ mb: 1 }}>
-            Size en uygun Doktorum Benimle Ol teklifini seçip hemen satın alabilirsiniz
+            Size en uygun Doktorum Benimle teklifini seçip hemen satın alabilirsiniz
           </Typography>
 
           {/* Filtering and Sorting Controls */}
@@ -1131,9 +1131,9 @@ export default function QuoteComparisonStep({
           <Typography variant="body2" color="text.secondary">
             <Box component="span" sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
               <InfoOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-              <Typography variant="subtitle2" component="span">Doktorum Benimle Ol Hakkında</Typography>
+              <Typography variant="subtitle2" component="span">Doktorum Benimle Hakkında</Typography>
             </Box>
-            Doktorum Benimle Ol, acil durumlarda sağlık harcamalarınızı karşılar. Acil servis, acil ameliyat ve acil tedavi gibi sağlık hizmetlerini güvence altına alır. Size ve ailenize en uygun Doktorum Benimle Ol teklifini seçerek hemen satın alabilirsiniz.
+            Doktorum Benimle, acil durumlarda sağlık harcamalarınızı karşılar. Acil servis, acil ameliyat ve acil tedavi gibi sağlık hizmetlerini güvence altına alır. Size ve ailenize en uygun Doktorum Benimle teklifini seçerek hemen satın alabilirsiniz.
           </Typography>
         </Box>
 
@@ -1467,7 +1467,7 @@ export default function QuoteComparisonStep({
           open={isComparisonModalOpen}
           onClose={() => setIsComparisonModalOpen(false)}
           quotes={convertQuotesForComparison(quotes.filter(q => q.state === 'ACTIVE'))}
-          title="Doktorum Benimle Ol"
+          title="Doktorum Benimle"
           onPurchase={handlePurchase}
           maxQuotes={3}
         />

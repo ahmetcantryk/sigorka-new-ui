@@ -4,7 +4,6 @@ import type { Metadata } from 'next';
 import ConditionalLayout from './components/ConditionalLayout';
 import Script from 'next/script';
 import UTMHandler from './components/UTMHandler';
-import AltinOrumcekPopup from '@/components/common/AltinOrumcekPopup';
 
 // Bootstrap Icons ve Font Awesome CSS'lerini ekle
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -50,12 +49,8 @@ export const metadata: Metadata = {
   description: 'Sigorka ile güvenli ve uygun fiyatlı sigorta çözümleri. Kasko, trafik, sağlık, DASK ve daha fazlası için hemen teklif alın.',
   metadataBase: new URL('https://sigorka.com'),
   robots: {
-    index: false,
-    follow: false,
-    nocache: true,
-    noarchive: true,
-    nosnippet: true,
-    noimageindex: true,
+    index: true,
+    follow: true,
   },
   openGraph: {
     type: 'website',
@@ -133,7 +128,6 @@ export default function RootLayout({
         {/* End Chatbot Widget Script */}
         
         <UTMHandler />
-        <AltinOrumcekPopup />
         <ConditionalLayout>
           {children}
         </ConditionalLayout>

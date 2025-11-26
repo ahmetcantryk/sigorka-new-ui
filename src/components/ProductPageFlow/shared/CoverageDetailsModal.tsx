@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import CoverageTooltip from './CoverageTooltip';
 
 interface CoverageDetailsModalProps {
     isOpen: boolean;
@@ -174,14 +175,7 @@ const CoverageDetailsModal: React.FC<CoverageDetailsModalProps> = ({
                                 <div key={guarantee.insuranceGuaranteeId} className="pp-coverage-modal-row">
                                     <div className="pp-row-cell-left">
                                         {guarantee.label}
-                                        <div className="pp-info-icon-wrapper group">
-                                            <img
-                                                src="/images/product-detail/teminat-info.svg"
-                                                alt="Info"
-                                                className="pp-info-icon-img"
-                                            />
-                                            {/* Tooltip could be added here */}
-                                        </div>
+                                        <CoverageTooltip branch="kasko" coverageKey={guarantee.label} />
                                     </div>
                                     <div className="pp-row-cell-right">
                                         {formatGuaranteeValue(guarantee)}

@@ -1,20 +1,25 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 import { CircularProgress, Box, Typography } from '@mui/material';
-import SeyahatSaglikOfflineQuotePage from '@/components/QuoteFlow/SeyahatSaglikOfflineQuote/SeyahatSaglikOfflineQuotePage';
+import SeyahatSaglikQuotePage from '@/components/QuoteFlow/SeyahatSaglikQuote/SeyahatSaglikQuotePage';
 import '../../styles/form-style.css';
 
 export const metadata: Metadata = {
   title: "Seyahat Sağlık Sigortası Teklif Al - Güvenli Seyahat | Sigorka",
   description: "Seyahatlerinizde güvenli kalın. Seyahat sağlık sigortası tekliflerini hızlıca alın, online poliçe oluşturun ve rahat seyahat edin.",
   metadataBase: new URL('https://sigorka.com'),
-  alternates: {
-    canonical: "https://sigorka.com/seyahat-saglik-teklif"
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+    },
   },
   openGraph: {
     title: "Seyahat Sağlık Sigortası Teklif Al - Güvenli Seyahat | Sigorka",
     description: "Seyahatlerinizde güvenli kalın. Seyahat sağlık sigortası tekliflerini hızlıca alın, online poliçe oluşturun ve rahat seyahat edin.",
-    url: "https://sigorka.com/seyahat-saglik-teklif",
+    url: "https://sigorka.com/seyahat-saglik-teklif-yeni",
     type: "website"
   },
   twitter: {
@@ -45,10 +50,11 @@ function LoadingFallback() {
   );
 }
 
-export default function SeyahatSaglikTeklifPage() {
+export default function SeyahatSaglikTeklifYeniPage() {
   return (
     <Suspense fallback={<LoadingFallback />}>
-      <SeyahatSaglikOfflineQuotePage />
+      <SeyahatSaglikQuotePage />
     </Suspense>
   );
 }
+

@@ -15,13 +15,14 @@ interface InfoTooltipProps {
     text: string;
     href: string;
   };
+  className?: string;
 }
 
-const InfoTooltip = ({ content, link }: InfoTooltipProps) => {
+const InfoTooltip = ({ content, link, className }: InfoTooltipProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
   return (
-    <div className="pp-info-tooltip-container">
+    <div className={`pp-info-tooltip-container ${className || ''}`}>
       <button
         type="button"
         className="pp-info-icon"
@@ -29,15 +30,12 @@ const InfoTooltip = ({ content, link }: InfoTooltipProps) => {
         onMouseLeave={() => setIsVisible(false)}
         onClick={() => setIsVisible(!isVisible)}
       >
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5"/>
-          <path d="M8 11V7.5M8 5.5V5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-        </svg>
+      <img src="/images/product-detail/form-info-icon.svg" alt="Info" className="pp-info-icon-img" />
       </button>
       
       {isVisible && (
-        <div className="pp-tooltip-content">
-          <div className="pp-tooltip-text">{content}</div>
+        <div className={`pp-tooltip-content ${className ? `${className}-content` : ''}`}>
+          <div className={`pp-tooltip-text ${className ? `${className}-text` : ''}`}>{content}</div>
           {link && (
             <a
               href={link.href}

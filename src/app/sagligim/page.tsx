@@ -34,7 +34,7 @@ const sagligimProducts = [
     title: "Seyahat Sağlık Katılım Sigortası",
     img: "/images/product-icons-subpage/seyahat-saglik-sigortasi.svg",
     alt: "Seyahat Sağlık Katılım Sigortası",
-    link: "/seyahat-saglik-teklif"
+    link: "/seyahat-saglik-sigortasi"
   },
   {
     title: "Tamamlayıcı Sağlık Katılım Sigortası",

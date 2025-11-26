@@ -66,9 +66,9 @@ export default function Promo() {
               </Link>
             </div>
             <div className="col-md-3 col-6 mb-4 d-md-block d-none">
-              <Link href="/yabanci-saglik-sigortasi" className="promo-product-box">
-                <span className="promo-product-box__icon icon-yabanci-saglik" aria-hidden="true"></span>
-                <h3 className="promo-product-box__title">Yabancı Sağlık</h3>
+              <Link href="/seyahat-saglik-sigortasi" className="promo-product-box">
+                <span className="promo-product-box__icon icon-seyahat-saglik" aria-hidden="true"></span>
+                <h3 className="promo-product-box__title">Seyahat Sağlık</h3>
               </Link>
             </div>
           </div>

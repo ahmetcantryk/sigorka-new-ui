@@ -105,7 +105,16 @@ const personalInfoValidationSchema = yup.object({
       }
       return true;
     }),
-  email: yup.string().email('Geçerli bir e-posta giriniz').required('E-posta gereklidir'),
+  email: yup
+    .string()
+    .required('E-posta gereklidir')
+    .email('Geçerli bir e-posta giriniz')
+    .test('email-format', 'Geçerli bir e-posta adresi giriniz (örn: ornek@eposta.com)', function (value) {
+      if (!value) return true;
+      // E-posta formatı kontrolü: @ işaretinden sonra en az bir nokta ve domain olmalı
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(value);
+    }),
   phoneNumber: yup
     .string()
     .required('Telefon numarası gereklidir')
@@ -787,6 +796,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
   // State for toggles
   const [kvkkConsent, setKvkkConsent] = useState(false);
   const [marketingConsent, setMarketingConsent] = useState(false);
+  const [kvkkError, setKvkkError] = useState<string | null>(null);
 
   // Verification modal state
   const [showVerification, setShowVerification] = useState(false);
@@ -804,6 +814,21 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
     });
     console.log('KVKK Consent:', kvkkConsent);
 
+    // Tüm alanları touched olarak işaretle (validasyon mesajlarını göstermek için)
+    formik.setTouched({
+      identityNumber: true,
+      email: true,
+      phoneNumber: true,
+      birthDate: true,
+    });
+
+    // KVKK kontrolünü önce yap (validation hatalarından önce)
+    if (!kvkkConsent) {
+      setKvkkError('Aydınlatma ve Açık Rıza metnini okuyup onaylayınız');
+    } else {
+      setKvkkError(null);
+    }
+
     // Validate only personal info fields
     const personalInfoErrors = await personalInfoValidationSchema.validate({
       identityNumber: formik.values.identityNumber,
@@ -814,19 +839,14 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
 
     console.log('Validation errors:', personalInfoErrors);
 
+    // Validation hataları varsa göster ve return yap
     if (personalInfoErrors.errors && personalInfoErrors.errors.length > 0) {
-      formik.setTouched({
-        identityNumber: true,
-        email: true,
-        phoneNumber: true,
-        birthDate: true,
-      });
       setError(personalInfoErrors.errors[0] || 'Lütfen tüm alanları doğru şekilde doldurun');
       return;
     }
 
+    // KVKK kontrolü (validation hataları yoksa)
     if (!kvkkConsent) {
-      setError('KVKK onayı zorunludur');
       return;
     }
 
@@ -1122,7 +1142,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
           </div>
 
           <div className="pp-form-row">
-            <div className={`pp-form-group ${formik.errors.phoneNumber ? 'error' : ''}`}>
+            <div className={`pp-form-group ${formik.touched.phoneNumber && formik.errors.phoneNumber ? 'error' : ''}`}>
               <label className="pp-label">Cep Telefonu Numarası</label>
               <input
                 type="tel"
@@ -1148,8 +1168,6 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
                       formik.setFieldValue('phoneNumber', value);
                     }
                   }
-
-                  setTimeout(() => formik.validateField('phoneNumber'), 0);
                 }}
                 onBlur={() => {
                   formik.setFieldTouched('phoneNumber', true);
@@ -1159,7 +1177,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
                 maxLength={10}
                 disabled={!!accessToken}
               />
-              {formik.errors.phoneNumber && (
+              {formik.touched.phoneNumber && formik.errors.phoneNumber && (
                 <div className="pp-error-message">{String(formik.errors.phoneNumber)}</div>
               )}
             </div>
@@ -1190,11 +1208,8 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
               <label className="pp-label">
                 Meslek
                 <InfoTooltip
-                  content="Meslek bilginiz, sigorta priminin hesaplanmasında kullanılır. Doğru bilgi girmeniz önemlidir."
-                  link={{
-                    text: "Detaylı Bilgi",
-                    href: "/meslek-bilgisi"
-                  }}
+                  content="Mesleğinizi seçin, teklif adımında size özel fırsatları kaçırmayın."
+                  className="pp-meslek-tooltip"
                 />
               </label>
               <Dropdown
@@ -1220,19 +1235,25 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
           </div>
 
           <div className="pp-toggles">
-            <div className="pp-toggle-item">
-              <div
-                className={`pp-toggle-switch ${kvkkConsent ? 'active' : ''}`}
-                onClick={() => {
-                  setKvkkConsent(!kvkkConsent);
-                  if (error) setError(null);
-                }}
-              >
-                <div className="pp-toggle-knob">{kvkkConsent ? '✓' : '✕'}</div>
+            <div className={`pp-toggle-item-wrapper ${kvkkError ? 'error' : ''}`}>
+              <div className="pp-toggle-item">
+                <div
+                  className={`pp-toggle-switch ${kvkkConsent ? 'active' : ''}`}
+                  onClick={() => {
+                    setKvkkConsent(!kvkkConsent);
+                    if (kvkkError) setKvkkError(null);
+                    if (error) setError(null);
+                  }}
+                >
+                  <div className="pp-toggle-knob">{kvkkConsent ? '✓' : '✕'}</div>
+                </div>
+                <p className="pp-toggle-text">
+                  Kişisel Verilerin İşlenmesine İlişkin <a href="/kvkk" target="_blank" rel="noopener noreferrer">Aydınlatma Metni</a> 'ni ve <a href="/acik-riza-metni" target="_blank" rel="noopener noreferrer">Açık Rıza Metni</a> 'ni okudum, onaylıyorum.
+                </p>
               </div>
-              <p className="pp-toggle-text">
-                Kişisel Verilerin İşlenmesine İlişkin <a href="/kvkk" target="_blank" rel="noopener noreferrer">Aydınlatma Metni</a> 'ni ve <a href="/acik-riza-metni" target="_blank" rel="noopener noreferrer">Açık Rıza Metni</a> 'ni okudum, onaylıyorum.
-              </p>
+              {kvkkError && (
+                <div className="pp-error-message">{kvkkError}</div>
+              )}
             </div>
 
             <div className="pp-toggle-item">
@@ -1261,10 +1282,9 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
               onClick={(e) => {
                 e.preventDefault();
                 console.log('🔴 Button clicked!');
-                console.log('Button disabled?', !formik.values.identityNumber || !formik.values.phoneNumber || !formik.values.email || !formik.values.birthDate || !kvkkConsent || isLoading);
                 handlePersonalInfoSubmit();
               }}
-              disabled={!formik.values.identityNumber || !formik.values.phoneNumber || !formik.values.email || !formik.values.birthDate || !kvkkConsent || isLoading}
+              disabled={isLoading}
             >
               {isLoading ? 'İşleniyor...' : 'Araç Bilgilerine Geç'}
             </button>
@@ -1366,10 +1386,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
                 className="pp-vehicle-edit-icon"
                 onClick={(e) => handleEditVehicle(vehicle.id, e)}
               >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M11 4H4C3.46957 4 2.96086 4.21071 2.58579 4.58579C2.21071 4.96086 2 5.46957 2 6V20C2 20.5304 2.21071 21.0391 2.58579 21.4142C2.96086 21.7893 3.46957 22 4 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M18.5 2.50023C18.8978 2.1024 19.4374 1.87891 20 1.87891C20.5626 1.87891 21.1022 2.1024 21.5 2.50023C21.8978 2.89805 22.1213 3.43762 22.1213 4.00023C22.1213 4.56284 21.8978 5.1024 21.5 5.50023L12 15.0002L8 16.0002L9 12.0002L18.5 2.50023Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                <i className="icon-edit"></i>
               </div>
             </div>
           );
@@ -1500,7 +1517,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
               filter
               filterPlaceholder="Ara..."
               emptyFilterMessage="Sonuç bulunamadı"
-              showClear={!!formik.values.plateCity}
+              showClear={false}
             />
             {formik.touched.plateCity && formik.errors.plateCity && (
               <div className="pp-error-message">{formik.errors.plateCity}</div>
@@ -1617,7 +1634,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
                 filter
                 filterPlaceholder="Ara..."
                 emptyFilterMessage="Sonuç bulunamadı"
-                showClear={!!formik.values.plateCity}
+                showClear={false}
               />
               {formik.touched.plateCity && formik.errors.plateCity && (
                 <div className="pp-error-message">{formik.errors.plateCity}</div>
@@ -1676,7 +1693,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
               filter
               filterPlaceholder="Ara..."
               emptyFilterMessage="Sonuç bulunamadı"
-              showClear={!!formik.values.brandCode}
+              showClear={false}
             />
             {formik.touched.brandCode && formik.errors.brandCode && (
               <div className="pp-error-message">{formik.errors.brandCode}</div>
@@ -1752,7 +1769,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
               filterPlaceholder="Ara..."
               emptyFilterMessage="Sonuç bulunamadı"
               disabled={isModelsLoading || vehicleModels.length === 0}
-              showClear={!!formik.values.modelCode}
+              showClear={false}
             />
             {modelError && (
               <div className="pp-error-message">{modelError}</div>
@@ -1848,7 +1865,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
               filter
               filterPlaceholder="Ara..."
               emptyFilterMessage="Sonuç bulunamadı"
-              showClear={!!formik.values.usageType}
+              showClear={false}
             />
             {formik.touched.usageType && formik.errors.usageType && (
               <div className="pp-error-message">{formik.errors.usageType}</div>
@@ -1872,7 +1889,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
               onBlur={() => formik.setFieldTouched('fuelType', true)}
               placeholder="Seçiniz"
               className="pp-dropdown"
-              showClear={!!formik.values.fuelType}
+              showClear={false}
             />
             {formik.touched.fuelType && formik.errors.fuelType && (
               <div className="pp-error-message">{formik.errors.fuelType}</div>
@@ -2007,11 +2024,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
           Kasko Sigortası teklifiniz için eksik bilgilerinizi doldurunuz
         </p>
 
-        {error && (
-          <div className="pp-error-banner">
-            {error}
-          </div>
-        )}
+      
 
         <div>
           <div className="pp-form-row">
@@ -2066,7 +2079,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
                 filter
                 filterPlaceholder="Ara..."
                 emptyFilterMessage="Sonuç bulunamadı"
-                showClear={!!formik.values.city}
+                showClear={false}
               />
             </div>
 
@@ -2090,7 +2103,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
                 filterPlaceholder="Ara..."
                 emptyFilterMessage="Sonuç bulunamadı"
                 disabled={!formik.values.city || districts.length === 0}
-                showClear={!!formik.values.district}
+                showClear={false}
               />
             </div>
           </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Dropdown } from 'primereact/dropdown';
+import CoverageTooltip from './CoverageTooltip';
 
 // Define interfaces locally or import if they are shared. 
 interface ComparisonQuote {
@@ -147,10 +148,11 @@ const QuoteComparisonModal: React.FC<QuoteComparisonModalProps> = ({
             const button = buttonRefs.current[index];
             if (button) {
                 const rect = button.getBoundingClientRect();
+                // Fixed positioning doesn't need scrollY/scrollX offset
                 setDropdownPosition({
-                    top: rect.bottom + window.scrollY,
-                    left: rect.left + window.scrollX,
-                    width: rect.width
+                    top: rect.bottom,
+                    left: rect.left,
+                    width: Math.max(rect.width, 180) // Minimum width for readability
                 });
                 setOpenInstallmentDropdownIndex(index);
             }
@@ -359,7 +361,7 @@ const QuoteComparisonModal: React.FC<QuoteComparisonModalProps> = ({
                                     <td className="pp-comp-cell-label">
                                         <div className="pp-comp-label-content">
                                             <span className="pp-comp-label-text">{label}</span>
-                                            <img src="/images/product-detail/teminat-info.svg" alt="Info" className="pp-comp-info-icon" />
+                                            <CoverageTooltip branch="kasko" coverageKey={label} className="pp-comp-info-icon" />
                                         </div>
                                     </td>
                                     {selectedQuotes.map((quote, colIndex) => {
@@ -388,16 +390,18 @@ const QuoteComparisonModal: React.FC<QuoteComparisonModalProps> = ({
             {openInstallmentDropdownIndex !== null && dropdownPosition && selectedQuotes[openInstallmentDropdownIndex] && createPortal(
                 <div
                     className="pp-comp-installment-menu-portal"
+                    onClick={(e) => e.stopPropagation()}
+                    onMouseDown={(e) => e.stopPropagation()}
                     style={{
-                        position: 'fixed', // Fixed to viewport
-                        top: dropdownPosition.top + 4,
+                        position: 'fixed',
+                        top: dropdownPosition.top + 2,
                         left: dropdownPosition.left,
                         width: dropdownPosition.width,
-                        zIndex: 10010, // Higher than modal
+                        zIndex: 10010,
                         backgroundColor: 'white',
                         border: '1px solid #e5e7eb',
                         borderRadius: '8px',
-                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
                         maxHeight: '200px',
                         overflowY: 'auto'
                     }}
@@ -405,7 +409,10 @@ const QuoteComparisonModal: React.FC<QuoteComparisonModalProps> = ({
                     {selectedQuotes[openInstallmentDropdownIndex]!.premiums.map((premium: any) => (
                         <button
                             key={premium.installmentNumber}
-                            onClick={() => handleInstallmentChange(openInstallmentDropdownIndex, premium.installmentNumber)}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                handleInstallmentChange(openInstallmentDropdownIndex, premium.installmentNumber);
+                            }}
                             className="pp-comp-installment-item"
                         >
                             {premium.installmentNumber === 1 ? (

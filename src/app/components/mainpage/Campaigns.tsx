@@ -62,11 +62,11 @@ const Campaigns = ({ campaigns }: CampaignsProps) => {
                     <div className="col-md-5">
                       <Link className="campaigns__item-img h-100" href={`/kampanyalar/${campaign.slug}`}>
                         <Image src={campaign.image} alt={campaign.title} width={792} height={662} />
-                        {campaign.badge && (
+                        {/* {campaign.badge && (
                           <div className="campaigns__item-popper">
                             {campaign.badge}
                           </div>
-                        )}
+                        )} */}
                       </Link>
                     </div>
                     <div className="col-md-7">

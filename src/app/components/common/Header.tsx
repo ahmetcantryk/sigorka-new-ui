@@ -411,9 +411,9 @@ export default function Header() {
                   <li className="sub-nav__item">
                     <Link className="sub-nav__link" href="/ozel-saglik-sigortasi">Özel Sağlık Katılım Sigortası</Link>
                   </li>
-                  {/* <li className="sub-nav__item">
+                  <li className="sub-nav__item">
                     <Link className="sub-nav__link" href="/seyahat-saglik-sigortasi">Seyahat Sağlık Katılım Sigortası</Link>
-                  </li> */}
+                  </li>
                   <li className="sub-nav__item">
                     <Link className="sub-nav__link" href="/tamamlayici-saglik-sigortasi">Tamamlayıcı Sağlık Katılım Sigortası</Link>
                   </li>
@@ -421,7 +421,7 @@ export default function Header() {
                     <Link className="sub-nav__link" href="/yabanci-saglik-sigortasi">Yabancı Sağlık Katılım Sigortası</Link>
                   </li>
                   {/*<li className="sub-nav__item">*/}
-                  {/*  <Link className="sub-nav__link" href="/acil-saglik-sigortasi">Doktorum Benimle Ol</Link>*/}
+                  {/*  <Link className="sub-nav__link" href="/acil-saglik-sigortasi">Doktorum Benimle</Link>*/}
                   {/*</li>*/}
                   <li className="sub-nav__item">
                     <Link className="sub-nav__link" href="/sagligim">Sağlık Sigortaları Hakkında</Link>
@@ -449,18 +449,18 @@ export default function Header() {
                     <li className="sub-nav__item">
                       <Link className="sub-nav__link" href="/ozel-saglik-sigortasi">Özel Sağlık Katılım Sigortası</Link>
                     </li>
-                    {/* <li className="sub-nav__item">
+                    <li className="sub-nav__item">
                       <Link className="sub-nav__link" href="/seyahat-saglik-sigortasi">Seyahat Sağlık Katılım Sigortası</Link>
-                    </li> */}
+                    </li>
                     <li className="sub-nav__item">
                       <Link className="sub-nav__link" href="/tamamlayici-saglik-sigortasi">Tamamlayıcı Sağlık Katılım Sigortası</Link>
                     </li>
                     <li className="sub-nav__item">
                       <Link className="sub-nav__link" href="/yabanci-saglik-sigortasi">Yabancı Sağlık Katılım Sigortası</Link>
                     </li>
-                    <li className="sub-nav__item">
-                      <Link className="sub-nav__link" href="/acil-saglik-sigortasi">Doktorum Benimle Ol</Link>
-                    </li>
+                    {/* <li className="sub-nav__item">
+                      <Link className="sub-nav__link" href="/acil-saglik-sigortasi">Doktorum Benimle</Link>
+                    </li> */}
                     <li className="sub-nav__item">
                       <Link className="sub-nav__link" href="/sagligim">Sağlık Sigortaları Hakkında</Link>
                     </li>

@@ -46,12 +46,12 @@ const products = [
     title: 'Yabancı Sağlık',
     href: '/yabanci-saglik-teklif'
   },
-  // {
-  //   id: 8,
-  //   icon: 'icon-seyahat-saglik',
-  //   title: 'Seyahat Sağlık',
-  //   href: '/seyahat-saglik-teklif'
-  // },
+  {
+    id: 8,
+    icon: 'icon-seyahat-saglik',
+    title: 'Seyahat Sağlık',
+    href: '/seyahat-saglik-teklif'
+  },
   {
     id: 9,
     icon: 'icon-ozel-saglik',
@@ -67,7 +67,7 @@ const products = [
   // {
   //   id: 11,
   //   icon: 'icon-tamamlayici-saglik',
-  //   title: 'Doktorum Benimle Ol',
+  //   title: 'Doktorum Benimle',
   //   href: '/acil-saglik-teklif'
   // }
 ];

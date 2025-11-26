@@ -15,6 +15,7 @@ import { API_ENDPOINTS } from '@/config/api';
 import CoverageDetailsModal from '../shared/CoverageDetailsModal';
 import QuoteComparisonModal from '../shared/QuoteComparisonModal';
 import QuoteLoadingScreen from '@/components/common/QuoteLoadingScreen';
+import CoverageTooltip from '../shared/CoverageTooltip';
 
 // DataLayer helper
 declare global {
@@ -1000,11 +1001,7 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
                             <div key={index} className="pp-coverage-row">
                               <span className="pp-coverage-label">
                                 {guarantee.label}
-                                <img
-                                  src="/images/product-detail/teminat-info.svg"
-                                  alt="Info"
-                                  className="pp-coverage-icon-info"
-                                />
+                                <CoverageTooltip branch="kasko" coverageKey={guarantee.label || ''} />
                               </span>
                               <img
                                 src={isCoverageIncluded(guarantee)
@@ -1159,11 +1156,7 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
                                           <div key={guarantee.insuranceGuaranteeId} className="pp-coverage-item">
                                             <span className="pp-coverage-item-label">
                                               {guarantee.label}
-                                              <img
-                                                src="/images/product-detail/teminat-info.svg"
-                                                alt="Info"
-                                                className="pp-coverage-item-info"
-                                              />
+                                              <CoverageTooltip branch="kasko" coverageKey={guarantee.label || ''} />
                                             </span>
                                             <div className="pp-coverage-item-value">
                                               {showTick && !['Limitsiz', 'Rayiç'].includes(displayValue) && (
@@ -1196,18 +1189,14 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
                                       className="pp-coverage-action-btn pp-btn-details"
                                       onClick={() => handleOpenModal(quote)}
                                     >
-                                      <svg className="pp-btn-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                      </svg>
+                                      <i className="icon-info-button pp-btn-icon"></i>
                                       <span>Teminat Detayları</span>
                                     </button>
                                     <button
                                       className="pp-coverage-action-btn pp-btn-document"
                                       onClick={() => handleViewDocument(proposalId, quote.id)}
                                     >
-                                      <svg className="pp-btn-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                      </svg>
+                                      <i className="icon-teklif-button pp-btn-icon"></i>
                                       <span>Teklif Belgesi</span>
                                     </button>
                                   </div>

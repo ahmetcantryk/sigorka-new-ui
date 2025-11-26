@@ -132,14 +132,6 @@
           "order": 6,
           "link": "/imm-teklif-al",
           "icon": "Shield"
-        },
-        {
-          "id": "acil-saglik",
-          "name": "Doktorum Benimle Ol",
-          "isActive": true,
-          "order": 7,
-          "link": "/acil-saglik-teklif",
-          "icon": "Heart"
         }
       ]
     },

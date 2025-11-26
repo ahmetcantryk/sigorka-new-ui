@@ -5,21 +5,21 @@ import AcilSaglikQuotePage from '@/components/QuoteFlow/AcilSaglikQuote/AcilSagl
 import '../../styles/form-style.css';
 
 export const metadata: Metadata = {
-  title: "Doktorum Benimle Ol Teklif Al | Sigorka",
-  description: "Doktorum Benimle Ol tekliflerini hızlıca alın. Online poliçe oluşturun ve sağlığınızı güvence altına alın.",
+  title: "Doktorum Benimle Teklif Al | Sigorka",
+  description: "Doktorum Benimle tekliflerini hızlıca alın. Online poliçe oluşturun ve sağlığınızı güvence altına alın.",
   metadataBase: new URL('https://sigorka.com'),
   alternates: {
     canonical: "https://sigorka.com/acil-saglik-teklif"
   },
   openGraph: {
-    title: "Doktorum Benimle Ol Teklif Al | Sigorka",
-    description: "Doktorum Benimle Ol tekliflerini hızlıca alın. Online poliçe oluşturun ve sağlığınızı güvence altına alın.",
+    title: "Doktorum Benimle Teklif Al | Sigorka",
+    description: "Doktorum Benimle tekliflerini hızlıca alın. Online poliçe oluşturun ve sağlığınızı güvence altına alın.",
     url: "https://sigorka.com/acil-saglik-teklif",
     type: "website"
   },
   twitter: {
-    title: "Doktorum Benimle Ol Teklif Al | Sigorka",
-    description: "Doktorum Benimle Ol tekliflerini hızlıca alın. Online poliçe oluşturun ve sağlığınızı güvence altına alın.",
+    title: "Doktorum Benimle Teklif Al | Sigorka",
+    description: "Doktorum Benimle tekliflerini hızlıca alın. Online poliçe oluşturun ve sağlığınızı güvence altına alın.",
     card: "summary_large_image"
   }
 };

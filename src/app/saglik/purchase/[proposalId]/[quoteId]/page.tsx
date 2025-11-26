@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic';
 
 export default function SaglikPurchaseRoutePage() {
   return (
-    <Suspense fallback={<div>Yükleniyor... (Doktorum Benimle Ol Satın Alma)</div>}>
+    <Suspense fallback={<div>Yükleniyor... (Doktorum Benimle Satın Alma)</div>}>
       <SaglikPurchasePageComponent />
     </Suspense>
   );

@@ -250,6 +250,10 @@ export const validateTurkishPhoneStrict = (
 export const validateCardNumber = (value: string): ValidationResult => {
   if (!value) return { isValid: false, message: 'Bu alan zorunludur' };
   const digits = value.replace(/\s/g, '');
+  // Sadece rakam kontrolü
+  if (!/^\d+$/.test(digits)) {
+    return { isValid: false, message: 'Yalnızca rakamlardan oluşmalıdır' };
+  }
   if (digits.length !== 16) {
     return { isValid: false, message: 'Kart numarası 16 haneli olmalıdır' };
   }
@@ -266,6 +270,12 @@ export const validateCardHolder = (value: string): ValidationResult => {
 
 export const validateExpiryDate = (value: string): ValidationResult => {
   if (!value) return { isValid: false, message: 'Bu alan zorunludur' };
+
+  // Sadece rakam ve / karakteri kontrolü
+  const digitsOnly = value.replace(/\//g, '');
+  if (!/^\d*$/.test(digitsOnly)) {
+    return { isValid: false, message: 'Yalnızca rakamlardan oluşmalıdır' };
+  }
 
   if (!/^\d{2}\/\d{2}$/.test(value)) {
     return { isValid: false, message: 'Tarih AA/YY formatında olmalıdır' };
@@ -292,7 +302,7 @@ export const validateExpiryDate = (value: string): ValidationResult => {
 export const validateCvv = (value: string): ValidationResult => {
   if (!value) return { isValid: false, message: 'Bu alan zorunludur' };
   if (!/^\d+$/.test(value)) {
-    return { isValid: false, message: 'CVV sadece rakamlardan oluşmalıdır' };
+    return { isValid: false, message: 'Yalnızca rakamlardan oluşmalıdır' };
   }
   if (value.length < 3) {
     return { isValid: false, message: 'CVV kodunu eksiksiz giriniz' };
