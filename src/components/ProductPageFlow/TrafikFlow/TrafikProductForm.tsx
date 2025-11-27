@@ -1,8 +1,8 @@
 /**
- * KaskoProductForm
+ * TrafikProductForm
  * 
- * Ürün detay sayfası için Kasko formu
- * Refactored: Step bileşenleri, hook'lar ve utility fonksiyonları ayrıştırıldı
+ * Ürün detay sayfası için Trafik formu
+ * Kasko form yapısından adapte edildi
  */
 
 'use client';
@@ -16,36 +16,36 @@ import { useAgencyConfig } from '@/context/AgencyConfigProvider';
 
 // Config
 import {
-  KASKO_FORM_DEFAULTS,
-  STORAGE_KEYS,
-} from './config/kaskoConstants';
+  TRAFIK_FORM_DEFAULTS,
+  TRAFIK_STORAGE_KEYS,
+} from './config/trafikConstants';
 import {
   personalInfoValidationSchema,
   vehicleValidationSchema,
-} from './config/kaskoValidation';
+} from './config/trafikValidation';
 
 // Components
 import { PersonalInfoStep, VehicleSelectionStep, AdditionalInfoStep } from './components/steps';
-import { KaskoStepper, TramerErrorPopup } from './components/common';
+import { TrafikStepper, TramerErrorPopup } from './components/common';
 import VerificationCodeModal from '../shared/VerificationCodeModal';
 import { UpdateVehicleModal } from '../common';
-import KaskoProductQuote from './KaskoProductQuote';
+import TrafikProductQuote from './TrafikProductQuote';
 import PurchaseStepNew from '../../QuoteFlow/KaskoQuote/steps/PurchaseStepNew';
 
 // Hooks
-import { useKaskoVehicle } from './hooks/useKaskoVehicle';
+import { useTrafikVehicle } from './hooks/useTrafikVehicle';
 
 // Utils
-import { pushKaskoStep1Complete, pushKaskoStep2Complete } from './utils/dataLayerUtils';
+import { pushTrafikStep1Complete, pushTrafikStep2Complete } from './utils/dataLayerUtils';
 
 // Auth helpers
 import { performLogin, verifyOTP, CustomerType, updateCustomerProfile } from '@/utils/authHelper';
 import type { CustomerProfile } from '@/services/fetchWithAuth';
 
 // Types
-import type { KaskoFormProps, VehicleFormData } from './types';
+import type { TrafikFormProps, VehicleFormData } from './types';
 
-const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
+const TrafikProductForm = ({ onProposalCreated, onBack }: TrafikFormProps) => {
   const { customerId, accessToken, setTokens, setUser, setCustomerId } = useAuthStore();
   const agencyConfig = useAgencyConfig();
   const agentId = agencyConfig?.agency?.id;
@@ -109,11 +109,11 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
     queryTramer,
     refetchVehicles,
     setModelError,
-  } = useKaskoVehicle();
+  } = useTrafikVehicle();
 
   // Formik
   const formik = useFormik<VehicleFormData>({
-    initialValues: KASKO_FORM_DEFAULTS,
+    initialValues: TRAFIK_FORM_DEFAULTS,
     validationSchema: activeStep === 0 ? personalInfoValidationSchema : vehicleValidationSchema,
     validateOnChange: true,
     validateOnBlur: true,
@@ -163,10 +163,10 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
     console.log('🛒 Satın Al tıklandı:', quoteId);
 
     // LocalStorage'a kaydet (PurchaseStepNew için)
-    const selectedQuote = localStorage.getItem('selectedQuoteForPurchase');
+    const selectedQuote = localStorage.getItem('selectedQuoteForPurchaseTrafik');
     if (selectedQuote) {
       const quoteData = JSON.parse(selectedQuote);
-      localStorage.setItem('selectedQuoteForPurchase', JSON.stringify({
+      localStorage.setItem('selectedQuoteForPurchaseTrafik', JSON.stringify({
         ...quoteData,
         id: quoteId
       }));
@@ -225,12 +225,12 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
     // Email ve job kaydet
     console.log('=== Storing initial values ===');
     if (formik.values.email?.trim()) {
-      localStorage.setItem(STORAGE_KEYS.INITIAL_EMAIL, formik.values.email.trim());
-      console.log('✅ Saved kaskoInitialEmail:', formik.values.email.trim());
+      localStorage.setItem(TRAFIK_STORAGE_KEYS.INITIAL_EMAIL, formik.values.email.trim());
+      console.log('✅ Saved trafikInitialEmail:', formik.values.email.trim());
     }
     if (formik.values.job !== undefined) {
-      localStorage.setItem(STORAGE_KEYS.INITIAL_JOB, formik.values.job.toString());
-      console.log('✅ Saved kaskoInitialJob:', formik.values.job.toString());
+      localStorage.setItem(TRAFIK_STORAGE_KEYS.INITIAL_JOB, formik.values.job.toString());
+      console.log('✅ Saved trafikInitialJob:', formik.values.job.toString());
     }
 
     // Zaten login ise
@@ -292,8 +292,8 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
 
       setTokens(verifyData.accessToken, verifyData.refreshToken);
 
-      const userEnteredEmail = localStorage.getItem(STORAGE_KEYS.INITIAL_EMAIL);
-      const userEnteredJobStr = localStorage.getItem(STORAGE_KEYS.INITIAL_JOB);
+      const userEnteredEmail = localStorage.getItem(TRAFIK_STORAGE_KEYS.INITIAL_EMAIL);
+      const userEnteredJobStr = localStorage.getItem(TRAFIK_STORAGE_KEYS.INITIAL_JOB);
       const userEnteredJob = userEnteredJobStr ? parseInt(userEnteredJobStr) : null;
 
       // Fetch customer profile
@@ -316,7 +316,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
           email: meData?.primaryEmail || '',
           phone: meData?.primaryPhoneNumber?.number || ''
         });
-        localStorage.setItem(STORAGE_KEYS.PROPOSAL_ID, customerIdToUse);
+        localStorage.setItem(TRAFIK_STORAGE_KEYS.PROPOSAL_ID, customerIdToUse);
       }
 
       // Update email and job
@@ -442,8 +442,8 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
         throw new Error('Müşteri ID bulunamadı');
       }
 
-      const userEnteredEmail = localStorage.getItem(STORAGE_KEYS.INITIAL_EMAIL);
-      const userEnteredJobStr = localStorage.getItem(STORAGE_KEYS.INITIAL_JOB);
+      const userEnteredEmail = localStorage.getItem(TRAFIK_STORAGE_KEYS.INITIAL_EMAIL);
+      const userEnteredJobStr = localStorage.getItem(TRAFIK_STORAGE_KEYS.INITIAL_JOB);
 
       const updatePayload: Record<string, any> = {
         identityNumber: currentMeData.identityNumber,
@@ -482,12 +482,12 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
       });
 
       if (customerIdToUse) {
-        localStorage.setItem(STORAGE_KEYS.PROPOSAL_ID, customerIdToUse);
+        localStorage.setItem(TRAFIK_STORAGE_KEYS.PROPOSAL_ID, customerIdToUse);
       }
 
-      localStorage.setItem(STORAGE_KEYS.PERSONAL_INFO_COMPLETED, 'true');
+      localStorage.setItem(TRAFIK_STORAGE_KEYS.PERSONAL_INFO_COMPLETED, 'true');
 
-      pushKaskoStep1Complete();
+      pushTrafikStep1Complete();
       setShowAdditionalInfo(false);
       setActiveStep(1);
     } catch (error) {
@@ -608,12 +608,12 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
         if (!vehicle) throw new Error('Seçilen araç bulunamadı');
 
         const proposalData = {
-          $type: 'kasko',
+          $type: 'trafik',
           vehicleId: vehicle.id,
-          productBranch: 'KASKO',
+          productBranch: 'TRAFIK',
           insurerCustomerId: customerId,
           insuredCustomerId: customerId,
-          coverageGroupIds: getCoverageGroupIds('kasko'),
+          coverageGroupIds: getCoverageGroupIds('trafik'),
           channel: 'WEBSITE',
         };
 
@@ -632,7 +632,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
         const proposalId = result.proposalId || result.id;
 
         if (proposalId) {
-          localStorage.setItem(STORAGE_KEYS.PROPOSAL_ID, proposalId);
+          localStorage.setItem(TRAFIK_STORAGE_KEYS.PROPOSAL_ID, proposalId);
           handleProposalCreated(proposalId);
         }
       } else {
@@ -709,12 +709,12 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
         // 2. ADIM: Teklif oluştur
         console.log('📡 Teklif oluşturma isteği gönderiliyor...');
         const proposalData = {
-          $type: 'kasko',
+          $type: 'trafik',
           vehicleId: vehicleId,
-          productBranch: 'KASKO',
+          productBranch: 'TRAFIK',
           insurerCustomerId: customerId,
           insuredCustomerId: customerId,
-          coverageGroupIds: getCoverageGroupIds('kasko'),
+          coverageGroupIds: getCoverageGroupIds('trafik'),
           channel: 'WEBSITE',
         };
 
@@ -743,8 +743,8 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
         const proposalId = proposalResult.proposalId || proposalResult.id;
 
         if (proposalId) {
-          localStorage.setItem(STORAGE_KEYS.PROPOSAL_ID, proposalId);
-          pushKaskoStep2Complete();
+          localStorage.setItem(TRAFIK_STORAGE_KEYS.PROPOSAL_ID, proposalId);
+          pushTrafikStep2Complete();
           console.log('🎉 İşlem başarılı, yönlendiriliyor:', proposalId);
           handleProposalCreated(proposalId);
         } else {
@@ -809,7 +809,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
   return (
     <>
       <div className="product-page-flow-container">
-        <KaskoStepper activeStep={activeStep} />
+        <TrafikStepper activeStep={activeStep} />
 
         <form onSubmit={formik.handleSubmit}>
           {activeStep === 0 && (
@@ -870,7 +870,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
 
         {/* Step 2: Teklif Karşılaştırma */}
         {activeStep === 2 && proposalIdFromUrl && (
-          <KaskoProductQuote
+          <TrafikProductQuote
             proposalId={proposalIdFromUrl}
             onBack={() => setActiveStep(1)}
             onPurchaseClick={handlePurchaseClick}
@@ -921,4 +921,5 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
   );
 };
 
-export default KaskoProductForm;
+export default TrafikProductForm;
+

@@ -1,8 +1,7 @@
 /**
- * KaskoProductQuote
+ * TrafikProductQuote
  * 
- * Teklif karşılaştırma componenti
- * Refactored: Utility fonksiyonları ve hook'lar ayrıştırıldı
+ * Trafik teklif karşılaştırma componenti
  */
 
 'use client';
@@ -17,26 +16,26 @@ import { API_ENDPOINTS } from '@/config/api';
 import QuoteLoadingScreen from '@/components/common/QuoteLoadingScreen';
 import CoverageDetailsModal from '../shared/CoverageDetailsModal';
 import QuoteComparisonModal from '../shared/QuoteComparisonModal';
-import { QuoteList } from './components/quote';
-import { KaskoStepper } from './components/common';
+import { TrafikQuoteList } from './components/quote';
+import { TrafikStepper } from './components/common';
 
 // Hooks
-import { useKaskoQuotes } from './hooks/useKaskoQuotes';
+import { useTrafikQuotes } from './hooks/useTrafikQuotes';
 
 // Utils
-import { preparePurchaseData, savePurchaseDataToStorage, getSelectedPremium } from './utils/quoteUtils';
-import { pushKaskoPurchaseClick } from './utils/dataLayerUtils';
+import { prepareTrafikPurchaseData, saveTrafikPurchaseDataToStorage, getSelectedTrafikPremium } from './utils/quoteUtils';
+import { pushTrafikPurchaseClick } from './utils/dataLayerUtils';
 
 // Types
-import type { ProcessedQuote } from './types';
+import type { ProcessedTrafikQuote } from './types';
 
-interface KaskoProductQuoteProps {
+interface TrafikProductQuoteProps {
   proposalId: string;
   onBack?: () => void;
   onPurchaseClick?: (quoteId: string) => void;
 }
 
-const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProductQuoteProps) => {
+const TrafikProductQuote = ({ proposalId, onBack, onPurchaseClick }: TrafikProductQuoteProps) => {
   const accessToken = useAuthStore((state) => state.accessToken);
   const agencyConfig = useAgencyConfig();
 
@@ -47,11 +46,11 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
     error,
     progress,
     handleInstallmentChange,
-  } = useKaskoQuotes(proposalId);
+  } = useTrafikQuotes(proposalId);
 
   // Modal states
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedQuoteForModal, setSelectedQuoteForModal] = useState<ProcessedQuote | null>(null);
+  const [selectedQuoteForModal, setSelectedQuoteForModal] = useState<ProcessedTrafikQuote | null>(null);
   const [isComparisonModalOpen, setIsComparisonModalOpen] = useState(false);
 
   // Handlers
@@ -61,14 +60,14 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
     const selectedFullQuote = quotes.find(q => q.id === quoteId);
 
     if (selectedFullQuote && selectedFullQuote.state === 'ACTIVE') {
-      const purchaseData = preparePurchaseData(selectedFullQuote, proposalId);
-      savePurchaseDataToStorage(purchaseData, proposalId);
+      const purchaseData = prepareTrafikPurchaseData(selectedFullQuote, proposalId);
+      saveTrafikPurchaseDataToStorage(purchaseData, proposalId);
 
       console.log('✅ Purchase data saved to localStorage:', purchaseData);
 
       // DataLayer push
-      const premium = getSelectedPremium(selectedFullQuote);
-      pushKaskoPurchaseClick(quoteId, selectedFullQuote.company, premium?.grossPremium);
+      const premium = getSelectedTrafikPremium(selectedFullQuote);
+      pushTrafikPurchaseClick(quoteId, selectedFullQuote.company, premium?.grossPremium);
 
       // Callback
       if (onPurchaseClick) {
@@ -76,14 +75,14 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
         onPurchaseClick(quoteId);
       } else {
         console.log('⚠️ No onPurchaseClick callback, redirecting to new page');
-        window.location.href = `/kasko/purchase/${proposalId}`;
+        window.location.href = `/trafik/purchase/${proposalId}`;
       }
     } else {
       console.error('❌ Quote not found or not active:', quoteId);
     }
   };
 
-  const handleOpenModal = (quote: ProcessedQuote) => {
+  const handleOpenModal = (quote: ProcessedTrafikQuote) => {
     setSelectedQuoteForModal(quote);
     setIsModalOpen(true);
   };
@@ -137,12 +136,12 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
     return (
       <>
         <div className="product-page-flow-container">
-          <KaskoStepper activeStep={2} />
+          <TrafikStepper activeStep={2} />
 
           <div className="product-page-form pp-form-wide">
             <QuoteLoadingScreen
-              title="Kasko Sigortası Teklifleri"
-              subtitle="Size en uygun Kasko Sigortası teklifini seçip hemen satın alabilirsiniz."
+              title="Zorunlu Trafik Sigortası Teklifleri"
+              subtitle="Size en uygun Trafik Sigortası teklifini seçip hemen satın alabilirsiniz."
               description="Anlaşmalı şirketlerimizden size özel teklifler alınıyor..."
               progress={progress}
             />
@@ -157,15 +156,15 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
     return (
       <>
         <div className="product-page-flow-container">
-          <KaskoStepper activeStep={2} />
+          <TrafikStepper activeStep={2} />
 
           <div className="product-page-form pp-form-wide">
             <div className="pp-card">
               <div className="pp-quote-error-container">
                 <div className="pp-quote-error-content">
-                  <span className='pp-card-title'>Kasko Sigortası Teklifleri</span>
+                  <span className='pp-card-title'>Trafik Sigortası Teklifleri</span>
                 </div>
-                <img src="/images/product-detail/error-x.svg" alt="Kasko Sigortası Teklifleri" className="pp-error-image" />
+                <img src="/images/product-detail/error-x.svg" alt="Trafik Sigortası Teklifleri" className="pp-error-image" />
                 <span className="pp-error-card-title"><span className="pp-error-ups">Ups!</span> Uygun teklif bulunamadı</span>
                 <p className="pp-error-message-card-desc">
                   Araç bilgilerinize göre uygun teklif bulunamadı. Bilgilerinizi kontrol edip tekrar deneyebilirsiniz.
@@ -189,10 +188,10 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
   return (
     <>
       <div className="product-page-flow-container">
-        <KaskoStepper activeStep={2} />
+        <TrafikStepper activeStep={2} />
 
         <div className="product-page-form pp-form-wide">
-          <QuoteList
+          <TrafikQuoteList
             quotes={quotes}
             proposalId={proposalId}
             onInstallmentChange={handleInstallmentChange}
@@ -208,7 +207,7 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
       <CoverageDetailsModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        quote={quotes.find(q => q.id === selectedQuoteForModal?.id) || selectedQuoteForModal}
+        quote={quotes.find(q => q.id === selectedQuoteForModal?.id) || selectedQuoteForModal as any}
         onPurchase={handlePurchase}
         onInstallmentChange={handleInstallmentChange}
         agencyPhoneNumber={agencyConfig.agency?.contact?.phone?.primary || '0850 404 04 04'}
@@ -218,11 +217,12 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
       <QuoteComparisonModal
         isOpen={isComparisonModalOpen}
         onClose={handleCloseComparisonModal}
-        allQuotes={quotes}
+        allQuotes={quotes as any}
         onPurchase={handlePurchase}
       />
     </>
   );
 };
 
-export default KaskoProductQuote;
+export default TrafikProductQuote;
+

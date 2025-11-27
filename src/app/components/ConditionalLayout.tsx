@@ -32,7 +32,9 @@ const CLIENT_ONLY_PATHS = [
   '/imm',
   '/tss',
   '/saglik',
-  '/acil-saglik'
+  '/acil-saglik',
+  '/zorunlu-trafik-sigortasi',
+  '/kasko-sigortasi'
 ];
 
 const PROTECTED_PATHS = [

@@ -1,19 +1,51 @@
+/**
+ * Zorunlu Trafik Sigortası Ürün Detay Sayfası - Client Component
+ * 
+ * Query parametrelerine göre farklı içerikler gösterir:
+ * - Default: Ürün detay içeriği
+ * - ?mode=form: Teklif formu
+ * - ?proposalId=xxx: Teklif detayları
+ * - ?purchaseId=xxx: Satın alma ekranı
+ */
+
 "use client";
 
 import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import Breadcrumb from '../components/common/Breadcrumb';
 import FaqList from '../components/common/FaqList';
 import ProductBanner from '../components/common/ProductBanner';
 import StickyProductNav from '../components/common/StickyProductNav';
 import ConditionalCTAPopup from '../components/common/ConditionalCTAPopup';
 import { productAnchors, getOfferLink } from '../../config/productAnchors';
+import { useProductPageQuery } from '@/components/ProductPageFlow/shared/hooks/useProductPageQuery';
 import '../../styles/subpage.min.css';
 import '../../styles/armorbroker.css';
+import '../../styles/product-flow/product-page-flow.css';
 import Link from 'next/link';
 
+// Dynamic imports for better code splitting
+const TrafikProductForm = dynamic(
+  () => import('@/components/ProductPageFlow/TrafikFlow').then(mod => mod.TrafikProductForm),
+  { ssr: false }
+);
 
+const TrafikProductQuote = dynamic(
+  () => import('@/components/ProductPageFlow/TrafikFlow/TrafikProductQuote'),
+  { ssr: false }
+);
 
-const faqs = [
+const PurchaseStepNew = dynamic(
+  () => import('@/components/QuoteFlow/KaskoQuote/steps/PurchaseStepNew'),
+  { ssr: false }
+);
+
+interface FaqQuestion {
+  question: string;
+  answer: string;
+}
+
+const faqs: FaqQuestion[] = [
   {
     question: 'Katılım Sigortacılık Sistemi Nasıl İşler?',
     answer: 'Geleneksel sigortacılıkta sigortalı ile sigortacı arasında karşılıklı sorumluluklar yükleyen bir akit söz konusudur. Sigortalı primini ödeyecek sigortacı da poliçe şartları çerçevesinde gerektiğinde tazminat ödeyecektir. Toplanan primler tazminatlara yetmez ise sigortacı zarar etmiş olmaktadır. Buna karşın toplanan primler ödenen tazminatlardan fazla ise sigortacının karıdır. Sigorta döneminde riziko gerçekleşmez ise sigortalının ödediği prim tamamen sigortacının olmaktadır. Katılım sistemin de ise geleneksel sigortaların aksine toplanan primler Katılım kuruluşunun sigortalılara vekaleten faizsizlik esasına uygun olarak işletmesi amacıyla bir fonda toplanmakta ve gerektiğinde sigortalıların birbirlerine bağış olarak alınmaktadır. Bu havuzda biriken meblağ Katılım kuruluşu tarafından faizsizlik esasına göre işletilmekte ve Katılım kuruluşunun vekalet ya da ortaklık gibi doğal haklarının dışındaki kar sigortalıların primlerinden oluşan havuza aktarılmaktadır. Bu havuz ayrıca sigortanın gereği olarak hasar gerçekleşmesi halinde mağdur olan poliçe sahibinin mağduriyetini gidermede kullanılmaktadır.'
@@ -40,38 +72,36 @@ const faqs = [
   }
 ];
 
-export default function ZorunluTrafikSigortasiClientPage() {
+// Banner Area Component - Shows form, quote or purchase based on mode
+const BannerArea = () => {
+  const { activeMode } = useProductPageQuery();
+
+  return (
+    <section className="cover product-page-banner">
+      <div className="container">
+        {/* Sabit başlık - tüm steplerde görünür */}
+        <h1 className="pp-product-title">Zorunlu Trafik Sigortası</h1>
+        {activeMode === 'purchase' ? (
+          <PurchaseWrapper />
+        ) : activeMode === 'quote' ? (
+          <QuoteWrapper />
+        ) : (
+          <FormWrapper />
+        )}
+      </div>
+    </section>
+  );
+};
+
+// Product Detail Content Component
+const ProductDetailContent = () => {
   const anchors = productAnchors['zorunlu-trafik-sigortasi'];
   const offerLink = getOfferLink('zorunlu-trafik-sigortasi');
 
-  useEffect(() => {
-    document.body.classList.add('product-detail-page');
-    return () => {
-      document.body.classList.remove('product-detail-page');
-    };
-  }, []);
-
   return (
     <>
-      <ConditionalCTAPopup
-        condition="inactivity"
-        inactivityDelay={15}
-        config={{
-          title: 'Zorunlu Trafik Sigortası Teklifi Almak İster misiniz?',
-          description: 'Hemen birkaç dakika içinde en uygun trafik sigortası tekliflerini karşılaştırın.',
-          buttonText: 'Hemen Teklif Al',
-          buttonLink: '/trafik-teklif'
-        }}
-      />
-      <StickyProductNav anchors={anchors} offerLink={offerLink} />
-      <ProductBanner
-        title1="Aracım"
-        title2="Katılım Zorunlu Trafik Sigortası"
-        buttonText="Hemen Teklif Alın"
-        buttonHref="/trafik-teklif"
-        size="sm"
-      />
-      <section className="page-content" >
+      <BannerArea />
+      <section className="page-content">
         <div className="container">
           <Breadcrumb
             items={[
@@ -204,7 +234,7 @@ export default function ZorunluTrafikSigortasiClientPage() {
                 <p>En uygun tekliflerle aracınızı sigortalamak için şimdi teklif alın.</p>
               </div>
               <div className="offer-banner__cta">
-                <Link className="btn btn-wide btn-tertiary" href="/trafik-teklif">Hemen Teklif Alın</Link>
+                <Link className="btn btn-wide btn-tertiary" href="/zorunlu-trafik-sigortasi">Hemen Teklif Alın</Link>
               </div>
             </div>
 
@@ -258,12 +288,172 @@ export default function ZorunluTrafikSigortasiClientPage() {
           </div>
         </div>
       </section>
-      <section className="page-content">
-        <div className="container">
-          <h4>Zorunlu Trafik Sigortası Sıkça Sorulan Sorular</h4>
-          <FaqList faqs={faqs} />
-        </div>
-      </section>
     </>
   );
-} 
+};
+
+// Form Wrapper - Handles navigation after proposal created
+const FormWrapper = () => {
+  const { navigateToQuote } = useProductPageQuery();
+
+  const handleProposalCreated = (proposalId: string) => {
+    // Shallow navigation - URL değişir ama sayfa yeniden yüklenmez
+    navigateToQuote(proposalId);
+  };
+
+  return <TrafikProductForm onProposalCreated={handleProposalCreated} />;
+};
+
+// Quote Wrapper - Handles quote view (renders inside banner area)
+const QuoteWrapper = () => {
+  const { query, navigateToDefault, navigateToPurchase } = useProductPageQuery();
+
+  if (!query.proposalId) {
+    return null;
+  }
+
+  const handlePurchaseClick = (quoteId: string) => {
+    console.log('🛒 Purchase clicked for quote:', quoteId);
+    
+    // LocalStorage'a kaydet (PurchaseStepNew için gerekli)
+    localStorage.setItem('selectedProductIdForTrafik', quoteId);
+    localStorage.setItem('currentProposalIdTrafik', query.proposalId!);
+    
+    // Purchase moduna geç (?purchaseId=quoteId&proposalId=xxx)
+    navigateToPurchase(quoteId, query.proposalId);
+    
+    // Sayfayı en üste scroll et
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  return (
+    <TrafikProductQuote
+      proposalId={query.proposalId}
+      onPurchaseClick={handlePurchaseClick}
+      onBack={navigateToDefault}
+    />
+  );
+};
+
+// Purchase Wrapper - Handles purchase view (renders inside banner area)
+const PurchaseWrapper = () => {
+  const { query, navigateToQuote } = useProductPageQuery();
+
+  if (!query.purchaseId) {
+    return null;
+  }
+
+  const handleBack = () => {
+    const proposalId = localStorage.getItem('currentProposalIdTrafik');
+    if (proposalId) {
+      navigateToQuote(proposalId);
+    }
+  };
+
+  const handleNext = () => {
+    console.log('✅ Ödeme tamamlandı');
+    // Başarılı ödeme sonrası yönlendirme PurchaseStepNew içinde yapılıyor
+  };
+
+  return (
+    <>
+      <div className="product-page-flow-container">
+        {/* Stepper - Her zaman görünür */}
+        <div className="pp-stepper">
+          <div className="pp-step completed">
+            <div className="pp-step-visual">
+              <span>1</span>
+            </div>
+            <div className="pp-step-label">
+              <span>Kişisel</span>
+              <span>Bilgiler</span>
+            </div>
+          </div>
+
+          <div className="pp-step completed">
+            <div className="pp-step-visual">
+              <span>2</span>
+            </div>
+            <div className="pp-step-label">
+              <span>Araç</span>
+              <span>Bilgileri</span>
+            </div>
+          </div>
+
+          <div className="pp-step completed">
+            <div className="pp-step-visual">
+              <span>3</span>
+            </div>
+            <div className="pp-step-label">
+              <span>Teklif</span>
+              <span>Karşılaştırma</span>
+            </div>
+          </div>
+
+          <div className="pp-step active">
+            <div className="pp-step-visual">
+              <span>4</span>
+            </div>
+            <div className="pp-step-label">
+              <span>Ödeme</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="product-page-form pp-form-wide">
+          <PurchaseStepNew
+            onNext={handleNext}
+            onBack={handleBack}
+          />
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default function ZorunluTrafikSigortasiClientPage() {
+  const { activeMode } = useProductPageQuery();
+  const anchors = productAnchors['zorunlu-trafik-sigortasi'];
+  const offerLink = getOfferLink('zorunlu-trafik-sigortasi');
+
+  useEffect(() => {
+    document.body.classList.add('product-detail-page');
+    return () => {
+      document.body.classList.remove('product-detail-page');
+    };
+  }, []);
+
+  return (
+    <>
+      {/* GEÇICI OLARAK KAPATILDI */}
+      {/* <ConditionalCTAPopup
+        condition="inactivity"
+        inactivityDelay={15}
+        config={{
+          title: 'Zorunlu Trafik Sigortası Teklifi Almak İster misiniz?',
+          description: 'Hemen birkaç dakika içinde en uygun trafik sigortası tekliflerini karşılaştırın.',
+          buttonText: 'Hemen Teklif Al',
+          buttonLink: '/zorunlu-trafik-sigortasi'
+        }}
+      /> */}
+
+      <StickyProductNav 
+        anchors={anchors} 
+        offerLink="/zorunlu-trafik-sigortasi" 
+      />
+
+      {/* Her zaman aynı içerik - Banner area içinde form/quote değişir */}
+      <ProductDetailContent />
+
+      {/* FAQ sadece default modda göster */}
+      {activeMode === 'default' && (
+        <section className="page-content">
+          <div className="container">
+            <h4>Zorunlu Trafik Sigortası Sıkça Sorulan Sorular</h4>
+            <FaqList faqs={faqs} />
+          </div>
+        </section>
+      )}
+    </>
+  );
+}

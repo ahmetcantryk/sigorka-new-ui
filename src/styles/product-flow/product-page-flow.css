@@ -918,6 +918,7 @@
   flex-direction: column;
   gap: 8px;
   flex: 1;
+  position: relative;
 }
 
 .product-page-form .pp-vehicle-brand {
@@ -949,7 +950,10 @@
   align-items: center;
   justify-content: flex-end;
   color: var(--primary-color);
-  margin-top: 12px;
+  /* margin-top: 12px; */
+  position: absolute !important;
+  bottom: 20px !important;
+  right: 15px !important;
 }
 
 
@@ -1113,6 +1117,7 @@
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s;
+  position: relative;
   background-color: white;
 }
 
@@ -1507,7 +1512,7 @@
 }
 
 .pp-quote-title {
-  font-size: 28px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--primary-color);
   margin-bottom: 8px;
@@ -1932,7 +1937,7 @@
 .pp-quote-title {
   text-align: center;
   color: #d9ae5f;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
   margin-bottom: 30px;
   font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
