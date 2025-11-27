@@ -121,10 +121,10 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
 
   // Ref to persist selected installments across polls/renders
   const selectedInstallmentsRef = useRef<Record<string, number>>({});
-  
+
   // İlk active teklif geldiği zamanı takip et
   const firstActiveQuoteTimeRef = useRef<number | null>(null);
-  
+
   // Progress başlangıç zamanı ve active teklif geldiğindeki progress
   const progressStartTimeRef = useRef<number>(0);
   const progressAtFirstActiveRef = useRef<number | null>(null);
@@ -147,7 +147,7 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
     let guaranteeId = 1;
 
     const coverageLabels: Record<string, string> = {
-      immLimitiAyrimsiz: 'İMM Limitli / Limitsiz',
+      immLimitiAyrimsiz: 'İMM Limiti',
       ferdiKazaVefat: 'Ferdi Kaza Vefat',
       ferdiKazaSakatlik: 'Ferdi Kaza Sakatlık',
       ferdiKazaTedaviMasraflari: 'Ferdi Kaza Tedavi Masrafları',
@@ -362,7 +362,7 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
         ...quote,
         premiums: formattedPremiums,
         company: company?.name || `Sigorta Şirketi #${quote.insuranceCompanyId}`,
-        logo: company?.logo || `https://storage.dogasigorta.com/app-1/insurup-b2c-company/${quote.insuranceCompanyId}.png`,
+        logo: `https://storage.dogasigorta.com/app-1/insurup-b2c-company/${quote.insuranceCompanyId}.png`,
         selectedInstallmentNumber: initialSelectedInstallment,
         insuranceCompanyGuarantees: guarantees,
       };
@@ -372,23 +372,23 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
   // Progress interval - polling'den bağımsız her saniye 1 artar
   useEffect(() => {
     if (!isLoading) return;
-    
+
     // İlk başlangıçta zaman ref'ini set et
     if (progressStartTimeRef.current === 0) {
       progressStartTimeRef.current = Date.now();
     }
-    
+
     const progressInterval = setInterval(() => {
       setProgress(prevProgress => {
         let newProgress = prevProgress;
-        
+
         if (isFinishing && firstActiveQuoteTimeRef.current && progressAtFirstActiveRef.current !== null) {
           // Active teklif geldikten sonra 30 saniyede %100'e ulaş
           const timeSinceFirstActive = Date.now() - firstActiveQuoteTimeRef.current;
           const baseProgress = progressAtFirstActiveRef.current;
           const remainingProgress = 100 - baseProgress;
           const finishDuration = 30000; // 30 saniye
-          
+
           // Süre dolduysa kesin 100
           if (timeSinceFirstActive >= finishDuration) {
             newProgress = 100;
@@ -408,12 +408,12 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
           const calculatedProgress = Math.min(30 + Math.floor(elapsedSeconds * (69 / 180)), 99);
           newProgress = calculatedProgress;
         }
-        
+
         // Asla geriye düşme - her zaman en yüksek değeri al
         return Math.max(prevProgress, newProgress);
       });
     }, 500); // 500ms'de bir güncelle (daha akıcı)
-    
+
     return () => {
       clearInterval(progressInterval);
     };
@@ -552,7 +552,7 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
           if (pollInterval) {
             clearInterval(pollInterval);
           }
-          
+
           // Loading açıksa ve finishing değilse kapat
           if (isLoading && !isFinishing) {
             setIsLoading(false);
@@ -687,9 +687,9 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
     const items: Array<{ label: string; rate?: number; hasValue: boolean }> = [];
 
     // Meslek İndirimi - her zaman göster
-    items.push({ 
+    items.push({
       label: 'Meslek İndirimi',
-      hasValue: quote.hasVocationalDiscount 
+      hasValue: quote.hasVocationalDiscount
     });
 
     // Hasarsızlık İndirimi - her zaman göster
@@ -719,14 +719,14 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
   const formatGuaranteeValue = (guarantee: Guarantee): string => {
     if (guarantee.valueText) {
       let text = guarantee.valueText;
-      
+
       // "SEGMENTE_SEGMENT Segment" veya "SEGMENTE_SEGMENT" → "Segmente Segment"
       text = text.replace(/SEGMENTE_SEGMENT\s*Segment/gi, 'Segmente Segment');
       text = text.replace(/SEGMENTE_SEGMENT/gi, 'Segmente Segment');
-      
+
       // Alt çizgileri boşluğa çevir
       text = text.replace(/_/g, ' ');
-      
+
       // Türkçe karakterleri koruyarak her kelimenin ilk harfini büyük yap
       text = text.split(' ').map((word: string) => {
         if (word.length === 0) return word;
@@ -736,7 +736,7 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
         // İlk harfi büyük, geri kalanı küçük
         return word.charAt(0).toLocaleUpperCase('tr-TR') + word.slice(1).toLocaleLowerCase('tr-TR');
       }).join(' ');
-      
+
       return text;
     }
     if (guarantee.amount) {
@@ -752,9 +752,9 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
 
   const handlePurchase = (quoteId: string) => {
     console.log('🛒 handlePurchase called with quoteId:', quoteId);
-    
+
     const selectedFullQuote = quotes.find(q => q.id === quoteId);
-    
+
     if (selectedFullQuote && selectedFullQuote.state === 'ACTIVE') {
       const purchaseData = {
         id: quoteId,
@@ -957,11 +957,11 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
           <div className="product-page-form pp-form-wide">
             <div className="pp-card">
               <div className="pp-quote-error-container">
-                <div className="pp-quote-error-content">  
-                <span className='pp-card-title'>Kasko Sigortası Teklifleri</span> 
+                <div className="pp-quote-error-content">
+                  <span className='pp-card-title'>Kasko Sigortası Teklifleri</span>
                 </div>
                 <img src="/images/product-detail/error-x.svg" alt="Kasko Sigortası Teklifleri" className="pp-error-image" />
-                <span className="pp-error-card-title"><span className="pp-error-ups">Ups!</span> Uygun teklif bulunamadı</span> 
+                <span className="pp-error-card-title"><span className="pp-error-ups">Ups!</span> Uygun teklif bulunamadı</span>
                 <p className="pp-error-message-card-desc">
                   Araç bilgilerinize göre uygun teklif bulunamadı. Bilgilerinizi kontrol edip tekrar deneyebilirsiniz.
                 </p>
@@ -1181,7 +1181,7 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
                                   )}
                                 </span>
                                 <img
-                                  src={item.hasValue 
+                                  src={item.hasValue
                                     ? "/images/product-detail/teminat-tick-dark.svg"
                                     : "/images/product-detail/teminat-x.svg"
                                   }
@@ -1294,20 +1294,20 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
                                   {/* Kampanya Kutusu 1 - Araç Yıkama */}
                                   <div className="pp-campaign-box">
                                     <div className="pp-campaign-header">
-                                      <span className="pp-campaign-title">En temiz kasko sigorka.com'da!</span>
+                                      <span className="pp-campaign-title">En temiz kasko sigorka.com'da!<br /> Online teklif alın, hemen yaptırın.</span>
                                     </div>
                                     <p className="pp-campaign-desc">
-                                      Yılda 3 kez iç-dış yıkama, 1 kez periyodik bakım ve 2 kez ozon temizliği hediye!
+                                      Yılda 3 kez iç–dış araç yıkama, 1 kez periyodik bakım, 2 kez ozon sterilizasyonu ve sağlık hizmetleri ücretsiz!
                                     </p>
                                     <div className="pp-campaign-footer">
                                       <label className="pp-campaign-radio">
                                         <input type="radio" name={`campaign-${quote.id}`} value="car-wash" defaultChecked />
                                         <span className="pp-campaign-radio-label">Kampanyayı Seç</span>
                                       </label>
-                                      <a href="#" className="pp-campaign-link">
+                                      <a href="/kampanyalar/en-temiz-kasko-kampanyasi" target="_blank" className="pp-campaign-link">
                                         Detaylı Bilgi
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                          <path d="M5 12h14M12 5l7 7-7 7"/>
+                                          <path d="M5 12h14M12 5l7 7-7 7" />
                                         </svg>
                                       </a>
                                     </div>
@@ -1316,20 +1316,21 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
                                   {/* Kampanya Kutusu 2 - Cam Filmi */}
                                   <div className="pp-campaign-box">
                                     <div className="pp-campaign-header">
-                                      <span className="pp-campaign-title">Cam filmi hediye!</span>
+                                      <span className="pp-campaign-title">Katılım Kasko Sigortası Yaptırana 1000 TL'lik akaryakıt çeki hediye!
+                                      </span>
                                     </div>
                                     <p className="pp-campaign-desc">
-                                      Kasko poliçenizle birlikte aracınıza ücretsiz cam filmi uygulaması yapılır.
+                                      Katılım Kasko sigortanızı yaptırın, 1000 TL’lik akaryakıt çeki avantajından yararlanın.
                                     </p>
                                     <div className="pp-campaign-footer">
                                       <label className="pp-campaign-radio">
                                         <input type="radio" name={`campaign-${quote.id}`} value="window-film" />
                                         <span className="pp-campaign-radio-label">Kampanyayı Seç</span>
                                       </label>
-                                      <a href="#" className="pp-campaign-link">
+                                      <a href="/kampanyalar/yakit-ceki-kampanyasi" target="_blank" className="pp-campaign-link">
                                         Detaylı Bilgi
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                          <path d="M5 12h14M12 5l7 7-7 7"/>
+                                          <path d="M5 12h14M12 5l7 7-7 7" />
                                         </svg>
                                       </a>
                                     </div>

@@ -185,14 +185,14 @@ const QuoteComparisonModal: React.FC<QuoteComparisonModalProps> = ({
         if (!guarantee) return '-';
         if (guarantee.valueText) {
             let text = guarantee.valueText;
-            
+
             // "SEGMENTE_SEGMENT Segment" veya "SEGMENTE_SEGMENT" → "Segmente Segment"
             text = text.replace(/SEGMENTE_SEGMENT\s*Segment/gi, 'Segmente Segment');
             text = text.replace(/SEGMENTE_SEGMENT/gi, 'Segmente Segment');
-            
+
             // Alt çizgileri boşluğa çevir
             text = text.replace(/_/g, ' ');
-            
+
             // Türkçe karakterleri koruyarak her kelimenin ilk harfini büyük yap
             text = text.split(' ').map((word: string) => {
                 if (word.length === 0) return word;
@@ -201,7 +201,7 @@ const QuoteComparisonModal: React.FC<QuoteComparisonModalProps> = ({
                 // İlk harfi büyük, geri kalanı küçük
                 return word.charAt(0).toLocaleUpperCase('tr-TR') + word.slice(1).toLocaleLowerCase('tr-TR');
             }).join(' ');
-            
+
             return text;
         }
         if (guarantee.amount) {
@@ -273,7 +273,7 @@ const QuoteComparisonModal: React.FC<QuoteComparisonModalProps> = ({
                         <h2 className="pp-comp-title">Teklif Karşılaştırması</h2>
                         <p className="pp-comp-subtitle">Karşılaştırmak istediğiniz teklifleri seçin</p>
                     </div>
-                    
+
                     {/* Mobil Dropdown Seçimi */}
                     <div className="pp-comp-mobile-selectors">
                         {selectedQuotes.map((quote, index) => {
@@ -345,7 +345,7 @@ const QuoteComparisonModal: React.FC<QuoteComparisonModalProps> = ({
                                             {quote ? (
                                                 <div className="pp-comp-info-container">
                                                     <div className="pp-comp-logo-wrapper">
-                                                        <img src={quote.logo} alt={quote.company} className="pp-comp-logo" />
+                                                        <img src={`https://storage.dogasigorta.com/app-1/insurup-b2c-company/${quote.insuranceCompanyId}.png`} alt={quote.company} className="pp-comp-logo" />
                                                     </div>
                                                     <div className="pp-comp-price">
                                                         {selectedPremium ? formatPrice(selectedPremium.grossPremium) : '-'}

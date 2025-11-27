@@ -59,14 +59,14 @@ const CoverageDetailsModal: React.FC<CoverageDetailsModalProps> = ({
     const formatGuaranteeValue = (guarantee: any): string => {
         if (guarantee.valueText) {
             let text = guarantee.valueText;
-            
+
             // "SEGMENTE_SEGMENT Segment" veya "SEGMENTE_SEGMENT" → "Segmente Segment"
             text = text.replace(/SEGMENTE_SEGMENT\s*Segment/gi, 'Segmente Segment');
             text = text.replace(/SEGMENTE_SEGMENT/gi, 'Segmente Segment');
-            
+
             // Alt çizgileri boşluğa çevir
             text = text.replace(/_/g, ' ');
-            
+
             // Türkçe karakterleri koruyarak her kelimenin ilk harfini büyük yap
             text = text.split(' ').map((word: string) => {
                 if (word.length === 0) return word;
@@ -75,7 +75,7 @@ const CoverageDetailsModal: React.FC<CoverageDetailsModalProps> = ({
                 // İlk harfi büyük, geri kalanı küçük
                 return word.charAt(0).toLocaleUpperCase('tr-TR') + word.slice(1).toLocaleLowerCase('tr-TR');
             }).join(' ');
-            
+
             return text;
         }
         if (guarantee.amount) {
@@ -116,7 +116,7 @@ const CoverageDetailsModal: React.FC<CoverageDetailsModalProps> = ({
                 <div className="pp-coverage-modal-top-card">
                     <div className="pp-coverage-modal-logo-area">
                         {quote.logo ? (
-                            <img src={quote.logo} alt={quote.company} className="pp-coverage-modal-logo" />
+                            <img src={`https://storage.dogasigorta.com/app-1/insurup-b2c-company/${quote.insuranceCompanyId}.png`} alt={quote.company} className="pp-coverage-modal-logo" />
                         ) : (
                             <div className="pp-coverage-modal-logo-placeholder">{quote.company}</div>
                         )}

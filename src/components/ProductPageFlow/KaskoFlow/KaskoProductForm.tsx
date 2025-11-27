@@ -235,7 +235,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
   // URL parametrelerini güncelleme fonksiyonu
   const updateUrlParams = (params: { proposalId?: string; productId?: string }) => {
     if (typeof window === 'undefined') return;
-    
+
     const url = new URL(window.location.href);
     if (params.proposalId) {
       url.searchParams.set('proposalId', params.proposalId);
@@ -243,7 +243,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
     if (params.productId) {
       url.searchParams.set('productId', params.productId);
     }
-    
+
     window.history.pushState({}, '', url.toString());
     setProposalIdFromUrl(params.proposalId || null);
     setProductIdFromUrl(params.productId || null);
@@ -252,7 +252,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
   // Satın Al butonuna tıklandığında
   const handlePurchaseClick = (quoteId: string) => {
     console.log('🛒 Satın Al tıklandı:', quoteId);
-    
+
     // LocalStorage'a kaydet (PurchaseStepNew için)
     const selectedQuote = localStorage.getItem('selectedQuoteForPurchase');
     if (selectedQuote) {
@@ -262,7 +262,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
         id: quoteId
       }));
     }
-    
+
     // URL parametrelerini güncelle
     if (proposalIdFromUrl) {
       updateUrlParams({
@@ -270,10 +270,10 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
         productId: quoteId
       });
     }
-    
+
     // Step 3'e (ödeme) geç
     setActiveStep(3);
-    
+
     // Sayfayı en üste scroll et
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -281,18 +281,18 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
   // Proposal oluşturulduğunda
   const handleProposalCreated = (proposalId: string) => {
     console.log('✅ Proposal oluşturuldu:', proposalId);
-    
+
     // URL parametrelerini güncelle
     updateUrlParams({ proposalId });
-    
+
     // Step 2'ye (teklif karşılaştırma) geç
     setActiveStep(2);
-    
+
     // Callback varsa çağır
     if (onProposalCreated) {
       onProposalCreated(proposalId);
     }
-    
+
     // Sayfayı en üste scroll et
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -374,8 +374,8 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
     modelCode: '',
     model: '',
     year: '2025',
-    usageType: VehicleUtilizationStyle.PrivateCar.toString(),
-    fuelType: VehicleFuelType.Diesel.toString(),
+    usageType: VehicleUtilizationStyle.PrivateCar,
+    fuelType: VehicleFuelType.Diesel,
     engineNo: '',
     chassisNo: '',
     registrationDate: new Date().toISOString().split('T')[0],
@@ -671,9 +671,9 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
           modelYear: parseInt(values.year),
           brandReference: values.brandCode,
           modelTypeReference: values.modelCode,
-          utilizationStyle: parseInt(values.usageType),
+          utilizationStyle: parseInt(values.usageType.toString()),
           fuel: {
-            type: parseInt(values.fuelType),
+            type: parseInt(values.fuelType.toString()),
             customLpg: false,
             customLpgPrice: null,
           },
@@ -1382,7 +1382,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
                 <p className="pp-vehicle-model">{vehicle.model}</p>
                 <p className="pp-vehicle-plate">{displayPlate}</p>
               </div>
-              <div 
+              <div
                 className="pp-vehicle-edit-icon"
                 onClick={(e) => handleEditVehicle(vehicle.id, e)}
               >
@@ -2024,7 +2024,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
           Kasko Sigortası teklifiniz için eksik bilgilerinizi doldurunuz
         </p>
 
-      
+
 
         <div>
           <div className="pp-form-row">
@@ -2409,29 +2409,29 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
           const tramerResult = await tramerResponse.json();
           if (tramerResult) {
             // Kullanım şekli string değerini enum'a çevir
-            let usageTypeValue = '';
+            let usageTypeValue: number | string = '';
             if (tramerResult.utilizationStyle === 'PRIVATE_CAR') {
-              usageTypeValue = VehicleUtilizationStyle.PrivateCar.toString();
+              usageTypeValue = VehicleUtilizationStyle.PrivateCar;
             } else if (tramerResult.utilizationStyle === 'TAXI') {
-              usageTypeValue = VehicleUtilizationStyle.Taxi.toString();
+              usageTypeValue = VehicleUtilizationStyle.Taxi;
             } else if (tramerResult.utilizationStyle === 'COMMERCIAL') {
-              usageTypeValue = VehicleUtilizationStyle.RouteBasedMinibus.toString();
+              usageTypeValue = VehicleUtilizationStyle.RouteBasedMinibus;
             } else if (tramerResult.utilizationStyle === 'MOTORCYCLE') {
-              usageTypeValue = VehicleUtilizationStyle.Motorcycle.toString();
+              usageTypeValue = VehicleUtilizationStyle.Motorcycle;
             }
 
             // Yakıt tipi string değerini enum'a çevir
-            let fuelTypeValue = '';
+            let fuelTypeValue: number | string = '';
             if (tramerResult.fuelType === 'GASOLINE') {
-              fuelTypeValue = VehicleFuelType.Gasoline.toString();
+              fuelTypeValue = VehicleFuelType.Gasoline;
             } else if (tramerResult.fuelType === 'DIESEL') {
-              fuelTypeValue = VehicleFuelType.Diesel.toString();
+              fuelTypeValue = VehicleFuelType.Diesel;
             } else if (tramerResult.fuelType === 'LPG') {
-              fuelTypeValue = VehicleFuelType.Lpg.toString();
+              fuelTypeValue = VehicleFuelType.Lpg;
             } else if (tramerResult.fuelType === 'ELECTRIC') {
-              fuelTypeValue = VehicleFuelType.Electric.toString();
+              fuelTypeValue = VehicleFuelType.Electric;
             } else if (tramerResult.fuelType === 'LPG_GASOLINE') {
-              fuelTypeValue = VehicleFuelType.LpgGasoline.toString();
+              fuelTypeValue = VehicleFuelType.LpgGasoline;
             }
 
             // Tramer'den gelen eski poliçe bilgilerini state'e kaydet

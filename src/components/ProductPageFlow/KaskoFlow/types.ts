@@ -27,8 +27,8 @@ export interface VehicleFormData {
   modelCode: string;
   model: string;
   year: string;
-  usageType: string;
-  fuelType: string;
+  usageType: string | number;
+  fuelType: string | number;
   engineNo: string;
   chassisNo: string;
   registrationDate: string;

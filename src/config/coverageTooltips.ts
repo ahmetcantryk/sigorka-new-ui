@@ -24,11 +24,11 @@ export const coverageTooltips: BranchCoverageConfig = {
     // IMM ve Ferdi Kaza
     immLimitiAyrimsiz: {
       label: "İMM Limiti (Ayrımsız)",
-      tooltip: "testtest"
+      tooltip: ""
     },
     ferdiKazaVefat: {
       label: "Ferdi Kaza - Vefat",
-      tooltip: "testtest"
+      tooltip: ""
     },
     ferdiKazaSakatlik: {
       label: "Ferdi Kaza - Sakatlık",
