@@ -26,7 +26,7 @@ export const TRAFIK_COVERAGE_LABELS: Record<string, string> = {
   tedaviSaglikGiderleriKazaBasina: 'Tedavi Sağlık Giderleri Kaza Başına',
   
   // Ek Teminatlar
-  hukuksalKorumaAracaBagli: 'Hukuksal Koruma Araca Bağlı',
+  hukuksalKorumaAracaBagli: 'Hukuksal Koruma',
   hukuksalKorumaSurucuyeBagli: 'Hukuksal Koruma Sürücüye Bağlı',
   immKombine: 'İMM',
   ferdiKaza: 'Ferdi Kaza',

@@ -78,7 +78,7 @@ const TrafikProductQuote = ({ proposalId, onBack, onPurchaseClick }: TrafikProdu
         window.location.href = `/trafik/purchase/${proposalId}`;
       }
     } else {
-      console.error('❌ Quote not found or not active:', quoteId);
+      // console.error('❌ Quote not found or not active:', quoteId);
     }
   };
 
@@ -127,7 +127,6 @@ const TrafikProductQuote = ({ proposalId, onBack, onPurchaseClick }: TrafikProdu
         }, 1000);
       }
     } catch (error) {
-      console.error('Document view error:', error);
     }
   };
 
@@ -162,9 +161,9 @@ const TrafikProductQuote = ({ proposalId, onBack, onPurchaseClick }: TrafikProdu
             <div className="pp-card">
               <div className="pp-quote-error-container">
                 <div className="pp-quote-error-content">
-                  <span className='pp-card-title'>Trafik Sigortası Teklifleri</span>
+                  <span className='pp-card-title'>Zorunlu Trafik Sigortası Teklifleri</span>
                 </div>
-                <img src="/images/product-detail/error-x.svg" alt="Trafik Sigortası Teklifleri" className="pp-error-image" />
+                <img src="/images/product-detail/error-x.svg" alt="Zorunlu Trafik Sigortası Teklifleri" className="pp-error-image" />
                 <span className="pp-error-card-title"><span className="pp-error-ups">Ups!</span> Uygun teklif bulunamadı</span>
                 <p className="pp-error-message-card-desc">
                   Araç bilgilerinize göre uygun teklif bulunamadı. Bilgilerinizi kontrol edip tekrar deneyebilirsiniz.

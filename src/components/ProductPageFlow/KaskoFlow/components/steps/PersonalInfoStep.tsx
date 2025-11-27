@@ -74,7 +74,7 @@ const PersonalInfoStep = ({
             </div>
 
             <div className={`pp-form-group ${formik.touched.email && formik.errors.email ? 'error' : ''}`}>
-              <label className="pp-label">E-posta Adresi</label>
+              <label className="pp-label">E-posta Adresi (İsteğe Bağlı)</label>
               <input
                 type="email"
                 className="pp-input"

@@ -172,7 +172,6 @@ export default function PurchaseStepNew({ onNext, onBack }: PurchaseStepNewProps
           }
         }
       } catch (error) {
-        console.error('❌ Quote fetch error:', error);
         // Fallback: localStorage'dan oku
         const storedQuote = localStorage.getItem('selectedQuoteForPurchase');
         if (storedQuote) {
@@ -705,7 +704,7 @@ export default function PurchaseStepNew({ onNext, onBack }: PurchaseStepNewProps
           <div className="pp-radio-section">
             <div className="pp-radio-header">
               <label className="pp-radio-label-text">
-                Kart sahibi sigortalı ile aynı mı?
+                Kart sahibi sigortalı ile aynı
               </label>
               <div className="pp-radio-group">
                 <label className="pp-radio-label">

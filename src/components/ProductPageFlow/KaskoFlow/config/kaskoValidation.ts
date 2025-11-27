@@ -22,10 +22,9 @@ export const personalInfoValidationSchema = yup.object({
     }),
   email: yup
     .string()
-    .required('E-posta gereklidir')
-    .email('Geçerli bir e-posta giriniz')
+    .notRequired()
     .test('email-format', 'Geçerli bir e-posta adresi giriniz (örn: ornek@eposta.com)', function (value) {
-      if (!value) return true;
+      if (!value || value.trim() === '') return true; // Boşsa geçerli
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       return emailRegex.test(value);
     }),

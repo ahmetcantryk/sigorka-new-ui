@@ -27,6 +27,7 @@ import {
 // Components
 import { PersonalInfoStep, VehicleSelectionStep, AdditionalInfoStep } from './components/steps';
 import { TrafikStepper, TramerErrorPopup } from './components/common';
+import { DuplicateVehiclePopup } from '../common';
 import VerificationCodeModal from '../shared/VerificationCodeModal';
 import { UpdateVehicleModal } from '../common';
 import TrafikProductQuote from './TrafikProductQuote';
@@ -91,6 +92,8 @@ const TrafikProductForm = ({ onProposalCreated, onBack }: TrafikFormProps) => {
   const [showTramerErrorPopup, setShowTramerErrorPopup] = useState(false);
   const [showUpdateVehicleModal, setShowUpdateVehicleModal] = useState(false);
   const [editingVehicleId, setEditingVehicleId] = useState<string | null>(null);
+  const [showDuplicateVehiclePopup, setShowDuplicateVehiclePopup] = useState(false);
+  const [duplicatePlateNumber, setDuplicatePlateNumber] = useState<string>('');
 
   // Vehicle hook
   const {
@@ -273,7 +276,7 @@ const TrafikProductForm = ({ onProposalCreated, onBack }: TrafikFormProps) => {
         throw new Error('OTP gönderilemedi');
       }
     } catch (err) {
-      console.error('❌ OTP Error:', err);
+      
       setError(err instanceof Error ? err.message : 'Doğrulama kodu gönderilemedi');
     } finally {
       setIsLoading(false);
@@ -492,7 +495,7 @@ const TrafikProductForm = ({ onProposalCreated, onBack }: TrafikFormProps) => {
       setActiveStep(1);
     } catch (error) {
       setError('Bilgiler güncellenirken bir hata oluştu. Lütfen tekrar deneyin.');
-      console.error('Additional info update error:', error);
+     
     } finally {
       setIsLoading(false);
     }
@@ -690,7 +693,25 @@ const TrafikProductForm = ({ onProposalCreated, onBack }: TrafikFormProps) => {
 
         if (!vehicleResponse.ok) {
           const errorText = await vehicleResponse.text();
-          console.error('❌ Araç kaydı hatası:', errorText);
+          
+          
+          // Duplicate araç hatası kontrolü
+          try {
+            const errorData = JSON.parse(errorText);
+            if (errorData.status === 409 && 
+                (errorData.codes?.includes('RESOURCE_DUPLICATE_WITH_ERROR') || 
+                 errorData.codes?.includes('CUSTOMER_DUPLICATE_VEHICLE_BY_PLATE'))) {
+              // Plaka numarasını al
+              const plateNumber = `${formik.values.plateCity} ${formik.values.plateCode}`.trim();
+              setDuplicatePlateNumber(plateNumber);
+              setShowDuplicateVehiclePopup(true);
+              setIsLoading(false);
+              return;
+            }
+          } catch (parseError) {
+            // JSON parse hatası, normal hata mesajı göster
+          }
+          
           throw new Error(`Araç kaydı oluşturulamadı: ${errorText || vehicleResponse.statusText}`);
         }
 
@@ -700,7 +721,7 @@ const TrafikProductForm = ({ onProposalCreated, onBack }: TrafikFormProps) => {
         const vehicleId = vehicleResult.id;
 
         if (!vehicleId) {
-          console.error('❌ Araç ID bulunamadı:', vehicleResult);
+       
           throw new Error('Araç ID alınamadı');
         }
 
@@ -733,7 +754,7 @@ const TrafikProductForm = ({ onProposalCreated, onBack }: TrafikFormProps) => {
 
         if (!proposalResponse.ok) {
           const errorText = await proposalResponse.text();
-          console.error('❌ Teklif oluşturma hatası:', errorText);
+          
           throw new Error(`Teklif oluşturulamadı: ${errorText || proposalResponse.statusText}`);
         }
 
@@ -748,12 +769,12 @@ const TrafikProductForm = ({ onProposalCreated, onBack }: TrafikFormProps) => {
           console.log('🎉 İşlem başarılı, yönlendiriliyor:', proposalId);
           handleProposalCreated(proposalId);
         } else {
-          console.error('❌ Proposal ID bulunamadı:', proposalResult);
+         
           throw new Error('Teklif ID alınamadı');
         }
       }
     } catch (error) {
-      console.error('❌ Form submit hatası:', error);
+  
       const errorMessage = (error as Error).message || 'Bir hata oluştu';
       setError(errorMessage);
       alert(`Hata: ${errorMessage}`);
@@ -900,6 +921,21 @@ const TrafikProductForm = ({ onProposalCreated, onBack }: TrafikFormProps) => {
       <TramerErrorPopup
         isOpen={showTramerErrorPopup}
         onClose={() => setShowTramerErrorPopup(false)}
+      />
+
+      {/* Duplicate Vehicle Popup */}
+      <DuplicateVehiclePopup
+        isOpen={showDuplicateVehiclePopup}
+        plateNumber={duplicatePlateNumber}
+        onClose={() => setShowDuplicateVehiclePopup(false)}
+        onUpdateExisting={() => {
+          setShowDuplicateVehiclePopup(false);
+          // Mevcut araçlar sekmesine geç
+          setSelectionType('existing');
+          formik.setFieldValue('selectionType', 'existing');
+          // Araç listesini yenile
+          refetchVehicles();
+        }}
       />
 
       {/* Araç Güncelleme Modal */}
