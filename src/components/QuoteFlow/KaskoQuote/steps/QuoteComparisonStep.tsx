@@ -298,9 +298,9 @@ const convertCoverageToGuarantees = (coverage: KaskoCoverage | null): Guarantee[
     ferdiKazaTedaviMasraflari: 'Ferdi Kaza Tedavi Masrafları',
     anahtarKaybi: 'Anahtar Kaybı',
     maneviTazminat: 'Manevi Tazminat',
-    onarimServisTuru: 'Onarım Servis Türü',
-    yedekParcaTuru: 'Yedek Parça Türü',
-    camKirilmaMuafeyeti: 'Cam Kırılma Muafiyeti',
+      onarimServisTuru: 'Servis Geçerliliği',
+      yedekParcaTuru: 'Yedek Parça Türü',
+      camKirilmaMuafeyeti: 'Cam Hasarı',
     hukuksalKorumaAracaBagli: 'Hukuksal Koruma (Araca Bağlı)',
     ozelEsya: 'Özel Eşya',
     sigaraMaddeZarari: 'Sigara/Madde Zararı',
@@ -359,27 +359,19 @@ const convertCoverageToGuarantees = (coverage: KaskoCoverage | null): Guarantee[
       if (typeof value === 'object' && value !== null && '$type' in value) {
         const kiralikArac = value as any;
         if (kiralikArac.$type === 'DEFINED') {
+          const yillikKullanim = kiralikArac.yillikKullanimSayisi || 0;
+          const tekSeferlikGun = kiralikArac.tekSeferlikGunSayisi || 0;
           guarantees.push({
             insuranceGuaranteeId: guaranteeId.toString(),
-            label: 'Kiralık Araç',
-            valueText: `${kiralikArac.yillikKullanimSayisi || 0} kez/yıl, ${kiralikArac.tekSeferlikGunSayisi || 0} gün`,
+            label: 'İkame Araç',
+            valueText: `Yılda ${yillikKullanim} kez ${tekSeferlikGun} gün`,
             amount: 0
           });
           guaranteeId++;
-          
-          if (kiralikArac.aracSegment) {
-            guarantees.push({
-              insuranceGuaranteeId: guaranteeId.toString(),
-              label: 'Kiralık Araç Segmenti',
-              valueText: segmentLabels[kiralikArac.aracSegment] || kiralikArac.aracSegment,
-              amount: 0
-            });
-            guaranteeId++;
-          }
         } else if (kiralikArac.$type === 'NONE') {
           guarantees.push({
             insuranceGuaranteeId: guaranteeId.toString(),
-            label: 'Kiralık Araç',
+            label: 'İkame Araç',
             valueText: 'Dahil Değil',
             amount: 0
           });
@@ -394,7 +386,7 @@ const convertCoverageToGuarantees = (coverage: KaskoCoverage | null): Guarantee[
       guarantees.push({
         insuranceGuaranteeId: guaranteeId.toString(),
         label,
-        valueText: serviceTypeLabels[value as string] || value as string,
+        valueText: serviceTypeLabels[value as string] || (value as string).replace(/_/g, ' ').replace(/Sigortali/gi, 'Sigortalı').replace(/Ozel/gi, 'Özel'),
         amount: 0
       });
       guaranteeId++;
@@ -447,18 +439,24 @@ const convertCoverageToGuarantees = (coverage: KaskoCoverage | null): Guarantee[
           break;
           
         case 'INCLUDED':
+          // Cam Hasarı ve Mini Onarım için özel label
+          const includedLabel = key === 'camKirilmaMuafeyeti' ? 'Cam Hasarı' : 
+                               key === 'miniOnarim' ? 'Mini Onarım' : label;
           guarantees.push({
             insuranceGuaranteeId: guaranteeId.toString(),
-            label,
+            label: includedLabel,
             valueText: 'Dahil',
             amount: 0
           });
           break;
           
         case 'NOT_INCLUDED':
+          // Cam Hasarı ve Mini Onarım için özel label
+          const notIncludedLabel = key === 'camKirilmaMuafeyeti' ? 'Cam Hasarı' : 
+                                   key === 'miniOnarim' ? 'Mini Onarım' : label;
           guarantees.push({
             insuranceGuaranteeId: guaranteeId.toString(),
-            label,
+            label: notIncludedLabel,
             valueText: 'Dahil Değil',
             amount: 0
           });
@@ -474,11 +472,13 @@ const convertCoverageToGuarantees = (coverage: KaskoCoverage | null): Guarantee[
           break;
           
         case 'UNDEFINED':
-          // UNDEFINED teminatları "Belirsiz" olarak göster
+          // UNDEFINED teminatları - Cam Hasarı ve Mini Onarım için özel işleme
+          const undefinedLabel = key === 'camKirilmaMuafeyeti' ? 'Cam Hasarı' : 
+                                 key === 'miniOnarim' ? 'Mini Onarım' : label;
           guarantees.push({
             insuranceGuaranteeId: guaranteeId.toString(),
-            label,
-            valueText: 'Belirsiz',
+            label: undefinedLabel,
+            valueText: 'Dahil Değil',
             amount: 0
           });
           break;
@@ -565,9 +565,9 @@ export default function QuoteComparisonStep({
       ferdiKazaTedaviMasraflari: 'Ferdi Kaza Tedavi Masrafları',
       anahtarKaybi: 'Anahtar Kaybı',
       maneviTazminat: 'Manevi Tazminat',
-      onarimServisTuru: 'Onarım Servis Türü',
+      onarimServisTuru: 'Servis Geçerliliği',
       yedekParcaTuru: 'Yedek Parça Türü',
-      camKirilmaMuafeyeti: 'Cam Kırılma Muafiyeti',
+      camKirilmaMuafeyeti: 'Cam Hasarı',
       hukuksalKorumaAracaBagli: 'Hukuksal Koruma (Araca Bağlı)',
       ozelEsya: 'Özel Eşya',
       sigaraMaddeZarari: 'Sigara/Madde Zararı',
@@ -689,25 +689,18 @@ export default function QuoteComparisonStep({
             if (field === 'kiralikArac') {
               if (typeof bestValue === 'object' && bestValue !== null && '$type' in bestValue) {
                 if (bestValue.$type === 'DEFINED') {
+                  const yillikKullanim = bestValue.yillikKullanimSayisi || 0;
+                  const tekSeferlikGun = bestValue.tekSeferlikGunSayisi || 0;
                   guarantees.push({
                     insuranceGuaranteeId: guarantees.length + 1 + '',
-                    label: 'Kiralık Araç',
-                    valueText: `${bestValue.yillikKullanimSayisi || 0} kez/yıl, ${bestValue.tekSeferlikGunSayisi || 0} gün`,
+                    label: 'İkame Araç',
+                    valueText: `Yılda ${yillikKullanim} kez ${tekSeferlikGun} gün`,
                     amount: 0
                   });
-                  
-                  if (bestValue.aracSegment) {
-                    guarantees.push({
-                      insuranceGuaranteeId: guarantees.length + 1 + '',
-                      label: 'Kiralık Araç Segmenti',
-                      valueText: segmentLabels[bestValue.aracSegment] || bestValue.aracSegment,
-                      amount: 0
-                    });
-                  }
                 } else if (bestValue.$type === 'NONE') {
                   guarantees.push({
                     insuranceGuaranteeId: guarantees.length + 1 + '',
-                    label: 'Kiralık Araç',
+                    label: 'İkame Araç',
                     valueText: 'Dahil Değil',
                     amount: 0
                   });
@@ -717,7 +710,7 @@ export default function QuoteComparisonStep({
               guarantees.push({
                 insuranceGuaranteeId: guarantees.length + 1 + '',
                 label,
-                valueText: serviceTypeLabels[bestValue as string] || bestValue as string,
+                valueText: serviceTypeLabels[bestValue as string] || (bestValue as string).replace(/_/g, ' ').replace(/Sigortali/gi, 'Sigortalı').replace(/Ozel/gi, 'Özel'),
                 amount: 0
               });
             } else if (field === 'yedekParcaTuru') {

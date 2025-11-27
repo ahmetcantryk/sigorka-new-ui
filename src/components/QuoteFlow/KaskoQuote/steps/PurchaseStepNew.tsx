@@ -707,8 +707,8 @@ export default function PurchaseStepNew({ onNext, onBack }: PurchaseStepNewProps
               <label className="pp-radio-label-text">
                 Kart sahibi sigortalı ile aynı mı?
               </label>
-              <div className="pp-radio-options">
-                <label className="pp-radio-option">
+              <div className="pp-radio-group">
+                <label className="pp-radio-label">
                   <input
                     type="radio"
                     name="cardOwnerSame"
@@ -721,7 +721,7 @@ export default function PurchaseStepNew({ onNext, onBack }: PurchaseStepNewProps
                   />
                   <span>Evet</span>
                 </label>
-                <label className="pp-radio-option">
+                <label className="pp-radio-label">
                   <input
                     type="radio"
                     name="cardOwnerSame"
@@ -763,7 +763,7 @@ export default function PurchaseStepNew({ onNext, onBack }: PurchaseStepNewProps
             <input
               type="text"
               className="pp-input pp-input-uppercase"
-              placeholder="İsim Soyisim"
+              placeholder="Ad Soyad"
               value={cardHolder}
               onChange={(e) => {
                 const filteredValue = e.target.value.replace(/[^a-zA-ZğüşıöçĞÜŞİÖÇ\s]/g, '');
@@ -931,7 +931,7 @@ export default function PurchaseStepNew({ onNext, onBack }: PurchaseStepNewProps
               <img
                 src={selectedQuoteData.insuranceCompanyLogo}
                 alt={selectedQuoteData.company || 'Sigorta Şirketi'}
-                style={{ maxWidth: '150px', maxHeight: '60px', objectFit: 'contain' }}
+                style={{ maxWidth: '150px', maxHeight: '120px', objectFit: 'contain' }}
               />
             ) : (
               <div className="pp-summary-logo-placeholder">

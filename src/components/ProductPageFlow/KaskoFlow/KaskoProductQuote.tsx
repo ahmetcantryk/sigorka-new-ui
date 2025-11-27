@@ -153,9 +153,9 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
       ferdiKazaTedaviMasraflari: 'Ferdi Kaza Tedavi Masrafları',
       anahtarKaybi: 'Anahtar Kaybı',
       maneviTazminat: 'Manevi Tazminat',
-      onarimServisTuru: 'Onarım Servis Türü',
+      onarimServisTuru: 'Servis Geçerliliği',
       yedekParcaTuru: 'Yedek Parça Türü',
-      camKirilmaMuafeyeti: 'Cam Kırılma Muafiyeti',
+      camKirilmaMuafeyeti: 'Cam Hasarı',
       hukuksalKorumaAracaBagli: 'Hukuksal Koruma (Araca Bağlı)',
       ozelEsya: 'Özel Eşya',
       sigaraMaddeZarari: 'Sigara/Madde Zararı',
@@ -178,7 +178,7 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
       grevLokavt: 'Grev/Lokavt',
       dogalAfetler: 'Doğal Afetler',
       hirsizlik: 'Hırsızlık',
-      kiralikArac: 'Kiralık Araç'
+      kiralikArac: 'İkame Araç'
     };
 
     Object.entries(coverage).forEach(([key, value]) => {
@@ -186,19 +186,37 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
 
       const label = coverageLabels[key] || key;
 
-      // Handle String Values (e.g. "ANLASMALI_OZEL_SERVIS")
+      // Handle String Values (e.g. "ANLASMALI_OZEL_SERVIS", "YETKILI_SERVIS")
       if (typeof value === 'string') {
         let formattedValue = value;
-        if (value === 'ANLASMALI_OZEL_SERVIS') formattedValue = 'Anlaşmalı Özel Servis';
-        else if (value === 'ANLASMALI_YETKILI_SERVIS') formattedValue = 'Anlaşmalı Yetkili Servis';
-        else if (value === 'TUM_YETKILI_SERVISLER') formattedValue = 'Tüm Yetkili Servisler';
-        else if (value === 'ORIJINAL_PARCA') formattedValue = 'Orijinal Parça';
-        else if (value === 'ESDEGER_PARCA') formattedValue = 'Eşdeğer Parça';
-        else {
-          // Fallback: Replace underscores with spaces and Title Case
-          formattedValue = value.replace(/_/g, ' ').replace(/\w\S*/g, (txt) => {
-            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-          });
+        
+        // Servis türleri için özel formatlama
+        if (key === 'onarimServisTuru') {
+          if (value === 'ANLASMALI_OZEL_SERVIS') formattedValue = 'Anlaşmalı Özel Servis';
+          else if (value === 'ANLASMALI_YETKILI_SERVIS') formattedValue = 'Anlaşmalı Yetkili Servis';
+          else if (value === 'YETKILI_SERVIS') formattedValue = 'Yetkili Servis';
+          else if (value === 'TUM_YETKILI_SERVISLER') formattedValue = 'Tüm Yetkili Servisler';
+          else if (value === 'OZEL_SERVIS') formattedValue = 'Özel Servis';
+          else if (value === 'SIGORTALI_BELIRLER') formattedValue = 'Sigortalı Belirler';
+          else {
+            // Fallback: Replace underscores with spaces and Title Case
+            formattedValue = value.replace(/_/g, ' ').replace(/\w\S*/g, (txt) => {
+              return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            });
+            // Türkçe karakter düzeltmeleri
+            formattedValue = formattedValue.replace(/Sigortali/g, 'Sigortalı');
+            formattedValue = formattedValue.replace(/Ozel/g, 'Özel');
+          }
+        } else {
+          // Diğer string değerler için
+          if (value === 'ORIJINAL_PARCA') formattedValue = 'Orijinal Parça';
+          else if (value === 'ESDEGER_PARCA') formattedValue = 'Eşdeğer Parça';
+          else {
+            // Fallback: Replace underscores with spaces and Title Case
+            formattedValue = value.replace(/_/g, ' ').replace(/\w\S*/g, (txt) => {
+              return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            });
+          }
         }
 
         guarantees.push({
@@ -241,47 +259,60 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
             });
             break;
           case 'INCLUDED':
+            // Cam Hasarı ve Mini Onarım için özel label
+            const includedLabel = key === 'camKirilmaMuafeyeti' ? 'Cam Hasarı' : label;
             guarantees.push({
               insuranceGuaranteeId: guaranteeId.toString(),
-              label,
+              label: includedLabel,
               valueText: 'Dahil',
               amount: 0
             });
             break;
           case 'NOT_INCLUDED':
+            // Cam Hasarı ve Mini Onarım için özel label
+            const notIncludedLabel = key === 'camKirilmaMuafeyeti' ? 'Cam Hasarı' : label;
             guarantees.push({
               insuranceGuaranteeId: guaranteeId.toString(),
-              label,
+              label: notIncludedLabel,
               valueText: 'Dahil Değil',
               amount: 0
             });
             break;
           case 'UNDEFINED':
-            // UNDEFINED teminatları teminatlar tab'ında gösterme (filtrelenecek)
-            // Ama teklif kartı için gerekli olabilir, bu yüzden ekliyoruz
-            guarantees.push({
-              insuranceGuaranteeId: guaranteeId.toString(),
-              label,
-              valueText: 'Dahil Değil',
-              amount: 0
-            });
+            // UNDEFINED teminatları - Cam Hasarı ve Mini Onarım için özel işleme
+            if (key === 'camKirilmaMuafeyeti' || key === 'miniOnarim') {
+              guarantees.push({
+                insuranceGuaranteeId: guaranteeId.toString(),
+                label: key === 'camKirilmaMuafeyeti' ? 'Cam Hasarı' : label,
+                valueText: 'Dahil Değil',
+                amount: 0
+              });
+            } else {
+              // Diğer UNDEFINED teminatlar
+              guarantees.push({
+                insuranceGuaranteeId: guaranteeId.toString(),
+                label,
+                valueText: 'Dahil Değil',
+                amount: 0
+              });
+            }
             break;
           case 'DEFINED':
-            // Handle Kiralık Araç specifically
+            // Handle İkame Araç (Kiralık Araç) specifically
             if (key === 'kiralikArac') {
-              const { yillikKullanimSayisi, tekSeferlikGunSayisi, aracSegment } = coverageValue;
-              if (yillikKullanimSayisi && tekSeferlikGunSayisi && aracSegment) {
+              const { yillikKullanimSayisi, tekSeferlikGunSayisi } = coverageValue;
+              if (yillikKullanimSayisi && tekSeferlikGunSayisi) {
                 guarantees.push({
                   insuranceGuaranteeId: guaranteeId.toString(),
-                  label,
-                  valueText: `${yillikKullanimSayisi}x${tekSeferlikGunSayisi} ${aracSegment} Segment`,
+                  label: 'İkame Araç', // Label'ı güncelle
+                  valueText: `Yılda ${yillikKullanimSayisi} kez ${tekSeferlikGunSayisi} gün`,
                   amount: 0
                 });
               } else {
                 // DEFINED ama değerler eksikse
                 guarantees.push({
                   insuranceGuaranteeId: guaranteeId.toString(),
-                  label,
+                  label: 'İkame Araç',
                   valueText: 'Dahil Değil',
                   amount: 0
                 });
@@ -663,11 +694,27 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
   // Kasko için önemli 3 teminatı bul - her zaman 3 teminat döndür
   const getMainCoverages = (quote: ProcessedQuote) => {
     const coverages = quote.insuranceCompanyGuarantees || [];
-    const camKirilma = coverages.find(g => g.label === 'Cam Kırılma Muafiyeti');
-    const yolYardim = coverages.find(g => g.label === 'Yol Yardım');
-    const aracCalinmasi = coverages.find(g => g.label === 'Araç Çalınması');
+    
+    // 4 teminat
+    const immLimiti = coverages.find(g => 
+      g.label === 'İMM Limiti' || 
+      g.label === 'İMM Limiti (Ayrımsız)' ||
+      g.label === 'İMM Limitli / Limitsiz'
+    );
+    const camHasari = coverages.find(g => 
+      g.label === 'Cam Hasarı' || 
+      g.label === 'Cam Kırılma Muafiyeti'
+    );
+    const servisGecerliligi = coverages.find(g => 
+      g.label === 'Servis Geçerliliği' || 
+      g.label === 'Onarım Servis Türü'
+    );
+    const ikameArac = coverages.find(g => 
+      g.label === 'İkame Araç' || 
+      g.label === 'Kiralık Araç'
+    );
 
-    // Her zaman 3 teminatı döndür - yoksa placeholder
+    // Her zaman 4 teminatı döndür - yoksa placeholder
     const defaultGuarantee = (label: string): Guarantee => ({
       insuranceGuaranteeId: `default-${label}`,
       label,
@@ -675,10 +722,12 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
       amount: 0
     });
 
+    // Önce tick/X olanlar (Cam Hasarı), sonra değer gösterilenler
     return [
-      camKirilma || defaultGuarantee('Cam Kırılma Muafiyeti'),
-      yolYardim || defaultGuarantee('Yol Yardım'),
-      aracCalinmasi || defaultGuarantee('Araç Çalınması')
+      camHasari || defaultGuarantee('Cam Hasarı'),
+      immLimiti || defaultGuarantee('İMM Limiti'),
+      servisGecerliligi || defaultGuarantee('Servis Geçerliliği'),
+      ikameArac || defaultGuarantee('İkame Araç')
     ];
   };
 
@@ -710,19 +759,54 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
 
   // Teminat dahil mi kontrol et
   const isCoverageIncluded = (guarantee: Guarantee): boolean => {
-    return guarantee.valueText === 'Dahil' ||
+    // Cam Hasarı için özel kontrol
+    if (guarantee.label === 'Cam Hasarı') {
+      return guarantee.valueText === 'Dahil';
+    }
+    
+    // Diğer teminatlar için genel kontrol
+    return (guarantee.valueText === 'Dahil' ||
       guarantee.valueText === 'Limitsiz' ||
       guarantee.valueText === 'Rayiç' ||
-      guarantee.amount > 0;
+      guarantee.amount > 0 ||
+      (guarantee.valueText !== null && guarantee.valueText !== 'Dahil Değil' && guarantee.valueText !== 'Belirsiz')) || false;
+  };
+  
+  // Teminat değerini formatla (gösterim için - sadece İMM Limiti, Servis Geçerliliği, İkame Araç için)
+  const getCoverageDisplayValue = (guarantee: Guarantee): string | null => {
+    // İMM Limiti için amount göster
+    if (guarantee.label === 'İMM Limiti' || guarantee.label === 'İMM Limiti (Ayrımsız)' || guarantee.label === 'İMM Limitli / Limitsiz') {
+      if (guarantee.amount > 0) {
+        return guarantee.amount.toLocaleString('tr-TR', {
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0,
+        }) + ' ₺';
+      }
+      return guarantee.valueText || '-';
+    }
+    
+    // İkame Araç için özel format
+    if (guarantee.label === 'İkame Araç' || guarantee.label === 'Kiralık Araç') {
+      return guarantee.valueText || '-';
+    }
+    
+    // Servis Geçerliliği için valueText göster
+    if (guarantee.label === 'Servis Geçerliliği' || guarantee.label === 'Onarım Servis Türü') {
+      return guarantee.valueText || '-';
+    }
+    
+    // Cam Hasarı ve Mini Onarım için null (tick/x gösterilir, değer gösterilmez)
+    return null;
+  };
+  
+  // Tick/X gösterilecek mi kontrol et (sadece Cam Hasarı için)
+  const shouldShowTickX = (guarantee: Guarantee): boolean => {
+    return guarantee.label === 'Cam Hasarı';
   };
 
   const formatGuaranteeValue = (guarantee: Guarantee): string => {
     if (guarantee.valueText) {
       let text = guarantee.valueText;
-
-      // "SEGMENTE_SEGMENT Segment" veya "SEGMENTE_SEGMENT" → "Segmente Segment"
-      text = text.replace(/SEGMENTE_SEGMENT\s*Segment/gi, 'Segmente Segment');
-      text = text.replace(/SEGMENTE_SEGMENT/gi, 'Segmente Segment');
 
       // Alt çizgileri boşluğa çevir
       text = text.replace(/_/g, ' ');
@@ -730,12 +814,16 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
       // Türkçe karakterleri koruyarak her kelimenin ilk harfini büyük yap
       text = text.split(' ').map((word: string) => {
         if (word.length === 0) return word;
-        // Zaten düzgün formatlı kelimeleri atla (Dahil, Limitsiz, Rayiç, Segmente, Segment vb.)
-        const skipWords = ['Dahil', 'Değil', 'Limitsiz', 'Rayiç', 'Segmente', 'Segment', 'Özel', 'Servis', 'Orijinal', 'Parça', 'Eşdeğer'];
+        // Zaten düzgün formatlı kelimeleri atla (Dahil, Limitsiz, Rayiç, Özel, Servis, Orijinal, Parça, Eşdeğer vb.)
+        const skipWords = ['Dahil', 'Değil', 'Limitsiz', 'Rayiç', 'Özel', 'Servis', 'Orijinal', 'Parça', 'Eşdeğer'];
         if (skipWords.includes(word)) return word;
         // İlk harfi büyük, geri kalanı küçük
         return word.charAt(0).toLocaleUpperCase('tr-TR') + word.slice(1).toLocaleLowerCase('tr-TR');
       }).join(' ');
+
+      // Türkçe karakter düzeltmeleri
+      text = text.replace(/Sigortali/gi, 'Sigortalı');
+      text = text.replace(/Ozel/gi, 'Özel');
 
       return text;
     }
@@ -1145,24 +1233,36 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
                         {/* Divider */}
                         <div className="pp-quote-divider" />
 
-                        {/* BÖLÜM 2: Ana 3 Teminat (Cam Kırılması, Yol Yardım, Araç Çalınması) */}
+                        {/* BÖLÜM 2: Ana 4 Teminat */}
                         <div className={`pp-quote-section pp-quote-main-coverages ${!shouldShowAdditionalSection(quote) ? 'pp-coverages-full' : ''}`}>
-                          {mainCoverages.map((guarantee, index) => (
-                            <div key={index} className="pp-coverage-row">
-                              <span className="pp-coverage-label">
-                                {guarantee.label}
-                                <CoverageTooltip branch="kasko" coverageKey={guarantee.label || ''} />
-                              </span>
-                              <img
-                                src={isCoverageIncluded(guarantee)
-                                  ? "/images/product-detail/teminat-tick.svg"
-                                  : "/images/product-detail/teminat-x.svg"
-                                }
-                                alt={isCoverageIncluded(guarantee) ? "Dahil" : "Dahil Değil"}
-                                className="pp-coverage-icon-status"
-                              />
-                            </div>
-                          ))}
+                          {mainCoverages.map((guarantee, index) => {
+                            const displayValue = getCoverageDisplayValue(guarantee);
+                            const isIncluded = isCoverageIncluded(guarantee);
+                            const showTickX = shouldShowTickX(guarantee);
+                            
+                            return (
+                              <div key={index} className="pp-coverage-row">
+                                <span className="pp-coverage-label">
+                                  {guarantee.label}
+                                  <CoverageTooltip branch="kasko" coverageKey={guarantee.label || ''} />
+                                </span>
+                                {showTickX ? (
+                                  <img
+                                    src={isIncluded
+                                      ? "/images/product-detail/teminat-tick.svg"
+                                      : "/images/product-detail/teminat-x.svg"
+                                    }
+                                    alt={isIncluded ? "Dahil" : "Dahil Değil"}
+                                    className="pp-coverage-icon-status"
+                                  />
+                                ) : (
+                                  <span className="pp-coverage-value-text">
+                                    {displayValue || '-'}
+                                  </span>
+                                )}
+                              </div>
+                            );
+                          })}
                         </div>
 
                         {/* BÖLÜM 3: İndirimler (Her zaman göster - yoksa X ile) */}

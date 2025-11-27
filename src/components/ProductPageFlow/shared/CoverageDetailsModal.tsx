@@ -58,25 +58,7 @@ const CoverageDetailsModal: React.FC<CoverageDetailsModalProps> = ({
 
     const formatGuaranteeValue = (guarantee: any): string => {
         if (guarantee.valueText) {
-            let text = guarantee.valueText;
-
-            // "SEGMENTE_SEGMENT Segment" veya "SEGMENTE_SEGMENT" → "Segmente Segment"
-            text = text.replace(/SEGMENTE_SEGMENT\s*Segment/gi, 'Segmente Segment');
-            text = text.replace(/SEGMENTE_SEGMENT/gi, 'Segmente Segment');
-
-            // Alt çizgileri boşluğa çevir
-            text = text.replace(/_/g, ' ');
-
-            // Türkçe karakterleri koruyarak her kelimenin ilk harfini büyük yap
-            text = text.split(' ').map((word: string) => {
-                if (word.length === 0) return word;
-                // Zaten düzgün formatlı kelimeleri atla
-                if (word === 'Segmente' || word === 'Segment') return word;
-                // İlk harfi büyük, geri kalanı küçük
-                return word.charAt(0).toLocaleUpperCase('tr-TR') + word.slice(1).toLocaleLowerCase('tr-TR');
-            }).join(' ');
-
-            return text;
+            return guarantee.valueText;
         }
         if (guarantee.amount) {
             return (
