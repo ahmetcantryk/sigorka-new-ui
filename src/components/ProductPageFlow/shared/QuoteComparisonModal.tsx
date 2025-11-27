@@ -249,9 +249,35 @@ const QuoteComparisonModal: React.FC<QuoteComparisonModalProps> = ({
             </button>
 
             <div className="pp-comp-modal-container" onClick={(e) => e.stopPropagation()}>
-                <div className="pp-comp-header">
-                    <h2 className="pp-comp-title">Teklif Karşılaştırması</h2>
-                    <p className="pp-comp-subtitle">Karşılaştırmak istediğiniz teklifleri seçin</p>
+                {/* Mobil için: Header + Dropdown seçimi aynı bölümde */}
+                <div className="pp-comp-header-section">
+                    <div className="pp-comp-header">
+                        <h2 className="pp-comp-title">Teklif Karşılaştırması</h2>
+                        <p className="pp-comp-subtitle">Karşılaştırmak istediğiniz teklifleri seçin</p>
+                    </div>
+                    
+                    {/* Mobil Dropdown Seçimi */}
+                    <div className="pp-comp-mobile-selectors">
+                        {selectedQuotes.map((quote, index) => {
+                            const currentOptions = getQuoteOptions(index);
+                            return (
+                                <div key={`mobile-select-${index}`} className="pp-comp-mobile-selector">
+                                    <Dropdown
+                                        value={quote?.id}
+                                        options={currentOptions}
+                                        onChange={(e) => handleQuoteChange(index, e.value)}
+                                        onShow={() => handleQuoteDropdownShow(index)}
+                                        placeholder="Teklif Seçin"
+                                        className="pp-comp-dropdown"
+                                        panelClassName="pp-comp-dropdown-panel"
+                                        valueTemplate={selectedValueTemplate}
+                                        itemTemplate={itemTemplate}
+                                        appendTo={document.body}
+                                    />
+                                </div>
+                            );
+                        })}
+                    </div>
                 </div>
 
                 <div className="pp-comp-content">
@@ -264,8 +290,8 @@ const QuoteComparisonModal: React.FC<QuoteComparisonModalProps> = ({
                         </colgroup>
 
                         <thead>
-                            {/* Row 1: Dropdowns */}
-                            <tr>
+                            {/* Row 1: Dropdowns - Desktop only */}
+                            <tr className="pp-comp-desktop-only">
                                 <th className="pp-comp-th-dropdown"></th>
                                 {selectedQuotes.map((quote, index) => {
                                     const currentOptions = getQuoteOptions(index);

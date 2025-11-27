@@ -56,6 +56,10 @@ const BannerArea = () => {
     return (
         <section className="cover product-page-banner">
             <div className="container">
+                {/* Sabit başlık - tüm steplerde görünür */}
+                {activeMode !== 'default' && (
+                    <h1 className="pp-product-title">Kasko Sigortası</h1>
+                )}
                 {activeMode === 'purchase' ? (
                     <PurchaseWrapper />
                 ) : activeMode === 'quote' ? (

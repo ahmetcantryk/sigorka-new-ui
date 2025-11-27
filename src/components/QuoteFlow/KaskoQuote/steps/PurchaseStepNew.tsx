@@ -150,8 +150,8 @@ export default function PurchaseStepNew({ onNext, onBack }: PurchaseStepNewProps
               name: selectedProduct.insuranceCompanyName,
               proposalProductId: selectedProduct.id,
             },
-            // Logo bilgisini ekle
-            insuranceCompanyLogo: selectedProduct.insuranceCompanyLogo,
+            // Logo bilgisini ekle (API'de logo veya insuranceCompanyLogo olarak gelebilir)
+            insuranceCompanyLogo: selectedProduct.insuranceCompanyLogo || selectedProduct.logo,
             coverageGroupName: selectedProduct.coverageGroupName,
           };
           
@@ -912,8 +912,20 @@ export default function PurchaseStepNew({ onNext, onBack }: PurchaseStepNewProps
               <h3 className="pp-summary-title">
                 Sipariş Özeti
               </h3>
+              {/* Mobilde logo header'da sağda */}
+              <div className="pp-summary-logo-mobile">
+                {selectedQuoteData?.insuranceCompanyLogo ? (
+                  <img 
+                    src={selectedQuoteData.insuranceCompanyLogo} 
+                    alt={selectedQuoteData.company || 'Sigorta Şirketi'}
+                  />
+                ) : (
+                  <span className="pp-summary-logo-text">{selectedQuoteData?.company || ''}</span>
+                )}
+              </div>
             </div>
 
+            {/* Desktop logo */}
             <div className="pp-summary-logo-section">
               {selectedQuoteData?.insuranceCompanyLogo ? (
                 <img 
@@ -929,16 +941,16 @@ export default function PurchaseStepNew({ onNext, onBack }: PurchaseStepNewProps
             </div>
 
             <div className="pp-summary-details">
-              <div className="pp-summary-installment">
-                {currentPremium?.installmentNumber === 1 ? 'Peşin Ödeme' : `${currentPremium?.installmentNumber} Taksit`}
+              {/* Sol: Taksit + Hasarsızlık */}
+              <div className="pp-summary-details-left">
+                <div className="pp-summary-installment">
+                  {currentPremium?.installmentNumber === 1 ? 'Peşin Ödeme' : `${currentPremium?.installmentNumber} Taksit`}
+                </div>
+
+             
               </div>
 
-              {selectedQuoteData?.coverageGroupName && (
-                <div className="pp-summary-discount">
-                  {selectedQuoteData.coverageGroupName}
-                </div>
-              )}
-
+              {/* Sağ: Toplam Fiyat */}
               <div className="pp-summary-total-section">
                 <span className="pp-summary-total-label">Toplam:</span>
                 <span className="pp-summary-total-price">

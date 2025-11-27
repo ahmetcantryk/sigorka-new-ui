@@ -987,7 +987,7 @@ const UpdateVehicleModal: React.FC<UpdateVehicleModalProps> = ({ vehicleId, onCl
                   filter
                   filterPlaceholder="Ara..."
                   emptyFilterMessage="Sonuç bulunamadı"
-                  appendTo="self"
+                  appendTo={document.body}
                   panelClassName="update-vehicle-dropdown-panel"
                 />
               </div>
@@ -1022,7 +1022,7 @@ const UpdateVehicleModal: React.FC<UpdateVehicleModalProps> = ({ vehicleId, onCl
                   filter
                   filterPlaceholder="Ara..."
                   emptyFilterMessage="Sonuç bulunamadı"
-                  appendTo="self"
+                  appendTo={document.body}
                   panelClassName="update-vehicle-dropdown-panel"
                 />
               </div>
@@ -1060,7 +1060,7 @@ const UpdateVehicleModal: React.FC<UpdateVehicleModalProps> = ({ vehicleId, onCl
                   filterPlaceholder="Ara..."
                   emptyFilterMessage="Sonuç bulunamadı"
                   disabled={!formData.brandCode || !formData.modelYear || vehicleModels.length === 0}
-                  appendTo="self"
+                  appendTo={document.body}
                   panelClassName="update-vehicle-dropdown-panel"
                 />
               </div>
@@ -1083,7 +1083,7 @@ const UpdateVehicleModal: React.FC<UpdateVehicleModalProps> = ({ vehicleId, onCl
                   filter
                   filterPlaceholder="Ara..."
                   emptyFilterMessage="Sonuç bulunamadı"
-                  appendTo="self"
+                  appendTo={document.body}
                   panelClassName="update-vehicle-dropdown-panel"
                 />
               </div>
@@ -1104,7 +1104,7 @@ const UpdateVehicleModal: React.FC<UpdateVehicleModalProps> = ({ vehicleId, onCl
                   ]}
                   onChange={(e) => handleChange('fuelType', e.value)}
                   placeholder="Seçiniz"
-                  appendTo="self"
+                  appendTo={document.body}
                   panelClassName="update-vehicle-dropdown-panel"
                 />
               </div>
@@ -1507,7 +1507,7 @@ const UpdateVehicleModal: React.FC<UpdateVehicleModalProps> = ({ vehicleId, onCl
                           filterPlaceholder="Ara..."
                           emptyFilterMessage="Sonuç bulunamadı"
                           showClear
-                          appendTo="self"
+                          appendTo={document.body}
                           panelClassName="update-vehicle-dropdown-panel"
                         />
                       </div>
@@ -1533,7 +1533,7 @@ const UpdateVehicleModal: React.FC<UpdateVehicleModalProps> = ({ vehicleId, onCl
                             filterPlaceholder="Ara..."
                             emptyFilterMessage="Sonuç bulunamadı"
                             showClear
-                            appendTo="self"
+                            appendTo={document.body}
                             panelClassName="update-vehicle-dropdown-panel"
                           />
                         </div>
@@ -1575,7 +1575,7 @@ const UpdateVehicleModal: React.FC<UpdateVehicleModalProps> = ({ vehicleId, onCl
                           filterPlaceholder="Ara..."
                           emptyFilterMessage="Sonuç bulunamadı"
                           showClear
-                          appendTo="self"
+                          appendTo={document.body}
                           panelClassName="update-vehicle-dropdown-panel"
                         />
                       </div>
@@ -1589,19 +1589,13 @@ const UpdateVehicleModal: React.FC<UpdateVehicleModalProps> = ({ vehicleId, onCl
 
           {/* Buttons */}
           <div className="update-vehicle-modal-footer">
-            <button
-              type="button"
-              className="update-vehicle-button update-vehicle-button-secondary"
-              onClick={onClose}
-            >
-              İptal
-            </button>
+          
             <button
               type="submit"
               className="update-vehicle-button update-vehicle-button-primary"
               disabled={isLoading}
             >
-              {isLoading ? 'Güncelleniyor...' : 'Değişiklikleri Kaydet'}
+              {isLoading ? 'Güncelleniyor...' : 'Kaydet'}
             </button>
           </div>
         </form>

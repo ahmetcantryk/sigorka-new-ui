@@ -591,7 +591,13 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
 
   const formatGuaranteeValue = (guarantee: Guarantee): string => {
     if (guarantee.valueText) {
-      return guarantee.valueText;
+      // "SEGMENTE_SEGMENT Segment" gibi değerleri temizle
+      let text = guarantee.valueText;
+      // "SEGMENTE_SEGMENT Segment" veya "SEGMENTE_SEGMENT" → "Segmente Segment"
+      text = text.replace(/SEGMENTE_SEGMENT\s*Segment/gi, 'Segmente Segment');
+      text = text.replace(/SEGMENTE_SEGMENT/gi, 'Segmente Segment');
+      text = text.replace(/_/g, ' '); // Kalan alt çizgileri boşluğa çevir
+      return text;
     }
     if (guarantee.amount) {
       return (
@@ -815,14 +821,16 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
                 <span className='pp-card-title'>Kasko Sigortası Teklifleri</span> 
                 </div>
                 <img src="/images/product-detail/error-x.svg" alt="Kasko Sigortası Teklifleri" className="pp-error-image" />
-                <span className="pp-error-card-title">Ups! Uygun teklif bulunamadı</span> 
+                <span className="pp-error-card-title"><span className="pp-error-ups">Ups!</span> Uygun teklif bulunamadı</span> 
                 <p className="pp-error-message-card-desc">
                   Araç bilgilerinize göre uygun teklif bulunamadı. Bilgilerinizi kontrol edip tekrar deneyebilirsiniz.
                 </p>
                 {onBack && (
-                  <button className="pp-btn-submit" onClick={onBack}>
-                    Araç Bilgilerini Güncelle
-                  </button>
+                  <div className="pp-button-group">
+                    <button className="pp-btn-submit" onClick={onBack}>
+                      Araç Bilgilerini Güncelle
+                    </button>
+                  </div>
                 )}
               </div>
             </div>
@@ -881,7 +889,7 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
         <div className="product-page-form pp-form-wide">
           <div className="pp-card">
             {/* Title */}
-            <h1 className="pp-quote-title">Kasko Sigortası Teklifleri</h1>
+            <h2 className="pp-quote-title">Kasko Sigortası Teklifleri</h2>
 
             {/* Top Controls */}
             <div className="pp-quote-controls">
@@ -889,7 +897,8 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
                 <svg className="pp-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                 </svg>
-                <span>Teklifleri Karşılaştır</span>
+                <span className="pp-text-desktop">Teklifleri Karşılaştır</span>
+                <span className="pp-text-mobile">Karşılaştır</span>
               </button>
 
               <div className="pp-quote-filters">
@@ -928,7 +937,8 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
                     }}
                     className="pp-filter-button pp-filter-price"
                   >
-                    <span>{selectedSort}</span>
+                    <span className="pp-text-desktop">{selectedSort}</span>
+                    <span className="pp-text-mobile">Sırala</span>
                     <svg className="pp-chevron" fill="none" viewBox="0 0 9 5">
                       <path d="M8.49399 0.256643C8.41273 0.175281 8.31625 0.110738 8.21005 0.0667015C8.10385 0.0226655 7.99003 0 7.87507 0C7.76012 0 7.64629 0.0226655 7.5401 0.0667015C7.4339 0.110738 7.33742 0.175281 7.25616 0.256643L4.58099 2.93293C4.52629 2.98765 4.45212 3.01838 4.37478 3.01838C4.29744 3.01838 4.22327 2.98765 4.16857 2.93293L1.49399 0.256643C1.32992 0.0923918 1.10736 8.53478e-05 0.87528 3.06166e-05C0.643196 -2.41147e-05 0.420596 0.0921772 0.256449 0.256351C0.092302 0.420526 5.47242e-05 0.643224 2.43402e-08 0.875456C-5.46755e-05 1.10769 0.0920879 1.33043 0.256157 1.49468L2.93132 4.17155C3.12091 4.36128 3.34599 4.51179 3.59371 4.61447C3.84143 4.71715 4.10694 4.77 4.37507 4.77C4.64321 4.77 4.90871 4.71715 5.15643 4.61447C5.40415 4.51179 5.62924 4.36128 5.81882 4.17155L8.49399 1.49468C8.65803 1.33049 8.75018 1.10783 8.75018 0.875663C8.75018 0.643496 8.65803 0.420835 8.49399 0.256643Z" fill="currentColor" />
                     </svg>
@@ -996,7 +1006,7 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
                         <div className="pp-quote-divider" />
 
                         {/* BÖLÜM 2: Ana 3 Teminat (Cam Kırılması, Yol Yardım, Araç Çalınması) */}
-                        <div className="pp-quote-section pp-quote-main-coverages">
+                        <div className={`pp-quote-section pp-quote-main-coverages ${!shouldShowAdditionalSection(quote) ? 'pp-coverages-full' : ''}`}>
                           {mainCoverages.map((guarantee, index) => (
                             <div key={index} className="pp-coverage-row">
                               <span className="pp-coverage-label">
@@ -1016,32 +1026,31 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
                         </div>
 
                         {/* BÖLÜM 3: İndirimler (Dinamik - sadece varsa göster) */}
-                        {/* BÖLÜM 3: İndirimler (Dinamik - sadece varsa göster) */}
-                        {/* Divider - Sadece içerik varsa göster */}
                         {shouldShowAdditionalSection(quote) && (
-                          <div className="pp-quote-divider" />
-                        )}
-
-                        <div className="pp-quote-section pp-quote-additional-coverages">
-                          {additionalCoverages.map((item, index) => (
-                            <div key={index} className="pp-coverage-row">
-                              <span className="pp-coverage-label">
-                                {item.rate !== undefined ? (
-                                  <>
-                                    <strong>%{item.rate}</strong> {item.label}
-                                  </>
-                                ) : (
-                                  item.label
-                                )}
-                              </span>
-                              <img
-                                src="/images/product-detail/teminat-tick-dark.svg"
-                                alt="Dahil"
-                                className="pp-coverage-icon-dark"
-                              />
+                          <>
+                            <div className="pp-quote-divider" />
+                            <div className="pp-quote-section pp-quote-additional-coverages">
+                              {additionalCoverages.map((item, index) => (
+                                <div key={index} className="pp-coverage-row">
+                                  <span className="pp-coverage-label">
+                                    {item.rate !== undefined ? (
+                                      <>
+                                        <strong>%{item.rate}</strong> {item.label}
+                                      </>
+                                    ) : (
+                                      item.label
+                                    )}
+                                  </span>
+                                  <img
+                                    src="/images/product-detail/teminat-tick-dark.svg"
+                                    alt="Dahil"
+                                    className="pp-coverage-icon-dark"
+                                  />
+                                </div>
+                              ))}
                             </div>
-                          ))}
-                        </div>
+                          </>
+                        )}
 
                         {/* Divider */}
                         <div className="pp-quote-divider" />
@@ -1104,9 +1113,11 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
                       <div className="pp-quote-details-toggle">
                         <button
                           onClick={() => setExpandedQuoteId(isExpanded ? null : quote.id)}
-                          className="pp-details-toggle-button"
+                          className={`pp-details-toggle-button ${isExpanded ? 'pp-toggle-expanded' : 'pp-toggle-collapsed'}`}
                         >
-                          <span>{isExpanded ? 'Daha Az' : 'Kampanyalar & Teklif Detayları'}</span>
+                          <span className={isExpanded ? 'pp-toggle-text-less' : 'pp-toggle-text-more'}>
+                            {isExpanded ? 'Daha Az' : 'Kampanyalar & Teklif Detayları'}
+                          </span>
                           <svg
                             className={`pp-chevron-small ${isExpanded ? 'pp-chevron-rotated' : ''}`}
                             fill="none"
@@ -1138,7 +1149,51 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
                             {/* Tab Content */}
                             {(activeTab[quote.id] || 'campaigns') === 'campaigns' ? (
                               <div className="pp-tab-content">
-                                <p className="pp-no-campaigns">Kampanya bulunmamaktadır.</p>
+                                <div className="pp-campaigns-grid">
+                                  {/* Kampanya Kutusu 1 - Araç Yıkama */}
+                                  <div className="pp-campaign-box">
+                                    <div className="pp-campaign-header">
+                                      <span className="pp-campaign-title">En temiz kasko sigorka.com'da!</span>
+                                    </div>
+                                    <p className="pp-campaign-desc">
+                                      Yılda 3 kez iç-dış yıkama, 1 kez periyodik bakım ve 2 kez ozon temizliği hediye!
+                                    </p>
+                                    <div className="pp-campaign-footer">
+                                      <label className="pp-campaign-radio">
+                                        <input type="radio" name={`campaign-${quote.id}`} value="car-wash" defaultChecked />
+                                        <span className="pp-campaign-radio-label">Kampanyayı Seç</span>
+                                      </label>
+                                      <a href="#" className="pp-campaign-link">
+                                        Detaylı Bilgi
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                          <path d="M5 12h14M12 5l7 7-7 7"/>
+                                        </svg>
+                                      </a>
+                                    </div>
+                                  </div>
+
+                                  {/* Kampanya Kutusu 2 - Cam Filmi */}
+                                  <div className="pp-campaign-box">
+                                    <div className="pp-campaign-header">
+                                      <span className="pp-campaign-title">Cam filmi hediye!</span>
+                                    </div>
+                                    <p className="pp-campaign-desc">
+                                      Kasko poliçenizle birlikte aracınıza ücretsiz cam filmi uygulaması yapılır.
+                                    </p>
+                                    <div className="pp-campaign-footer">
+                                      <label className="pp-campaign-radio">
+                                        <input type="radio" name={`campaign-${quote.id}`} value="window-film" />
+                                        <span className="pp-campaign-radio-label">Kampanyayı Seç</span>
+                                      </label>
+                                      <a href="#" className="pp-campaign-link">
+                                        Detaylı Bilgi
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                          <path d="M5 12h14M12 5l7 7-7 7"/>
+                                        </svg>
+                                      </a>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
                             ) : (
                               <div className="pp-tab-content">

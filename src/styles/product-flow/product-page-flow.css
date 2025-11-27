@@ -64,7 +64,7 @@
   background: url(/images/product-detail/product-new-banner.png) bottom center no-repeat #c7c3ef !important;
   background-size: 100%;
   min-height:800px;
-  padding: 120px 0 60px;
+  padding: 140px 0 60px;
 }
 
 :root {
@@ -90,6 +90,16 @@
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
+}
+
+/* Product Title - Tüm steplerde sabit görünen başlık */
+.pp-product-title {
+  text-align: center;
+  color: var(--primary-color);
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 24px 0;
+  font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
 }
 
 /* Stepper Container */
@@ -1124,7 +1134,7 @@ margin-bottom:0 !important;
 
 .pp-modal-content {
   background-color: white;
-  border-radius: 20px;
+  border-radius: 20px 0 20px 0;
   padding: 40px;
   max-width: 500px;
   width: 100%;
@@ -1291,37 +1301,10 @@ margin-bottom:0 !important;
   max-width: calc(100vw - 200px) !important;
 }
 
-@media (max-width: 767px) {
-  .pp-meslek-tooltip-content {
-    padding: 10px 14px !important;
-    left: calc(100% + 8px) !important;
-    max-width: calc(100vw - 100px) !important;
-  }
-  
-  .pp-form-group .pp-meslek-tooltip-content {
-    max-width: calc(100vw - 120px) !important;
-  }
-}
 
-@media (min-width: 768px) {
-  .pp-meslek-tooltip-content {
-    max-width: calc(100vw - 250px) !important;
-  }
-  
-  .pp-form-group .pp-meslek-tooltip-content {
-    max-width: calc(100vw - 300px) !important;
-  }
-}
 
-@media (min-width: 1024px) {
-  .pp-meslek-tooltip-content {
-    max-width: calc(100vw - 350px) !important;
-  }
-  
-  .pp-form-group .pp-meslek-tooltip-content {
-    max-width: calc(100vw - 400px) !important;
-  }
-}
+
+
 
 .pp-meslek-tooltip-content::after {
   content: '' !important;
@@ -1385,104 +1368,8 @@ margin-bottom:0 !important;
 }
 
 /* Responsive */
-@media (max-width: 768px) {
-  .pp-stepper {
-    overflow-x: auto;
-    justify-content: flex-start;
-    gap: 30px;
-    padding-bottom: 20px;
-  }
-
-  .pp-step {
-    flex-shrink: 0;
-  }
-
-  .pp-modal-content {
-    padding: 30px 20px;
-  }
-
-  .pp-code-inputs {
-    gap: 8px;
-  }
-
-  .pp-code-input {
-    width: 45px;
-    height: 55px;
-    font-size: 20px;
-  }
-}
-
-@media (max-width: 900px) {
-
-  /* 3'lü grid'i tablet'te 2'li yap */
-  .product-page-form .pp-form-row.pp-form-row-3 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* 4'lü grid'i tablet'te 2'li yap */
-  .product-page-form .pp-form-row.pp-form-row-4 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* Araç kartlarını tablet'te 2'li yap */
-  .product-page-form .pp-vehicles-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-
-  /* Tüm grid'leri mobilde tek sütun yap */
-  .product-page-form .pp-form-row,
-  .product-page-form .pp-form-row.pp-form-row-3,
-  .product-page-form .pp-form-row.pp-form-row-4 {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-
-  /* Tab butonları mobilde üst üste */
-  .product-page-form .pp-card-header {
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-  }
-
-  .product-page-form .pp-card-header .pp-title {
-    text-align: center;
-    width: 100%;
-  }
-
-  .product-page-form .pp-vehicle-tabs {
-    zoom: 0.8;
-    position: static;
-    transform: none;
-    width: 100%;
-    flex-direction: column;
-  }
-
-  .product-page-form .pp-tab-button {
-    width: 100%;
-    text-align: center;
-  }
-
-  /* Araç kartlarını mobilde tek sütun yap */
-  .product-page-form .pp-vehicles-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .product-page-form .pp-card {
-    padding: 20px;
-  }
-
-  .product-page-form .pp-vehicle-type-buttons {
-    flex-direction: column;
-  }
 
 
-  .product-page-form .pp-vehicles-list {
-    grid-template-columns: 1fr;
-  }
-}
 
 /* ============================================
    QUOTE COMPARISON STYLES
@@ -2006,105 +1893,8 @@ margin-bottom:0 !important;
 }
 
 /* Responsive */
-@media (max-width: 900px) {
-  .pp-quote-card-content {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
 
-  .pp-quote-actions {
-    justify-content: flex-start;
-    flex-wrap: wrap;
-  }
 
-  .pp-quote-controls {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .pp-quote-controls-left,
-  .pp-quote-controls-right {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .pp-quote-sort-select {
-    width: 100%;
-  }
-
-  .pp-quote-badge-coverage {
-    left: 16px;
-    top: 16px;
-  }
-
-  .pp-quote-badge-best {
-    top: 48px;
-  }
-}
-
-@media (max-width: 600px) {
-  .pp-quote-title {
-    font-size: 22px;
-  }
-
-  .pp-quote-card {
-    padding: 16px;
-  }
-
-  .pp-quote-company {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .pp-quote-actions {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .pp-quote-actions button {
-    width: 100%;
-  }
-
-  .pp-quote-modal {
-    max-height: 95vh;
-  }
-
-  .pp-quote-modal-header {
-    padding: 16px;
-  }
-
-  .pp-quote-modal-body {
-    padding: 16px;
-  }
-
-  .pp-quote-modal-footer {
-    flex-direction: column;
-    padding: 16px;
-  }
-
-  .pp-quote-modal-note {
-    text-align: center;
-  }
-
-  .pp-quote-progress-circle {
-    width: 150px;
-    height: 150px;
-  }
-
-  .pp-quote-progress-text {
-    font-size: 36px;
-  }
-
-  .pp-quote-loading-title,
-  .pp-quote-error-title {
-    font-size: 22px;
-  }
-
-  .pp-quote-loading,
-  .pp-quote-error {
-    padding: 40px 20px;
-  }
-}
 
 /* ==========================================
    KASKO PRODUCT QUOTE - TEST DESIGN
@@ -2127,6 +1917,14 @@ margin-bottom:0 !important;
   justify-content: space-between;
   margin-bottom: 40px;
   gap: 16px;
+}
+
+/* Desktop'ta uzun metinleri göster, kısa metinleri gizle */
+.pp-text-desktop {
+  display: inline;
+}
+.pp-text-mobile {
+  display: none;
 }
 
 .pp-btn-compare {
@@ -2350,20 +2148,20 @@ margin-bottom:0 !important;
 }
 
 .pp-coverage-icon-info {
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   flex-shrink: 0;
   cursor: help;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  /* font-size: 14px; */
   color: inherit;
 }
 
 .pp-coverage-icon-status {
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   flex-shrink: 0;
   margin-left: auto;
 }
@@ -2379,13 +2177,10 @@ margin-bottom:0 !important;
   cursor: help;
   font-size: 14px;
   color: #291f69;
-  opacity: 0.7;
   transition: opacity 0.2s ease;
 }
 
-.pp-coverage-tooltip-icon:hover {
-  opacity: 1;
-}
+
 
 .pp-coverage-tooltip-content {
   position: absolute;
@@ -2427,36 +2222,6 @@ margin-bottom:0 !important;
 }
 
 /* Responsive tooltip - mobilde yukarıda */
-@media (max-width: 767px) {
-  .pp-coverage-tooltip-content {
-    top: auto;
-    bottom: calc(100% + 8px);
-    left: 50%;
-    transform: translateX(-50%);
-    min-width: 180px;
-    max-width: 260px;
-    border-radius: 20px 0 20px 0;
-    border-top-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-  
-  .pp-coverage-tooltip-arrow {
-    top: auto;
-    bottom: -6px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-top: 6px solid #C7C3EF;
-    border-bottom: none;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-  }
-  
-  .pp-coverage-tooltip-text {
-    font-size: 11px;
-  }
-}
 
 /* BÖLÜM 3: Ek 2 Teminat */
 .pp-quote-additional-coverages {
@@ -2657,6 +2422,166 @@ margin-bottom:0 !important;
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
+}
+
+/* Kampanyalar Grid - Yan yana 2 kutu */
+.pp-campaigns-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.pp-campaign-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  background: #FFFBF3;
+  /* border: 1px solid #F5E6B3; */
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.pp-campaign-box:hover {
+  /* border-color: #D9AE5F;
+  box-shadow: 0 4px 12px rgba(217, 174, 95, 0.15);
+  transform: translateY(-2px); */
+}
+
+.pp-campaign-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.pp-campaign-icon {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-color);
+  border-radius: 50%;
+  color: white;
+}
+
+.pp-campaign-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.pp-campaign-icon img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.pp-campaign-title {
+  color: #291F69;
+  font-family: "Source Sans 3";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.pp-campaign-desc {
+  color: #291F69;
+  font-family: "Source Sans 3";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: left;
+}
+
+.pp-campaign-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid #F0E4C4;
+}
+
+.pp-campaign-radio {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.pp-campaign-radio input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: none !important;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  outline: 1px solid #291F69;
+  outline-offset: 0;
+  background-color: white;
+  transition: all 0.2s ease;
+  box-shadow:none !important;
+
+}
+
+.pp-campaign-radio input[type="radio"]:checked {
+  outline: 1px solid #291F69;
+  border:3px solid white;
+  background-color: white;
+}
+
+.pp-campaign-radio input[type="radio"]:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #00D4A6;
+}
+
+.pp-campaign-radio-label {
+  font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.pp-campaign-link {
+  font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #00D4A6;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.2s ease;
+}
+
+.pp-campaign-link:hover {
+  color: #00B894;
+}
+
+.pp-campaign-link svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Kampanya yoksa */
+.pp-no-campaigns {
+  text-align: center;
+  color: #888;
+  font-size: 14px;
+  padding: 20px;
 }
 
 .pp-no-campaigns {
@@ -3060,129 +2985,8 @@ display: block;
   width: 100%;
 }
 
-/* Responsive */
-@media (max-width: 1200px) {
-  .pp-quote-main {
-    gap: 12px;
-  }
 
-  .pp-quote-logo-section {
-    min-width: 120px;
-    width: 120px;
-  }
 
-  .pp-quote-logo-container {
-    width: 120px;
-    height: 90px;
-  }
-
-  .pp-quote-main-coverages {
-    min-width: 180px;
-  }
-
-  .pp-quote-additional-coverages {
-    min-width: 150px;
-  }
-
-  .pp-quote-price-section {
-    min-width: 130px;
-  }
-
-  .pp-quote-buy-section {
-    min-width: 100px;
-  }
-
-  .pp-coverage-label {
-    font-size: 11px;
-  }
-
-  .pp-quote-price {
-    font-size: 18px;
-  }
-}
-
-@media (max-width: 768px) {
-  .pp-quote-controls {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .pp-quote-filters {
-    justify-content: space-between;
-  }
-
-  .pp-quote-main {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .pp-quote-divider {
-    width: 100%;
-    height: 1px;
-  }
-
-  .pp-quote-logo-section {
-    width: 100%;
-  }
-
-  .pp-quote-logo-container {
-    width: 100%;
-    height: 80px;
-  }
-
-  .pp-quote-section {
-    width: 100%;
-  }
-
-  .pp-quote-price-section,
-  .pp-quote-buy-section {
-    align-items: stretch;
-  }
-
-  .pp-btn-buy {
-    width: 100%;
-  }
-
-  .pp-guarantees-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .pp-quote-actions-footer {
-    flex-direction: column;
-  }
-
-  .pp-action-button:not(:last-child) {
-    border-right: none;
-    border-bottom: 1px solid #e9e7f9;
-  }
-
-  /* Coverages Layout - Mobile */
-  .pp-coverages-layout {
-    flex-direction: column;
-  }
-
-  .pp-coverages-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .pp-coverages-actions {
-    min-width: 100%;
-  }
-
-  .pp-details-tabs {
-    flex-wrap: wrap;
-  }
-
-  .pp-details-tab {
-    flex: 1;
-    min-width: 120px;
-    padding: 10px 16px;
-    font-size: 13px;
-  }
-}
 
 /* ========================================
    TEMINAT DETAYLARI MODAL
@@ -3237,13 +3041,7 @@ display: block;
   flex-shrink: 0;
 }
 
-.pp-modal-title {
-  font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  color: #291f69;
-  margin: 0;
-}
+
 
 .pp-modal-subtitle {
   font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
@@ -3474,75 +3272,7 @@ display: block;
 }
 
 /* Responsive Modal */
-@media (max-width: 768px) {
-  .pp-modal-overlay {
-    padding: 10px;
-  }
 
-  .pp-modal-container {
-    max-height: 95vh;
-  }
-
-  .pp-modal-header {
-    padding: 16px;
-  }
-
-  .pp-modal-title {
-    font-size: 16px;
-  }
-
-  .pp-modal-subtitle {
-    font-size: 12px;
-  }
-
-  .pp-modal-body {
-    padding: 16px;
-  }
-
-  .pp-modal-company-box {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
-
-  .pp-modal-company-right {
-    width: 100%;
-    align-items: stretch;
-  }
-
-  .pp-modal-price {
-    font-size: 20px;
-  }
-
-  .pp-modal-installment-select {
-    max-width: 100%;
-  }
-
-  .pp-modal-table-container {
-    overflow-x: auto;
-  }
-
-  .pp-modal-table th,
-  .pp-modal-table td {
-    font-size: 13px;
-    padding: 12px;
-  }
-
-  .pp-modal-footer {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 16px;
-  }
-
-  .pp-modal-footer-text {
-    font-size: 11px;
-    text-align: center;
-  }
-
-  .pp-modal-buy-btn {
-    width: 100%;
-  }
-}
 
 /* ========================================
    TEMINAT DETAYLARI MODAL (TEMİNAT - Özel Class'lar - Çakışma Önleme)
@@ -3825,75 +3555,6 @@ display: block;
 }
 
 /* Responsive Teminat Modal */
-@media (max-width: 768px) {
-  .pp-teminat-modal-overlay {
-    padding: 10px;
-  }
-
-  .pp-teminat-modal-container {
-    max-height: 95vh;
-  }
-
-  .pp-teminat-modal-header {
-    padding: 16px;
-  }
-
-  .pp-teminat-modal-title {
-    font-size: 18px;
-  }
-
-  .pp-teminat-modal-close {
-    right: 12px;
-  }
-
-  .pp-teminat-modal-body {
-    padding: 16px;
-  }
-
-  .pp-teminat-company-box {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
-
-  .pp-teminat-company-right {
-    width: 100%;
-    align-items: stretch;
-  }
-
-  .pp-teminat-price {
-    font-size: 20px;
-  }
-
-  .pp-teminat-installment-wrapper {
-    max-width: 100%;
-  }
-
-  .pp-teminat-table-wrapper {
-    overflow-x: auto;
-  }
-
-  .pp-teminat-table th,
-  .pp-teminat-table td {
-    font-size: 13px;
-    padding: 12px;
-  }
-
-  .pp-teminat-modal-footer {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 16px;
-  }
-
-  .pp-teminat-footer-text {
-    font-size: 11px;
-    text-align: center;
-  }
-
-  .pp-teminat-buy-btn {
-    width: 100%;
-  }
-}
 
 /* ==========================================
    NEW COVERAGE DETAILS MODAL (CUSTOM DESIGN)
@@ -4130,23 +3791,27 @@ display: block;
 /* Table Body */
 .pp-coverage-modal-table-body {
   overflow-y: auto;
-  padding-bottom: 10px;
-  /* Custom Scrollbar */
+  /* Custom Scrollbar - Sarı */
   scrollbar-width: thin;
-  scrollbar-color: #ccc #f1f1f1;
+  scrollbar-color: #d9ae5f #f5f0e6;
 }
 
 .pp-coverage-modal-table-body::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 .pp-coverage-modal-table-body::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f5f0e6;
+  border-radius: 4px;
 }
 
 .pp-coverage-modal-table-body::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 3px;
+  background: #d9ae5f;
+  border-radius: 4px;
+}
+
+.pp-coverage-modal-table-body::-webkit-scrollbar-thumb:hover {
+  background: #c99d4f;
 }
 
 .pp-coverage-modal-row {
@@ -4155,7 +3820,7 @@ display: block;
   align-items: center;
   padding: 10px 25px;
   /* Less padding */
-  border-bottom: 1px solid #F0F0F0;
+  border-bottom: 1px solid #D9D9D9;
   background-color: white;
   transition: background-color 0.2s;
 }
@@ -4245,48 +3910,6 @@ min-width:200px;
   background-color: #00C49A;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .pp-coverage-modal-container {
-    padding: 20px;
-    max-height: 80vh;
-  }
-
-  .pp-coverage-modal-close-outside {
-    top: 10px;
-  }
-
-  .pp-coverage-modal-scroll-content {
-    zoom: 0.7;
-  }
-
-  .pp-coverage-modal-top-card {
-    flex-direction: row;
-    gap: 10px;
-    text-align: center;
-    padding: 5px;
-    zoom: 0.8;
-  }
-
-  .pp-coverage-modal-price-area {
-    align-items: center;
-    width: 100%;
-  }
-
-  .pp-coverage-modal-installment {
-    width: 100%;
-  }
-
-  .pp-coverage-modal-footer {
-    flex-direction: column;
-    gap: 15px;
-    text-align: center;
-  }
-
-  .pp-coverage-modal-buy-btn {
-    width: 100%;
-  }
-}
 
 /* Quote Comparison Modal Styles (Refined) */
 .pp-comp-modal-overlay {
@@ -4326,6 +3949,11 @@ min-width:200px;
   overflow: hidden;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
   border: 1px solid #f3f4f6;
+}
+
+/* Desktop: Mobil selector'ları gizle */
+.pp-comp-mobile-selectors {
+  display: none;
 }
 
 .pp-comp-header {
@@ -4572,7 +4200,10 @@ min-width:200px;
 }
 .pp-comp-row:nth-child(even) .pp-comp-cell-label,
 .pp-comp-row:nth-child(even) .pp-comp-cell-value {
-  background-color: #FAFAFA;
+  background-color: #FAFAFA !important;
+}
+.pp-coverage-modal-row:nth-child(even)  {
+  background-color: #FAFAFA !important;
 }
 
 
@@ -4673,26 +4304,9 @@ min-width:200px;
   max-width: 100%;
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-  .pp-comp-modal-container {
-    max-width: 95vw;
-  }
 
-  .pp-comp-table {
-    min-width: 800px;
-  }
-}
 
-@media (max-width: 768px) {
-  .pp-comp-content {
-    overflow-x: auto;
-  }
 
-  .pp-comp-table {
-    min-width: 700px;
-  }
-}
 /* Purchase Page Styles */
 .pp-purchase-container {
   display: flex;
@@ -4994,15 +4608,7 @@ min-width:200px;
   opacity: 0.8;
 }
 
-@media (max-width: 768px) {
-  .pp-purchase-container {
-    flex-direction: column;
-  }
-  
-  .pp-purchase-form-section {
-    padding: 20px;
-  }
-}
+
 
 /* ============================================
    PAYMENT STEP 4 - ÖDEME SAYFASI STİLLERİ
@@ -5282,44 +4888,9 @@ min-width:200px;
   box-shadow: 0 0 0 3px rgba(0, 212, 166, 0.1);
 }
 
-/* Responsive Design */
-@media (max-width: 968px) {
-  .pp-payment-grid {
-    grid-template-columns: 1fr;
-  }
 
-  .pp-order-summary {
-    position: relative;
-    top: 0;
-  }
-}
 
-@media (max-width: 640px) {
-  .pp-card {
-    padding: 24px !important;
-  }
 
-  .pp-section-title {
-    font-size: 20px;
-  }
-
-  .pp-total-amount {
-    font-size: 20px;
-  }
-
-  .pp-summary-logo {
-    padding: 24px;
-    min-height: 80px;
-  }
-
-  .pp-checkbox-item {
-    padding: 12px;
-  }
-
-  .pp-checkbox-label {
-    font-size: 12px;
-  }
-}
 
 /* ========================================
    PAYMENT STEP SPECIFIC STYLES
@@ -5411,16 +4982,16 @@ min-width:200px;
 }
 
 /* Order Summary Card */
-.pp-payment-container .pp-summary-card {
+.product-page-form .pp-card.pp-summary-card {
   background:#FAFAFA !important;
   padding: 0 !important;
   /* position: sticky; */
   /* top: 20px; */
-  border-radius: 0 20px 20px 0 !important;
-  -webkit-border-radius: 0 20px 20px 0 !important;
-  -moz-border-radius: 0 20px 20px 0 !important;
-  -ms-border-radius: 0 20px 20px 0 !important;
-  -o-border-radius: 0 20px 20px 0 !important;
+  border-radius: 20px 0 20px 0 !important;
+  -webkit-border-radius: 20px 0 20px 0 !important;
+  -moz-border-radius: 20px 0 20px 0 !important;
+  -ms-border-radius: 20px 0 20px 0 !important;
+  -o-border-radius: 20px 0 20px 0 !important;
 }
 .pp-payment-card{
   -webkit-border-radius: 20px 0px 0px 0 !important;
@@ -5450,6 +5021,11 @@ min-width:200px;
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid var(--border-color);
+}
+
+/* Desktop: Mobil logo gizle */
+.pp-summary-logo-mobile {
+  display: none;
 }
 
 .pp-summary-logo-placeholder {
@@ -5528,31 +5104,9 @@ min-width:200px;
   cursor: not-allowed;
 }
 
-/* Responsive - Payment Step */
-@media (max-width: 968px) {
-  .pp-payment-container {
-    grid-template-columns: 1fr;
-  }
 
-  .pp-summary-card {
-    position: relative;
-    top: 0;
-  }
-}
 
-@media (max-width: 640px) {
-  .pp-payment-card {
-    padding: 24px;
-  }
 
-  .pp-payment-title {
-    font-size: 20px;
-  }
-
-  .pp-summary-total-price {
-    font-size: 20px;
-  }
-}
 
 /* ============================================
    UPDATE VEHICLE MODAL STYLES
@@ -5643,7 +5197,7 @@ min-width:200px;
 /* Form Row - 3 kolonlu */
 .update-vehicle-form-row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
   margin-bottom: 20px;
 }
@@ -5720,11 +5274,20 @@ min-width:200px;
 .update-vehicle-dropdown .p-dropdown .p-dropdown-label {
   padding: 12px 16px;
   color: var(--primary-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  max-width: 100%;
 }
 
 .update-vehicle-dropdown .p-dropdown .p-dropdown-trigger {
   width: 3rem;
   color: var(--primary-color);
+}
+
+.update-vehicle-dropdown .p-dropdown .p-dropdown-clear-icon {
+  display: none !important;
 }
 
 .update-vehicle-dropdown .p-dropdown.p-disabled {
@@ -5907,14 +5470,12 @@ min-width:200px;
   transition: all 0.3s;
 }
 
-.update-vehicle-dain-button:hover {
-  border-color: var(--success-color);
-}
+
 
 .update-vehicle-dain-button.active {
-  background: rgba(0, 212, 166, 0.1);
-  border-color: var(--success-color);
-  color: var(--success-color);
+  background: #C7C3EF;
+  /* border-color: var(--success-color); */
+  color: #291F69;
 }
 
 .update-vehicle-dain-content {
@@ -5927,8 +5488,6 @@ min-width:200px;
   align-items: center;
   justify-content: flex-end;
   gap: 12px;
-  padding-top: 24px;
-  border-top: 1px solid var(--border-color);
   margin-top: 24px;
 }
 
@@ -5944,22 +5503,51 @@ min-width:200px;
 }
 
 .update-vehicle-button-secondary {
-  background: white;
-  color: var(--primary-color);
-  border: 1px solid var(--border-color);
+  background-color: #D9D9D9;
+  color: var(--white-color) !important;
+  border: none;
+  border-radius: 10px 0 10px 0;
+  padding: 15px 40px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  min-width: 150px;
+  transition: all 0.3s;
+  -webkit-border-radius: 10px 0 10px 0;
+  -moz-border-radius: 10px 0 10px 0;
+  -ms-border-radius: 10px 0 10px 0;
+  -o-border-radius: 10px 0 10px 0;
 }
 
-.update-vehicle-button-secondary:hover {
-  background: #F9F9F9;
-}
+
 
 .update-vehicle-button-primary {
-  background: var(--success-color);
-  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin: 0 auto; */
+  background-color: var(--success-color);
+  color: var(--primary-color);
+  border: none;
+  border-radius: 10px 0 10px 0;
+  padding: 13px 40px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 200px;
+  max-width: 300px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  -webkit-border-radius: 10px 0 10px 0;
+  -moz-border-radius: 10px 0 10px 0;
+  -ms-border-radius: 10px 0 10px 0;
+  -o-border-radius: 10px 0 10px 0;
 }
 
-.update-vehicle-button-primary:hover {
-  background: #00C299;
+.update-vehicle-button-primary:not(:disabled):hover {
+  background-color: #130856;
+  color: #fff;
+  /* transform: translateY(-2px); */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .update-vehicle-button-primary:disabled {
@@ -5967,14 +5555,677 @@ min-width:200px;
   cursor: not-allowed;
 }
 
+
+
+
+
+/* RESPONSİVE */
+/* Responsive */
+@media (max-width: 1200px) {
+  .pp-quote-main {
+    gap: 12px;
+  }
+
+  .pp-quote-logo-section {
+    min-width: 120px;
+    width: 120px;
+  }
+
+  .pp-quote-logo-container {
+    width: 120px;
+    height: 90px;
+  }
+
+  .pp-quote-main-coverages {
+    min-width: 180px;
+  }
+
+  .pp-quote-additional-coverages {
+    min-width: 150px;
+  }
+
+  .pp-quote-price-section {
+    min-width: 130px;
+  }
+
+  .pp-quote-buy-section {
+    min-width: 100px;
+  }
+
+ 
+
+  .pp-quote-price {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .pp-meslek-tooltip-content {
+    max-width: calc(100vw - 350px) !important;
+  }
+  
+  .pp-form-group .pp-meslek-tooltip-content {
+    max-width: calc(100vw - 400px) !important;
+  }
+}
 /* Responsive */
 @media (max-width: 1024px) {
+  .pp-comp-modal-container {
+    max-width: 95vw;
+  }
+
+  .pp-comp-table {
+    min-width: 800px;
+  }
   .update-vehicle-form-row {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+/* Responsive - Payment Step */
+@media (max-width: 968px) {
+  .pp-payment-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pp-order-summary {
+    position: relative;
+    top: 0;
+  }
+  .pp-payment-container {
+    grid-template-columns: 1fr;
+  }
+
+  .pp-summary-card {
+    position: relative;
+    top: 0;
+  }
+}
+@media (max-width: 900px) {
+
+  /* 3'lü grid'i tablet'te 2'li yap */
+  .product-page-form .pp-form-row.pp-form-row-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 4'lü grid'i tablet'te 2'li yap */
+  .product-page-form .pp-form-row.pp-form-row-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Araç kartlarını tablet'te 2'li yap */
+  .product-page-form .pp-vehicles-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  /* 3'lü grid'i tablet'te 2'li yap */
+  .product-page-form .pp-form-row.pp-form-row-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 4'lü grid'i tablet'te 2'li yap */
+  .product-page-form .pp-form-row.pp-form-row-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Araç kartlarını tablet'te 2'li yap */
+  .product-page-form .pp-vehicles-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pp-quote-card-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .pp-quote-actions {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .pp-quote-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pp-quote-controls-left,
+  .pp-quote-controls-right {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .pp-quote-sort-select {
+    width: 100%;
+  }
+
+  .pp-quote-badge-coverage {
+    left: 16px;
+    top: 16px;
+  }
+
+  .pp-quote-badge-best {
+    top: 48px;
+  }
+}
+
+
+@media (min-width: 768px) {
+  .pp-meslek-tooltip-content {
+    max-width: calc(100vw - 250px) !important;
+  }
+  
+  .pp-form-group .pp-meslek-tooltip-content {
+    max-width: calc(100vw - 300px) !important;
+  }
+}
 
 @media (max-width: 768px) {
+  .pp-comp-info-icon{align-items: flex-start;}
+  .pp-coverage-label {font-size:11px;text-align: left !important;}
+  .pp-header-cell-left, .pp-header-cell-right,.pp-row-cell-left{font-size:14px !important;}
+  .pp-coverage-modal-disclaimer{text-align: left !important;}
+  .pp-coverage-modal-table-body{
+    padding:0 !important;
+    overflow-y: scroll !important; /* Her zaman scrollbar göster */
+    scrollbar-width: thin;
+    scrollbar-color: #d9ae5f #f5f0e6;
+  }
+  .pp-coverage-modal-table-body::-webkit-scrollbar {
+    width: 8px;
+    display: block !important; /* Her zaman görünür */
+  }
+  .pp-coverage-modal-table-body::-webkit-scrollbar-track {
+    background: #f5f0e6;
+    border-radius: 4px;
+  }
+  .pp-coverage-modal-table-body::-webkit-scrollbar-thumb {
+    background: #d9ae5f;
+    border-radius: 4px;
+    min-height: 40px; /* Minimum yükseklik */
+  }
+  .pp-coverage-modal-table-body::-webkit-scrollbar-thumb:hover {
+    background: #c99d4f;
+  }
+  .pp-coverage-modal-table-header{padding:12px 18px !important;}
+  .pp-coverage-modal-row{padding:9px 18px !important;}
+  .pp-chevron-small{margin-left:0 !important}
+  .pp-quotes-list{gap:40px;}
+  .pp-details-toggle-button{gap:0 !important}
+  button.pp-details-toggle-button.pp-toggle-collapsed{
+    min-width: 210px !important;
+    padding:0 8px !important;
+  }
+  .pp-quote-main .pp-quote-divider{display: none !important;}
+  .pp-quote-tier-badge {
+    position: absolute !important;
+    left: 50% !important;
+    top: -10px !important;
+    transform: translateX(-50%) !important;
+    z-index: 2;
+  }
+
+  .pp-error-card-title{font-size:24px !important}
+  .pp-error-image{width: 100px !important;height: 100px !important;}
+  .pp-quote-error-container{padding:0 15px 30px !important}
+  .pp-product-title {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+
+  /* Mobilde Ups! dan sonra satır kırılması */
+  .pp-error-ups {
+    display: block;
+  }
+
+  .product-page-banner {
+    background: url(/images/product-detail/banner-mobile.png) no-repeat left bottom #c7c3ef !important;
+    background-size: 100%;
+    min-height: 800px;
+    padding: 100px 0 150px;
+    background-position: left bottom;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
+  .product-page-form .pp-vehicle-edit-icon{
+    z-index: 99;
+    margin-top: -25px;
+    position: absolute;
+    bottom: 20px;
+    right: 15px;
+  }
+  .product-page-form .pp-vehicle-card{border:1px solid #D9D9D9 !important;}
+  .product-page-form .pp-vehicle-card.selected{border:1px solid var(--success-color) !important;}
+  .product-page-form .pp-vehicle-card h4,.product-page-form .pp-vehicle-card p{margin-bottom: 0 !important;}
+  .product-page-form .pp-vehicle-card{min-height: fit-content !important;position: relative;}
+  /* pp-button-group grid yapısı */
+  .product-page-form .pp-vehicle-content{gap:9px;}
+  .product-page-form .pp-button-group {
+    display: grid;
+    gap: 15px;
+  }
+  .product-page-form .pp-button-group:has(.pp-btn-submit) {
+    justify-items: center;
+  }
+  .product-page-form .pp-button-group .pp-btn-submit,
+  .product-page-form .pp-button-group .pp-btn-back {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 !important;
+  }
+  /* Eğer 2 buton varsa 1fr 1fr */
+  .product-page-form .pp-button-group:has(.pp-btn-submit):has(.pp-btn-back) {
+    grid-template-columns: 1fr 1fr;
+    justify-items: stretch;
+  }
+  /* Eğer sadece bir buton varsa 1fr ve ortalı */
+  .product-page-form .pp-button-group:has(.pp-btn-submit):not(:has(.pp-btn-back)),
+  .product-page-form .pp-button-group:has(.pp-btn-back):not(:has(.pp-btn-submit)) {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  .product-page-form .pp-btn-submit,
+  .product-page-form .pp-btn-back {
+    padding: 13px 9px;
+    font-weight: 600;
+    font-size: 16px;
+    min-width: fit-content;
+    max-width: 100%;
+  }
+  /* Eğer sadece bir buton varsa: padding 13px 15px */
+  .product-page-form .pp-button-group:has(.pp-btn-submit):not(:has(.pp-btn-back)) .pp-btn-submit,
+  .product-page-form .pp-button-group:has(.pp-btn-back):not(:has(.pp-btn-submit)) .pp-btn-back {
+    padding: 13px 20px !important;
+  }
+  .pp-quote-controls {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  /* Mobilde kısa metinleri göster, uzunları gizle */
+  .pp-text-desktop {
+    display: none !important;
+  }
+  .pp-text-mobile {
+    display: inline !important;
+  }
+
+  .pp-btn-compare {
+    flex: 1;
+    padding: 10px 12px !important;
+    font-size: 14px;
+    justify-content: center;
+  }
+
+  .pp-quote-filters {
+    flex: 2;
+    display: flex;
+    gap: 8px;
+  }
+
+  .pp-quote-filters .pp-dropdown-wrapper {
+    flex: 1;
+  }
+
+  .pp-filter-button {
+    width: 100%;
+    min-width: fit-content !important;
+    padding: 10px 12px !important;
+    font-size: 14px;
+    justify-content: center;
+  }
+
+  /* Mobil Teklif Kartı Düzeni */
+  .pp-quote-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 12px;
+    align-items: start;
+  }
+
+  /* 1. Satır: Logo (sol) + Fiyat/Taksit (sağ) */
+  .pp-quote-logo-section {
+    order: 1;
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .pp-quote-price-section {
+    order: 2;
+    grid-column: 2;
+    grid-row: 1;
+    align-items: flex-end !important;
+    text-align: right !important;
+  }
+
+  /* 2. Satır: Satın Al Butonu (full genişlik) */
+  .pp-quote-buy-section {
+    order: 3;
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  /* 3. Satır: Teminatlar (sol) + İndirimler (sağ) */
+  .pp-quote-main-coverages {
+    order: 4;
+    grid-column: 1;
+    grid-row: 3;
+    min-width: unset;
+  }
+
+  .pp-quote-additional-coverages {
+    order: 5;
+    grid-column: 2;
+    grid-row: 3;
+    min-width: unset;
+  }
+
+  /* İndirimler yoksa teminatlar full genişlik */
+  .pp-quote-main-coverages.pp-coverages-full {
+    grid-column: 1 / -1;
+  }
+
+  .pp-quote-divider {
+    display: none !important;
+  }
+
+  .pp-quote-logo-container {
+    width: 80px;
+    height: 60px;
+  }
+
+  .pp-quote-section {
+    width: 100%;
+  }
+
+  .pp-btn-buy {
+    width: 100%;
+  }
+
+  .pp-guarantees-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .pp-quote-actions-footer {
+    flex-direction: column;
+  }
+
+  .pp-action-button:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid #e9e7f9;
+  }
+
+  /* Coverages Layout - Mobile */
+  .pp-coverages-layout {
+    flex-direction: column;
+  }
+
+  .pp-coverages-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .pp-coverages-actions {
+    display:grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .pp-coverages-actions .pp-coverage-action-btn{
+    width: 100%;
+  }
+
+  .pp-details-tabs {
+    flex-wrap: wrap;
+  }
+
+  .pp-details-tab {
+    flex: 1;
+    min-width: 120px;
+    padding: 10px 16px;
+  }
+
+  .pp-coverage-tooltip-content {
+    top: auto;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 180px;
+    max-width: 260px;
+    border-radius: 20px 0 20px 0;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  
+  .pp-coverage-tooltip-arrow {
+    top: auto;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-top: 6px solid #C7C3EF;
+    border-bottom: none;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+  }
+  
+  .pp-coverage-tooltip-text {
+    font-size: 11px;
+  }
+
+  .pp-stepper {
+    overflow-x: auto;
+    justify-content: center;
+    gap: 30px;
+    padding-bottom: 20px;
+  }
+
+  .pp-step {
+    flex-shrink: 0;
+  }
+
+  .pp-modal-content {
+    padding: 30px 20px;
+  }
+
+  .pp-code-inputs {
+    gap: 8px;
+  }
+
+  .pp-code-input {
+    width: 45px;
+    height: 55px;
+    font-size: 20px;
+  }
+
+  .pp-meslek-tooltip-content {
+    padding: 10px 14px !important;
+    left: calc(100% + 8px) !important;
+    max-width: calc(100vw - 100px) !important;
+  }
+  
+  .pp-form-group .pp-meslek-tooltip-content {
+    max-width: calc(100vw - 120px) !important;
+    min-width: 200px !important;
+  }
+
+  .pp-teminat-modal-overlay {
+    padding: 10px;
+  }
+
+  .pp-teminat-modal-container {
+    max-height: 95vh;
+  }
+
+  .pp-teminat-modal-header {
+    padding: 16px;
+  }
+
+  .pp-teminat-modal-title {
+    font-size: 18px;
+  }
+
+  .pp-teminat-modal-close {
+    right: 12px;
+  }
+
+  .pp-teminat-modal-body {
+    padding: 16px;
+  }
+
+  .pp-teminat-company-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .pp-teminat-company-right {
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .pp-teminat-price {
+    font-size: 20px;
+  }
+
+  .pp-teminat-installment-wrapper {
+    max-width: 100%;
+  }
+
+  .pp-teminat-table-wrapper {
+    overflow-x: auto;
+  }
+
+  .pp-teminat-table th,
+  .pp-teminat-table td {
+    font-size: 13px;
+    padding: 12px;
+  }
+
+  .pp-teminat-modal-footer {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px;
+  }
+
+  .pp-teminat-footer-text {
+    font-size: 11px;
+    text-align: center;
+  }
+
+  .pp-teminat-buy-btn {
+    width: 100%;
+  }
+
+  .pp-modal-overlay {
+    padding: 10px;
+  }
+
+  .pp-modal-container {
+    max-height: 95vh;
+  }
+
+  .pp-modal-header {
+    padding: 16px;
+  }
+
+  .pp-modal-title {
+    font-size: 16px;
+  }
+
+  .pp-modal-subtitle {
+    font-size: 12px;
+  }
+
+  .pp-modal-body {
+    padding: 16px;
+  }
+
+  .pp-modal-company-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .pp-modal-company-right {
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .pp-modal-price {
+    font-size: 20px;
+  }
+
+  .pp-modal-installment-select {
+    max-width: 100%;
+  }
+
+  .pp-modal-table-container {
+    overflow-x: auto;
+  }
+
+  .pp-modal-table th,
+  .pp-modal-table td {
+    font-size: 13px;
+    padding: 12px;
+  }
+
+  .pp-modal-footer {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px;
+  }
+
+  .pp-modal-footer-text {
+    font-size: 11px;
+    text-align: center;
+  }
+
+  .pp-modal-buy-btn {
+    width: 100%;
+  }
+
+  .pp-coverage-modal-container {
+    padding: 20px;
+    max-height: 80vh;
+  }
+
+  .pp-coverage-modal-close-outside {
+    top: 10px;
+  }
+
+ 
+  .pp-coverage-modal-top-card {
+    flex-direction: row;
+    gap: 10px;
+    text-align: center;
+    padding: 5px 0;
+    zoom: 0.8;
+  }
+  .pp-coverage-modal-logo-area{padding:0 0 0 15px;}
+  .pp-coverage-modal-logo{max-height: 65px !important;;}
+  .pp-coverage-modal-price-area {
+    border:none !important;
+    align-items: flex-end;
+    width: fit-content;
+  }
+
+  .pp-coverage-modal-installment {
+    width: 100%;
+  }
+
+  .pp-coverage-modal-footer {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .pp-coverage-modal-buy-btn {
+    width: 100%;
+  }
   .update-vehicle-modal-container {
     max-height: 95vh;
   }
@@ -6006,11 +6257,797 @@ min-width:200px;
   }
 
   .update-vehicle-modal-footer {
-    flex-direction: column-reverse;
+    flex-direction: row;
   }
-
   .update-vehicle-button {
     width: 100%;
   }
+ 
+  .update-vehicle-dropdown .p-dropdown .p-dropdown-label {
+    max-width: calc(100% - 3rem);
+    word-break: break-word;
+    white-space: normal;
+    line-height: 1.4;
+    padding-right: 8px;
+  }
+
+  /* ========================================
+     MOBİL KARŞILAŞTIRMA MODAL - Yeni Düzen
+     ======================================== */
+     .pp-comp-modal-overlay{align-items: flex-end !important;}
+     .pp-comp-dropdown{border:none !important}
+  .pp-comp-modal-container {
+    gap:20px;
+    max-width: 100%;
+    max-height: 86vh;
+    border-radius: 16px;
+    margin: 10px;
+    background:none !important;
+    border:none !important;
+    overflow: inherit;
+  }
+
+  /* ===== Header + Dropdown Seçimi Birleşik Bölüm ===== */
+  .pp-comp-header-section {
+    background: white;
+    border-radius: 16px 0 16px 0;
+    border-bottom: 3px solid var(--primary-color);
+    padding-bottom: 15px;
+  }
+
+  .pp-comp-mobile-selectors {
+    display: flex !important;
+    gap: 0;
+    padding: 0;
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 12px;
+  }
+
+  .pp-comp-mobile-selector {
+    flex: 1;
+    min-width: 0;
+    border-right: 1px solid var(--primary-color);
+  }
+  .pp-comp-mobile-selector:last-child {
+    border-right: none;
+  }
+  .pp-comp-mobile-selector:last-child {
+    border-right: none;
+  }
+
+  .pp-comp-mobile-selectors .pp-comp-dropdown {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .pp-comp-mobile-selectors .p-dropdown {
+    width: 100% !important;
+    min-width: 0 !important;
+    border-left: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+  }
+  
+  .pp-comp-mobile-selectors .p-dropdown-label {
+    font-size: 13px !important;
+    padding: 12px 6px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+    color: var(--primary-color);
+  }
+
+  .pp-comp-mobile-selectors .p-dropdown-trigger {
+    width: 24px !important;
+    padding: 0 4px !important;
+    color: var(--primary-color);
+  }
+
+  /* Desktop dropdown satırını gizle */
+  .pp-comp-desktop-only {
+    display: none !important;
+  }
+
+  .pp-comp-content {
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 0;
+    background: white;
+    border-radius: 20px 0 20px 0;
+  }
+
+  .pp-comp-table {
+    display: flex;
+    flex-direction: column;
+    min-width: unset;
+    width: 100%;
+  }
+
+  .pp-comp-table colgroup {
+    display: none;
+  }
+
+  .pp-comp-table thead {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .pp-comp-table tbody {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding:0 20px;
+  }
+
+  /* ===== BÖLÜM 2: Logo + Fiyat + Taksit (Orta) ===== */
+  .pp-comp-table thead tr:nth-child(2) {
+    display: flex !important;
+    flex-wrap: nowrap;
+    gap: 6px;
+    padding: 10px 5px 0;
+    background: white;
+    /* border-bottom: 1px solid #e9ecef; */
+    order: 2;
+  }
+
+  .pp-comp-table thead tr:nth-child(2) .pp-comp-th-info:first-child {
+    display: none !important; /* Boş th'yi gizle */
+  }
+
+  .pp-comp-th-info {
+    flex: 1;
+    min-width: 0;
+    padding: 0 !important;
+  }
+
+  .pp-comp-info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 6px 2px;
+    /* background: #fafafa; */
+    border-radius: 8px;
+    height: 100%;
+    min-height: 90px;
+  }
+
+  .pp-comp-logo-wrapper {
+    width: 45px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pp-comp-logo {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .pp-comp-price {
+    font-size: 12px !important;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .pp-comp-installment-button {
+    font-size: 9px !important;
+    padding: 9px 4px !important;
+    background:white !important;
+    gap: 2px !important;
+  }
+
+  .pp-comp-installment-button .pp-chevron-small {
+    width: 10px;
+    height: 10px;
+  }
+
+  /* ===== BÖLÜM 3: Satın Al Butonları (Sticky Header) ===== */
+  .pp-comp-table thead tr:nth-child(3),
+  .pp-comp-table thead tr.pp-comp-sticky-header {
+    display: flex !important;
+    flex-wrap: nowrap;
+    gap: 6px;
+    padding: 8px 7px;
+    background: white;
+    /* border-bottom: 2px solid var(--success-color); */
+    order: 3;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .pp-comp-table thead tr:nth-child(3) .pp-comp-th-action-label,
+  .pp-comp-sticky-header .pp-comp-th-action-label {
+    display: none !important; /* "Teminat Adı" label'ını gizle */
+  }
+
+  .pp-comp-th-action-btn {
+    flex: 1;
+    min-width: 0;
+    padding: 0 !important;
+  }
+  .pp-comp-sticky-header th:last-child{border-radius: 0 !important;}
+  .pp-comp-btn-buy {
+    background:#00dcb4 !important;
+    width: 100%;
+    text-transform: capitalize;
+    min-height: auto !important;
+    font-size: 14px !important;
+    padding: 6px 2px !important;
+    border-radius: 10px 0 10px 0 !important;
+    font-weight: 600 !important;
+    color:var(--primary-color) !important;
+    white-space: nowrap;
+  }
+
+  /* ===== BÖLÜM 4: Teminat Satırları ===== */
+  .pp-comp-table tbody tr.pp-comp-row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    border-bottom: none !important;
+    padding: 0;
+  }
+
+  /* Teminat Adı - Full Genişlik */
+  
+  .pp-comp-cell-label {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    background: #f8f9fa;
+    padding: 6px 11px !important;
+    border-bottom: none;
+    text-align: center;
+    border-radius: 30px;
+border: 1px solid #D9D9D9;
+background: #FAFAFA;
+backdrop-filter: blur(25px);
+  }
+
+  .pp-comp-label-content {
+    justify-content: center;
+    gap:5px;
+  }
+
+  .pp-comp-label-text {
+    color: #000;
+font-family: "Source Sans 3", sans-serif; 
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+  }
+
+  /* Teminat Değerleri - Eşit Genişlikte Stretch */
+  .pp-comp-cell-value {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    padding: 10px 4px !important;
+    text-align: center;
+    border-bottom: none;
+    border-right: 1px solid #f0f0f0;
+    font-size: 11px;
+    word-break: break-word;
+    color: #000;
+text-align: center;
+font-family: "Source Sans 3";
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+  }
+
+  .pp-comp-cell-value:last-child {
+    border-right: none;
+  }
+
+  .pp-comp-text-included,
+  .pp-comp-text-default {
+    color:#000;
+  }
+
+  /* Header Stilleri */
+  .pp-comp-header {
+    padding: 35px 12px 12px;
+  }
+
+  .pp-comp-title {
+    font-size: 20px;
+  }
+
+  .pp-comp-subtitle {
+    font-size: 16px;
+  }
+  .pp-purchase-container {
+    flex-direction: column;
+  }
+  
+  .pp-purchase-form-section {
+    padding: 20px;
+  }
+  .pp-step:not(.active) .pp-step-label{
+   display: none;
+  }
+  .pp-step{padding:0 !important}
+  .pp-step:not(.active) .pp-step-visual{margin:0 !important}
+
+  .pp-stepper{justify-content: space-between;gap:0 !important; }
+
+  /* ========================================
+     MOBİL SİPARİŞ ÖZETİ - Formun Üstünde
+     ======================================== */
+  .pp-payment-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* Sipariş özeti üste gelsin */
+  .pp-payment-container .pp-summary-card {
+    order: -1;
+    border-radius: 16px 0 16px 0 !important;
+    padding: 16px !important;
+    background: white !important;
+    position: relative;
+  }
+
+  .pp-payment-container .pp-summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px  !important;
+    border-bottom: none !important;
+  }
+
+  .pp-payment-container .pp-summary-title {
+    font-size: 18px !important;
+    margin: 0 !important;
+  }
+
+  /* Mobil logo - header'da sağda */
+  .pp-payment-container .pp-summary-logo-mobile {
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .pp-payment-container .pp-summary-logo-mobile img {
+    max-width: 80px;
+    max-height: 40px;
+    object-fit: contain;
+  }
+
+  .pp-payment-container .pp-summary-logo-mobile .pp-summary-logo-text {
+    font-size: 11px;
+    color: var(--primary-color);
+    font-weight: 600;
+    text-align: right;
+    max-width: 80px;
+    line-height: 1.2;
+  }
+
+  /* Desktop logo gizle */
+  .pp-payment-container .pp-summary-logo-section {
+    display: none !important;
+  }
+
+  /* Detaylar yatay düzen */
+  .pp-payment-container .pp-summary-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px !important;
+    border-top: 1px solid #e9ecef;
+    border-bottom: 1px solid #e9ecef;
+    /* margin-top: 12px; */
+  }
+
+  /* Sol taraf wrapper */
+  .pp-payment-container .pp-summary-details-left {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Sol taraf: Taksit + Hasarsızlık */
+  .pp-payment-container .pp-summary-installment {
+    color: #291F69;
+    font-family: "Source Sans 3";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  .pp-payment-container .pp-summary-discount {
+    font-size: 12px;
+    color: #00d4a6;
+    font-weight: 500;
+  }
+
+  /* Sağ taraf: Toplam fiyat */
+  .pp-payment-container .pp-summary-total-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    border-top:0 !important;
+    padding:0 !important;
+    margin-top:0 !important;
+    border-bottom: 0 !important;
+    gap:0;
+  }
+
+  .pp-payment-container .pp-summary-total-label {
+    color: #291F69;
+    text-align: right;
+    font-family: "Source Sans 3" !important;
+    font-size: 22px !important;
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  .pp-payment-container .pp-summary-total-price {
+    color: #291F69;
+    text-align: right;
+    font-family: "Source Sans 3" !important;
+    font-size: 22px !important;
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  /* Tekliflere geri dön butonu */
+  .pp-payment-container .pp-btn-back-to-quotes {
+    width: 100%;
+    margin-top: 0;
+    padding: 16px !important;
+    margin-bottom: 0 !important;
+    font-size: 14px;
+    justify-content: center;
+    border:none !important;
+  }
+  .pp-btn-purchase-back{order:2;min-width: 190px !important;}
+  .product-page-form .pp-card .pp-btn-submit{margin:0 !important}
+  /* Payment Card */
+  .pp-radio-header{gap:10px;}
+  .pp-error-buttons{margin-top:20px; gap:15px !important}
+  .product-page-form .pp-card.pp-payment-card {
+    order: 1;
+    padding: 24px !important;
+    border-radius: 16px 0 16px 0 !important;
+  }
+
+  .pp-payment-title {
+    font-size: 20px;
+  }
+
+  .pp-summary-total-price {
+    font-size: 20px;
+  }
+  .pp-card {
+    padding: 24px !important;
+  }
+
+  .pp-section-title {
+    font-size: 20px;
+  }
+
+  .pp-total-amount {
+    font-size: 20px;
+  }
+
+  .pp-summary-logo {
+    padding: 24px;
+    min-height: 80px;
+  }
+
+  .pp-checkbox-item {
+    padding: 12px;
+  }
+
+  .pp-checkbox-label {
+    font-size: 12px;
+  }
+  .pp-quote-title {
+    font-size: 22px;
+  }
+
+  .pp-quote-card {
+    padding: 20px 20px 25px;
+  }
+
+  .pp-quote-company {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pp-quote-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .pp-quote-actions button {
+    width: 100%;
+  }
+
+  .pp-quote-modal {
+    max-height: 95vh;
+  }
+
+  .pp-quote-modal-header {
+    padding: 16px;
+  }
+
+  .pp-quote-modal-body {
+    padding: 16px;
+  }
+
+  .pp-quote-modal-footer {
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  .pp-quote-modal-note {
+    text-align: center;
+  }
+
+  .pp-quote-progress-circle {
+    width: 150px;
+    height: 150px;
+  }
+
+  .pp-quote-progress-text {
+    font-size: 36px;
+  }
+
+  .pp-quote-loading-title,
+  .pp-quote-error-title {
+    font-size: 22px;
+  }
+
+  .pp-quote-loading,
+  .pp-quote-error {
+    padding: 40px 20px;
+  }
+  
+  /* Tüm grid'leri mobilde tek sütun yap */
+  .product-page-form .pp-form-row,
+  .product-page-form .pp-form-row.pp-form-row-3,
+  .product-page-form .pp-form-row.pp-form-row-4 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 15px;
+  }
+
+  /* Tab butonları mobilde üst üste */
+  .product-page-form .pp-card-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .product-page-form .pp-card-header .pp-title {
+    text-align: center;
+    width: 100%;
+  }
+
+  .product-page-form .pp-vehicle-tabs {
+    zoom: 1;
+    position: static;
+    transform: none;
+    width: 100%;
+  }
+
+  .product-page-form .pp-tab-button {
+    width: 100%;
+    padding:12px 10px !important;
+    text-align: center;
+  }
+
+  /* Araç kartlarını mobilde tek sütun yap */
+  .product-page-form .pp-vehicles-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-page-form .pp-card {
+    /* padding: 0 !important; */
+    width: 100%;
+  }
+
+  .product-page-form .pp-vehicle-type-buttons {
+    flex-direction: column;
+  }
+
+
+  .product-page-form .pp-vehicles-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+
+/* Quote Loading Screen Styles */
+
+.quote-loading-screen {
+  width: 100%;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+/* Title Section */
+.quote-loading-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #D4A574;
+  margin: 0 0 1rem 0;
+  line-height: 1.3;
+}
+
+.quote-loading-subtitle {
+  font-size: 16px;
+  color: #999999;
+  margin: 0 0 3rem 0;
+  line-height: 1.5;
+}
+
+/* Logo Container */
+.quote-loading-logo-container {
+  position: relative;
+  display: inline-block;
+  margin: 0 auto 3rem;
+}
+
+.quote-loading-leaf {
+  display: block;
+  width: 120px;
+  height: auto;
+  filter: drop-shadow(0 4px 12px rgba(0, 212, 166, 0.2));
+}
+
+.quote-loading-fill {
+  transform-origin: bottom;
+}
+
+/* Percentage Text */
+.quote-loading-percentage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Status Text */
+.quote-loading-status {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1E2A5E;
+  margin: 0 0 1rem 0;
+}
+
+.quote-loading-description {
+  font-size: 16px;
+  color: #999999;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .pp-comp-sticky-header th{border:none !important;box-shadow: none !important;background:none !important;}
+  .pp-tab-content{border:none !important;
+  padding:0 !important}
+  .quote-loading-description{padding:0 20px !important;}
+  .quote-loading-subtitle{margin-bottom:40px !important;}
+
+  /* Kampanyalar Grid - Mobil */
+  .pp-campaigns-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .pp-campaign-box {
+    padding: 16px;
+    gap: 10px;
+  }
+
+  .pp-campaign-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+  }
+
+  .pp-campaign-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .pp-campaign-title {
+    font-size: 14px;
+  }
+
+  .pp-campaign-desc {
+    font-size: 13px;
+  }
+
+  .pp-campaign-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .pp-campaign-radio-label {
+    font-size: 13px;
+  }
+
+  .pp-campaign-link {
+    font-size: 13px;
+  }
+  .quote-loading-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .quote-loading-title {
+    font-size: 24px;
+  }
+
+
+
+  .quote-loading-leaf {
+    width: 100px;
+  }
+
+  .quote-loading-percentage {
+    font-size: 18px;
+  }
+
+
+
+ 
+}
+
+@media (max-width: 480px) {
+  .quote-loading-screen {
+    min-height: auto;
+    padding: 1rem;
+  }
+
+  .quote-loading-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .quote-loading-title {
+    font-size: 20px;
+  }
+
+
+
+  .quote-loading-logo-container {
+    margin-bottom: 2rem;
+  }
+
+
+
+
+  
 }
 
