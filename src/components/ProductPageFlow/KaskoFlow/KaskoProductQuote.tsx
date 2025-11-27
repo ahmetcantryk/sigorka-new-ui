@@ -718,12 +718,25 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
 
   const formatGuaranteeValue = (guarantee: Guarantee): string => {
     if (guarantee.valueText) {
-      // "SEGMENTE_SEGMENT Segment" gibi değerleri temizle
       let text = guarantee.valueText;
+      
       // "SEGMENTE_SEGMENT Segment" veya "SEGMENTE_SEGMENT" → "Segmente Segment"
       text = text.replace(/SEGMENTE_SEGMENT\s*Segment/gi, 'Segmente Segment');
       text = text.replace(/SEGMENTE_SEGMENT/gi, 'Segmente Segment');
-      text = text.replace(/_/g, ' '); // Kalan alt çizgileri boşluğa çevir
+      
+      // Alt çizgileri boşluğa çevir
+      text = text.replace(/_/g, ' ');
+      
+      // Türkçe karakterleri koruyarak her kelimenin ilk harfini büyük yap
+      text = text.split(' ').map((word: string) => {
+        if (word.length === 0) return word;
+        // Zaten düzgün formatlı kelimeleri atla (Dahil, Limitsiz, Rayiç, Segmente, Segment vb.)
+        const skipWords = ['Dahil', 'Değil', 'Limitsiz', 'Rayiç', 'Segmente', 'Segment', 'Özel', 'Servis', 'Orijinal', 'Parça', 'Eşdeğer'];
+        if (skipWords.includes(word)) return word;
+        // İlk harfi büyük, geri kalanı küçük
+        return word.charAt(0).toLocaleUpperCase('tr-TR') + word.slice(1).toLocaleLowerCase('tr-TR');
+      }).join(' ');
+      
       return text;
     }
     if (guarantee.amount) {

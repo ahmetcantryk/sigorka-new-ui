@@ -344,7 +344,7 @@ const convertCoverageToGuarantees = (coverage: KaskoCoverage | null): Guarantee[
 
   // Araç segmenti etiketleri
   const segmentLabels: Record<string, string> = {
-    'SEGMENTE_SEGMENT': 'Segment E Segment',
+    'SEGMENTE_SEGMENT': 'Segmente Segment',
     'NONE': 'Yok'
   };
 
@@ -611,7 +611,7 @@ export default function QuoteComparisonStep({
 
     // Araç segmenti etiketleri
     const segmentLabels: Record<string, string> = {
-      'SEGMENTE_SEGMENT': 'Segment E Segment',
+      'SEGMENTE_SEGMENT': 'Segmente Segment',
       'NONE': 'Yok'
     };
 
