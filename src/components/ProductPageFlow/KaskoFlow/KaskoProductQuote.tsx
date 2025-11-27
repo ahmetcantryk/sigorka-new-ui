@@ -110,7 +110,7 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
   const [companies, setCompanies] = useState<InsuranceCompany[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(30); // %30'dan başla
   const [isFinishing, setIsFinishing] = useState(false);
 
   // Filter & Sort states
@@ -121,6 +121,13 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
 
   // Ref to persist selected installments across polls/renders
   const selectedInstallmentsRef = useRef<Record<string, number>>({});
+  
+  // İlk active teklif geldiği zamanı takip et
+  const firstActiveQuoteTimeRef = useRef<number | null>(null);
+  
+  // Progress başlangıç zamanı ve active teklif geldiğindeki progress
+  const progressStartTimeRef = useRef<number>(0);
+  const progressAtFirstActiveRef = useRef<number | null>(null);
 
   // Details expansion states
   const [expandedQuoteId, setExpandedQuoteId] = useState<string | null>(null);
@@ -226,14 +233,12 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
             });
             break;
           case 'DECIMAL':
-            if (coverageValue.value !== undefined) {
-              guarantees.push({
-                insuranceGuaranteeId: guaranteeId.toString(),
-                label,
-                valueText: null,
-                amount: coverageValue.value
-              });
-            }
+            guarantees.push({
+              insuranceGuaranteeId: guaranteeId.toString(),
+              label,
+              valueText: coverageValue.value !== undefined ? null : 'Dahil Değil',
+              amount: coverageValue.value !== undefined ? coverageValue.value : 0
+            });
             break;
           case 'INCLUDED':
             guarantees.push({
@@ -244,6 +249,16 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
             });
             break;
           case 'NOT_INCLUDED':
+            guarantees.push({
+              insuranceGuaranteeId: guaranteeId.toString(),
+              label,
+              valueText: 'Dahil Değil',
+              amount: 0
+            });
+            break;
+          case 'UNDEFINED':
+            // UNDEFINED teminatları teminatlar tab'ında gösterme (filtrelenecek)
+            // Ama teklif kartı için gerekli olabilir, bu yüzden ekliyoruz
             guarantees.push({
               insuranceGuaranteeId: guaranteeId.toString(),
               label,
@@ -262,8 +277,33 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
                   valueText: `${yillikKullanimSayisi}x${tekSeferlikGunSayisi} ${aracSegment} Segment`,
                   amount: 0
                 });
+              } else {
+                // DEFINED ama değerler eksikse
+                guarantees.push({
+                  insuranceGuaranteeId: guaranteeId.toString(),
+                  label,
+                  valueText: 'Dahil Değil',
+                  amount: 0
+                });
               }
+            } else {
+              // Diğer DEFINED tipler
+              guarantees.push({
+                insuranceGuaranteeId: guaranteeId.toString(),
+                label,
+                valueText: 'Dahil',
+                amount: 0
+              });
             }
+            break;
+          default:
+            // Bilinmeyen tipler için de ekle
+            guarantees.push({
+              insuranceGuaranteeId: guaranteeId.toString(),
+              label,
+              valueText: 'Dahil Değil',
+              amount: 0
+            });
             break;
         }
 
@@ -328,6 +368,67 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
       };
     });
   };
+
+  // Progress interval - polling'den bağımsız her saniye 1 artar
+  useEffect(() => {
+    if (!isLoading) return;
+    
+    // İlk başlangıçta zaman ref'ini set et
+    if (progressStartTimeRef.current === 0) {
+      progressStartTimeRef.current = Date.now();
+    }
+    
+    const progressInterval = setInterval(() => {
+      setProgress(prevProgress => {
+        let newProgress = prevProgress;
+        
+        if (isFinishing && firstActiveQuoteTimeRef.current && progressAtFirstActiveRef.current !== null) {
+          // Active teklif geldikten sonra 30 saniyede %100'e ulaş
+          const timeSinceFirstActive = Date.now() - firstActiveQuoteTimeRef.current;
+          const baseProgress = progressAtFirstActiveRef.current;
+          const remainingProgress = 100 - baseProgress;
+          const finishDuration = 30000; // 30 saniye
+          
+          // Süre dolduysa kesin 100
+          if (timeSinceFirstActive >= finishDuration) {
+            newProgress = 100;
+          } else {
+            // Lineer artış - Math.ceil ile yukarı yuvarla ki 100'e ulaşsın
+            const progressRatio = timeSinceFirstActive / finishDuration;
+            newProgress = Math.min(
+              Math.ceil(baseProgress + (remainingProgress * progressRatio)),
+              100
+            );
+          }
+        } else {
+          // Normal mod: 3 dakikada %30'dan %99'a (69 birim / 180 saniye ≈ 0.38/saniye)
+          const elapsedTime = Date.now() - progressStartTimeRef.current;
+          const elapsedSeconds = elapsedTime / 1000;
+          // Her saniye yaklaşık 0.38 artış, ama tam sayı olması için hesapla
+          const calculatedProgress = Math.min(30 + Math.floor(elapsedSeconds * (69 / 180)), 99);
+          newProgress = calculatedProgress;
+        }
+        
+        // Asla geriye düşme - her zaman en yüksek değeri al
+        return Math.max(prevProgress, newProgress);
+      });
+    }, 500); // 500ms'de bir güncelle (daha akıcı)
+    
+    return () => {
+      clearInterval(progressInterval);
+    };
+  }, [isLoading, isFinishing]);
+
+  // Progress %100'e ulaştığında loading'i kapat
+  useEffect(() => {
+    if (progress >= 100 && isLoading && isFinishing) {
+      const timeout = setTimeout(() => {
+        setIsLoading(false);
+        setIsFinishing(false);
+      }, 500);
+      return () => clearTimeout(timeout);
+    }
+  }, [progress, isLoading, isFinishing]);
 
   // Fetch companies and quotes with polling
   useEffect(() => {
@@ -409,12 +510,10 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
           });
         });
 
-        // Progress calculation - 3 dakika (180000ms) boyunca 1-2-3-4 şeklinde artacak
         const elapsedTime = Date.now() - startTime;
-        const calculatedProgress = Math.min(Math.floor((elapsedTime / 180000) * 100), 99);
-        setProgress(calculatedProgress);
 
         const relevantQuotes = processedQuotes.filter(q => allowedProductIds.includes(q.productId));
+        const hasWaitingQuote = relevantQuotes.some(quote => quote.state === 'WAITING');
         const allRelevantQuotesFinalized = relevantQuotes.length > 0 && relevantQuotes.every(
           (quote) => quote.state === 'FAILED' || quote.state === 'ACTIVE'
         );
@@ -424,7 +523,45 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
         // Config'de tanımlı üründen teklif geldi mi kontrol et
         const hasActiveQuote = filteredQuotes.length > 0;
 
-        if (allRelevantQuotesFinalized || timeoutReached || hasActiveQuote) {
+        // İlk active teklif geldiğinde zamanı kaydet ve finishing moduna geç
+        if (hasActiveQuote && firstActiveQuoteTimeRef.current === null && !isFinishing) {
+          firstActiveQuoteTimeRef.current = Date.now();
+          // Progress'i elapsed time'dan hesapla (state'e güvenme)
+          const currentElapsedSeconds = (Date.now() - progressStartTimeRef.current) / 1000;
+          const currentProgress = Math.min(30 + Math.floor(currentElapsedSeconds * (69 / 180)), 99);
+          progressAtFirstActiveRef.current = currentProgress;
+          setIsFinishing(true);
+        }
+
+        // 3 dakika timeout - polling'i durdur
+        if (timeoutReached) {
+          const hasSuccessfulQuotes = filteredQuotes.length > 0;
+
+          if (hasSuccessfulQuotes) {
+            pushToDataLayer({
+              event: "kasko_formsubmit",
+              form_name: "kasko_teklif_basarili"
+            });
+          } else {
+            pushToDataLayer({
+              event: "kasko_formsubmit",
+              form_name: "kasko_teklif_basarisiz"
+            });
+          }
+
+          if (pollInterval) {
+            clearInterval(pollInterval);
+          }
+          
+          // Loading açıksa ve finishing değilse kapat
+          if (isLoading && !isFinishing) {
+            setIsLoading(false);
+          }
+          return;
+        }
+
+        // Tüm teklifler finalize olduysa ve WAITING kalmadıysa polling'i durdur
+        if (allRelevantQuotesFinalized && !hasWaitingQuote) {
           const hasSuccessfulQuotes = filteredQuotes.length > 0;
 
           if (hasSuccessfulQuotes) {
@@ -443,35 +580,13 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
             clearInterval(pollInterval);
           }
 
-          // Dinamik 3 saniyede %100'e çık ve sonra kapat
-          setIsFinishing(true);
-          
-          const currentProgress = calculatedProgress;
-          const remainingProgress = 100 - currentProgress;
-          
-          // Kalan progress'e göre dinamik süre hesapla
-          // Minimum 1 saniye, maksimum 3 saniye
-          const animationDuration = Math.max(1000, Math.min(3000, remainingProgress * 30));
-          const steps = Math.ceil(animationDuration / 100); // 100ms aralıklarla
-          const progressIncrement = remainingProgress / steps;
-          
-          let step = 0;
-          const finishInterval = setInterval(() => {
-            step++;
-            const newProgress = Math.min(currentProgress + (progressIncrement * step), 100);
-            setProgress(Math.floor(newProgress));
-            
-            if (step >= steps || newProgress >= 100) {
-              clearInterval(finishInterval);
-              setProgress(100);
-              // 100'e ulaştıktan sonra 500ms bekle ve loading'i kapat
-              setTimeout(() => {
-                setIsLoading(false);
-                setIsFinishing(false);
-              }, 500);
-            }
-          }, 100);
+          // Loading zaten kapalıysa bir şey yapma
+          if (!isLoading) {
+            return;
+          }
 
+          // Loading açıksa (hiç active gelmeden finalize olduysa) kapat
+          setIsLoading(false);
           return;
         }
 
@@ -521,6 +636,9 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
       if (pollInterval) {
         clearInterval(pollInterval);
       }
+      // Ref'leri sıfırla
+      firstActiveQuoteTimeRef.current = null;
+      progressAtFirstActiveRef.current = null;
     };
   }, [proposalId, agencyConfig]);
 
@@ -542,43 +660,52 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
     return quote.premiums.find((p) => p.installmentNumber === quote.selectedInstallmentNumber);
   };
 
-  // Kasko için önemli 3 teminatı bul
+  // Kasko için önemli 3 teminatı bul - her zaman 3 teminat döndür
   const getMainCoverages = (quote: ProcessedQuote) => {
     const coverages = quote.insuranceCompanyGuarantees || [];
     const camKirilma = coverages.find(g => g.label === 'Cam Kırılma Muafiyeti');
     const yolYardim = coverages.find(g => g.label === 'Yol Yardım');
     const aracCalinmasi = coverages.find(g => g.label === 'Araç Çalınması');
 
-    // UNDEFINED teminatları filtrele
-    return [camKirilma, yolYardim, aracCalinmasi]
-      .filter(Boolean)
-      .filter(g => g!.valueText !== 'Tanımsız') as Guarantee[];
+    // Her zaman 3 teminatı döndür - yoksa placeholder
+    const defaultGuarantee = (label: string): Guarantee => ({
+      insuranceGuaranteeId: `default-${label}`,
+      label,
+      valueText: null,
+      amount: 0
+    });
+
+    return [
+      camKirilma || defaultGuarantee('Cam Kırılma Muafiyeti'),
+      yolYardim || defaultGuarantee('Yol Yardım'),
+      aracCalinmasi || defaultGuarantee('Araç Çalınması')
+    ];
   };
 
-  // Kasko için ek indirim/teminatları bul (dinamik)
+  // Kasko için ek indirim/teminatları bul - her zaman göster
   const getAdditionalCoverages = (quote: ProcessedQuote) => {
-    const items: Array<{ label: string; rate?: number }> = [];
+    const items: Array<{ label: string; rate?: number; hasValue: boolean }> = [];
 
-    // Meslek İndirimi - sadece true ise göster
-    if (quote.hasVocationalDiscount) {
-      items.push({ label: 'Meslek İndirimi' });
-    }
+    // Meslek İndirimi - her zaman göster
+    items.push({ 
+      label: 'Meslek İndirimi',
+      hasValue: quote.hasVocationalDiscount 
+    });
 
-    // Hasarsızlık İndirimi - true ise rate ile göster
-    if (quote.hasUndamagedDiscount && (quote as any).hasUndamagedDiscountRate) {
-      const rate = (quote as any).hasUndamagedDiscountRate;
-      items.push({
-        label: 'Hasarsızlık',
-        rate: rate
-      });
-    }
+    // Hasarsızlık İndirimi - her zaman göster
+    const hasUndamaged = quote.hasUndamagedDiscount && (quote as any).hasUndamagedDiscountRate;
+    items.push({
+      label: 'Hasarsızlık',
+      rate: hasUndamaged ? (quote as any).hasUndamagedDiscountRate : undefined,
+      hasValue: hasUndamaged
+    });
 
     return items;
   };
 
-  // 3. bölge gösterilmeli mi kontrol et
-  const shouldShowAdditionalSection = (quote: ProcessedQuote): boolean => {
-    return quote.hasVocationalDiscount || quote.hasUndamagedDiscount;
+  // 3. bölge her zaman gösterilecek (artık gizlenmeyecek)
+  const shouldShowAdditionalSection = (_quote: ProcessedQuote): boolean => {
+    return true; // Her zaman göster
   };
 
   // Teminat dahil mi kontrol et
@@ -1025,32 +1152,33 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
                           ))}
                         </div>
 
-                        {/* BÖLÜM 3: İndirimler (Dinamik - sadece varsa göster) */}
-                        {shouldShowAdditionalSection(quote) && (
-                          <>
-                            <div className="pp-quote-divider" />
-                            <div className="pp-quote-section pp-quote-additional-coverages">
-                              {additionalCoverages.map((item, index) => (
-                                <div key={index} className="pp-coverage-row">
-                                  <span className="pp-coverage-label">
-                                    {item.rate !== undefined ? (
-                                      <>
-                                        <strong>%{item.rate}</strong> {item.label}
-                                      </>
-                                    ) : (
-                                      item.label
-                                    )}
-                                  </span>
-                                  <img
-                                    src="/images/product-detail/teminat-tick-dark.svg"
-                                    alt="Dahil"
-                                    className="pp-coverage-icon-dark"
-                                  />
-                                </div>
-                              ))}
-                            </div>
-                          </>
-                        )}
+                        {/* BÖLÜM 3: İndirimler (Her zaman göster - yoksa X ile) */}
+                        <>
+                          <div className="pp-quote-divider" />
+                          <div className="pp-quote-section pp-quote-additional-coverages">
+                            {additionalCoverages.map((item, index) => (
+                              <div key={index} className="pp-coverage-row">
+                                <span className="pp-coverage-label">
+                                  {item.hasValue && item.rate !== undefined ? (
+                                    <>
+                                      <strong>%{item.rate}</strong> {item.label}
+                                    </>
+                                  ) : (
+                                    item.label
+                                  )}
+                                </span>
+                                <img
+                                  src={item.hasValue 
+                                    ? "/images/product-detail/teminat-tick-dark.svg"
+                                    : "/images/product-detail/teminat-x.svg"
+                                  }
+                                  alt={item.hasValue ? "Dahil" : "Dahil Değil"}
+                                  className={item.hasValue ? "pp-coverage-icon-dark" : "pp-coverage-icon-status"}
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        </>
 
                         {/* Divider */}
                         <div className="pp-quote-divider" />
@@ -1198,14 +1326,17 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
                             ) : (
                               <div className="pp-tab-content">
                                 <div className="pp-coverages-layout">
-                                  {/* Sol ve Orta Bölge: Teminatlar */}
+                                  {/* Sol ve Orta Bölge: Teminatlar - sadece değeri olanları göster */}
                                   <div className="pp-coverages-grid">
                                     {quote.insuranceCompanyGuarantees
-                                      ?.filter((g) => formatGuaranteeValue(g) !== 'Belirsiz')
+                                      ?.filter((g) => {
+                                        const val = formatGuaranteeValue(g);
+                                        // Dahil Değil, Belirsiz ve - olanları gizle
+                                        return val !== 'Dahil Değil' && val !== 'Belirsiz' && val !== '-';
+                                      })
                                       .map((guarantee) => {
                                         const displayValue = formatGuaranteeValue(guarantee);
-                                        const showTick = displayValue === 'Dahil' || displayValue === 'Limitsiz' || displayValue === 'Rayiç';
-                                        const showX = displayValue === 'Dahil Değil' || displayValue === '-';
+                                        const showTick = displayValue === 'Dahil';
 
                                         return (
                                           <div key={guarantee.insuranceGuaranteeId} className="pp-coverage-item">
@@ -1214,21 +1345,13 @@ const KaskoProductQuote = ({ proposalId, onBack, onPurchaseClick }: KaskoProduct
                                               <CoverageTooltip branch="kasko" coverageKey={guarantee.label || ''} />
                                             </span>
                                             <div className="pp-coverage-item-value">
-                                              {showTick && !['Limitsiz', 'Rayiç'].includes(displayValue) && (
+                                              {showTick ? (
                                                 <img
                                                   src="/images/product-detail/teminat-tick.svg"
                                                   alt="Dahil"
                                                   className="pp-coverage-item-icon"
                                                 />
-                                              )}
-                                              {showX && (
-                                                <img
-                                                  src="/images/product-detail/teminat-x.svg"
-                                                  alt="Dahil Değil"
-                                                  className="pp-coverage-item-icon"
-                                                />
-                                              )}
-                                              {!showX && (displayValue !== 'Dahil' || ['Limitsiz', 'Rayiç'].includes(displayValue)) && (
+                                              ) : (
                                                 <span className="pp-coverage-item-price">{displayValue}</span>
                                               )}
                                             </div>

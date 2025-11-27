@@ -5718,6 +5718,7 @@ min-width:200px;
 }
 
 @media (max-width: 768px) {
+  .pp-quote-section.pp-quote-main-coverages .pp-coverage-tooltip-container{display: none !important;}
   .pp-comp-info-icon{align-items: flex-start;}
   .pp-coverage-label {font-size:11px;text-align: left !important;}
   .pp-header-cell-left, .pp-header-cell-right,.pp-row-cell-left{font-size:14px !important;}
