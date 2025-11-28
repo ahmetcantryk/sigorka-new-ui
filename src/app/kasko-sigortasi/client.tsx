@@ -12,6 +12,7 @@
 
 import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import Breadcrumb from '../components/common/Breadcrumb';
 import FaqList from '../components/common/FaqList';
 import ProductBanner from '../components/common/ProductBanner';
@@ -35,8 +36,8 @@ const KaskoProductQuote = dynamic(
     { ssr: false } // Quote is client-only
 );
 
-const PurchaseStepNew = dynamic(
-    () => import('@/components/QuoteFlow/KaskoQuote/steps/PurchaseStepNew'),
+const KaskoPurchaseStep = dynamic(
+    () => import('@/components/ProductPageFlow/KaskoFlow/components/purchase/KaskoPurchaseStep'),
     { ssr: false } // Purchase is client-only
 );
 
@@ -54,7 +55,7 @@ const BannerArea = () => {
     const { activeMode } = useProductPageQuery();
 
     return (
-        <section className="cover product-page-banner">
+        <section id="kasko-form-banner" className="cover product-page-banner">
             <div className="container">
                 {/* Sabit başlık - tüm steplerde görünür */}
                 <h1 className="pp-product-title">Kasko Sigortası</h1>
@@ -132,6 +133,20 @@ const ProductDetailContent = () => {
                         <p>Bu sigortaları sadece verdikleri standart hizmetlerden ibaret olarak düşünmemeli, aracınıza dair ihtiyacınız olan farklı bir hizmeti de kasko teminatları içerisine ekletebileceğinizi unutmamalısınız. Araç için çilingir hizmeti, araç anahtar kaybı, araç aksesuarlarının sigorta kapsamına alınması gibi pek çok farklı seçenek isteğe bağlı olarak güvenceler içerisine alınabilmektedir.</p>
                         <h4 id="nasil-teklif-alinir">Kasko Sigortası Teklifi Nasıl Alınır?</h4>
                         <p>Araç sahipleri kasko sigortası teklifi alabilmek için bazı bilgileri vermesi gerekir. Aracın markası ve üretim yılı gibi faktörler fiyatın hesaplanmasında etkilidir. Diğer etkili faktörler ise aracın hasarsızlık indiriminin olup olmadığı ve talep edilen ek teminatlardır. Örneğin ana teminatların yer aldığı poliçede genişletilmiş kasko sigortası talep ediliyorsa fiyatın yüksek olması muhtemeldir. Size en uygun ve fiyat avantajlı Katılım Kasko tekliflerinizi ruhsat bilgilerini girerek sigorka.com sitemizden alabilirsiniz.</p>
+                        
+                        <div className="col-12 mb-4">
+                            <div className="offer-banner offer-banner-car-bg">
+                                <div className="offer-banner__content">
+                                    <h3>Katılım Kasko Sigortasına mı ihtiyacınız var?</h3>
+                                    <p>En uygun tekliflerle aracınızı kaskolamak için şimdi teklif alın.</p>
+                                </div>
+                                <div className="offer-banner__cta">
+                                    <a className="btn btn-wide btn-tertiary" href="/kasko-sigortasi" target="_self">
+                                        Hemen Teklif Alın
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -162,7 +177,7 @@ const QuoteWrapper = () => {
     const handlePurchaseClick = (quoteId: string) => {
         console.log('🛒 Purchase clicked for quote:', quoteId);
         
-        // LocalStorage'a kaydet (PurchaseStepNew için gerekli)
+        // LocalStorage'a kaydet (KaskoPurchaseStep için gerekli)
         localStorage.setItem('selectedProductIdForKasko', quoteId);
         localStorage.setItem('currentProposalId', query.proposalId!);
         
@@ -199,7 +214,7 @@ const PurchaseWrapper = () => {
 
     const handleNext = () => {
         console.log('✅ Ödeme tamamlandı');
-        // Başarılı ödeme sonrası yönlendirme PurchaseStepNew içinde yapılıyor
+        // Başarılı ödeme sonrası yönlendirme KaskoPurchaseStep içinde yapılıyor
     };
 
     return (
@@ -248,7 +263,7 @@ const PurchaseWrapper = () => {
                 </div>
 
                 <div className="product-page-form pp-form-wide">
-                    <PurchaseStepNew
+                    <KaskoPurchaseStep
                         onNext={handleNext}
                         onBack={handleBack}
                     />
@@ -264,7 +279,7 @@ interface KaskoSigortasiClientPageProps {
 }
 
 export default function KaskoSigortasiClientPage({ faqs, searchParams }: KaskoSigortasiClientPageProps) {
-    const { activeMode } = useProductPageQuery();
+    const { activeMode, navigateToDefault } = useProductPageQuery();
 
     // Body class için useEffect
     useEffect(() => {
@@ -273,6 +288,50 @@ export default function KaskoSigortasiClientPage({ faqs, searchParams }: KaskoSi
             document.body.classList.remove('product-detail-page');
         };
     }, []);
+
+    // Kasko sayfasına özel: /kasko-teklif linklerini yakala ve banner formuna yönlendir
+    useEffect(() => {
+        const handleKaskoTeklifClick = (e: MouseEvent) => {
+            const target = e.target as HTMLElement;
+            const link = target.closest('a[href*="/kasko-teklif"], a[href="/kasko-sigortasi"]');
+            
+            if (link) {
+                const href = link.getAttribute('href');
+                
+                // Sadece /kasko-teklif veya /kasko-sigortasi linklerini yakala
+                if (href && (href.includes('/kasko-teklif') || href === '/kasko-sigortasi')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // URL'i temizle (query parametrelerini kaldır)
+                    navigateToDefault();
+                    
+                    // Banner formuna smooth scroll
+                    setTimeout(() => {
+                        const bannerElement = document.getElementById('kasko-form-banner');
+                        if (bannerElement) {
+                            const offset = 120; // Sticky navbar yüksekliği için offset
+                            const elementPosition = bannerElement.offsetTop - offset;
+                            window.scrollTo({
+                                top: elementPosition,
+                                behavior: 'smooth'
+                            });
+                        } else {
+                            // Fallback: sayfanın en üstüne scroll
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+                    }, 100);
+                }
+            }
+        };
+
+        // Event listener ekle
+        document.addEventListener('click', handleKaskoTeklifClick, true);
+
+        return () => {
+            document.removeEventListener('click', handleKaskoTeklifClick, true);
+        };
+    }, [navigateToDefault]);
 
     return (
         <>
@@ -291,6 +350,8 @@ export default function KaskoSigortasiClientPage({ faqs, searchParams }: KaskoSi
             <StickyProductNav
                 anchors={productAnchors['kasko-sigortasi']}
                 offerLink="/kasko-sigortasi"
+                enableMobileScrollBasedVisibility={true}
+                formBannerId="kasko-form-banner"
             />
 
             {/* Her zaman aynı içerik - Banner area içinde form/quote değişir */}

@@ -35,8 +35,8 @@ const TrafikProductQuote = dynamic(
   { ssr: false }
 );
 
-const PurchaseStepNew = dynamic(
-  () => import('@/components/QuoteFlow/KaskoQuote/steps/PurchaseStepNew'),
+const TrafikPurchaseStep = dynamic(
+  () => import('@/components/ProductPageFlow/TrafikFlow/components/purchase/TrafikPurchaseStep'),
   { ssr: false }
 );
 
@@ -315,7 +315,7 @@ const QuoteWrapper = () => {
   const handlePurchaseClick = (quoteId: string) => {
     console.log('🛒 Purchase clicked for quote:', quoteId);
     
-    // LocalStorage'a kaydet (PurchaseStepNew için gerekli)
+    // LocalStorage'a kaydet (TrafikPurchaseStep için gerekli)
     localStorage.setItem('selectedProductIdForTrafik', quoteId);
     localStorage.setItem('currentProposalIdTrafik', query.proposalId!);
     
@@ -352,7 +352,7 @@ const PurchaseWrapper = () => {
 
   const handleNext = () => {
     console.log('✅ Ödeme tamamlandı');
-    // Başarılı ödeme sonrası yönlendirme PurchaseStepNew içinde yapılıyor
+    // Başarılı ödeme sonrası yönlendirme TrafikPurchaseStep içinde yapılıyor
   };
 
   return (
@@ -401,7 +401,7 @@ const PurchaseWrapper = () => {
         </div>
 
         <div className="product-page-form pp-form-wide">
-          <PurchaseStepNew
+          <TrafikPurchaseStep
             onNext={handleNext}
             onBack={handleBack}
           />

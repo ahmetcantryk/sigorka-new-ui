@@ -11,9 +11,16 @@ interface Anchor {
 interface StickyProductNavProps {
   anchors: Anchor[];
   offerLink: string;
+  enableMobileScrollBasedVisibility?: boolean; // Mobilde scroll tabanlı görünürlük için
+  formBannerId?: string; // Form banner ID'si (mobil scroll için)
 }
 
-export default function StickyProductNav({ anchors, offerLink }: StickyProductNavProps) {
+export default function StickyProductNav({ 
+  anchors, 
+  offerLink,
+  enableMobileScrollBasedVisibility = false,
+  formBannerId
+}: StickyProductNavProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [activeAnchor, setActiveAnchor] = useState('');
   const [isMobile, setIsMobile] = useState(false);
@@ -31,9 +38,33 @@ export default function StickyProductNav({ anchors, offerLink }: StickyProductNa
     // Sticky navbar visibility control (subpage.js mantığı)
     const checkStickyNavbarVisibility = () => {
       const offset = 120;
+      const isMobileView = window.innerWidth <= 767;
       
-      // Mobilde her zaman görünür
-      if (window.innerWidth <= 767) {
+      // Mobilde scroll tabanlı görünürlük (sadece enableMobileScrollBasedVisibility true ise)
+      if (isMobileView && enableMobileScrollBasedVisibility) {
+        // Form banner'ı kontrol et
+        if (formBannerId) {
+          const formBanner = document.getElementById(formBannerId);
+          if (formBanner) {
+            const scrollPosition = window.scrollY;
+            // Form banner'ın altına scroll edildiğinde göster
+            const formBannerBottom = formBanner.offsetTop + formBanner.offsetHeight;
+            setIsVisible(scrollPosition >= formBannerBottom - offset);
+            return;
+          }
+        }
+        // Form banner yoksa ilk section'a göre kontrol et
+        const firstSection = document.getElementById(anchors[0]?.id);
+        if (firstSection) {
+          const scrollPosition = window.scrollY;
+          const contentStartPosition = firstSection.offsetTop - offset - 50;
+          setIsVisible(scrollPosition >= contentStartPosition);
+          return;
+        }
+      }
+      
+      // Mobilde her zaman görünür (varsayılan davranış)
+      if (isMobileView) {
         setIsVisible(true);
         return;
       }
@@ -82,7 +113,7 @@ export default function StickyProductNav({ anchors, offerLink }: StickyProductNa
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', checkMobile);
     };
-  }, [anchors, activeAnchor, isAnimating]);
+  }, [anchors, activeAnchor, isAnimating, enableMobileScrollBasedVisibility, formBannerId]);
 
   const scrollToTop = (e: React.MouseEvent) => {
     e.preventDefault();

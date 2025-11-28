@@ -21,20 +21,34 @@ interface InfoTooltipProps {
 const InfoTooltip = ({ content, link, className }: InfoTooltipProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
+  const handleMouseEnter = () => {
+    setIsVisible(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsVisible(false);
+  };
+
   return (
-    <div className={`pp-info-tooltip-container ${className || ''}`}>
+    <div 
+      className={`pp-info-tooltip-container ${className || ''}`}
+    >
       <button
         type="button"
         className="pp-info-icon"
-        onMouseEnter={() => setIsVisible(true)}
-        onMouseLeave={() => setIsVisible(false)}
-        onClick={() => setIsVisible(!isVisible)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        aria-label="Bilgi"
+        aria-expanded={isVisible}
       >
-      <img src="/images/product-detail/form-info-icon.svg" alt="Info" className="pp-info-icon-img" />
+        <img src="/images/product-detail/form-info-icon.svg" alt="Info" className="pp-info-icon-img" />
       </button>
       
       {isVisible && (
-        <div className={`pp-tooltip-content ${className ? `${className}-content` : ''}`}>
+        <div 
+          className={`pp-tooltip-content ${className ? `${className}-content` : ''}`}
+          role="tooltip"
+        >
           <div className={`pp-tooltip-text ${className ? `${className}-text` : ''}`}>{content}</div>
           {link && (
             <a

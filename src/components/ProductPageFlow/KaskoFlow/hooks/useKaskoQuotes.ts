@@ -7,6 +7,7 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useAgencyConfig } from '@/context/AgencyConfigProvider';
 import { fetchWithAuth } from '@/services/fetchWithAuth';
@@ -24,6 +25,14 @@ interface UseKaskoQuotesResult {
   progress: number;
   handleInstallmentChange: (quoteId: string, installmentNumber: number) => void;
 }
+
+// 401 hatası durumunda sayfaya yönlendirme
+const redirectToFormPage = () => {
+  if (typeof window !== 'undefined') {
+    // URL parametrelerini temizle ve form sayfasına yönlendir
+    window.location.href = '/kasko-sigortasi';
+  }
+};
 
 export const useKaskoQuotes = (proposalId: string): UseKaskoQuotesResult => {
   const accessToken = useAuthStore((state) => state.accessToken);
@@ -118,12 +127,21 @@ export const useKaskoQuotes = (proposalId: string): UseKaskoQuotesResult => {
     const fetchCompanies = async () => {
       const currentAccessToken = useAuthStore.getState().accessToken;
       if (!currentAccessToken) {
+        // Token yoksa form sayfasına yönlendir
+        redirectToFormPage();
         throw new Error('Yetkilendirme anahtarı bulunamadı.');
       }
 
       const rawCompanyResponse = await fetchWithAuth(API_ENDPOINTS.COMPANIES, {
         headers: { Authorization: `Bearer ${currentAccessToken}` },
       });
+
+      // 401 Unauthorized - oturum süresi dolmuş
+      if (rawCompanyResponse.status === 401) {
+        console.log('⚠️ 401 Unauthorized - Oturum süresi dolmuş, form sayfasına yönlendiriliyor...');
+        redirectToFormPage();
+        throw new Error('Oturum süresi dolmuş.');
+      }
 
       if (!rawCompanyResponse.ok) {
         throw new Error(`Şirket bilgileri alınamadı: ${rawCompanyResponse.status}`);
@@ -149,6 +167,13 @@ export const useKaskoQuotes = (proposalId: string): UseKaskoQuotesResult => {
             },
           }
         );
+
+        // 401 Unauthorized - oturum süresi dolmuş
+        if (rawProductsResponse.status === 401) {
+          console.log('⚠️ 401 Unauthorized - Oturum süresi dolmuş, form sayfasına yönlendiriliyor...');
+          redirectToFormPage();
+          throw new Error('Oturum süresi dolmuş.');
+        }
 
         if (!rawProductsResponse.ok) {
           throw new Error(`Proposal bilgileri alınamadı: ${rawProductsResponse.status}`);
