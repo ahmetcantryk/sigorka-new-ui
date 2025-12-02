@@ -14,7 +14,7 @@ export default function ImmQuoteComparisonPageComponent() {
 
   // Teklif ana sayfasına (veya form adımlarına) geri dönme
   const handleBack = () => {
-    router.push('/imm-teklif'); 
+    router.push('/imm'); 
   };
 
   if (!proposalId) {
@@ -24,7 +24,7 @@ export default function ImmQuoteComparisonPageComponent() {
             <Paper sx={{p:3, textAlign: 'center'}}>
                 <Typography variant="h6" color="error">Teklif ID bulunamadı.</Typography>
                 <Typography sx={{my:2}}>Lütfen teklifinizi tekrar oluşturun veya ana sayfaya dönün.</Typography>
-                <Button variant="contained" onClick={() => router.push('/imm-teklif')}>Teklif Sayfasına Dön</Button>
+                <Button variant="contained" onClick={() => router.push('/imm')}>Teklif Sayfasına Dön</Button>
             </Paper>
         </Container>
     );

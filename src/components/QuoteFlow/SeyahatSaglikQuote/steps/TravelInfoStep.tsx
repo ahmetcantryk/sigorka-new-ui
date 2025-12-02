@@ -368,7 +368,6 @@ const TravelInfoStep = ({ onNext, onBack, isFirstStep, isLastStep }: TravelInfoS
         // Hata analytics event
         pushToDataLayer({
           event: 'seyahat_saglik_proposal_error',
-          error_message: errorMessage,
         });
       } finally {
         setIsLoading(false);

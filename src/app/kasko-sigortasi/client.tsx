@@ -293,13 +293,13 @@ export default function KaskoSigortasiClientPage({ faqs, searchParams }: KaskoSi
     useEffect(() => {
         const handleKaskoTeklifClick = (e: MouseEvent) => {
             const target = e.target as HTMLElement;
-            const link = target.closest('a[href*="/kasko-teklif"], a[href="/kasko-sigortasi"]');
+            const link = target.closest('a[href*="/kasko-sigortasi"], a[href="/kasko-sigortasi"]');
             
             if (link) {
                 const href = link.getAttribute('href');
                 
                 // Sadece /kasko-teklif veya /kasko-sigortasi linklerini yakala
-                if (href && (href.includes('/kasko-teklif') || href === '/kasko-sigortasi')) {
+                if (href && (href.includes('/kasko-sigortasi') || href === '/kasko-sigortasi')) {
                     e.preventDefault();
                     e.stopPropagation();
                     

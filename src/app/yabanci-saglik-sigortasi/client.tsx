@@ -1,14 +1,28 @@
+/**
+ * Yabancı Sağlık Sigortası Ürün Detay Sayfası - Client Component
+ * 
+ * Banner içinde offline talep formu gösterir
+ * Kasko/TSS ile aynı yapıda
+ */
+
 "use client";
 
 import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import Breadcrumb from '../components/common/Breadcrumb';
 import FaqList from '../components/common/FaqList';
-import ProductBanner from '../components/common/ProductBanner';
 import StickyProductNav from '../components/common/StickyProductNav';
-import ConditionalCTAPopup from '../components/common/ConditionalCTAPopup';
-import { productAnchors, getOfferLink } from '../../config/productAnchors';
+import { productAnchors } from '../../config/productAnchors';
+import { getBranchConfig } from '@/components/ProductPageFlow/OfflineFlow';
 import '../../styles/subpage.min.css';
 import '../../styles/armorbroker.css';
+import '../../styles/product-flow/product-page-flow.css';
+
+// Dynamic import for better code splitting
+const OfflineProductForm = dynamic(
+  () => import('@/components/ProductPageFlow/OfflineFlow').then(mod => mod.OfflineProductForm),
+  { ssr: false }
+);
 
 const faqs = [
   {
@@ -49,35 +63,29 @@ const faqs = [
   }
 ];
 
-export default function YabanciSaglikSigortasiPage() {
-  const anchors = productAnchors['yabanci-saglik-sigortasi'];
-  const offerLink = getOfferLink('yabanci-saglik-sigortasi');
+// Banner Area Component - Shows form
+const BannerArea = () => {
+  const branchConfig = getBranchConfig('yabanci-saglik');
 
-  useEffect(() => {
-    document.body.classList.add('product-detail-page');
-    return () => document.body.classList.remove('product-detail-page');
-  }, []);
+  if (!branchConfig) {
+    return null;
+  }
 
   return (
+    <section id="yabanci-saglik-form-banner" className="cover product-page-banner">
+      <div className="container">
+        <h1 className="pp-product-title">Yabancı Sağlık Sigortası</h1>
+        <OfflineProductForm branchConfig={branchConfig} />
+      </div>
+    </section>
+  );
+};
+
+// Product Detail Content Component
+const ProductDetailContent = () => {
+  return (
     <>
-      <ConditionalCTAPopup
-        condition="inactivity"
-        inactivityDelay={15}
-        config={{
-          title: 'Yabancı Sağlık Sigortası Teklifi Almak İster misiniz?',
-          description: 'İkamet izni başvurunuz için gerekli sağlık sigortasını hemen alın.',
-          buttonText: 'Hemen Teklif Al',
-          buttonLink: '/yabanci-saglik-teklif'
-        }}
-      />
-      <StickyProductNav anchors={anchors} offerLink={offerLink} />
-      <ProductBanner
-        title1="Sağlığım"
-        title2="Yabancı Sağlık Katılım Sigortası"
-        buttonText="Hemen Teklif Alın"
-        buttonHref="/yabanci-saglik-teklif"
-        size="sm"
-      />
+      <BannerArea />
       <section className="page-content">
         <div className="container">
           <Breadcrumb
@@ -121,10 +129,25 @@ export default function YabanciSaglikSigortasiPage() {
             <div className="offer-banner offer-banner-health-bg">
               <div className="offer-banner__content">
                 <h3>Yabancı Sağlık Katılım Sigortasına mı ihtiyacınız var?</h3>
-                <p>En uygun tekliflerle sağlığınızı güvence altına almak için hemen teklif alın.</p>
+                <p>En uygun tekliflerle sağlığınızı güvence altına almak için yukarıdaki formu doldurun.</p>
               </div>
               <div className="offer-banner__cta">
-                <a className="btn btn-wide btn-tertiary" href="/yabanci-saglik-teklif" target="_self">
+                <a 
+                  className="btn btn-wide btn-tertiary" 
+                  href="#yabanci-saglik-form-banner"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const bannerElement = document.getElementById('yabanci-saglik-form-banner');
+                    if (bannerElement) {
+                      const offset = 120;
+                      const elementPosition = bannerElement.offsetTop - offset;
+                      window.scrollTo({
+                        top: elementPosition,
+                        behavior: 'smooth'
+                      });
+                    }
+                  }}
+                >
                   Hemen Teklif Alın
                 </a>
               </div>
@@ -132,6 +155,59 @@ export default function YabanciSaglikSigortasiPage() {
           </div>
         </div>
       </section>
+    </>
+  );
+};
+
+export default function YabanciSaglikSigortasiPage() {
+  const anchors = productAnchors['yabanci-saglik-sigortasi'];
+  const offerLink = '#yabanci-saglik-form-banner';
+
+  useEffect(() => {
+    document.body.classList.add('product-detail-page');
+    return () => document.body.classList.remove('product-detail-page');
+  }, []);
+
+  // Sayfa içi teklif linklerini banner'a yönlendir
+  useEffect(() => {
+    const handleOfferLinkClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const link = target.closest('a[href*="/yabanci-saglik-sigortasi"], a[href="#yabanci-saglik-form-banner"]');
+      
+      if (link) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const bannerElement = document.getElementById('yabanci-saglik-form-banner');
+        if (bannerElement) {
+          const offset = 120;
+          const elementPosition = bannerElement.offsetTop - offset;
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    };
+
+    document.addEventListener('click', handleOfferLinkClick, true);
+
+    return () => {
+      document.removeEventListener('click', handleOfferLinkClick, true);
+    };
+  }, []);
+
+  return (
+    <>
+      <StickyProductNav 
+        anchors={anchors} 
+        offerLink={offerLink}
+        enableMobileScrollBasedVisibility={true}
+        formBannerId="yabanci-saglik-form-banner"
+      />
+      
+      <ProductDetailContent />
+
       <section className="page-content pt-0">
         <div className="container">
           <h4>Yabancı Sağlık Sigortası ile İlgili Sıkça Sorulan Sorular</h4>
@@ -140,4 +216,4 @@ export default function YabanciSaglikSigortasiPage() {
       </section>
     </>
   );
-} 
+}

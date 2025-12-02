@@ -999,7 +999,7 @@ export default function PropertyInfoStep({
           setNotificationSeverity('success');
           setShowNotification(true);
           // onNext(); // Yönlendirme ile değiştirildi
-          router.push(`/konut-teklif/quote-comparison/${proposalResult.proposalId}`); // Yönlendirme eklendi
+          router.push(`/konut-sigortasi/quote-comparison/${proposalResult.proposalId}`); // Yönlendirme eklendi
         } else {
           throw new Error('Konut Teklif ID alınamadı.');
         }

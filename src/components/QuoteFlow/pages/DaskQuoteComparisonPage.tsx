@@ -18,7 +18,7 @@ export default function DaskQuoteComparisonPageComponent() {
   };
 
   const handleBack = () => {
-    router.push('/dask-teklif');
+    router.push('/dask');
   };
 
   return (

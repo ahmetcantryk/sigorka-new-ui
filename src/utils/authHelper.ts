@@ -50,11 +50,11 @@ export const performLogin = async (
   };
 
   if (customerType === CustomerType.Individual) {
-    if (!birthDate) {
-      throw new Error('Bireysel müşteriler için doğum tarihi gereklidir');
-    }
     requestBody.identityNumber = typeof identityNumberOrTaxNumber === 'string' ? parseInt(identityNumberOrTaxNumber) : identityNumberOrTaxNumber;
-    requestBody.birthDate = birthDate;
+    // Doğum tarihi opsiyonel - sadece varsa gönder (üye ol modunda zorunlu, giriş yap modunda opsiyonel)
+    if (birthDate) {
+      requestBody.birthDate = birthDate;
+    }
   } else {
     requestBody.taxNumber = typeof identityNumberOrTaxNumber === 'string' ? identityNumberOrTaxNumber : identityNumberOrTaxNumber.toString();
   }

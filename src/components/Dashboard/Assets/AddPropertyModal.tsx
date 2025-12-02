@@ -1823,7 +1823,7 @@ const AddPropertyModal: React.FC<AddPropertyModalProps> = ({ onClose, initialDat
 
           {/* Dain-i Mürtehin */}
           <div>
-            <h3 className="mb-3 font-medium text-gray-900 text-sm md:text-base">Dain-i Mürtehin</h3>
+            <h3 className="mb-3 font-medium text-gray-900 text-sm md:text-base">Rehin Alacaklı Var mı? (Dain-i Mürtehin)</h3>
             <div className="flex flex-col md:flex-row gap-3">
               <button
                 type="button"

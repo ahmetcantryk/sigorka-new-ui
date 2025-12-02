@@ -18,7 +18,7 @@ export default function TrafikQuoteComparisonPage() {
   };
 
   const handleBack = () => {
-    router.push('/trafik-teklif');
+    router.push('/');
   };
 
   return (

@@ -1,0 +1,91 @@
+'use client';
+
+import React from 'react';
+import { Phone, X, AlertTriangle } from 'lucide-react';
+
+interface DocumentErrorModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+}
+
+const DocumentErrorModal: React.FC<DocumentErrorModalProps> = ({ isOpen, onClose }) => {
+    if (!isOpen) return null;
+
+    return (
+        <>
+            {/* Overlay */}
+            <div 
+                className="fixed inset-0 bg-black bg-opacity-50 z-[9998] transition-opacity duration-300"
+                onClick={onClose}
+            />
+            
+            {/* Modal */}
+            <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+                <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full" style={{ animation: 'fadeIn 0.3s ease-out' }}>
+                    {/* Close Button */}
+                    <button
+                        onClick={onClose}
+                        className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+                        aria-label="Kapat"
+                    >
+                        <X size={24} />
+                    </button>
+
+                    {/* Content */}
+                    <div className="p-8 text-center">
+                        {/* Warning Icon */}
+                        <div className="mb-6 flex justify-center">
+                            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-100 border-2 border-amber-500">
+                                <AlertTriangle className="text-amber-500" size={32} />
+                            </div>
+                        </div>
+
+                        {/* Title */}
+                        <h2 className="text-xl font-semibold text-gray-800 mb-4">Belge Alınamadı</h2>
+
+                        {/* Message */}
+                        <div className="mb-6">
+                            <p className="text-gray-700 text-base leading-relaxed">
+                                Sigorta şirketinin belge servislerinden güncel belge alınamamaktadır. 
+                                Temsilcimiz ile iletişime geçerek belgeyi talep edebilirsiniz.
+                            </p>
+                        </div>
+
+                        {/* Separator */}
+                        <div className="border-t border-gray-200 my-6"></div>
+
+                        {/* Customer Service */}
+                        <div className="space-y-2">
+                            <p className="text-gray-600 text-sm">Müşteri Hizmetleri</p>
+                            <a 
+                                href="tel:+908504044404" 
+                                className="inline-flex items-center gap-2 text-secondary hover:text-secondary/80 transition-colors text-lg font-semibold"
+                            >
+                                <Phone size={20} />
+                                0850 404 04 04
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            {/* Animation styles */}
+            <style jsx>{`
+                @keyframes fadeIn {
+                    from {
+                        opacity: 0;
+                        transform: scale(0.95);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: scale(1);
+                    }
+                }
+            `}</style>
+        </>
+    );
+};
+
+export default DocumentErrorModal;
+

@@ -14,12 +14,21 @@ export const metadata = {
     title: "Neden Katılım Sigortacılığı? | Sigorka ile Sigortacılık",
     description: "Faizsiz, paylaşım esaslı ve etik değerlere dayalı katılım sigortacılığı neden tercih edilmeli? Tüm detaylı bilgiler için hemen web sitemizi ziyaret edin.",
     url: "https://sigorka.com/neden-katilim-sigortaciligi",
-    type: "website"
+    type: "website",
+    images: [
+      {
+        url: "https://sigorka.com/images/sigorka-og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Neden Katılım Sigortacılığı? | Sigorka ile Sigortacılık"
+      }
+    ]
   },
   twitter: {
     title: "Neden Katılım Sigortacılığı? | Sigorka ile Sigortacılık",
     description: "Faizsiz, paylaşım esaslı ve etik değerlere dayalı katılım sigortacılığı neden tercih edilmeli? Tüm detaylı bilgiler için hemen web sitemizi ziyaret edin.",
-    card: "summary_large_image"
+    card: "summary_large_image",
+    images: ["https://sigorka.com/images/sigorka-og-image.png"]
   }
 };
 

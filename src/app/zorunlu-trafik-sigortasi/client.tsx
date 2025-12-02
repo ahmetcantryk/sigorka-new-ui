@@ -12,6 +12,7 @@
 
 import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import Breadcrumb from '../components/common/Breadcrumb';
 import FaqList from '../components/common/FaqList';
 import ProductBanner from '../components/common/ProductBanner';
@@ -22,27 +23,26 @@ import { useProductPageQuery } from '@/components/ProductPageFlow/shared/hooks/u
 import '../../styles/subpage.min.css';
 import '../../styles/armorbroker.css';
 import '../../styles/product-flow/product-page-flow.css';
-import Link from 'next/link';
 
 // Dynamic imports for better code splitting
 const TrafikProductForm = dynamic(
-  () => import('@/components/ProductPageFlow/TrafikFlow').then(mod => mod.TrafikProductForm),
-  { ssr: false }
+    () => import('@/components/ProductPageFlow/TrafikFlow').then(mod => mod.TrafikProductForm),
+    { ssr: false } // Form is client-only
 );
 
 const TrafikProductQuote = dynamic(
-  () => import('@/components/ProductPageFlow/TrafikFlow/TrafikProductQuote'),
-  { ssr: false }
+    () => import('@/components/ProductPageFlow/TrafikFlow/TrafikProductQuote'),
+    { ssr: false } // Quote is client-only
 );
 
 const TrafikPurchaseStep = dynamic(
-  () => import('@/components/ProductPageFlow/TrafikFlow/components/purchase/TrafikPurchaseStep'),
-  { ssr: false }
+    () => import('@/components/ProductPageFlow/TrafikFlow/components/purchase/TrafikPurchaseStep'),
+    { ssr: false } // Purchase is client-only
 );
 
 interface FaqQuestion {
-  question: string;
-  answer: string;
+    question: string;
+    answer: string;
 }
 
 const faqs: FaqQuestion[] = [
@@ -74,386 +74,435 @@ const faqs: FaqQuestion[] = [
 
 // Banner Area Component - Shows form, quote or purchase based on mode
 const BannerArea = () => {
-  const { activeMode } = useProductPageQuery();
+    const { activeMode } = useProductPageQuery();
 
-  return (
-    <section className="cover product-page-banner">
-      <div className="container">
-        {/* Sabit başlık - tüm steplerde görünür */}
-        <h1 className="pp-product-title">Zorunlu Trafik Sigortası</h1>
-        {activeMode === 'purchase' ? (
-          <PurchaseWrapper />
-        ) : activeMode === 'quote' ? (
-          <QuoteWrapper />
-        ) : (
-          <FormWrapper />
-        )}
-      </div>
-    </section>
-  );
+    return (
+        <section id="trafik-form-banner" className="cover product-page-banner">
+            <div className="container">
+                {/* Sabit başlık - tüm steplerde görünür */}
+                <h1 className="pp-product-title">Zorunlu Trafik Sigortası</h1>
+                {activeMode === 'purchase' ? (
+                    <PurchaseWrapper />
+                ) : activeMode === 'quote' ? (
+                    <QuoteWrapper />
+                ) : (
+                    <FormWrapper />
+                )}
+            </div>
+        </section>
+    );
 };
 
 // Product Detail Content Component
 const ProductDetailContent = () => {
-  const anchors = productAnchors['zorunlu-trafik-sigortasi'];
-  const offerLink = getOfferLink('zorunlu-trafik-sigortasi');
+    return (
+        <>
+            <BannerArea />
+            <section className="page-content">
+                <div className="container">
+                    <Breadcrumb
+                        items={[
+                            { name: 'Ana Sayfa', href: '/' },
+                            { name: 'Ürünler', href: '' },
+                            { name: 'Aracım', href: '/aracim' },
+                            { name: 'Katılım Zorunlu Trafik Sigortası' }
+                        ]}
+                    />
+                    <div className="text-content">
+                        <h3>
+                            Trafiğe çıkan tüm araçların yaptırmak zorunda olduğu Zorunlu Trafik Sigortası, olası
+                            bir kaza durumunda iki tarafın da haklarını güvence altına alır ve oluşan hasarların
+                            karşılanmasını sağlar.
+                        </h3>
+                        <h4 id="sigorta-nedir">Zorunlu Trafik Sigortası Nedir?</h4>
+                        <p>Zorunlu trafik sigortası, sigortalanan aracın kaza sonucunda diğer araç ya da üçüncü şahıslara verebileceği hasarları, mecburi masraflar doğrultusunda karşılayan zorunlu bir sigortadır.</p>
+                        <p>Sigorta kapsamında poliçenizde tanımlanan motorlu aracın işletilmesi sırasında, bir kimsenin ölümüne, yaralanmasına veya bir şeyin zarara uğramasına sebep olunması durumunda karşılaşılan miktarı zorunlu sigorta limitlerine kadar temin etmekteyiz. Her bir motorlu kara taşıtı için ayrı poliçe düzenlenmektedir. Poliçe kanunen zorunlu olduğu için katkı payı (primi) peşin ödenmek zorundadır.</p>
+                        <h4 id="avantajlar">Avantajları Nelerdir?</h4>
+                        <p>Olası bir kaza durumunda iki tarafın da haklarını güvence altına alarak, oluşan hasarların karşılanmasını sağlar. Her aracın kendine ait zorunlu bir trafik sigortası olup, aracın kaza ve hasar geçmişine göre ödenecek katkı payı (prim) tutarı ve aracın bulunduğu hasarsızlık kademesi değişiklik gösterir. Kaza ve hasar durumuna göre kademelendirilen prim ödemeleri, sürücüleri kazalara karşı daha tedbirli olmaya ve trafik kurallarına uymaya teşvik eder. Zorunlu trafik sigortası ile karayollarında oluşabilecek maddi ve bedensel kayıpların minimuma indirilmesi hedeflenir.</p>
+                        <h4 id="teminatlar">Teminatları Nelerdir?</h4>
+                        <ul className="prop-list">
+                            <li>Maddi Zararlar Teminatı</li>
+                            <li>Sağlık Giderleri Teminatı</li>
+                            <li>Sürekli Sakatlık Teminatı</li>
+                            <li>Vefat Teminatı</li>
+                            <li>Tedavi Teminatı</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section className="page-content page-content--highlighted">
+                <div className="container">
+                    <div className="text-content">
+                        <h4 id="limitler">Zorunlu Trafik Sigortası Limitleri Nelerdir?</h4>
+                        <div className="table-responsive">
+                            <table className="table table-bordered text-center">
+                                <thead>
+                                    <tr>
+                                        <th rowSpan={2}>Araç Türü</th>
+                                        <th colSpan={2}>Sağlık Gideri</th>
+                                        <th colSpan={2}>Sakatlanma ve Ölüm</th>
+                                        <th colSpan={2}>Maddi Zararlar</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Kişi Başı</th>
+                                        <th>Kaza Başı</th>
+                                        <th>Kişi Başı</th>
+                                        <th>Kaza Başı</th>
+                                        <th>Araç Başı</th>
+                                        <th>Kaza Başı</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Otomobil / Taksi</td>
+                                        <td>2.700.000 TL</td>
+                                        <td>13.500.000 TL</td>
+                                        <td>2.700.000 TL</td>
+                                        <td>13.500.000 TL</td>
+                                        <td>300.000 TL</td>
+                                        <td>600.000 TL</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kamyonet, Kamyon, Minibüs veya Çekici</td>
+                                        <td>2.700.000 TL</td>
+                                        <td>18.000.000 TL</td>
+                                        <td>2.700.000 TL</td>
+                                        <td>27.000.000 TL</td>
+                                        <td>300.000 TL</td>
+                                        <td>600.000 TL</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tarım Araçları ile Özel Amaçlı Araçlar</td>
+                                        <td>2.700.000 TL</td>
+                                        <td>13.500.000 TL</td>
+                                        <td>2.700.000 TL</td>
+                                        <td>13.500.000 TL</td>
+                                        <td>300.000 TL</td>
+                                        <td>600.000 TL</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Motosiklet ve Yük Motosikleti</td>
+                                        <td>2.700.000 TL</td>
+                                        <td>8.100.000 TL</td>
+                                        <td>2.700.000 TL</td>
+                                        <td>8.100.000 TL</td>
+                                        <td>300.000 TL</td>
+                                        <td>600.000 TL</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Minibüs (sürücü dahil 10-17 koltuk)</td>
+                                        <td>2.700.000 TL</td>
+                                        <td>6.075.000 TL</td>
+                                        <td>2.700.000 TL</td>
+                                        <td>6.075.000 TL</td>
+                                        <td>300.000 TL</td>
+                                        <td>600.000 TL</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Otobüs (sürücü dahil 18-30 koltuk)</td>
+                                        <td>2.700.000 TL</td>
+                                        <td>15.795.000 TL</td>
+                                        <td>2.700.000 TL</td>
+                                        <td>15.795.000 TL</td>
+                                        <td>300.000 TL</td>
+                                        <td>600.000 TL</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="rounded-bottom-left">Otobüs (sürücü dahil 31+üstü koltuk)</td>
+                                        <td>2.700.000 TL</td>
+                                        <td>31.590.000 TL</td>
+                                        <td>2.700.000 TL</td>
+                                        <td>31.590.000 TL</td>
+                                        <td>300.000 TL</td>
+                                        <td className="rounded-bottom-right">600.000 TL</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h4>Trafik Sigortası Teklifi Nasıl Alınır?</h4>
+                        <p>Zorunlu trafik sigortası teklif alma aşamasında aracın ruhsatında ve sürücünün kimliğinde yazılı olan bazı bilgilere ihtiyaç duyulur. Araç bilgilerine ilişkin olarak öncelikle poliçe durumuna göre değerlendirme yapılır. Sıfır km araç için ilk poliçe, ikinci el araç için ilk poliçe veya poliçe yenileme seçeneklerinden birisi seçilir. Poliçe yenileme işleminde mevcut plaka üstünden işlem yapılacağı için aracın plakası, sürücünün kimlik numarası ve doğum tarihi gibi bilgiler trafik sigortası teklif alma aşamasında yeterli olur. İkinci el veya sıfır araçlar için hazırlanacak olan ilk poliçede ise aracın plakasının olup olmadığını belirtmeniz gerekir. Bu bilgiler ile hızlı bir şekilde farklı zorunlu trafik sigortası paketlerine ilişkin tarafınıza verilen fiyat tekliflerini görüntüleyip, bu teklifleri birbiriyle karşılaştırarak en kapsamlı ve en ucuz trafik sigortası alternatifleri arasından seçiminizi yapabilirsiniz.</p>
+                        
+                        <div className="offer-banner mt-2 mb-5">
+                            <div className="offer-banner__content">
+                                <h3>
+                                    Katılım Zorunlu Trafik Sigortasına mı
+                                    ihtiyacınız var?
+                                </h3>
+                                <p>En uygun tekliflerle aracınızı sigortalamak için şimdi teklif alın.</p>
+                            </div>
+                            <div className="offer-banner__cta">
+                                <Link className="btn btn-wide btn-tertiary" href="/zorunlu-trafik-sigortasi">Hemen Teklif Alın</Link>
+                            </div>
+                        </div>
 
-  return (
-    <>
-      <BannerArea />
-      <section className="page-content">
-        <div className="container">
-          <Breadcrumb
-            items={[
-              { name: 'Ana Sayfa', href: '/' },
-              { name: 'Ürünler', href: '' },
-              { name: 'Aracım', href: '/aracim' },
-              { name: 'Katılım Zorunlu Trafik Sigortası' }
-            ]}
-          />
-          <div className="text-content">
-            <h3>
-              Trafiğe çıkan tüm araçların yaptırmak zorunda olduğu Zorunlu Trafik Sigortası, olası
-              bir kaza durumunda iki tarafın da haklarını güvence altına alır ve oluşan hasarların
-              karşılanmasını sağlar.
-            </h3>
-            <h4 id="sigorta-nedir">Zorunlu Trafik Sigortası Nedir?</h4>
-            <p>Zorunlu trafik sigortası, sigortalanan aracın kaza sonucunda diğer araç ya da üçüncü şahıslara verebileceği hasarları, mecburi masraflar doğrultusunda karşılayan zorunlu bir sigortadır.</p>
-            <p>Sigorta kapsamında poliçenizde tanımlanan motorlu aracın işletilmesi sırasında, bir kimsenin ölümüne, yaralanmasına veya bir şeyin zarara uğramasına sebep olunması durumunda karşılaşılan miktarı zorunlu sigorta limitlerine kadar temin etmekteyiz. Her bir motorlu kara taşıtı için ayrı poliçe düzenlenmektedir. Poliçe kanunen zorunlu olduğu için katkı payı (primi) peşin ödenmek zorundadır.</p>
-            <h4 id="avantajlar">Avantajları Nelerdir?</h4>
-            <p>Olası bir kaza durumunda iki tarafın da haklarını güvence altına alarak, oluşan hasarların karşılanmasını sağlar. Her aracın kendine ait zorunlu bir trafik sigortası olup, aracın kaza ve hasar geçmişine göre ödenecek katkı payı (prim) tutarı ve aracın bulunduğu hasarsızlık kademesi değişiklik gösterir. Kaza ve hasar durumuna göre kademelendirilen prim ödemeleri, sürücüleri kazalara karşı daha tedbirli olmaya ve trafik kurallarına uymaya teşvik eder. Zorunlu trafik sigortası ile karayollarında oluşabilecek maddi ve bedensel kayıpların minimuma indirilmesi hedeflenir.</p>
-            <h4 id="teminatlar">Teminatları Nelerdir?</h4>
-            <ul className="prop-list">
-              <li>Maddi Zararlar Teminatı</li>
-              <li>Sağlık Giderleri Teminatı</li>
-              <li>Sürekli Sakatlık Teminatı</li>
-              <li>Vefat Teminatı</li>
-              <li>Tedavi Teminatı</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-      <section className="page-content page-content--highlighted">
-        <div className="container">
-          <div className="text-content">
-            <h4 id="limitler">Zorunlu Trafik Sigortası Limitleri Nelerdir?</h4>
-            <div className="table-responsive">
-              <table className="table table-bordered text-center">
-                <thead>
-                  <tr>
-                    <th rowSpan={2}>Araç Türü</th>
-                    <th colSpan={2}>Sağlık Gideri</th>
-                    <th colSpan={2}>Sakatlanma ve Ölüm</th>
-                    <th colSpan={2}>Maddi Zararlar</th>
-                  </tr>
-                  <tr>
-                    <th>Kişi Başı</th>
-                    <th>Kaza Başı</th>
-                    <th>Kişi Başı</th>
-                    <th>Kaza Başı</th>
-                    <th>Araç Başı</th>
-                    <th>Kaza Başı</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Otomobil</td>
-                    <td>1.800.000 TL</td>
-                    <td>9.000.000 TL</td>
-                    <td>1.800.000 TL</td>
-                    <td>9.000.000 TL</td>
-                    <td>200.000 TL</td>
-                    <td>400.000 TL</td>
-                  </tr>
-                  <tr>
-                    <td>Kamyonet, Kamyon, Minibüs</td>
-                    <td>1.800.000 TL</td>
-                    <td>9.000.000 TL</td>
-                    <td>1.800.000 TL</td>
-                    <td>9.000.000 TL</td>
-                    <td>200.000 TL</td>
-                    <td>400.000 TL</td>
-                  </tr>
-                  <tr>
-                    <td>Tarım ve Özel Amaçlı Araçlar</td>
-                    <td>1.800.000 TL</td>
-                    <td>9.000.000 TL</td>
-                    <td>1.800.000 TL</td>
-                    <td>9.000.000 TL</td>
-                    <td>200.000 TL</td>
-                    <td>400.000 TL</td>
-                  </tr>
-                  <tr>
-                    <td>Motosiklet</td>
-                    <td>1.800.000 TL</td>
-                    <td>9.000.000 TL</td>
-                    <td>1.800.000 TL</td>
-                    <td>9.000.000 TL</td>
-                    <td>200.000 TL</td>
-                    <td>400.000 TL</td>
-                  </tr>
-                  <tr>
-                    <td>Minibüs (Sürücü dahil 10-17 koltuk)</td>
-                    <td>1.800.000 TL</td>
-                    <td>9.000.000 TL</td>
-                    <td>1.800.000 TL</td>
-                    <td>9.000.000 TL</td>
-                    <td>200.000 TL</td>
-                    <td>400.000 TL</td>
-                  </tr>
-                  <tr>
-                    <td>Otobüs (Sürücü dahil 18-30 koltuk)</td>
-                    <td>1.800.000 TL</td>
-                    <td>9.000.000 TL</td>
-                    <td>1.800.000 TL</td>
-                    <td>9.000.000 TL</td>
-                    <td>200.000 TL</td>
-                    <td>400.000 TL</td>
-                  </tr>
-                  <tr>
-                    <td className="rounded-bottom-left">Otobüs (Sürücü dahil 31 üstü koltuk)</td>
-                    <td>1.800.000 TL</td>
-                    <td>9.000.000 TL</td>
-                    <td>1.800.000 TL</td>
-                    <td>9.000.000 TL</td>
-                    <td>200.000 TL</td>
-                    <td className="rounded-bottom-right">400.000 TL</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <h4>Trafik Sigortası Teklifi Nasıl Alınır?</h4>
-            <p>Zorunlu trafik sigortası teklif alma aşamasında aracın ruhsatında ve sürücünün kimliğinde yazılı olan bazı bilgilere ihtiyaç duyulur. Araç bilgilerine ilişkin olarak öncelikle poliçe durumuna göre değerlendirme yapılır. Sıfır km araç için ilk poliçe, ikinci el araç için ilk poliçe veya poliçe yenileme seçeneklerinden birisi seçilir. Poliçe yenileme işleminde mevcut plaka üstünden işlem yapılacağı için aracın plakası, sürücünün kimlik numarası ve doğum tarihi gibi bilgiler trafik sigortası teklif alma aşamasında yeterli olur. İkinci el veya sıfır araçlar için hazırlanacak olan ilk poliçede ise aracın plakasının olup olmadığını belirtmeniz gerekir. Bu bilgiler ile hızlı bir şekilde farklı zorunlu trafik sigortası paketlerine ilişkin tarafınıza verilen fiyat tekliflerini görüntüleyip, bu teklifleri birbiriyle karşılaştırarak en kapsamlı ve en ucuz trafik sigortası alternatifleri arasından seçiminizi yapabilirsiniz.</p>
-            
-            <div className="offer-banner mt-2 mb-5">
-              <div className="offer-banner__content">
-                <h3>
-                  Katılım Zorunlu Trafik Sigortasına mı
-                  ihtiyacınız var?
-                </h3>
-                <p>En uygun tekliflerle aracınızı sigortalamak için şimdi teklif alın.</p>
-              </div>
-              <div className="offer-banner__cta">
-                <Link className="btn btn-wide btn-tertiary" href="/zorunlu-trafik-sigortasi">Hemen Teklif Alın</Link>
-              </div>
-            </div>
-
-            <h4 id="hasarsizlik-oranlari">Zorunlu Trafik Sigortasında <span>Hasarsızlık İndirimi</span> Nedir?</h4>
-            <p>Aracın hasarsızlık durumuna göre sigorta indirim basamakları ve sürprim oranları değişkenlik gösterir. Toplam yedi basamaktan oluşur.</p>
-            <h4>Zorunlu Trafik Sigortası <span>Hasarsızlık İndirim Oranları</span> Nelerdir?</h4>
-            <div className="table-responsive">
-              <table className="table table-bordered text-center">
-                <thead>
-                  <tr>
-                    <th>Basamak No</th>
-                    <td>0</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>7</td>
-                    <td className="rounded-top-right">8</td>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th>İndirim</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>%5</td>
-                    <td>%20</td>
-                    <td>%40</td>
-                    <td>%50</td>
-                  </tr>
-                  <tr>
-                    <th>Artırım</th>
-                    <td>%200</td>
-                    <td>%135</td>
-                    <td>%90</td>
-                    <td>%45</td>
-                    <td>%10</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td className="rounded-bottom-right"></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  );
+                        <h4 id="hasarsizlik-oranlari">Zorunlu Trafik Sigortasında <span>Hasarsızlık İndirimi</span> Nedir?</h4>
+                        <p>Aracın hasarsızlık durumuna göre sigorta indirim basamakları ve sürprim oranları değişkenlik gösterir. Toplam yedi basamaktan oluşur.</p>
+                        <h4>Zorunlu Trafik Sigortası <span>Hasarsızlık İndirim Oranları</span> Nelerdir?</h4>
+                        <div className="table-responsive">
+                            <table className="table table-bordered text-center">
+                                <thead>
+                                    <tr>
+                                        <th>Basamak No</th>
+                                        <td>0</td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>3</td>
+                                        <td>4</td>
+                                        <td>5</td>
+                                        <td>6</td>
+                                        <td>7</td>
+                                        <td className="rounded-top-right">8</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>İndirim</th>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>%5</td>
+                                        <td>%20</td>
+                                        <td>%40</td>
+                                        <td>%50</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Artırım</th>
+                                        <td>%200</td>
+                                        <td>%135</td>
+                                        <td>%90</td>
+                                        <td>%45</td>
+                                        <td>%10</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td className="rounded-bottom-right"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </>
+    );
 };
 
 // Form Wrapper - Handles navigation after proposal created
 const FormWrapper = () => {
-  const { navigateToQuote } = useProductPageQuery();
+    const { navigateToQuote } = useProductPageQuery();
 
-  const handleProposalCreated = (proposalId: string) => {
-    // Shallow navigation - URL değişir ama sayfa yeniden yüklenmez
-    navigateToQuote(proposalId);
-  };
+    const handleProposalCreated = (proposalId: string) => {
+        // Shallow navigation - URL değişir ama sayfa yeniden yüklenmez
+        navigateToQuote(proposalId);
+    };
 
-  return <TrafikProductForm onProposalCreated={handleProposalCreated} />;
+    return <TrafikProductForm onProposalCreated={handleProposalCreated} />;
 };
 
 // Quote Wrapper - Handles quote view (renders inside banner area)
 const QuoteWrapper = () => {
-  const { query, navigateToDefault, navigateToPurchase } = useProductPageQuery();
+    const { query, navigateToDefault, navigateToPurchase } = useProductPageQuery();
 
-  if (!query.proposalId) {
-    return null;
-  }
+    if (!query.proposalId) {
+        return null;
+    }
 
-  const handlePurchaseClick = (quoteId: string) => {
-    console.log('🛒 Purchase clicked for quote:', quoteId);
-    
-    // LocalStorage'a kaydet (TrafikPurchaseStep için gerekli)
-    localStorage.setItem('selectedProductIdForTrafik', quoteId);
-    localStorage.setItem('currentProposalIdTrafik', query.proposalId!);
-    
-    // Purchase moduna geç (?purchaseId=quoteId&proposalId=xxx)
-    navigateToPurchase(quoteId, query.proposalId);
-    
-    // Sayfayı en üste scroll et
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+    const handlePurchaseClick = (quoteId: string) => {
+        console.log('🛒 Purchase clicked for quote:', quoteId);
+        
+        // LocalStorage'a kaydet (TrafikPurchaseStep için gerekli)
+        localStorage.setItem('selectedProductIdForTrafik', quoteId);
+        localStorage.setItem('currentProposalId', query.proposalId!);
+        
+        // Purchase moduna geç (?purchaseId=quoteId&proposalId=xxx)
+        navigateToPurchase(quoteId, query.proposalId);
+        
+        // Sayfayı en üste scroll et
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
-  return (
-    <TrafikProductQuote
-      proposalId={query.proposalId}
-      onPurchaseClick={handlePurchaseClick}
-      onBack={navigateToDefault}
-    />
-  );
+    return (
+        <TrafikProductQuote
+            proposalId={query.proposalId}
+            onPurchaseClick={handlePurchaseClick}
+            onBack={navigateToDefault}
+        />
+    );
 };
 
 // Purchase Wrapper - Handles purchase view (renders inside banner area)
 const PurchaseWrapper = () => {
-  const { query, navigateToQuote } = useProductPageQuery();
+    const { query, navigateToQuote } = useProductPageQuery();
 
-  if (!query.purchaseId) {
-    return null;
-  }
-
-  const handleBack = () => {
-    const proposalId = localStorage.getItem('currentProposalIdTrafik');
-    if (proposalId) {
-      navigateToQuote(proposalId);
+    if (!query.purchaseId) {
+        return null;
     }
-  };
 
-  const handleNext = () => {
-    console.log('✅ Ödeme tamamlandı');
-    // Başarılı ödeme sonrası yönlendirme TrafikPurchaseStep içinde yapılıyor
-  };
+    const handleBack = () => {
+        const proposalId = localStorage.getItem('currentProposalId');
+        if (proposalId) {
+            navigateToQuote(proposalId);
+        }
+    };
 
-  return (
-    <>
-      <div className="product-page-flow-container">
-        {/* Stepper - Her zaman görünür */}
-        <div className="pp-stepper">
-          <div className="pp-step completed">
-            <div className="pp-step-visual">
-              <span>1</span>
-            </div>
-            <div className="pp-step-label">
-              <span>Kişisel</span>
-              <span>Bilgiler</span>
-            </div>
-          </div>
+    const handleNext = () => {
+        console.log('✅ Ödeme tamamlandı');
+        // Başarılı ödeme sonrası yönlendirme TrafikPurchaseStep içinde yapılıyor
+    };
 
-          <div className="pp-step completed">
-            <div className="pp-step-visual">
-              <span>2</span>
-            </div>
-            <div className="pp-step-label">
-              <span>Araç</span>
-              <span>Bilgileri</span>
-            </div>
-          </div>
+    return (
+        <>
+            <div className="product-page-flow-container">
+                {/* Stepper - Her zaman görünür */}
+                <div className="pp-stepper">
+                    <div className="pp-step completed">
+                        <div className="pp-step-visual">
+                            <span>1</span>
+                        </div>
+                        <div className="pp-step-label">
+                            <span>Kişisel</span>
+                            <span>Bilgiler</span>
+                        </div>
+                    </div>
 
-          <div className="pp-step completed">
-            <div className="pp-step-visual">
-              <span>3</span>
-            </div>
-            <div className="pp-step-label">
-              <span>Teklif</span>
-              <span>Karşılaştırma</span>
-            </div>
-          </div>
+                    <div className="pp-step completed">
+                        <div className="pp-step-visual">
+                            <span>2</span>
+                        </div>
+                        <div className="pp-step-label">
+                            <span>Araç</span>
+                            <span>Bilgileri</span>
+                        </div>
+                    </div>
 
-          <div className="pp-step active">
-            <div className="pp-step-visual">
-              <span>4</span>
-            </div>
-            <div className="pp-step-label">
-              <span>Ödeme</span>
-            </div>
-          </div>
-        </div>
+                    <div className="pp-step completed">
+                        <div className="pp-step-visual">
+                            <span>3</span>
+                        </div>
+                        <div className="pp-step-label">
+                            <span>Teklif</span>
+                            <span>Karşılaştırma</span>
+                        </div>
+                    </div>
 
-        <div className="product-page-form pp-form-wide">
-          <TrafikPurchaseStep
-            onNext={handleNext}
-            onBack={handleBack}
-          />
-        </div>
-      </div>
-    </>
-  );
+                    <div className="pp-step active">
+                        <div className="pp-step-visual">
+                            <span>4</span>
+                        </div>
+                        <div className="pp-step-label">
+                            <span>Ödeme</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="product-page-form pp-form-wide">
+                    <TrafikPurchaseStep
+                        onNext={handleNext}
+                        onBack={handleBack}
+                    />
+                </div>
+            </div>
+        </>
+    );
 };
 
-export default function ZorunluTrafikSigortasiClientPage() {
-  const { activeMode } = useProductPageQuery();
-  const anchors = productAnchors['zorunlu-trafik-sigortasi'];
-  const offerLink = getOfferLink('zorunlu-trafik-sigortasi');
+interface ZorunluTrafikSigortasiClientPageProps {
+    faqs?: FaqQuestion[];
+    searchParams?: { [key: string]: string | string[] | undefined };
+}
 
-  useEffect(() => {
-    document.body.classList.add('product-detail-page');
-    return () => {
-      document.body.classList.remove('product-detail-page');
-    };
-  }, []);
+export default function ZorunluTrafikSigortasiClientPage({ faqs: propFaqs, searchParams }: ZorunluTrafikSigortasiClientPageProps) {
+    const { activeMode, navigateToDefault } = useProductPageQuery();
+    const anchors = productAnchors['zorunlu-trafik-sigortasi'];
+    const offerLink = getOfferLink('zorunlu-trafik-sigortasi');
 
-  return (
-    <>
-      {/* GEÇICI OLARAK KAPATILDI */}
-      {/* <ConditionalCTAPopup
-        condition="inactivity"
-        inactivityDelay={15}
-        config={{
-          title: 'Zorunlu Trafik Sigortası Teklifi Almak İster misiniz?',
-          description: 'Hemen birkaç dakika içinde en uygun trafik sigortası tekliflerini karşılaştırın.',
-          buttonText: 'Hemen Teklif Al',
-          buttonLink: '/zorunlu-trafik-sigortasi'
-        }}
-      /> */}
+    // Body class için useEffect
+    useEffect(() => {
+        document.body.classList.add('product-detail-page');
+        return () => {
+            document.body.classList.remove('product-detail-page');
+        };
+    }, []);
 
-      <StickyProductNav 
-        anchors={anchors} 
-        offerLink="/zorunlu-trafik-sigortasi" 
-      />
+    // Trafik sayfasına özel: /zorunlu-trafik-sigortasi veya /zorunlu-trafik-sigortasi linklerini yakala ve banner formuna yönlendir
+    useEffect(() => {
+        const handleTrafikTeklifClick = (e: MouseEvent) => {
+            const target = e.target as HTMLElement;
+            const link = target.closest('a[href*="/zorunlu-trafik-sigortasi"], a[href="/zorunlu-trafik-sigortasi"], a[href*="/zorunlu-trafik-sigortasi"], a[href="/zorunlu-trafik-sigortasi"]');
+            
+            if (link) {
+                const href = link.getAttribute('href');
+                
+                // Sadece /zorunlu-trafik-sigortasi veya /zorunlu-trafik-sigortasi linklerini yakala
+                if (href && (href.includes('/zorunlu-trafik-sigortasi') || href === '/zorunlu-trafik-sigortasi' || href.includes('/zorunlu-trafik-sigortasi') || href === '/zorunlu-trafik-sigortasi')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // URL'i temizle (query parametrelerini kaldır)
+                    navigateToDefault();
+                    
+                    // Banner formuna smooth scroll
+                    setTimeout(() => {
+                        const bannerElement = document.getElementById('trafik-form-banner');
+                        if (bannerElement) {
+                            const offset = 120; // Sticky navbar yüksekliği için offset
+                            const elementPosition = bannerElement.offsetTop - offset;
+                            window.scrollTo({
+                                top: elementPosition,
+                                behavior: 'smooth'
+                            });
+                        } else {
+                            // Fallback: sayfanın en üstüne scroll
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+                    }, 100);
+                }
+            }
+        };
 
-      {/* Her zaman aynı içerik - Banner area içinde form/quote değişir */}
-      <ProductDetailContent />
+        // Event listener ekle
+        document.addEventListener('click', handleTrafikTeklifClick, true);
 
-      {/* FAQ sadece default modda göster */}
-      {activeMode === 'default' && (
-        <section className="page-content">
-          <div className="container">
-            <h4>Zorunlu Trafik Sigortası Sıkça Sorulan Sorular</h4>
-            <FaqList faqs={faqs} />
-          </div>
-        </section>
-      )}
-    </>
-  );
+        return () => {
+            document.removeEventListener('click', handleTrafikTeklifClick, true);
+        };
+    }, [navigateToDefault]);
+
+    return (
+        <>
+            {/* GEÇICI OLARAK KAPATILDI */}
+            {/* <ConditionalCTAPopup
+                condition="inactivity"
+                inactivityDelay={15}
+                config={{
+                    title: 'Zorunlu Trafik Sigortası Teklifi Almak İster misiniz?',
+                    description: 'Hemen birkaç dakika içinde en uygun trafik sigortası tekliflerini karşılaştırın.',
+                    buttonText: 'Hemen Teklif Al',
+                    buttonLink: '/zorunlu-trafik-sigortasi'
+                }}
+            /> */}
+
+            <StickyProductNav
+                anchors={anchors}
+                offerLink={offerLink}
+                enableMobileScrollBasedVisibility={true}
+                formBannerId="trafik-form-banner"
+            />
+
+            {/* Her zaman aynı içerik - Banner area içinde form/quote değişir */}
+            <ProductDetailContent />
+
+            {/* FAQ sadece default modda göster */}
+            {activeMode === 'default' && (
+                <section className="page-content pt-0">
+                    <div className="container">
+                        <h4>Zorunlu Trafik Sigortası Sıkça Sorulan Sorular</h4>
+                        <FaqList faqs={propFaqs || faqs} />
+                    </div>
+                </section>
+            )}
+        </>
+    );
 }

@@ -22,7 +22,7 @@ export default function SaglikPurchasePageComponent() { // Bileşen adı güncel
       // localStorage'a kaydetme işlemleri burada kalabilir veya PurchaseStep içinde yönetilebilir.
       // SaglikQuoteComparisonPage'de zaten 'selectedQuoteForPurchase' kaydediliyor.
     } else {
-      // router.push('/acil-saglik-teklif'); // Eksik parametre durumunda ana sayfaya yönlendir
+      // router.push('/acil-saglik-sigortasi'); // Eksik parametre durumunda ana sayfaya yönlendir
     }
   }, [proposalId, quoteId, router]);
 

@@ -14,12 +14,21 @@ export const metadata: Metadata = {
     title: "Elektronik İleti Onayı - Ticari İletişim İzni | Sigorka",
     description: "Bilgilendirme ve kampanya amaçlı elektronik iletilerle ilgili onay sürecinizi bu sayfadan kolayca yönetebilirsiniz. Daha fazlası için sitemizi ziyaret edin.",
     url: "https://sigorka.com/elektronik-ileti-onayi",
-    type: "website"
+    type: "website",
+    images: [
+      {
+        url: "https://sigorka.com/images/sigorka-og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Elektronik İleti Onayı - Ticari İletişim İzni | Sigorka"
+      }
+    ]
   },
   twitter: {
     title: "Elektronik İleti Onayı - Ticari İletişim İzni | Sigorka",
     description: "Bilgilendirme ve kampanya amaçlı elektronik iletilerle ilgili onay sürecinizi bu sayfadan kolayca yönetebilirsiniz. Daha fazlası için sitemizi ziyaret edin.",
-    card: "summary_large_image"
+    card: "summary_large_image",
+    images: ["https://sigorka.com/images/sigorka-og-image.png"]
   }
 };
 

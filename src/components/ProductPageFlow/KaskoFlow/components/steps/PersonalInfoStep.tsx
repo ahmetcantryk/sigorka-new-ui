@@ -4,11 +4,13 @@
 
 'use client';
 
+import { useState, useEffect } from 'react';
 import { FormikProps } from 'formik';
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 import { JOB_OPTIONS, Job } from '../../config/kaskoConstants';
-import { validateTCKNFull } from '@/utils/validators';
+import { validateTCKNFull, validateTaxNumber } from '@/utils/validators';
 import InfoTooltip from '@/components/ProductPageFlow/shared/InfoTooltip';
+import MobileBirthDateCalendar from '@/components/ProductPageFlow/shared/MobileBirthDateCalendar';
 import type { VehicleFormData } from '../../types';
 
 interface PersonalInfoStepProps {
@@ -36,6 +38,40 @@ const PersonalInfoStep = ({
   onMarketingChange,
   onSubmit,
 }: PersonalInfoStepProps) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 992);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
+
+  const emailInput = (
+    <div className={`pp-form-group ${formik.touched.email && formik.errors.email ? 'error' : ''}`}>
+      <label className="pp-label">E-posta Adresi (İsteğe Bağlı)</label>
+      <input
+        type="email"
+        className="pp-input"
+        id="email"
+        name="email"
+        value={formik.values.email || ''}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        placeholder="ornek@eposta.com"
+      />
+      {formik.touched.email && formik.errors.email && (
+        <div className="pp-error-message">{String(formik.errors.email)}</div>
+      )}
+    </div>
+  );
+
   return (
     <div className="product-page-form">
       <div className="pp-card">
@@ -58,7 +94,13 @@ const PersonalInfoStep = ({
                 onBlur={(e) => {
                   formik.handleBlur(e);
                   if (e.target.value) {
-                    const validation = validateTCKNFull(e.target.value);
+                    // 10 haneli ise VKN, 11 haneli ise TCKN
+                    let validation;
+                    if (e.target.value.length === 10) {
+                      validation = validateTaxNumber(e.target.value);
+                    } else {
+                      validation = validateTCKNFull(e.target.value);
+                    }
                     if (!validation.isValid) {
                       formik.setFieldError('identityNumber', validation.message);
                     }
@@ -66,6 +108,7 @@ const PersonalInfoStep = ({
                 }}
                 placeholder="___________"
                 maxLength={11}
+                minLength={10}
                 disabled={!!accessToken}
               />
               {formik.touched.identityNumber && formik.errors.identityNumber && (
@@ -73,22 +116,7 @@ const PersonalInfoStep = ({
               )}
             </div>
 
-            <div className={`pp-form-group ${formik.touched.email && formik.errors.email ? 'error' : ''}`}>
-              <label className="pp-label">E-posta Adresi (İsteğe Bağlı)</label>
-              <input
-                type="email"
-                className="pp-input"
-                id="email"
-                name="email"
-                value={formik.values.email || ''}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                placeholder="ornek@eposta.com"
-              />
-              {formik.touched.email && formik.errors.email && (
-                <div className="pp-error-message">{String(formik.errors.email)}</div>
-              )}
-            </div>
+            {!isMobile && emailInput}
           </div>
 
           <div className="pp-form-row">
@@ -134,24 +162,39 @@ const PersonalInfoStep = ({
 
             <div className={`pp-form-group ${formik.touched.birthDate && formik.errors.birthDate ? 'error' : ''}`}>
               <label className="pp-label">Doğum Tarihi</label>
-              <input
-                type="date"
-                className="pp-input"
-                id="birthDate"
-                name="birthDate"
-                value={formik.values.birthDate || ''}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                min="1900-01-01"
-                max={new Date().toISOString().split('T')[0]}
-                disabled={!!accessToken}
-                placeholder="__ / __ / ____"
-              />
+              {isMobile ? (
+                <MobileBirthDateCalendar
+                  value={formik.values.birthDate || ''}
+                  onChange={(val) => formik.setFieldValue('birthDate', val)}
+                  onBlur={() => formik.setFieldTouched('birthDate', true)}
+                  disabled={!!accessToken || (formik.values.identityNumber?.length === 10)}
+                />
+              ) : (
+                <input
+                  type="date"
+                  className="pp-input"
+                  id="birthDate"
+                  name="birthDate"
+                  value={formik.values.birthDate || ''}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  min="1900-01-01"
+                  max={new Date().toISOString().split('T')[0]}
+                  disabled={!!accessToken || (formik.values.identityNumber?.length === 10)}
+                  placeholder="__ / __ / ____"
+                />
+              )}
               {formik.touched.birthDate && formik.errors.birthDate && (
                 <div className="pp-error-message">{String(formik.errors.birthDate)}</div>
               )}
             </div>
           </div>
+
+          {isMobile && (
+            <div className="pp-form-row">
+              {emailInput}
+            </div>
+          )}
 
           <div className="pp-form-row">
             <div className="pp-form-group">

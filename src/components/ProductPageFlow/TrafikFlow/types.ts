@@ -84,5 +84,6 @@ export interface TrafikQuote {
 
 export interface ProcessedTrafikQuote extends TrafikQuote {
   selectedInstallmentNumber: number;
+  productBranch?: string; // Modal'larda doğru branch tooltip'leri için
 }
 

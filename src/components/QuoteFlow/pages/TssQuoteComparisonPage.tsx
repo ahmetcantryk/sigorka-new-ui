@@ -18,7 +18,7 @@ export default function tssQuoteComparisonPageComponent() {
   };
 
   const handleBack = () => {
-    router.push('/tss-teklif');
+    router.push('/tamamlayici-saglik-sigortasi');
   };
 
   return (

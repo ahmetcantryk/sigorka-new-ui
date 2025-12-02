@@ -10,6 +10,14 @@ import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
 import type { ProductPageMode, ProductPageQuery } from '../types';
 
+// Sayfa üstüne scroll yapan yardımcı fonksiyon
+const scrollToTop = () => {
+  // Küçük bir gecikme ile scroll yap (DOM güncellemesi için)
+  setTimeout(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 100);
+};
+
 export const useProductPageQuery = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -67,6 +75,7 @@ export const useProductPageQuery = () => {
     
     const newUrl = `${pathname}?${params.toString()}`;
     router.push(newUrl, { scroll: false });
+    scrollToTop();
   }, [pathname, router]);
 
   // Satın alma ekranına geç
@@ -82,11 +91,13 @@ export const useProductPageQuery = () => {
     
     const newUrl = `${pathname}?${params.toString()}`;
     router.push(newUrl, { scroll: false });
+    scrollToTop();
   }, [pathname, router, query.proposalId]);
 
   // Default içeriğe dön
   const navigateToDefault = useCallback(() => {
     router.push(pathname, { scroll: false });
+    scrollToTop();
   }, [pathname, router]);
 
   return {

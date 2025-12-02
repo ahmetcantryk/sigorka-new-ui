@@ -11,12 +11,21 @@ export const metadata: Metadata = {
       title: "Özel Sağlık Sigortası - Geniş Hastane Ağı | Sigorka",
       description: "Türkiye genelindeki özel hastanelerde kapsamlı sağlık hizmetleri için özel sağlık sigortasını Sigorka ile yaptırın. Daha fazlası için sitemizi ziyaret edin.",
       url: "https://sigorka.com/ozel-saglik-sigortasi",
-      type: "website"
+      type: "website",
+      images: [
+        {
+          url: "https://sigorka.com/images/sigorka-og-image.png",
+          width: 1200,
+          height: 630,
+          alt: "Özel Sağlık Sigortası - Geniş Hastane Ağı | Sigorka"
+        }
+      ]
     },
     twitter: {
       title: "Özel Sağlık Sigortası - Geniş Hastane Ağı | Sigorka",
       description: "Türkiye genelindeki özel hastanelerde kapsamlı sağlık hizmetleri için özel sağlık sigortasını Sigorka ile yaptırın. Daha fazlası için sitemizi ziyaret edin.",
-      card: "summary_large_image"
+      card: "summary_large_image",
+      images: ["https://sigorka.com/images/sigorka-og-image.png"]
     }
   };
 

@@ -121,7 +121,7 @@ export default function BlogClientArea({ blogs, categories }: { blogs: Blog[], c
               <p>En uygun tekliflerle aracınızı kaskolamak için şimdi teklif alın.</p>
             </div>
             <div className="offer-banner__cta">
-              <Link className="btn btn-wide btn-tertiary" href="/kasko-teklif">
+              <Link className="btn btn-wide btn-tertiary" href="/kasko-sigortasi">
                 Hemen Teklif Alın
               </Link>
             </div>

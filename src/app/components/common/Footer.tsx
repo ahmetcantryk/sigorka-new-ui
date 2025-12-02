@@ -62,7 +62,7 @@ export default function Footer() {
           <Link href="/urunlerimiz" className="btn btn-secondary d-sm-none">Teklif Al</Link>
           <div className="customer-relations">
             <h4 className="customer-relations__title">Müşteri Hizmetleri Merkezi</h4>
-            <a href="tel:+908504044444" className="customer-relations__phone">
+            <a href="tel:+908504040404" className="customer-relations__phone">
               <span className="icon-phone"></span> 0850 404 04 04
             </a>
           </div>
@@ -120,25 +120,45 @@ export default function Footer() {
                 </div>
               </div>
             </div>
-            <div className="col footer-col">
-              <div className="footer-nav">
-                <Link href="/kampanyalar" className="footer-nav__title">Kampanyalar</Link>
-                <span className="footer-nav__title">Hakkımızda</span>
-                <div className="footer-nav__group d-none d-sm-block">
+            <div className="col-12 col-sm footer-col">
+              <div className={`footer-nav footer-nav--dropdown ${openDropdowns.includes(3) ? 'footer-nav--active' : ''}`}>
+                <Link 
+                  className={`footer-nav__title ${openDropdowns.includes(3) ? 'footer-nav__title--active' : ''}`} 
+                  href="/hakkimizda"
+                  onClick={(e) => toggleDropdown(3, e)}
+                >
+                  Hakkımızda
+                </Link>
+                <div className="footer-nav__group">
                   <Link href="/biz-kimiz" className="footer-nav__item">Biz Kimiz?</Link>
                   <Link href="/neden-katilim-sigortaciligi" className="footer-nav__item">Neden Katılım Sigortacılığı</Link>
                   <Link href="/anlasmali-sigorta-sirketleri" className="footer-nav__item">Anlaşmalı Sigorta Şirketleri</Link>
                 </div>
               </div>
             </div>
-            <div className="col footer-col">
-              <div className="footer-nav">
-                <span className="footer-nav__title">Bilgi Merkezi</span>
-                <div className="footer-nav__group d-none d-sm-block">
+            <div className="col-12 col-sm footer-col">
+              <div className={`footer-nav footer-nav--dropdown ${openDropdowns.includes(4) ? 'footer-nav--active' : ''}`}>
+                <Link 
+                  className={`footer-nav__title ${openDropdowns.includes(4) ? 'footer-nav__title--active' : ''}`} 
+                  href="/bilgi-merkezi"
+                  onClick={(e) => toggleDropdown(4, e)}
+                >
+                  Bilgi Merkezi
+                </Link>
+                <div className="footer-nav__group">
                   <Link href="/blog" className="footer-nav__item">Sigorta Blog</Link>
                   <Link href="/sozluk" className="footer-nav__item">Sigorta Sözlük</Link>
                   <Link href="/sikca-sorulan-sorular" className="footer-nav__item">S.S.S</Link>
                 </div>
+              </div>
+            </div>
+            <div className="col-6 col-sm footer-col">
+              <div className="footer-nav">
+                <Link href="/kampanyalar" className="footer-nav__title">Kampanyalar</Link>
+              </div>
+            </div>
+            <div className="col-6 col-sm footer-col">
+              <div className="footer-nav">
                 <Link className="footer-nav__title" href="/iletisim">İletişim</Link>
               </div>
             </div>

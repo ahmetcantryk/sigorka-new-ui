@@ -5,16 +5,24 @@
  */
 
 import * as yup from 'yup';
-import { validateTCKNFull, validateTurkishPhoneStrict, validateBirthDate } from '@/utils/validators';
+import { validateTCKNFull, validateTaxNumber, validateTurkishPhoneStrict, validateBirthDate } from '@/utils/validators';
 
 // ==================== KİŞİSEL BİLGİLER VALİDASYON ====================
 export const personalInfoValidationSchema = yup.object({
   identityNumber: yup
     .string()
-    .required('TC Kimlik No gereklidir')
-    .test('tckn-validation', '', function (value) {
+    .required('TC Kimlik No / Vergi Kimlik No gereklidir')
+    .test('identity-validation', '', function (value) {
       if (!value) return true;
-      const validation = validateTCKNFull(value);
+      // 10 haneli ise VKN, 11 haneli ise TCKN
+      let validation;
+      if (value.length === 10) {
+        validation = validateTaxNumber(value);
+      } else if (value.length === 11) {
+        validation = validateTCKNFull(value);
+      } else {
+        return this.createError({ message: 'Kimlik numarası 10 veya 11 haneli olmalıdır' });
+      }
       if (!validation.isValid) {
         return this.createError({ message: validation.message });
       }
@@ -41,9 +49,23 @@ export const personalInfoValidationSchema = yup.object({
     }),
   birthDate: yup
     .string()
-    .required('Doğum tarihi gereklidir')
+    .test('birth-date-required', 'Doğum tarihi gereklidir', function (value) {
+      // VKN (10 haneli) için birthDate zorunlu değil
+      const identityNumber = this.parent.identityNumber;
+      if (identityNumber && identityNumber.length === 10) {
+        return true; // VKN için birthDate zorunlu değil
+      }
+      // TCKN (11 haneli) için birthDate zorunlu
+      if (!value) return false;
+      return true;
+    })
     .test('birth-date-validation', '', function (value) {
       if (!value) return true;
+      // VKN için validation yapma
+      const identityNumber = this.parent.identityNumber;
+      if (identityNumber && identityNumber.length === 10) {
+        return true;
+      }
       const validation = validateBirthDate(value);
       if (!validation.isValid) {
         return this.createError({ message: validation.message });

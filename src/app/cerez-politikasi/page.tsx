@@ -15,12 +15,21 @@ export const metadata: Metadata = {
     title: "Çerez Politikası - Sigorka Resmi Web Sitesi | Sigorka",
     description: "Web sitemizde çerezlerin nasıl kullanıldığını, ne amaçla toplandığını ve bu verilerin nasıl saklandığını buradan detaylı bir şekilde öğrenebilirsiniz.",
     url: "https://sigorka.com/cerez-politikasi",
-    type: "website"
+    type: "website",
+    images: [
+      {
+        url: "https://sigorka.com/images/sigorka-og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Çerez Politikası - Sigorka Resmi Web Sitesi | Sigorka"
+      }
+    ]
   },
   twitter: {
     title: "Çerez Politikası - Sigorka Resmi Web Sitesi | Sigorka",
     description: "Web sitemizde çerezlerin nasıl kullanıldığını, ne amaçla toplandığını ve bu verilerin nasıl saklandığını buradan detaylı bir şekilde öğrenebilirsiniz.",
-    card: "summary_large_image"
+    card: "summary_large_image",
+    images: ["https://sigorka.com/images/sigorka-og-image.png"]
   }
 };
 

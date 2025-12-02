@@ -14,12 +14,21 @@ export const metadata: Metadata = {
     title: 'Sigorta Kütüphanesi - Sigorta ve Katılım Sigortacılığı Dokümanları | Sigorka',
     description: 'Sigorka kütüphanesinde sigorta ve katılım sigortacılığı hakkında detaylı bilgilendirici dokümanlar, araştırmalar ve raporlar bulabilirsiniz. PDF formatında indirilebilir kaynaklar.',
     url: 'https://sigorka.com/kutuphane',
-    type: 'website'
+    type: 'website',
+    images: [
+      {
+        url: 'https://sigorka.com/images/sigorka-og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Sigorta Kütüphanesi - Sigorta ve Katılım Sigortacılığı Dokümanları | Sigorka'
+      }
+    ]
   },
   twitter: {
     title: 'Sigorta Kütüphanesi - Sigorta ve Katılım Sigortacılığı Dokümanları | Sigorka',
     description: 'Sigorka kütüphanesinde sigorta ve katılım sigortacılığı hakkında detaylı bilgilendirici dokümanlar, araştırmalar ve raporlar bulabilirsiniz. PDF formatında indirilebilir kaynaklar.',
-    card: 'summary_large_image'
+    card: 'summary_large_image',
+    images: ['https://sigorka.com/images/sigorka-og-image.png']
   }
 };
 

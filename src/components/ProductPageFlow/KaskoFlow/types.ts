@@ -163,6 +163,7 @@ export interface Quote {
   needsInvestigationByCompany: boolean;
   hasVocationalDiscount: boolean;
   hasUndamagedDiscount: boolean;
+  hasUndamagedDiscountRate?: number;
   revised: boolean;
   errorMessage: string | null;
   policyId: string | null;
@@ -179,5 +180,6 @@ export interface Quote {
 
 export interface ProcessedQuote extends Quote {
   selectedInstallmentNumber: number;
+  productBranch?: string; // Modal'larda doğru branch tooltip'leri için
 }
 

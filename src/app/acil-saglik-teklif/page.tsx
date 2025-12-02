@@ -9,12 +9,12 @@ export const metadata: Metadata = {
   description: "Doktorum Benimle tekliflerini hızlıca alın. Online poliçe oluşturun ve sağlığınızı güvence altına alın.",
   metadataBase: new URL('https://sigorka.com'),
   alternates: {
-    canonical: "https://sigorka.com/acil-saglik-teklif"
+    canonical: "https://sigorka.com/acil-saglik-sigortasi"
   },
   openGraph: {
     title: "Doktorum Benimle Teklif Al | Sigorka",
     description: "Doktorum Benimle tekliflerini hızlıca alın. Online poliçe oluşturun ve sağlığınızı güvence altına alın.",
-    url: "https://sigorka.com/acil-saglik-teklif",
+    url: "https://sigorka.com/acil-saglik-sigortasi",
     type: "website"
   },
   twitter: {

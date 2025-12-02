@@ -8,67 +8,67 @@ const products = [
     id: 1,
     icon: 'icon-zorunlu-trafik',
     title: 'Zorunlu Trafik',
-    href: '/trafik-teklif'
+    href: '/zorunlu-trafik-sigortasi'
   },
   {
     id: 2,
     icon: 'icon-kasko',
     title: 'Kasko',
-    href: '/kasko-teklif'
+    href: '/kasko-sigortasi'
   },
   {
     id: 3,
     icon: 'icon-tamamlayici-saglik',
     title: 'Tamamlayıcı Sağlık',
-    href: '/tss-teklif'
+    href: '/tamamlayici-saglik-sigortasi'
   },
   {
     id: 4,
     icon: 'icon-dask',
     title: 'DASK',
-    href: '/dask-teklif'
+    href: '/dask'
   },
   {
     id: 5,
     icon: 'icon-konut',
     title: 'Konut',
-    href: '/konut-teklif'
+    href: '/konut-sigortasi'
   },
   {
     id: 6,
     icon: 'icon-imm',
     title: 'İMM',
-    href: '/imm-teklif'
+    href: '/imm'
   },
   {
     id: 7,
     icon: 'icon-yabanci-saglik',
     title: 'Yabancı Sağlık',
-    href: '/yabanci-saglik-teklif'
+    href: '/yabanci-saglik-sigortasi'
   },
   {
     id: 8,
     icon: 'icon-seyahat-saglik',
     title: 'Seyahat Sağlık',
-    href: '/seyahat-saglik-teklif'
+    href: '/seyahat-saglik-sigortasi'
   },
   {
     id: 9,
     icon: 'icon-ozel-saglik',
     title: 'Özel Sağlık',
-    href: '/ozel-saglik-teklif'
+    href: '/ozel-saglik-sigortasi'
   },
   {
     id: 10,
     icon: 'icon-ferdi-kaza',
     title: 'Ferdi Kaza',
-    href: '/ferdi-kaza-teklif'
+    href: '/ferdi-kaza-sigortasi'
   }
   // {
   //   id: 11,
   //   icon: 'icon-tamamlayici-saglik',
   //   title: 'Doktorum Benimle',
-  //   href: '/acil-saglik-teklif'
+  //   href: '/acil-saglik-sigortasi'
   // }
 ];
 

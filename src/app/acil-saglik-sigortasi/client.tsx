@@ -71,7 +71,7 @@ export default function AcilSaglikSigortasiPage() {
           title: 'Doktorum Benimle Teklifi Almak İster misiniz?',
           description: 'Hemen birkaç dakika içinde en uygun Doktorum Benimle tekliflerini karşılaştırın.',
           buttonText: 'Hemen Teklif Al',
-          buttonLink: '/acil-saglik-teklif'
+          buttonLink: '/acil-saglik-sigortasi'
         }}
       />
       <StickyProductNav anchors={anchors} offerLink={offerLink} />
@@ -79,7 +79,7 @@ export default function AcilSaglikSigortasiPage() {
         title1="Sağlığım"
         title2="Doktorum Benimle"
         buttonText="Hemen Teklif Alın"
-        buttonHref="/acil-saglik-teklif"
+        buttonHref="/acil-saglik-sigortasi"
         size="sm"
       />
       <section className="page-content">
@@ -138,7 +138,7 @@ export default function AcilSaglikSigortasiPage() {
                 <p>En uygun tekliflerle acil durumlarda sağlığınızı güvence altına almak için hemen teklif alın.</p>
               </div>
               <div className="offer-banner__cta">
-                <a className="btn btn-wide btn-tertiary" href="/acil-saglik-teklif" target="_self">
+                <a className="btn btn-wide btn-tertiary" href="/acil-saglik-sigortasi" target="_self">
                   Hemen Teklif Alın
                 </a>
               </div>

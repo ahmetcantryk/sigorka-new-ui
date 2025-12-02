@@ -6,7 +6,7 @@
 
 import { FormikProps } from 'formik';
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
-import { VEHICLE_USAGE_OPTIONS, FUEL_TYPE_OPTIONS } from '../../config/kaskoConstants';
+import { VEHICLE_USAGE_OPTIONS, FUEL_TYPE_OPTIONS, MODEL_YEAR_OPTIONS } from '../../config/kaskoConstants';
 import type { VehicleFormData, ExistingVehicle } from '../../types';
 
 interface VehicleSelectionStepProps {
@@ -146,7 +146,7 @@ const VehicleSelectionStep = ({
       {vehicleType === 'plated' && vehicleDetailsStep === 0 && (
         <>
           <div className="pp-form-row">
-            <div className={`pp-form-group ${formik.touched.plateCity && formik.errors.plateCity ? 'error' : ''}`}>
+            <div className={`pp-form-group ${formik.touched.plateCity && formik.errors.plateCity && !formik.values.plateCity ? 'error' : ''}`}>
               <label className="pp-label">Plaka İl Kodu</label>
               <Dropdown
                 id="plateCity"
@@ -156,10 +156,13 @@ const VehicleSelectionStep = ({
                   label: `${parseInt(city.value) < 10 ? `0${city.value}` : city.value} - ${city.text}`,
                   value: city.value
                 }))}
-                onChange={(e: DropdownChangeEvent) => {
-                  formik.setFieldValue('plateCity', e.value);
+                onChange={async (e: DropdownChangeEvent) => {
+                  await formik.setFieldValue('plateCity', e.value);
+                  setTimeout(() => {
+                    formik.setFieldTouched('plateCity', true, false);
+                  }, 0);
                 }}
-                onBlur={() => formik.setFieldTouched('plateCity', true)}
+                onBlur={() => formik.setFieldTouched('plateCity', true, false)}
                 placeholder="Seçiniz"
                 className="pp-dropdown"
                 filter
@@ -167,7 +170,7 @@ const VehicleSelectionStep = ({
                 emptyFilterMessage="Sonuç bulunamadı"
                 showClear={false}
               />
-              {formik.touched.plateCity && formik.errors.plateCity && (
+              {formik.touched.plateCity && formik.errors.plateCity && !formik.values.plateCity && (
                 <div className="pp-error-message">{formik.errors.plateCity}</div>
               )}
             </div>
@@ -260,7 +263,7 @@ const VehicleSelectionStep = ({
       <div>
         <div className="pp-form-row pp-form-row-3">
           {vehicleType === 'unplated' && (
-            <div className={`pp-form-group ${formik.touched.plateCity && formik.errors.plateCity ? 'error' : ''}`}>
+            <div className={`pp-form-group ${formik.touched.plateCity && formik.errors.plateCity && !formik.values.plateCity ? 'error' : ''}`}>
               <label className="pp-label">Plaka İl Kodu</label>
               <Dropdown
                 id="plateCityDetails"
@@ -270,10 +273,13 @@ const VehicleSelectionStep = ({
                   label: `${parseInt(city.value) < 10 ? `0${city.value}` : city.value} - ${city.text}`,
                   value: city.value
                 }))}
-                onChange={(e: DropdownChangeEvent) => {
-                  formik.setFieldValue('plateCity', e.value);
+                onChange={async (e: DropdownChangeEvent) => {
+                  await formik.setFieldValue('plateCity', e.value);
+                  setTimeout(() => {
+                    formik.setFieldTouched('plateCity', true, false);
+                  }, 0);
                 }}
-                onBlur={() => formik.setFieldTouched('plateCity', true)}
+                onBlur={() => formik.setFieldTouched('plateCity', true, false)}
                 placeholder="Seçiniz"
                 className="pp-dropdown"
                 filter
@@ -281,13 +287,13 @@ const VehicleSelectionStep = ({
                 emptyFilterMessage="Sonuç bulunamadı"
                 showClear={false}
               />
-              {formik.touched.plateCity && formik.errors.plateCity && (
+              {formik.touched.plateCity && formik.errors.plateCity && !formik.values.plateCity && (
                 <div className="pp-error-message">{formik.errors.plateCity}</div>
               )}
             </div>
           )}
 
-          <div className={`pp-form-group ${formik.touched.brandCode && formik.errors.brandCode ? 'error' : ''}`}>
+          <div className={`pp-form-group ${formik.touched.brandCode && formik.errors.brandCode && !formik.values.brandCode ? 'error' : ''}`}>
             <label className="pp-label">Marka</label>
             <Dropdown
               id="brandCode"
@@ -299,18 +305,21 @@ const VehicleSelectionStep = ({
                   label: brand.text,
                   value: brand.value
                 }))}
-              onChange={(e: DropdownChangeEvent) => {
+              onChange={async (e: DropdownChangeEvent) => {
                 if (e.value) {
-                  onBrandChange(e.value);
+                  await onBrandChange(e.value);
                 } else {
-                  formik.setFieldValue('brandCode', '');
-                  formik.setFieldValue('brand', '');
-                  formik.setFieldValue('modelCode', '');
-                  formik.setFieldValue('model', '');
+                  await formik.setFieldValue('brandCode', '');
+                  await formik.setFieldValue('brand', '');
+                  await formik.setFieldValue('modelCode', '');
+                  await formik.setFieldValue('model', '');
                 }
-                formik.setFieldTouched('brandCode', true);
+                // Değer set edildikten sonra touched'ı ayarla
+                setTimeout(() => {
+                  formik.setFieldTouched('brandCode', true, false);
+                }, 0);
               }}
-              onBlur={() => formik.setFieldTouched('brandCode', true)}
+              onBlur={() => formik.setFieldTouched('brandCode', true, false)}
               placeholder="Seçiniz"
               className="pp-dropdown"
               filter
@@ -318,33 +327,35 @@ const VehicleSelectionStep = ({
               emptyFilterMessage="Sonuç bulunamadı"
               showClear={false}
             />
-            {formik.touched.brandCode && formik.errors.brandCode && (
+            {formik.touched.brandCode && formik.errors.brandCode && !formik.values.brandCode && (
               <div className="pp-error-message">{formik.errors.brandCode}</div>
             )}
           </div>
 
           <div className={`pp-form-group ${formik.touched.year && formik.errors.year ? 'error' : ''}`}>
             <label className="pp-label">Model Yılı</label>
-            <input
-              type="text"
-              className="pp-input"
+            <Dropdown
               id="year"
               name="year"
               value={formik.values.year}
-              onChange={(e) => {
-                const value = e.target.value.replace(/[^0-9]/g, '').slice(0, 4);
-                onYearChange(value);
+              options={MODEL_YEAR_OPTIONS}
+              onChange={(e: DropdownChangeEvent) => {
+                onYearChange(e.value || '');
               }}
-              onBlur={formik.handleBlur}
-              placeholder="Örn: 2023"
-              maxLength={4}
+              onBlur={() => formik.setFieldTouched('year', true, false)}
+              placeholder="Seçiniz"
+              className="pp-dropdown"
+              filter
+              filterPlaceholder="Ara..."
+              emptyFilterMessage="Sonuç bulunamadı"
+              showClear={false}
             />
             {formik.touched.year && formik.errors.year && (
               <div className="pp-error-message">{formik.errors.year}</div>
             )}
           </div>
 
-          <div className={`pp-form-group ${(modelError || (formik.touched.modelCode && formik.errors.modelCode)) ? 'error' : ''}`}>
+          <div className={`pp-form-group ${(modelError || (formik.touched.modelCode && formik.errors.modelCode && !formik.values.modelCode)) ? 'error' : ''}`}>
             <label className="pp-label">Model</label>
             <Dropdown
               id="modelCode"
@@ -354,18 +365,23 @@ const VehicleSelectionStep = ({
                 label: model.text,
                 value: model.value
               }))}
-              onChange={(e: DropdownChangeEvent) => {
+              onChange={async (e: DropdownChangeEvent) => {
                 if (e.value) {
-                  formik.setFieldValue('modelCode', e.value);
+                  // Değeri string'e çevir
+                  const modelCodeValue = String(e.value);
+                  await formik.setFieldValue('modelCode', modelCodeValue);
                   const model = vehicleModels.find(m => m.value === e.value);
-                  if (model) formik.setFieldValue('model', model.text);
+                  if (model) await formik.setFieldValue('model', model.text);
                 } else {
-                  formik.setFieldValue('modelCode', '');
-                  formik.setFieldValue('model', '');
+                  await formik.setFieldValue('modelCode', '');
+                  await formik.setFieldValue('model', '');
                 }
-                formik.setFieldTouched('modelCode', true);
+                // Değer set edildikten sonra touched'ı ayarla
+                setTimeout(() => {
+                  formik.setFieldTouched('modelCode', true, false);
+                }, 0);
               }}
-              onBlur={() => formik.setFieldTouched('modelCode', true)}
+              onBlur={() => formik.setFieldTouched('modelCode', true, false)}
               placeholder={isModelsLoading ? 'Yükleniyor...' : 'Seçiniz'}
               className="pp-dropdown"
               filter
@@ -377,20 +393,25 @@ const VehicleSelectionStep = ({
             {modelError && (
               <div className="pp-error-message">{modelError}</div>
             )}
-            {!modelError && formik.touched.modelCode && formik.errors.modelCode && (
+            {!modelError && formik.touched.modelCode && formik.errors.modelCode && !formik.values.modelCode && (
               <div className="pp-error-message">{formik.errors.modelCode}</div>
             )}
           </div>
 
-          <div className={`pp-form-group ${formik.touched.usageType && formik.errors.usageType ? 'error' : ''}`}>
+          <div className={`pp-form-group ${formik.touched.usageType && formik.errors.usageType && !formik.values.usageType ? 'error' : ''}`}>
             <label className="pp-label">Kullanım Şekli</label>
             <Dropdown
               id="usageType"
               name="usageType"
               value={formik.values.usageType}
               options={VEHICLE_USAGE_OPTIONS}
-              onChange={(e: DropdownChangeEvent) => formik.setFieldValue('usageType', e.value)}
-              onBlur={() => formik.setFieldTouched('usageType', true)}
+              onChange={async (e: DropdownChangeEvent) => {
+                await formik.setFieldValue('usageType', e.value);
+                setTimeout(() => {
+                  formik.setFieldTouched('usageType', true, false);
+                }, 0);
+              }}
+              onBlur={() => formik.setFieldTouched('usageType', true, false)}
               placeholder="Seçiniz"
               className="pp-dropdown"
               filter
@@ -398,25 +419,30 @@ const VehicleSelectionStep = ({
               emptyFilterMessage="Sonuç bulunamadı"
               showClear={false}
             />
-            {formik.touched.usageType && formik.errors.usageType && (
+            {formik.touched.usageType && formik.errors.usageType && !formik.values.usageType && (
               <div className="pp-error-message">{formik.errors.usageType}</div>
             )}
           </div>
 
-          <div className={`pp-form-group ${formik.touched.fuelType && formik.errors.fuelType ? 'error' : ''}`}>
+          <div className={`pp-form-group ${formik.touched.fuelType && formik.errors.fuelType && !formik.values.fuelType ? 'error' : ''}`}>
             <label className="pp-label">Yakıt Tipi</label>
             <Dropdown
               id="fuelType"
               name="fuelType"
               value={formik.values.fuelType}
               options={FUEL_TYPE_OPTIONS}
-              onChange={(e: DropdownChangeEvent) => formik.setFieldValue('fuelType', e.value)}
-              onBlur={() => formik.setFieldTouched('fuelType', true)}
+              onChange={async (e: DropdownChangeEvent) => {
+                await formik.setFieldValue('fuelType', e.value);
+                setTimeout(() => {
+                  formik.setFieldTouched('fuelType', true, false);
+                }, 0);
+              }}
+              onBlur={() => formik.setFieldTouched('fuelType', true, false)}
               placeholder="Seçiniz"
               className="pp-dropdown"
               showClear={false}
             />
-            {formik.touched.fuelType && formik.errors.fuelType && (
+            {formik.touched.fuelType && formik.errors.fuelType && !formik.values.fuelType && (
               <div className="pp-error-message">{formik.errors.fuelType}</div>
             )}
           </div>

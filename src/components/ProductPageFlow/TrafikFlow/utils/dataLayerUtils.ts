@@ -22,20 +22,24 @@ const pushToDataLayer = (eventData: any): void => {
  * Trafik Step 1 (Kişisel Bilgiler) tamamlandığında
  */
 export const pushTrafikStep1Complete = (): void => {
-  pushToDataLayer({
+  const eventData = {
     event: "trafik_formsubmit",
     form_name: "trafik_step1"
-  });
+  };
+  console.log('📊 DataLayer Push - Trafik Step 1:', eventData);
+  pushToDataLayer(eventData);
 };
 
 /**
  * Trafik Step 2 (Araç Bilgileri) tamamlandığında
  */
 export const pushTrafikStep2Complete = (): void => {
-  pushToDataLayer({
+  const eventData = {
     event: "trafik_formsubmit",
     form_name: "trafik_step2"
-  });
+  };
+  console.log('📊 DataLayer Push - Trafik Step 2:', eventData);
+  pushToDataLayer(eventData);
 };
 
 // ==================== TEKLİF EVENT'LERİ ====================
@@ -44,20 +48,24 @@ export const pushTrafikStep2Complete = (): void => {
  * Trafik teklif başarılı
  */
 export const pushTrafikQuoteSuccess = (): void => {
-  pushToDataLayer({
+  const eventData = {
     event: "trafik_formsubmit",
     form_name: "trafik_teklif_basarili"
-  });
+  };
+  console.log('📊 DataLayer Push - Trafik Quote Success:', eventData);
+  pushToDataLayer(eventData);
 };
 
 /**
  * Trafik teklif başarısız
  */
 export const pushTrafikQuoteFailed = (): void => {
-  pushToDataLayer({
+  const eventData = {
     event: "trafik_formsubmit",
     form_name: "trafik_teklif_basarisiz"
-  });
+  };
+  console.log('📊 DataLayer Push - Trafik Quote Failed:', eventData);
+  pushToDataLayer(eventData);
 };
 
 // ==================== SATIN ALMA EVENT'LERİ ====================
@@ -70,39 +78,37 @@ export const pushTrafikPurchaseClick = (
   company: string | undefined,
   price: number | undefined
 ): void => {
-  pushToDataLayer({
-    event: "trafik_purchase_click",
+  const eventData = {
+    event: "trafik_satinal",
     quote_id: quoteId,
     company: company,
     price: price
-  });
+  };
+  console.log('📊 DataLayer Push - Trafik Purchase Click:', eventData);
+  pushToDataLayer(eventData);
 };
 
 /**
- * Trafik satın alma başarılı
+ * Trafik ödeme başarılı
  */
-export const pushTrafikPurchaseSuccess = (
-  policyId: string,
-  company: string | undefined,
-  price: number | undefined
-): void => {
-  pushToDataLayer({
-    event: "trafik_purchase_success",
-    policy_id: policyId,
-    company: company,
-    price: price
-  });
+export const pushTrafikPaymentSuccess = (): void => {
+  const eventData = {
+    event: "trafik_satinal",
+    form_name: "trafik_odeme_basarili"
+  };
+  console.log('📊 DataLayer Push - Trafik Payment Success:', eventData);
+  pushToDataLayer(eventData);
 };
 
 /**
- * Trafik satın alma başarısız
+ * Trafik ödeme başarısız
  */
-export const pushTrafikPurchaseFailed = (
-  errorMessage: string
-): void => {
-  pushToDataLayer({
-    event: "trafik_purchase_failed",
-    error_message: errorMessage
-  });
+export const pushTrafikPaymentFailed = (errorMessage?: string): void => {
+  const eventData = {
+    event: "trafik_satinal",
+    form_name: "trafik_odeme_basarisiz"
+  };
+  console.log('📊 DataLayer Push - Trafik Payment Failed:', eventData);
+  pushToDataLayer(eventData);
 };
 

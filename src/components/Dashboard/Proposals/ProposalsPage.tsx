@@ -146,10 +146,31 @@ const ProposalsPage = () => {
     return differenceInDays(today, offerDate) > 3;
   };
 
+  // URL helper function
+  const getDetailUrl = (productBranch: string, proposalId: string) => {
+    const branch = productBranch.toLowerCase();
+    switch (branch) {
+      case 'konut':
+        return `/konut-sigortasi?proposalId=${proposalId}`;
+      case 'trafik':
+        return `/zorunlu-trafik-sigortasi?proposalId=${proposalId}`;
+      case 'kasko':
+        return `/kasko-sigortasi?proposalId=${proposalId}`;
+      case 'dask':
+        return `/dask?proposalId=${proposalId}`;
+      case 'imm':
+        return `/imm/quote-comparison/${proposalId}`;
+      case 'tss':
+        return `/tamamlayici-saglik-sigortasi?proposalId=${proposalId}`;
+      default:
+        return `/${branch}/quote-comparison/${proposalId}`;
+    }
+  };
+
   // Mobile Card Component
   const ProposalCard = ({ proposal }: { proposal: Proposal }) => {
     const expired = isOfferExpired(proposal.createdAt);
-    const detailUrl = `/${proposal.productBranch.toLowerCase()}/quote-comparison/${proposal.id}`;
+    const detailUrl = getDetailUrl(proposal.productBranch, proposal.id);
 
     return (
       <div className="bg-white rounded-xl border border-gray-100 p-4 space-y-4">
@@ -292,26 +313,7 @@ const ProposalsPage = () => {
               {filteredProposals.length > 0 ? (
                 filteredProposals.map((proposal: Proposal) => {
                   const expired = isOfferExpired(proposal.createdAt);
-                    const getDetailUrl = (productBranch: string, proposalId: string) => {
-                        const branch = productBranch.toLowerCase();
-                        switch (branch) {
-                            case 'konut':
-                                return `/konut-teklif/quote-comparison/${proposalId}`;
-                            case 'trafik':
-                                return `/trafik/quote-comparison/${proposalId}`;
-                            case 'kasko':
-                                return `/kasko/quote-comparison/${proposalId}`;
-                            case 'dask':
-                                return `/dask/quote-comparison/${proposalId}`;
-                            case 'imm':
-                                return `/imm/quote-comparison/${proposalId}`;
-                            case 'tss':
-                                return `/tss/quote-comparison/${proposalId}`;
-                            default:
-                                return `/${branch}/quote-comparison/${proposalId}`;
-                        }
-                    };
-                    const detailUrl = getDetailUrl(proposal.productBranch, proposal.id);
+                  const detailUrl = getDetailUrl(proposal.productBranch, proposal.id);
                   return (
                     <tr key={proposal.id} className="border-b border-gray-50 hover:bg-gray-50/50">
                       <td className="px-4 py-3">

@@ -34,7 +34,14 @@ const CLIENT_ONLY_PATHS = [
   '/saglik',
   '/acil-saglik',
   '/zorunlu-trafik-sigortasi',
-  '/kasko-sigortasi'
+  '/kasko-sigortasi',
+  '/tamamlayici-saglik-sigortasi',
+  '/konut-sigortasi',
+  // Offline flow sayfaları
+  '/ferdi-kaza-sigortasi',
+  '/ozel-saglik-sigortasi',
+  '/yabanci-saglik-sigortasi',
+  '/seyahat-saglik-sigortasi',
 ];
 
 const PROTECTED_PATHS = [

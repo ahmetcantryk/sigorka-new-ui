@@ -8,12 +8,21 @@ export const metadata = {
     title: "İletişim - Sigorka Destek ve İletişim Bilgileri | Sigorka",
     description: "Sorularınız için bize ulaşın! Sigorta işlemlerinizle ilgili tüm destek ve önerileriniz için iletişim bilgilerimize bu sayfa üzerinden ulaşabilirsiniz.",
     url: "https://sigorka.com/iletisim",
-    type: "website"
+    type: "website",
+    images: [
+      {
+        url: "https://sigorka.com/images/sigorka-og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "İletişim - Sigorka Destek ve İletişim Bilgileri | Sigorka"
+      }
+    ]
   },
   twitter: {
     title: "İletişim - Sigorka Destek ve İletişim Bilgileri | Sigorka",
     description: "Sorularınız için bize ulaşın! Sigorta işlemlerinizle ilgili tüm destek ve önerileriniz için iletişim bilgilerimize bu sayfa üzerinden ulaşabilirsiniz.",
-    card: "summary_large_image"
+    card: "summary_large_image",
+    images: ["https://sigorka.com/images/sigorka-og-image.png"]
   }
 };
 

@@ -22,6 +22,9 @@ import {
   validateCvv,
   validateCardHolderIdentityNumber,
 } from '@/utils/validators';
+import { pushTrafikPaymentSuccess, pushTrafikPaymentFailed } from '../../utils/dataLayerUtils';
+import DocumentErrorModal from '@/components/common/DocumentErrorModal';
+import { isIOS, createPlaceholderWindow, fetchAndOpenPdf } from '../../../shared/utils/pdfUtils';
 
 interface PremiumData {
   installmentNumber: number;
@@ -71,6 +74,7 @@ export default function TrafikPurchaseStep({ onNext, onBack }: TrafikPurchaseSte
   const [isSendingPreInfoForm, setIsSendingPreInfoForm] = useState(false);
   const [offerDetailsAccepted, setOfferDetailsAccepted] = useState(false);
   const [preInfoFormAccepted, setPreInfoFormAccepted] = useState(false);
+  const [showDocumentErrorModal, setShowDocumentErrorModal] = useState(false);
   const [currentPremium, setCurrentPremium] = useState<PremiumData | null | undefined>(null);
 
   // Başarılı/Başarısız ekran state'leri
@@ -140,13 +144,29 @@ export default function TrafikPurchaseStep({ onNext, onBack }: TrafikPurchaseSte
         const selectedProduct = proposalData.products?.find((p: any) => p.id === productId);
 
         if (selectedProduct) {
+          // Önce localStorage'dan seçilen taksit bilgisini kontrol et
+          const storedQuote = localStorage.getItem('selectedQuoteForPurchase');
+          let selectedInstallment = selectedProduct.premiums?.[0]?.installmentNumber || 1;
+          
+          if (storedQuote) {
+            try {
+              const parsedStoredQuote = JSON.parse(storedQuote);
+              // Aynı quote için kayıtlı taksit bilgisi varsa onu kullan
+              if (parsedStoredQuote.id === selectedProduct.id && parsedStoredQuote.selectedInstallmentNumber) {
+                selectedInstallment = parsedStoredQuote.selectedInstallmentNumber;
+              }
+            } catch (e) {
+              // Parse hatası durumunda varsayılan değeri kullan
+            }
+          }
+
           const quoteData: SelectedQuoteData = {
             id: selectedProduct.id,
             company: selectedProduct.insuranceCompanyName,
             insuranceCompanyId: selectedProduct.insuranceCompanyId,
             productId: selectedProduct.productId,
             premiums: selectedProduct.premiums,
-            selectedInstallmentNumber: selectedProduct.premiums?.[0]?.installmentNumber || 1,
+            selectedInstallmentNumber: selectedInstallment,
             proposalProductId: selectedProduct.id,
             proposalId: proposalId,
             insuranceCompany: {
@@ -532,11 +552,17 @@ export default function TrafikPurchaseStep({ onNext, onBack }: TrafikPurchaseSte
       setShowSuccessScreen(true);
       setIsProcessing(false);
 
+      // Ödeme başarılı dataLayer push
+      pushTrafikPaymentSuccess();
+
     } catch (error: any) {
       setErrorMessage(`Satın alma başarısız: ${error.message}`);
       setIsProcessing(false);
       cleanupLocalStorage();
       setShowErrorScreen(true);
+
+      // Ödeme başarısız dataLayer push
+      pushTrafikPaymentFailed(error.message);
     }
   };
 
@@ -573,11 +599,78 @@ export default function TrafikPurchaseStep({ onNext, onBack }: TrafikPurchaseSte
         throw new Error("Döküman URL'si bulunamadı");
       }
     } catch (error) {
-      setErrorMessage('Ön bilgilendirme formu görüntülenirken bir hata oluştu.');
+      setShowDocumentErrorModal(true);
     } finally {
       setIsSendingPreInfoForm(false);
     }
   };
+
+  const handleViewOfferDocument = async () => {
+    if (!selectedQuoteData || !token) {
+      setErrorMessage('Teklif bilgisi veya oturum bilgisi bulunamadı.');
+      return;
+    }
+    
+    const proposalId = localStorage.getItem('currentProposalId') || selectedQuoteData.proposalId;
+    const proposalProductId = selectedQuoteData.id;
+
+    if (!proposalId || !proposalProductId) {
+      setErrorMessage('Teklif belgesi için gerekli ID bilgileri eksik.');
+      return;
+    }
+
+    // iOS için popup blocker'ı aşmak için kullanıcı etkileşimi sırasında window aç
+    const placeholderWindow = isIOS() ? createPlaceholderWindow() : null;
+
+    try {
+      const response = await fetchWithAuth(
+        API_ENDPOINTS.PROPOSAL_PRODUCT_DOCUMENT(proposalId, proposalProductId),
+        {
+          method: 'GET',
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Döküman görüntülenirken bir hata oluştu');
+      }
+
+      const data = await response.json();
+      if (data.url) {
+        await fetchAndOpenPdf(data.url, placeholderWindow);
+      }
+    } catch (error) {
+      console.error('Document view error:', error);
+      // Hata durumunda placeholder window'u kapat
+      if (placeholderWindow && !placeholderWindow.closed) {
+        placeholderWindow.close();
+      }
+      setShowDocumentErrorModal(true);
+    }
+  };
+
+  // Kart sahibi sigortalı ile aynı ise fullName'i otomatik doldur
+  useEffect(() => {
+    const fetchCustomerName = async () => {
+      if (isCardHolderSameAsInsured) {
+        try {
+          const customerProfile = await customerApi.getProfile();
+          if (customerProfile?.fullName) {
+            setCardHolder(customerProfile.fullName.toUpperCase());
+            setFormErrors(prev => ({ ...prev, cardHolder: '' }));
+          }
+        } catch (error) {
+          console.error('Error fetching customer profile:', error);
+        }
+      } else {
+        // Kart sahibi farklı ise input'u temizle
+        setCardHolder('');
+        setFormErrors(prev => ({ ...prev, cardHolder: '' }));
+      }
+    };
+
+    fetchCustomerName();
+  }, [isCardHolderSameAsInsured]);
 
   useEffect(() => {
     return () => {
@@ -688,7 +781,11 @@ export default function TrafikPurchaseStep({ onNext, onBack }: TrafikPurchaseSte
                     type="radio"
                     name="cardOwnerSame"
                     checked={!isCardHolderSameAsInsured}
-                    onChange={() => setIsCardHolderSameAsInsured(false)}
+                    onChange={() => {
+                      setIsCardHolderSameAsInsured(false);
+                      setCardHolder('');
+                      setFormErrors(prev => ({ ...prev, cardHolder: '' }));
+                    }}
                   />
                   <span>Hayır</span>
                 </label>
@@ -748,12 +845,18 @@ export default function TrafikPurchaseStep({ onNext, onBack }: TrafikPurchaseSte
               placeholder="Kart Numarası"
               value={cardNumber}
               onChange={(e) => {
-                const digitsOnly = e.target.value.replace(/\D/g, '');
+                const rawValue = e.target.value;
+                const hasNonDigit = /[^\d\s]/.test(rawValue);
+                const digitsOnly = rawValue.replace(/\D/g, '');
                 const truncatedDigits = digitsOnly.slice(0, 16);
                 const formattedValue = truncatedDigits.replace(/(.{4})/g, '$1 ').trim();
                 setCardNumber(formattedValue);
-                const validation = validateCardNumber(truncatedDigits);
-                setFormErrors(prev => ({ ...prev, cardNumber: validation.isValid ? '' : (validation.message || '') }));
+                if (hasNonDigit) {
+                  setFormErrors(prev => ({ ...prev, cardNumber: 'Yalnızca rakamlardan oluşmalıdır.' }));
+                } else {
+                  const validation = validateCardNumber(truncatedDigits);
+                  setFormErrors(prev => ({ ...prev, cardNumber: validation.isValid ? '' : (validation.message || '') }));
+                }
               }}
               maxLength={19}
             />
@@ -771,7 +874,9 @@ export default function TrafikPurchaseStep({ onNext, onBack }: TrafikPurchaseSte
                 placeholder="Ay / Yıl"
                 value={expiryDate}
                 onChange={(e) => {
-                  let value = e.target.value.replace(/\D/g, '');
+                  const rawValue = e.target.value;
+                  const hasNonDigit = /[^\d/]/.test(rawValue);
+                  let value = rawValue.replace(/\D/g, '');
                   if (value.length > 0 && !['0', '1'].includes(value[0])) {
                     value = '';
                   }
@@ -785,8 +890,12 @@ export default function TrafikPurchaseStep({ onNext, onBack }: TrafikPurchaseSte
                     value = value.slice(0, 2) + '/' + value.slice(2);
                   }
                   setExpiryDate(value.slice(0, 5));
-                  const validation = validateExpiryDate(value);
-                  setFormErrors(prev => ({ ...prev, expiryDate: validation.isValid ? '' : (validation.message || '') }));
+                  if (hasNonDigit) {
+                    setFormErrors(prev => ({ ...prev, expiryDate: 'Yalnızca rakamlardan oluşmalıdır.' }));
+                  } else {
+                    const validation = validateExpiryDate(value);
+                    setFormErrors(prev => ({ ...prev, expiryDate: validation.isValid ? '' : (validation.message || '') }));
+                  }
                 }}
                 maxLength={5}
               />
@@ -802,11 +911,17 @@ export default function TrafikPurchaseStep({ onNext, onBack }: TrafikPurchaseSte
                 placeholder="CVC / CVV"
                 value={cvv}
                 onChange={(e) => {
-                  const value = e.target.value.replace(/\D/g, '');
+                  const rawValue = e.target.value;
+                  const hasNonDigit = /\D/.test(rawValue);
+                  const value = rawValue.replace(/\D/g, '');
                   if (value.length <= 3) {
                     setCvv(value);
-                    const validation = validateCvv(value);
-                    setFormErrors(prev => ({ ...prev, cvv: validation.isValid ? '' : (validation.message || '') }));
+                    if (hasNonDigit) {
+                      setFormErrors(prev => ({ ...prev, cvv: 'Yalnızca rakamlardan oluşmalıdır.' }));
+                    } else {
+                      const validation = validateCvv(value);
+                      setFormErrors(prev => ({ ...prev, cvv: validation.isValid ? '' : (validation.message || '') }));
+                    }
                   }
                 }}
                 maxLength={3}
@@ -827,7 +942,16 @@ export default function TrafikPurchaseStep({ onNext, onBack }: TrafikPurchaseSte
                 <div className="pp-toggle-knob">{offerDetailsAccepted ? '✓' : '✕'}</div>
               </div>
               <p className="pp-toggle-text">
-                <strong>Teklif detaylarını</strong> okudum, onaylıyorum.
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleViewOfferDocument();
+                  }}
+                
+                >
+                  <strong>Teklif detaylarını</strong>
+                </a> okudum, onaylıyorum.
               </p>
             </div>
 
@@ -847,11 +971,29 @@ export default function TrafikPurchaseStep({ onNext, onBack }: TrafikPurchaseSte
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleViewPreInfoForm();
+                    if (!isSendingPreInfoForm) {
+                      handleViewPreInfoForm();
+                    }
+                  }}
+                  style={{
+                    pointerEvents: isSendingPreInfoForm ? 'none' : 'auto',
+                    opacity: isSendingPreInfoForm ? 0.6 : 1,
+                    cursor: isSendingPreInfoForm ? 'not-allowed' : 'pointer'
                   }}
                 >
                   <strong>Ön Bilgilendirme Formu</strong>
                 </a> 'nu okudum, kabul ediyorum.
+                {isSendingPreInfoForm && (
+                  <span style={{ marginLeft: '8px', display: 'inline-block' }}>
+                    <span className="pp-btn-spinner" style={{ 
+                      width: '12px', 
+                      height: '12px', 
+                      borderWidth: '2px',
+                      display: 'inline-block',
+                      verticalAlign: 'middle'
+                    }}></span>
+                  </span>
+                )}
               </p>
             </div>
           </div>
@@ -877,6 +1019,7 @@ export default function TrafikPurchaseStep({ onNext, onBack }: TrafikPurchaseSte
                 <img
                   src={selectedQuoteData.insuranceCompanyLogo}
                   alt={selectedQuoteData.company || 'Sigorta Şirketi'}
+                  style={selectedQuoteData.insuranceCompanyLogo?.includes('hdi-katilim') ? { maxWidth: '80px', maxHeight: '120px', objectFit: 'contain' } : undefined}
                 />
               ) : (
                 <span className="pp-summary-logo-text">{selectedQuoteData?.company || ''}</span>
@@ -889,7 +1032,9 @@ export default function TrafikPurchaseStep({ onNext, onBack }: TrafikPurchaseSte
               <img
                 src={selectedQuoteData.insuranceCompanyLogo}
                 alt={selectedQuoteData.company || 'Sigorta Şirketi'}
-                style={{ maxWidth: '150px', maxHeight: '120px', objectFit: 'contain' }}
+                style={selectedQuoteData.insuranceCompanyLogo?.includes('hdi-katilim') 
+                  ? { maxWidth: '80px', maxHeight: '120px', objectFit: 'contain' } 
+                  : { maxWidth: '150px', maxHeight: '120px', objectFit: 'contain' }}
               />
             ) : (
               <div className="pp-summary-logo-placeholder">
@@ -928,19 +1073,19 @@ export default function TrafikPurchaseStep({ onNext, onBack }: TrafikPurchaseSte
             </svg>
             Tekliflere Geri Dön
           </button>
-          <div className="offer-banner offer-banner-car-bg offer-banner-purchase offer-banner-kasko" >
-                        <div className="offer-banner__content">
-                            <h3>Tamamlayıcı<br/> Sağlık Sigortası</h3>
-                            <p>Sağlığınızı da güvence altına alın.<br/> 250.000 TL</p>
-                            <ul>
-                                <li>Bu teklif <b>%15 indirimli fiyat</b> üzerinden  sunulmaktadır.</li>
-                                <li>Yalnızca bu poliçe satın alımıyla birlikte geçerlidir.</li>
-                            </ul>
-                        </div>
-                        <div className="offer-banner__cta">
-                            <a className="btn btn-wide btn-tertiary" href="/kasko-teklif" target="_self">Hemen Teklif Alın</a>
-                        </div>
-                    </div>
+          {/* <div className="offer-banner offer-banner-car-bg offer-banner-purchase offer-banner-kasko" >
+            <div className="offer-banner__content">
+              <h3>Tamamlayıcı<br /> Sağlık Sigortası</h3>
+              <p>Sağlığınızı da güvence altına alın.<br /> 250.000 TL</p>
+              <ul>
+                <li>Bu teklif <b>%15 indirimli fiyat</b> üzerinden  sunulmaktadır.</li>
+                <li>Yalnızca bu poliçe satın alımıyla birlikte geçerlidir.</li>
+              </ul>
+            </div>
+            <div className="offer-banner__cta">
+              <a className="btn btn-wide btn-tertiary" href="/kasko-sigortasi" target="_self">Hemen Teklif Alın</a>
+            </div>
+          </div> */}
         </div>
       </div>
 
@@ -969,6 +1114,12 @@ export default function TrafikPurchaseStep({ onNext, onBack }: TrafikPurchaseSte
           }}
         />
       )}
+
+      {/* Document Error Modal */}
+      <DocumentErrorModal
+        isOpen={showDocumentErrorModal}
+        onClose={() => setShowDocumentErrorModal(false)}
+      />
     </>
   );
 }

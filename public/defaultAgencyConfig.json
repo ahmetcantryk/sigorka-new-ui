@@ -70,6 +70,9 @@
       "690c3e42286631cc10a898e0",
       "68fbd865b947fdacddecd1dd"
     ],
+    "sigorka-konut": [
+      "692c3c95545e2781a739dcd4"
+    ],
     "saglik": [
       "69170cb94779b27e287b0a3a",
       "69170c8a70006383c499c411",
@@ -130,7 +133,7 @@
           "name": "İMM",
           "isActive": false,
           "order": 6,
-          "link": "/imm-teklif-al",
+          "link": "/imm-al",
           "icon": "Shield"
         }
       ]
@@ -300,7 +303,8 @@
               3243
             ],
             "dask": [
-              52
+              52,
+              3483
             ],
             "imm": [
               3245
@@ -454,7 +458,8 @@
               1506
             ],
             "konut": [
-              1512
+              1512,
+              33
             ],
             "yuvamguvende": [
               33

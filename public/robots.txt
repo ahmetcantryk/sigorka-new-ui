@@ -1,8 +1,4 @@
 User-agent: *
-Allow: /
-
-Disallow: /api/
-Disallow: /_next/
-Disallow: /yuvamguvende
+Disallow: /
 
 Sitemap: https://sigorka.com/sitemap.xml

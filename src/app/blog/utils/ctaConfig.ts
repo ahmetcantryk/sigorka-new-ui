@@ -31,7 +31,7 @@ export const getCTAConfigForBlog = (categories?: Category[]) => {
       title: 'Katılım Kasko Sigortasına mı ihtiyacınız var?',
       description: 'En uygun tekliflerle aracınızı kaskolamak için şimdi teklif alın.',
       buttonText: 'Hemen Teklif Alın',
-      buttonLink: '/kasko-teklif'
+      buttonLink: '/kasko-sigortasi'
     };
   }
 
@@ -41,7 +41,7 @@ export const getCTAConfigForBlog = (categories?: Category[]) => {
       title: 'İMM Sigortasına mı ihtiyacınız var?',
       description: 'Mali sorumluluk güvencesi için en uygun İMM sigortası tekliflerini alın.',
       buttonText: 'Hemen Teklif Alın',
-      buttonLink: '/imm-teklif'
+      buttonLink: '/imm'
     };
   }
 
@@ -51,7 +51,7 @@ export const getCTAConfigForBlog = (categories?: Category[]) => {
       title: 'Özel Sağlık Sigortasına mı ihtiyacınız var?',
       description: 'Kapsamlı sağlık koruması için en uygun özel sağlık sigortası tekliflerini alın.',
       buttonText: 'Hemen Teklif Alın',
-      buttonLink: '/ozel-saglik-teklif'
+      buttonLink: '/ozel-saglik-sigortasi'
     };
   }
 
@@ -61,7 +61,7 @@ export const getCTAConfigForBlog = (categories?: Category[]) => {
       title: 'DASK Sigortasına mı ihtiyacınız var?',
       description: 'Deprem riskine karşı korunmak için en uygun DASK sigortası tekliflerini alın.',
       buttonText: 'Hemen Teklif Alın',
-      buttonLink: '/dask-teklif'
+      buttonLink: '/dask'
     };
   }
 
@@ -71,7 +71,7 @@ export const getCTAConfigForBlog = (categories?: Category[]) => {
       title: 'Ferdi Kaza Sigortasına mı ihtiyacınız var?',
       description: 'Beklenmedik kazalara karşı korunmak için ferdi kaza sigortası tekliflerini inceleyin.',
       buttonText: 'Hemen Teklif Alın',
-      buttonLink: '/ferdi-kaza-teklif'
+      buttonLink: '/ferdi-kaza-sigortasi'
     };
   }
 

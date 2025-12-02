@@ -14,12 +14,21 @@ export const metadata: Metadata = {
     title: "KVKK Aydınlatma Metni - Veri Güvenliği Politikası | Sigorka",
     description: "6698 sayılı KVKK kapsamında kişisel verilerinizin korunması, saklanması ve işlenmesine dair tüm bilgiler burada. Daha fazlası için sitemizi ziyaret edin.",
     url: "https://sigorka.com/kvkk",
-    type: "website"
+    type: "website",
+    images: [
+      {
+        url: "https://sigorka.com/images/sigorka-og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "KVKK Aydınlatma Metni - Veri Güvenliği Politikası | Sigorka"
+      }
+    ]
   },
   twitter: {
     title: "KVKK Aydınlatma Metni - Veri Güvenliği Politikası | Sigorka",
     description: "6698 sayılı KVKK kapsamında kişisel verilerinizin korunması, saklanması ve işlenmesine dair tüm bilgiler burada. Daha fazlası için sitemizi ziyaret edin.",
-    card: "summary_large_image"
+    card: "summary_large_image",
+    images: ["https://sigorka.com/images/sigorka-og-image.png"]
   }
 };
 

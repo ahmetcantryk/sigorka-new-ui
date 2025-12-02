@@ -909,7 +909,7 @@ export default function YGQuoteComparisonStep({ onNext, onBack }: YGQuoteCompari
                   title="Uygun Teklif Bulunamadı"
                   subtitle="Konut bilgilerinize göre uygun teklif bulunamadı. Bilgilerinizi kontrol edip tekrar deneyebilirsiniz veya müşteri iletişim merkezi numaramızdan bize ulaşabilirsiniz."
                   onAction={() => {
-                    window.location.href = 'tel:08504044444';
+                    window.location.href = 'tel:08504040404';
                   }}
                   actionText="İletişim Merkezi: 0850 404 04 04"
               />

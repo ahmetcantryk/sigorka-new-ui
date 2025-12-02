@@ -154,9 +154,18 @@ export default async function KampanyaDetayPage({params}: {params: Promise<{ slu
             <div className="row">
               <div className="col-md-8">
                 <div className="blog-post-intro__img">
+                  {/* Mobil görsel (dar) */}
+                  <Image 
+                    src={kampanya.image} 
+                    className="blog-promo__item-img img-fluid campaign-mobile-img" 
+                    alt={kampanya.title}
+                    width={792}
+                    height={662}
+                  />
+                  {/* Desktop görsel (geniş) */}
                   <Image 
                     src={kampanya.detailImage} 
-                    className="blog-promo__item-img img-fluid" 
+                    className="blog-promo__item-img img-fluid campaign-desktop-img" 
                     alt={kampanya.title}
                     width={800}
                     height={400}

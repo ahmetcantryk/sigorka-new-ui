@@ -22,12 +22,21 @@ export const metadata: Metadata = {
       title: "Kasko Sigortası - Araç Korumasında Güvence | Sigorka",
       description: "Çarpma, çalınma, yangın ve bir çok çeşitli beklenmedik risklere karşı aracınızı güvence altına almak için uygun kasko tekliflerini hemen inceleyebilirsiniz.",
       url: "https://sigorka.com/kasko-sigortasi",
-      type: "website"
+      type: "website",
+      images: [
+        {
+          url: "https://sigorka.com/images/sigorka-og-image.png",
+          width: 1200,
+          height: 630,
+          alt: "Kasko Sigortası - Araç Korumasında Güvence | Sigorka"
+        }
+      ]
     },
     twitter: {
       title: "Kasko Sigortası - Araç Korumasında Güvence | Sigorka",
       description: "Çarpma, çalınma, yangın ve bir çok çeşitli beklenmedik risklere karşı aracınızı güvence altına almak için uygun kasko tekliflerini hemen inceleyebilirsiniz.",
-      card: "summary_large_image"
+      card: "summary_large_image",
+      images: ["https://sigorka.com/images/sigorka-og-image.png"]
     }
   };
 

@@ -272,7 +272,7 @@
     }
 
     .sticky-navbar__btn {
-        display: none;
+        display: none !important;
     }
 }
 
@@ -294,7 +294,7 @@
     }
 
     .sticky-navbar__btn {
-        display: none;
+        display: none !important;
     }
 
     .sticky-navbar__mobile {
@@ -705,16 +705,16 @@
 }
 
 .page-content h3,.text-content h3 {
-    font-size: 28px;
+    font-size: 20px;
     font-weight: bold;
     color: #d9ae5f;
     margin-bottom: 30px;
-    line-height: 1.4;
+    /* line-height: 1.4; */
 }
 
 @media(max-width: 767px) {
     .page-content h3,.text-content h3 {
-        font-size:20px;
+        font-size:18px;
     }
 }
 
@@ -2020,6 +2020,25 @@
     object-fit: cover;
     width: 100%;
     height: 100%;
+}
+
+/* Kampanya görselleri - mobil ve desktop ayrımı */
+.campaign-mobile-img {
+    display: block;
+}
+
+.campaign-desktop-img {
+    display: none;
+}
+
+@media(min-width: 768px) {
+    .campaign-mobile-img {
+        display: none;
+    }
+    
+    .campaign-desktop-img {
+        display: block;
+    }
 }
 
 @media(max-width: 767px) {

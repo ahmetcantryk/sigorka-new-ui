@@ -14,12 +14,21 @@ export const metadata: Metadata = {
     title: "Kullanıcı Sözleşmesi - Sigorka Hizmet Şartları | Sigorka",
     description: "Sigorka'yı kullanırken geçerli olan şartlar, hak ve yükümlülüklerin tümüne kullanıcı sözleşmesi üzerinden ulaşabilir ve detayları inceleyebilirsiniz.",
     url: "https://sigorka.com/kullanici-sozlesmesi",
-    type: "website"
+    type: "website",
+    images: [
+      {
+        url: "https://sigorka.com/images/sigorka-og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Kullanıcı Sözleşmesi - Sigorka Hizmet Şartları | Sigorka"
+      }
+    ]
   },
   twitter: {
     title: "Kullanıcı Sözleşmesi - Sigorka Hizmet Şartları | Sigorka",
     description: "Sigorka'yı kullanırken geçerli olan şartlar, hak ve yükümlülüklerin tümüne kullanıcı sözleşmesi üzerinden ulaşabilir ve detayları inceleyebilirsiniz.",
-    card: "summary_large_image"
+    card: "summary_large_image",
+    images: ["https://sigorka.com/images/sigorka-og-image.png"]
   }
 };
 

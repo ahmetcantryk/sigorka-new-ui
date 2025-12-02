@@ -7,6 +7,7 @@ import { VehicleUtilizationStyle, VehicleFuelType } from '../../../types/enums/v
 import { AccessoryType } from '../../../types/enums/accessoryEnums';
 import { fetchWithAuth } from '../../../services/fetchWithAuth';
 import { API_ENDPOINTS, API_BASE_URL } from '../../../config/api';
+import { MODEL_YEAR_OPTIONS } from '../../ProductPageFlow/KaskoFlow/config/kaskoConstants';
 
 
 // VehicleType tipi
@@ -1254,13 +1255,12 @@ const AddVehicleModal: React.FC<AddVehicleModalProps> = ({ onClose, initialData,
             </div>
 
             <div>
-              <Input
+              <CustomSelect
                 label="Model Yılı"
-                type="number"
-                min="1900"
-                max={new Date().getFullYear() + 1}
                 value={formData.modelYear}
-                onChange={(e) => handleChange('modelYear', e.target.value)}
+                onChange={(value) => handleChange('modelYear', value)}
+                options={MODEL_YEAR_OPTIONS}
+                searchable={true}
               />
               {errors.modelYear && (
                 <p className="mt-1 text-xs text-red-500">{errors.modelYear}</p>
@@ -1798,7 +1798,7 @@ const AddVehicleModal: React.FC<AddVehicleModalProps> = ({ onClose, initialData,
 
           {/* Dain-i Mürtehin */}
           <div>
-            <h3 className="mb-3 font-medium text-gray-900 text-sm md:text-base">Dain-i Mürtehin</h3>
+            <h3 className="mb-3 font-medium text-gray-900 text-sm md:text-base">Rehin Alacaklı Var mı? (Dain-i Mürtehin)</h3>
             <div className="flex flex-col md:flex-row gap-3">
               <button
                 type="button"

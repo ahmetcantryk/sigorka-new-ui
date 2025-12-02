@@ -43,7 +43,10 @@
     --light-gray: #d8d8d8;
     --black: #000000;
 }
-
+.detail-ul {
+    list-style-type: numeric;
+    padding-left: 20px;
+}
 *,*::before,*::after {
     box-sizing: border-box;
 }
@@ -8853,7 +8856,7 @@ body.product-detail-page .navbar {
 
 .main-nav__link--btn-primary:hover {
     background-color: #241c5a!important;
-    color: #b5b0eb!important;
+    color: white!important;
     transition: background-color linear .4s!important;
 }
 

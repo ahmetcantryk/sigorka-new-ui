@@ -19,6 +19,7 @@ interface TrafikQuoteListProps {
   onOpenModal: (quote: ProcessedTrafikQuote) => void;
   onViewDocument: (proposalId: string, productId: string) => void;
   onOpenComparisonModal?: () => void;
+  loadingDocumentQuoteId: string | null;
 }
 
 const TrafikQuoteList = ({
@@ -29,6 +30,7 @@ const TrafikQuoteList = ({
   onOpenModal,
   onViewDocument,
   onOpenComparisonModal,
+  loadingDocumentQuoteId,
 }: TrafikQuoteListProps) => {
   const [filterOpen, setFilterOpen] = useState(false);
   const [sortOpen, setSortOpen] = useState(false);
@@ -38,6 +40,10 @@ const TrafikQuoteList = ({
   const coverageGroups = getUniqueCoverageGroups(quotes as any);
   const filteredQuotes = filterQuotes(quotes as any, selectedFilter) as ProcessedTrafikQuote[];
   const sortedQuotes = sortQuotes(filteredQuotes as any, selectedSort) as ProcessedTrafikQuote[];
+  
+  // En az 2 aktif teklif yoksa karşılaştırma butonu disabled
+  const activeQuotesCount = quotes.filter(q => q.state === 'ACTIVE').length;
+  const isCompareDisabled = activeQuotesCount < 2;
 
   return (
     <div className="pp-card">
@@ -47,7 +53,12 @@ const TrafikQuoteList = ({
       {/* Top Controls */}
       <div className="pp-quote-controls">
         {onOpenComparisonModal && (
-          <button className="pp-btn-compare" onClick={onOpenComparisonModal}>
+          <button 
+            className="pp-btn-compare" 
+            onClick={onOpenComparisonModal}
+            disabled={isCompareDisabled}
+            title={isCompareDisabled ? 'Karşılaştırma için en az 2 aktif teklif gereklidir' : ''}
+          >
             <svg className="pp-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
             </svg>
@@ -119,6 +130,7 @@ const TrafikQuoteList = ({
             onPurchase={onPurchase}
             onOpenModal={onOpenModal}
             onViewDocument={onViewDocument}
+            isLoadingDocument={loadingDocumentQuoteId === quote.id}
           />
         ))}
       </div>

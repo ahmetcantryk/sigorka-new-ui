@@ -18,7 +18,7 @@ export default function SaglikQuoteComparisonPageComponent() {
   };
 
   const handleBack = () => {
-    router.push('/acil-saglik-teklif');
+    router.push('/acil-saglik-sigortasi');
   };
 
   return (

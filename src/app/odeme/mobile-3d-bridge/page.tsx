@@ -25,7 +25,7 @@ export default function Mobile3DBridgePage() {
   useEffect(() => {
     const initMobilePayment = async () => {
       const sessionToken = searchParams.get('sessionToken');
-      const returnPath = searchParams.get('returnPath') || '/kasko-teklif';
+      const returnPath = searchParams.get('returnPath') || '/kasko-sigortasi';
       
       if (!sessionToken) {
         setStatus('error');

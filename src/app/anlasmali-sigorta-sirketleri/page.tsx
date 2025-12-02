@@ -18,12 +18,21 @@ export const metadata: Metadata = {
     title: "Anlaşmalı Sigorta Şirketleri | Sigorka Partnerleri",
     description: "Sigorka iş birliğiyle hizmet veren tüm sigortacılık şirketlerini bu sayfa üzerinden inceleyebilir, aralarında detaylı karşılaştırmalar yapabilirsiniz.",
     url: "https://sigorka.com/anlasmali-sigorta-sirketleri",
-    type: "website"
+    type: "website",
+    images: [
+      {
+        url: "https://sigorka.com/images/sigorka-og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Anlaşmalı Sigorta Şirketleri | Sigorka Partnerleri"
+      }
+    ]
   },
   twitter: {
     title: "Anlaşmalı Sigorta Şirketleri | Sigorka Partnerleri",
     description: "Sigorka iş birliğiyle hizmet veren tüm sigortacılık şirketlerini bu sayfa üzerinden inceleyebilir, aralarında detaylı karşılaştırmalar yapabilirsiniz.",
-    card: "summary_large_image"
+    card: "summary_large_image",
+    images: ["https://sigorka.com/images/sigorka-og-image.png"]
   }
 };
 

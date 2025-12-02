@@ -10,19 +10,19 @@ const yuvamProducts = [
     title: "DASK",
     img: "/images/product-icons-subpage/dask.svg",
     alt: "DASK",
-    link: "/dask-teklif"
+    link: "/dask"
   },
   {
     title: "Katılım Konut Sigortası",
     img: "/images/product-icons-subpage/katilim-konut-sigortasi.svg",
     alt: "Katılım Konut Sigortası",
-    link: "/konut-teklif"
+    link: "/konut-sigortasi"
   },
   {
     title: "Ferdi Kaza Sigortası",
     img: "/images/product-icons-subpage/ferdi-kaza-sigortasi.svg",
     alt: "Ferdi Kaza Sigortası",
-    link: "/ferdi-kaza-teklif"
+    link: "/ferdi-kaza-sigortasi"
   }
 ];
 

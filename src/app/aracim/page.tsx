@@ -29,19 +29,19 @@ const aracimProducts = [
     title: "Katılım Kasko Sigortası",
     img: "/images/product-icons-subpage/katilim-kasko-sigortasi.svg",
     alt: "Katılım Kasko Sigortası",
-    link: "/kasko-teklif"
+    link: "/kasko-sigortasi"
   },
   {
     title: "Katılım Zorunlu Trafik Sigortası",
     img: "/images/product-icons-subpage/katilim-zorunlu-trafik-sigortasi.svg",
     alt: "Katılım Zorunlu Trafik Sigortası",
-    link: "/trafik-teklif"
+    link: "/zorunlu-trafik-sigortasi"
   },
   {
     title: "İMM Sigortası",
     img: "/images/product-icons-subpage/ferdi-kaza-sigortasi.svg",
     alt: "İMM Sigortası",
-    link: "/imm-teklif"
+    link: "/imm"
   }
 ];
 

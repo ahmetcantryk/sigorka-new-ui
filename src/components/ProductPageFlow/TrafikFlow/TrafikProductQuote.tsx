@@ -6,7 +6,7 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useAgencyConfig } from '@/context/AgencyConfigProvider';
 import { fetchWithAuth } from '@/services/fetchWithAuth';
@@ -25,6 +25,7 @@ import { useTrafikQuotes } from './hooks/useTrafikQuotes';
 // Utils
 import { prepareTrafikPurchaseData, saveTrafikPurchaseDataToStorage, getSelectedTrafikPremium } from './utils/quoteUtils';
 import { pushTrafikPurchaseClick } from './utils/dataLayerUtils';
+import { isIOS, createPlaceholderWindow, fetchAndOpenPdf } from '../shared/utils/pdfUtils';
 
 // Types
 import type { ProcessedTrafikQuote } from './types';
@@ -52,21 +53,39 @@ const TrafikProductQuote = ({ proposalId, onBack, onPurchaseClick }: TrafikProdu
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedQuoteForModal, setSelectedQuoteForModal] = useState<ProcessedTrafikQuote | null>(null);
   const [isComparisonModalOpen, setIsComparisonModalOpen] = useState(false);
+  const [loadingDocumentQuoteId, setLoadingDocumentQuoteId] = useState<string | null>(null);
+
+  // Sayfa yüklendiğinde en üste scroll
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  // Teklifler yüklendiğinde de scroll
+  useEffect(() => {
+    if (!isLoading && quotes.length > 0) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [isLoading, quotes.length]);
 
   // Handlers
-  const handlePurchase = (quoteId: string) => {
-    console.log('🛒 handlePurchase called with quoteId:', quoteId);
+  const handlePurchase = (quoteId: string, installmentNumber?: number) => {
+    console.log('🛒 handlePurchase called with quoteId:', quoteId, 'installmentNumber:', installmentNumber);
 
     const selectedFullQuote = quotes.find(q => q.id === quoteId);
 
     if (selectedFullQuote && selectedFullQuote.state === 'ACTIVE') {
-      const purchaseData = prepareTrafikPurchaseData(selectedFullQuote, proposalId);
+      // Eğer karşılaştırma modalından taksit bilgisi geldiyse, quote'u override et
+      const quoteForPurchase = installmentNumber !== undefined 
+        ? { ...selectedFullQuote, selectedInstallmentNumber: installmentNumber }
+        : selectedFullQuote;
+      
+      const purchaseData = prepareTrafikPurchaseData(quoteForPurchase, proposalId);
       saveTrafikPurchaseDataToStorage(purchaseData, proposalId);
 
       console.log('✅ Purchase data saved to localStorage:', purchaseData);
 
       // DataLayer push
-      const premium = getSelectedTrafikPremium(selectedFullQuote);
+      const premium = getSelectedTrafikPremium(quoteForPurchase);
       pushTrafikPurchaseClick(quoteId, selectedFullQuote.company, premium?.grossPremium);
 
       // Callback
@@ -102,11 +121,16 @@ const TrafikProductQuote = ({ proposalId, onBack, onPurchaseClick }: TrafikProdu
 
   const handleViewDocument = async (proposalIdParam: string, productIdParam: string) => {
     if (!accessToken) return;
+    
+    // iOS için popup blocker'ı aşmak için kullanıcı etkileşimi sırasında window aç
+    const placeholderWindow = isIOS() ? createPlaceholderWindow() : null;
+    
+    setLoadingDocumentQuoteId(productIdParam);
     try {
       const response = await fetchWithAuth(
         API_ENDPOINTS.PROPOSAL_PRODUCT_DOCUMENT(proposalIdParam, productIdParam),
         {
-        method: 'GET',
+          method: 'GET',
           headers: { Authorization: `Bearer ${accessToken}` },
         }
       );
@@ -117,16 +141,16 @@ const TrafikProductQuote = ({ proposalId, onBack, onPurchaseClick }: TrafikProdu
 
       const data = await response.json();
       if (data.url) {
-        const pdfResponse = await fetch(data.url);
-        const blob = await pdfResponse.blob();
-        const blobUrl = window.URL.createObjectURL(blob);
-        window.open(blobUrl, '_blank');
-
-        setTimeout(() => {
-          window.URL.revokeObjectURL(blobUrl);
-        }, 1000);
+        await fetchAndOpenPdf(data.url, placeholderWindow);
       }
     } catch (error) {
+      console.error('Document view error:', error);
+      // Hata durumunda placeholder window'u kapat
+      if (placeholderWindow && !placeholderWindow.closed) {
+        placeholderWindow.close();
+      }
+    } finally {
+      setLoadingDocumentQuoteId(null);
     }
   };
 
@@ -198,6 +222,7 @@ const TrafikProductQuote = ({ proposalId, onBack, onPurchaseClick }: TrafikProdu
             onOpenModal={handleOpenModal}
             onViewDocument={handleViewDocument}
             onOpenComparisonModal={handleOpenComparisonModal}
+            loadingDocumentQuoteId={loadingDocumentQuoteId}
           />
         </div>
       </div>

@@ -129,16 +129,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'seyahat-saglik-sigortasi',
     'ferdi-kaza-sigortasi',
     'imm',
-    'kasko-teklif',
-    'imm-teklif',
-    'tss-teklif',
-    'konut-teklif',
-    'dask-teklif',
-    'trafik-teklif',
-    'ozel-saglik-teklif',
-    'ferdi-kaza-teklif',
-    // 'seyahat-saglik-teklif',
-    'yabanci-saglik-teklif',
+    'acil-saglik-sigortasi',
+    
   ].map((route) => ({
     url: `${baseUrl}/${route}`,
     lastModified: currentDate,

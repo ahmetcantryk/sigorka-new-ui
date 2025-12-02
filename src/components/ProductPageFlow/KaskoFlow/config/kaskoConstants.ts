@@ -152,9 +152,9 @@ export const COVERAGE_LABELS: Record<string, string> = {
   ferdiKazaTedaviMasraflari: 'Ferdi Kaza Tedavi Masrafları',
   anahtarKaybi: 'Anahtar Kaybı',
   maneviTazminat: 'Manevi Tazminat',
-  onarimServisTuru: 'Servis Geçerliliği',
+  onarimServisTuru: 'Servis',
   yedekParcaTuru: 'Yedek Parça Türü',
-  camKirilmaMuafeyeti: 'Cam Hasarı',
+  camKirilmaMuafeyeti: 'Cam',
   hukuksalKorumaAracaBagli: 'Hukuksal Koruma (Araca Bağlı)',
   ozelEsya: 'Özel Eşya',
   sigaraMaddeZarari: 'Sigara/Madde Zararı',
@@ -198,9 +198,9 @@ export const PART_TYPE_LABELS: Record<string, string> = {
 
 // ==================== ANA TEMİNATLAR (QUOTE CARD) ====================
 export const MAIN_COVERAGE_KEYS = [
-  'camKirilmaMuafeyeti',  // Cam Hasarı
+  'camKirilmaMuafeyeti',  // Cam
   'immLimitiAyrimsiz',    // İMM Limiti
-  'onarimServisTuru',     // Servis Geçerliliği
+  'onarimServisTuru',     // Servis
   'kiralikArac',          // İkame Araç
 ];
 
@@ -225,8 +225,8 @@ export const KASKO_FORM_DEFAULTS = {
   modelCode: '',
   model: '',
   year: new Date().getFullYear().toString(),
-  usageType: VehicleUtilizationStyle.PrivateCar,
-  fuelType: VehicleFuelType.Diesel,
+  usageType: '',
+  fuelType: '',
   engineNo: '',
   chassisNo: '',
   registrationDate: new Date().toISOString().split('T')[0],
@@ -259,5 +259,14 @@ export const POLLING_CONFIG = {
   TIMEOUT: 180000,         // 3 dakika
   INITIAL_PROGRESS: 30,    // Başlangıç progress
   FINISH_DURATION: 30000,  // Active quote sonrası 30 saniye
+  EARLY_FINISH_THRESHOLD: 120000,  // 2 dakika - Bu süreden önce kapanırsa background polling başlar
+  BACKGROUND_POLLING_DURATION: 60000,  // 1 dakika - Arka planda ek polling süresi
 };
+
+// ==================== MODEL YILI SEÇENEKLERİ ====================
+// 1970'den 2025'e kadar yıl seçenekleri (en yeniden en eskiye)
+export const MODEL_YEAR_OPTIONS = Array.from({ length: 2025 - 1970 + 1 }, (_, i) => {
+  const year = 2025 - i;
+  return { value: year.toString(), label: year.toString() };
+});
 

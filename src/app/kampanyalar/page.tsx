@@ -21,12 +21,21 @@ export const metadata: Metadata = {
     title: "Sigorta Kampanyalarını Keşfet | Sigorka Fırsatları",
     description: "Sigorka'nın avantajlı sigorta kampanyalarını keşfedin. Size özel indirimler, hediyeler ve fırsatlardan yararlanın. Hemen kampanyaları inceleyin!",
     url: "https://sigorka.com/kampanyalar",
-    type: "website"
+    type: "website",
+    images: [
+      {
+        url: "https://sigorka.com/images/sigorka-og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Sigorta Kampanyalarını Keşfet | Sigorka Fırsatları"
+      }
+    ]
   },
   twitter: {
     title: "Sigorta Kampanyalarını Keşfet | Sigorka ",
     description: "Sigorka'nın avantajlı sigorta kampanyalarını keşfedin. Size özel indirimler, hediyeler ve fırsatlardan yararlanın. Hemen kampanyaları inceleyin!",
-    card: "summary_large_image"
+    card: "summary_large_image",
+    images: ["https://sigorka.com/images/sigorka-og-image.png"]
   }
 };
 

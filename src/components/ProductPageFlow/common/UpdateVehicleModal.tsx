@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Dropdown } from 'primereact/dropdown';
+import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
+import { MODEL_YEAR_OPTIONS } from '../KaskoFlow/config/kaskoConstants';
 import { useAuthStore } from '../../../store/useAuthStore';
 import { fetchWithAuth } from '../../../services/fetchWithAuth';
 import { API_ENDPOINTS, API_BASE_URL } from '../../../config/api';
@@ -1031,14 +1032,19 @@ const UpdateVehicleModal: React.FC<UpdateVehicleModalProps> = ({ vehicleId, onCl
 
             <div className="update-vehicle-form-group">
               <label className="update-vehicle-label">Model Yılı *</label>
-              <input
-                type="number"
-                className="update-vehicle-input"
-                min="1900"
-                max={new Date().getFullYear() + 1}
-                value={formData.modelYear}
-                onChange={(e) => handleChange('modelYear', e.target.value)}
-              />
+              <div className="update-vehicle-dropdown">
+                <Dropdown
+                  value={formData.modelYear}
+                  options={MODEL_YEAR_OPTIONS}
+                  onChange={(e: DropdownChangeEvent) => handleChange('modelYear', e.value || '')}
+                  placeholder="Seçiniz"
+                  filter
+                  filterPlaceholder="Ara..."
+                  emptyFilterMessage="Sonuç bulunamadı"
+                  appendTo={document.body}
+                  panelClassName="update-vehicle-dropdown-panel"
+                />
+              </div>
               {errors.modelYear && <p className="update-vehicle-error">{errors.modelYear}</p>}
             </div>
 
@@ -1460,7 +1466,7 @@ const UpdateVehicleModal: React.FC<UpdateVehicleModalProps> = ({ vehicleId, onCl
 
           {/* Dain-i Mürtehin */}
           <div className="update-vehicle-form-section">
-            <h3 className="update-vehicle-section-title">Dain-i Mürtehin</h3>
+            <h3 className="update-vehicle-section-title">Rehin Alacaklı Var mı? (Dain-i Mürtehin)</h3>
             <div className="update-vehicle-dain-buttons">
               <button
                 type="button"

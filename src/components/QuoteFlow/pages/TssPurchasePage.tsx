@@ -23,7 +23,7 @@ export default function TssPurchasePageComponent() { // Bileşen adı güncellen
       // Kasko'da seçilen teklif bilgisi localStorage'dan okunuyordu.
       // TssQuoteComparisonPage'de zaten 'selectedTssQuoteForPurchase' kaydediliyor.
     } else {
-      // router.push('/tss-teklif'); // Eksik parametre durumunda ana sayfaya yönlendir
+      // router.push('/tamamlayici-saglik-sigortasi'); // Eksik parametre durumunda ana sayfaya yönlendir
     }
   }, [proposalId, quoteId, router]);
 

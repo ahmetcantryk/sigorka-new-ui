@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/images/sigorka-og-image.png',
+        url: 'https://sigorka.com/images/sigorka-og-image.png',
         width: 1200,
         height: 630,
         alt: 'Sigorka Blog'
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Sigorta Blogu - Güncel Haberler ve İpuçları | Sigorka',
     description: 'Sigortacılıkla ilgili güncel yazılar, ipuçları ve rehberler için blog sayfamızı ziyaret edin. Daha fazlası için sitemizi ziyaret ederek hizmetlere göz atın.',
-    images: ['/images/sigorka-og-image.png']
+    images: ['https://sigorka.com/images/sigorka-og-image.png']
   }
 };
 

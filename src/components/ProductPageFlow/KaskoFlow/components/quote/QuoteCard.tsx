@@ -15,6 +15,7 @@ import {
   shouldShowTickX,
   getCoverageDisplayValue,
   formatGuaranteeValue,
+  convertCoverageToGuarantees,
 } from '../../utils/coverageUtils';
 import { getSelectedPremium } from '../../utils/quoteUtils';
 import CoverageTooltip from '@/components/ProductPageFlow/shared/CoverageTooltip';
@@ -26,6 +27,7 @@ interface QuoteCardProps {
   onPurchase: (quoteId: string) => void;
   onOpenModal: (quote: ProcessedQuote) => void;
   onViewDocument: (proposalId: string, productId: string) => void;
+  isLoadingDocument?: boolean;
 }
 
 const QuoteCard = ({
@@ -35,6 +37,7 @@ const QuoteCard = ({
   onPurchase,
   onOpenModal,
   onViewDocument,
+  isLoadingDocument = false,
 }: QuoteCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isInstallmentsOpen, setIsInstallmentsOpen] = useState(false);
@@ -43,10 +46,35 @@ const QuoteCard = ({
   const currentPremium = getSelectedPremium(quote);
   const mainCoverages = getMainCoverages(quote);
   const additionalCoverages = getAdditionalCoverages(quote);
+  
+  // optimalCoverage'dan tüm teminatları al (UNDEFINED olanlar dahil)
+  const allCoveragesFromOptimal = convertCoverageToGuarantees(quote.optimalCoverage || null);
 
   const handleInstallmentSelect = (installmentNumber: number) => {
     onInstallmentChange(quote.id, installmentNumber);
     setIsInstallmentsOpen(false);
+  };
+
+  const handlePurchase = () => {
+    // Seçilen taksit bilgisini localStorage'a kaydet
+    const quoteDataForPurchase = {
+      id: quote.id,
+      company: quote.company,
+      insuranceCompanyId: quote.insuranceCompanyId,
+      productId: quote.productId,
+      premiums: quote.premiums,
+      selectedInstallmentNumber: quote.selectedInstallmentNumber,
+      proposalProductId: quote.id,
+      proposalId: proposalId,
+      insuranceCompanyLogo: quote.logo,
+      coverageGroupName: quote.coverageGroupName,
+      hasUndamagedDiscount: quote.hasUndamagedDiscount,
+      hasUndamagedDiscountRate: quote.hasUndamagedDiscountRate,
+    };
+    localStorage.setItem('selectedQuoteForPurchase', JSON.stringify(quoteDataForPurchase));
+    localStorage.setItem('selectedInstallmentNumber', quote.selectedInstallmentNumber.toString());
+    
+    onPurchase(quote.id);
   };
 
   return (
@@ -66,6 +94,7 @@ const QuoteCard = ({
               alt={quote.company}
               className="pp-quote-logo"
               src={quote.logo}
+              style={quote.logo?.includes('hdi-katilim') ? { width: '65px' } : undefined}
             />
           </div>
         </div>
@@ -79,6 +108,8 @@ const QuoteCard = ({
             const displayValue = getCoverageDisplayValue(guarantee);
             const isIncluded = isCoverageIncluded(guarantee);
             const showTickXIcon = shouldShowTickX(guarantee);
+            // DECIMAL type için amount > 0 ise undefined değil (valueText null olsa bile)
+            const isUndefined = guarantee.valueText === 'Belirsiz' || (guarantee.valueText === null && guarantee.amount === 0);
 
             return (
               <div key={index} className="pp-coverage-row">
@@ -87,17 +118,22 @@ const QuoteCard = ({
                   <CoverageTooltip branch="kasko" coverageKey={guarantee.label || ''} />
                 </span>
                 {showTickXIcon ? (
-                  <img
-                    src={isIncluded
-                      ? "/images/product-detail/teminat-tick.svg"
-                      : "/images/product-detail/teminat-x.svg"
-                    }
-                    alt={isIncluded ? "Dahil" : "Dahil Değil"}
-                    className="pp-coverage-icon-status"
-                  />
+                  isIncluded ? (
+                    <img
+                      src="/images/product-detail/teminat-tick.svg"
+                      alt="Dahil"
+                      className="pp-coverage-icon-status"
+                    />
+                  ) : (
+                    // optimalCoverage'dan gelen değer undefined/null ise boş bırak
+                    <span className="pp-coverage-value-text">&nbsp;</span>
+                  )
+                ) : isUndefined ? (
+                  // UNDEFINED/Belirsiz durumunda boş bırak
+                  <span className="pp-coverage-value-text">&nbsp;</span>
                 ) : (
                   <span className="pp-coverage-value-text">
-                    {displayValue || '-'}
+                    {displayValue || ''}
                   </span>
                 )}
               </div>
@@ -181,7 +217,7 @@ const QuoteCard = ({
         <div className="pp-quote-section pp-quote-buy-section">
           <button
             className="pp-btn-buy"
-            onClick={() => onPurchase(quote.id)}
+            onClick={handlePurchase}
           >
             Satın Al
           </button>
@@ -239,7 +275,7 @@ const QuoteCard = ({
                     </p>
                     <div className="pp-campaign-footer">
                       <label className="pp-campaign-radio">
-                        <input type="radio" name={`campaign-${quote.id}`} value="car-wash" defaultChecked />
+                        <input type="radio" name={`campaign-${quote.id}`} value="car-wash" />
                         <span className="pp-campaign-radio-label">Kampanyayı Seç</span>
                       </label>
                       <a href="/kampanyalar/en-temiz-kasko-kampanyasi" target="_blank" className="pp-campaign-link">
@@ -257,7 +293,7 @@ const QuoteCard = ({
                       <span className="pp-campaign-title">Katılım Kasko Sigortası Yaptırana 1000 TL'lik akaryakıt çeki hediye!</span>
                     </div>
                     <p className="pp-campaign-desc">
-                      Katılım Kasko sigortanızı yaptırın, 1000 TL'lik akaryakıt çeki avantajından yararlanın.
+                      Katılım Kasko sigortanızı yaptırın, 1000 TL'ye varan akaryakıt çeki avantajından yararlanın.
                     </p>
                     <div className="pp-campaign-footer">
                       <label className="pp-campaign-radio">
@@ -277,16 +313,28 @@ const QuoteCard = ({
             ) : (
               <div className="pp-tab-content">
                 <div className="pp-coverages-layout">
-                  {/* Teminatlar Grid */}
+                  {/* Teminatlar Grid - optimalCoverage'dan tüm teminatları göster */}
                   <div className="pp-coverages-grid">
-                    {quote.insuranceCompanyGuarantees
-                      ?.filter((g) => {
-                        const val = formatGuaranteeValue(g);
-                        return val !== 'Dahil Değil' && val !== 'Belirsiz' && val !== '-';
+                    {allCoveragesFromOptimal
+                      .filter((g) => {
+                        // BÖLÜM 2'de gösterilen ana teminatları filtrele
+                        const mainCoverageLabels = mainCoverages.map(c => c.label);
+                        const isMainCoverage = mainCoverageLabels.some(label => {
+                          if (g.label === label) return true;
+                          if (label === 'Cam' && (g.label === 'Cam Kırılma Muafiyeti' || g.label === 'Cam')) return true;
+                          if (label === 'İMM Limiti' && (g.label === 'İMM Limiti (Ayrımsız)' || g.label === 'İMM Limitli / Limitsiz')) return true;
+                          if (label === 'Servis' && (g.label === 'Onarım Servis Türü')) return true;
+                          if (label === 'İkame Araç' && (g.label === 'Kiralık Araç' || g.label === 'İkame Araç')) return true;
+                          return false;
+                        });
+                        return !isMainCoverage;
                       })
                       .map((guarantee) => {
                         const displayValue = formatGuaranteeValue(guarantee);
-                        const showTick = displayValue === 'Dahil';
+                        const isUndefined = guarantee.valueText === 'Belirsiz';
+                        const isNotIncluded = guarantee.valueText === 'Dahil Değil';
+                        const showTick = displayValue === 'Dahil' || displayValue === 'Limitsiz' || displayValue === 'Rayiç';
+                        const hasValue = displayValue && displayValue !== '' && !isUndefined && !isNotIncluded;
 
                         return (
                           <div key={guarantee.insuranceGuaranteeId} className="pp-coverage-item">
@@ -295,14 +343,19 @@ const QuoteCard = ({
                               <CoverageTooltip branch="kasko" coverageKey={guarantee.label || ''} />
                             </span>
                             <div className="pp-coverage-item-value">
-                              {showTick ? (
+                              {isUndefined || isNotIncluded ? (
+                                // UNDEFINED veya NOT_INCLUDED ise boş bırak
+                                <span className="pp-coverage-item-price">&nbsp;</span>
+                              ) : showTick ? (
                                 <img
                                   src="/images/product-detail/teminat-tick.svg"
                                   alt="Dahil"
                                   className="pp-coverage-item-icon"
                                 />
-                              ) : (
+                              ) : hasValue ? (
                                 <span className="pp-coverage-item-price">{displayValue}</span>
+                              ) : (
+                                <span className="pp-coverage-item-price">&nbsp;</span>
                               )}
                             </div>
                           </div>
@@ -322,9 +375,19 @@ const QuoteCard = ({
                     <button
                       className="pp-coverage-action-btn pp-btn-document"
                       onClick={() => onViewDocument(proposalId, quote.id)}
+                      disabled={isLoadingDocument}
                     >
-                      <i className="icon-teklif-button pp-btn-icon"></i>
-                      <span>Teklif Belgesi</span>
+                      {isLoadingDocument ? (
+                        <>
+                          <div className="pp-spinner pp-btn-spinner"></div>
+                          <span>Yükleniyor...</span>
+                        </>
+                      ) : (
+                        <>
+                          <i className="icon-teklif-button pp-btn-icon"></i>
+                          <span>Teklif Belgesi</span>
+                        </>
+                      )}
                     </button>
                   </div>
                 </div>

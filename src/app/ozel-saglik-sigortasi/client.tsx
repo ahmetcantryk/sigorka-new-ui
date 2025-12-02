@@ -1,14 +1,28 @@
+/**
+ * Özel Sağlık Sigortası Ürün Detay Sayfası - Client Component
+ * 
+ * Banner içinde offline talep formu gösterir
+ * Kasko/TSS ile aynı yapıda
+ */
+
 "use client";
 
 import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import Breadcrumb from '../components/common/Breadcrumb';
 import FaqList from '../components/common/FaqList';
-import ProductBanner from '../components/common/ProductBanner';
 import StickyProductNav from '../components/common/StickyProductNav';
-import ConditionalCTAPopup from '../components/common/ConditionalCTAPopup';
-import { productAnchors, getOfferLink } from '../../config/productAnchors';
+import { productAnchors } from '../../config/productAnchors';
+import { getBranchConfig } from '@/components/ProductPageFlow/OfflineFlow';
 import '../../styles/subpage.min.css';
 import '../../styles/armorbroker.css';
+import '../../styles/product-flow/product-page-flow.css';
+
+// Dynamic import for better code splitting
+const OfflineProductForm = dynamic(
+  () => import('@/components/ProductPageFlow/OfflineFlow').then(mod => mod.OfflineProductForm),
+  { ssr: false }
+);
 
 const faqs = [
   {
@@ -53,35 +67,29 @@ const faqs = [
   }
 ];
 
-export default function OzelSaglikSigortasiPage() {
-  const anchors = productAnchors['ozel-saglik-sigortasi'];
-  const offerLink = getOfferLink('ozel-saglik-sigortasi');
+// Banner Area Component - Shows form
+const BannerArea = () => {
+  const branchConfig = getBranchConfig('ozel-saglik');
 
-  useEffect(() => {
-    document.body.classList.add('product-detail-page');
-    return () => document.body.classList.remove('product-detail-page');
-  }, []);
+  if (!branchConfig) {
+    return null;
+  }
 
   return (
+    <section id="ozel-saglik-form-banner" className="cover product-page-banner">
+      <div className="container">
+        <h1 className="pp-product-title">Özel Sağlık Sigortası</h1>
+        <OfflineProductForm branchConfig={branchConfig} />
+      </div>
+    </section>
+  );
+};
+
+// Product Detail Content Component
+const ProductDetailContent = () => {
+  return (
     <>
-      <ConditionalCTAPopup
-        condition="inactivity"
-        inactivityDelay={15}
-        config={{
-          title: 'Özel Sağlık Sigortası Teklifi Almak İster misiniz?',
-          description: 'Hemen birkaç dakika içinde en uygun özel sağlık sigortası tekliflerini karşılaştırın.',
-          buttonText: 'Hemen Teklif Al',
-          buttonLink: '/ozel-saglik-teklif'
-        }}
-      />
-      <StickyProductNav anchors={anchors} offerLink={offerLink} />
-      <ProductBanner
-        title1="Sağlığım"
-        title2="Özel Sağlık Katılım Sigortası"
-        buttonText="Hemen Teklif Alın"
-        buttonHref="/ozel-saglik-teklif"
-        size="sm"
-      />
+      <BannerArea />
       <section className="page-content">
         <div className="container">
           <Breadcrumb
@@ -140,10 +148,25 @@ export default function OzelSaglikSigortasiPage() {
             <div className="offer-banner offer-banner-health-bg">
               <div className="offer-banner__content">
                 <h3>Özel Sağlık Katılım Sigortasına mı ihtiyacınız var?</h3>
-                <p>En uygun tekliflerle sağlığınızı güvence altına almak için hemen teklif alın.</p>
+                <p>En uygun tekliflerle sağlığınızı güvence altına almak için yukarıdaki formu doldurun.</p>
               </div>
               <div className="offer-banner__cta">
-                <a className="btn btn-wide btn-tertiary" href="/ozel-saglik-teklif" target="_self">
+                <a 
+                  className="btn btn-wide btn-tertiary" 
+                  href="#ozel-saglik-form-banner"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const bannerElement = document.getElementById('ozel-saglik-form-banner');
+                    if (bannerElement) {
+                      const offset = 120;
+                      const elementPosition = bannerElement.offsetTop - offset;
+                      window.scrollTo({
+                        top: elementPosition,
+                        behavior: 'smooth'
+                      });
+                    }
+                  }}
+                >
                   Hemen Teklif Alın
                 </a>
               </div>
@@ -151,6 +174,59 @@ export default function OzelSaglikSigortasiPage() {
           </div>
         </div>
       </section>
+    </>
+  );
+};
+
+export default function OzelSaglikSigortasiPage() {
+  const anchors = productAnchors['ozel-saglik-sigortasi'];
+  const offerLink = '#ozel-saglik-form-banner';
+
+  useEffect(() => {
+    document.body.classList.add('product-detail-page');
+    return () => document.body.classList.remove('product-detail-page');
+  }, []);
+
+  // Sayfa içi teklif linklerini banner'a yönlendir
+  useEffect(() => {
+    const handleOfferLinkClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const link = target.closest('a[href*="/ozel-saglik-sigortasi"], a[href="#ozel-saglik-form-banner"]');
+      
+      if (link) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const bannerElement = document.getElementById('ozel-saglik-form-banner');
+        if (bannerElement) {
+          const offset = 120;
+          const elementPosition = bannerElement.offsetTop - offset;
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    };
+
+    document.addEventListener('click', handleOfferLinkClick, true);
+
+    return () => {
+      document.removeEventListener('click', handleOfferLinkClick, true);
+    };
+  }, []);
+
+  return (
+    <>
+      <StickyProductNav 
+        anchors={anchors} 
+        offerLink={offerLink}
+        enableMobileScrollBasedVisibility={true}
+        formBannerId="ozel-saglik-form-banner"
+      />
+      
+      <ProductDetailContent />
+
       <section className="page-content pt-0">
         <div className="container">
           <h4>Özel Sağlık Katılım Sigortası Sıkça Sorulan Sorular</h4>
@@ -159,4 +235,4 @@ export default function OzelSaglikSigortasiPage() {
       </section>
     </>
   );
-} 
+}

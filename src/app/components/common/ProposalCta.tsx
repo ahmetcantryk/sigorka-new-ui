@@ -8,7 +8,7 @@ const ProposalCta: React.FC = () => {
         <p>En uygun tekliflerle aracınızı kaskolamak için şimdi teklif alın.</p>
       </div>
       <div className="offer-banner__cta">
-        <a className="btn btn-wide btn-tertiary" href="/kasko-teklif">
+        <a className="btn btn-wide btn-tertiary" href="/kasko-sigortasi">
           Hemen Teklif Alın
         </a>
       </div>

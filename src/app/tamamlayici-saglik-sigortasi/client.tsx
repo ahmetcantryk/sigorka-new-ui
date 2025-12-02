@@ -1,14 +1,32 @@
 "use client";
 
 import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import Breadcrumb from '../components/common/Breadcrumb';
 import FaqList from '../components/common/FaqList';
-import ProductBanner from '../components/common/ProductBanner';
 import StickyProductNav from '../components/common/StickyProductNav';
-import ConditionalCTAPopup from '../components/common/ConditionalCTAPopup';
+// import ConditionalCTAPopup from '../components/common/ConditionalCTAPopup';
 import { productAnchors, getOfferLink } from '../../config/productAnchors';
+import { useProductPageQuery } from '@/components/ProductPageFlow/shared/hooks/useProductPageQuery';
 import '../../styles/subpage.min.css';
 import '../../styles/armorbroker.css';
+import '../../styles/product-flow/product-page-flow.css';
+
+// Dynamic imports for better code splitting
+const TssProductForm = dynamic(
+  () => import('@/components/ProductPageFlow/TssFlow').then(mod => mod.TssProductForm),
+  { ssr: false }
+);
+
+const TssProductQuote = dynamic(
+  () => import('@/components/ProductPageFlow/TssFlow/TssProductQuote'),
+  { ssr: false }
+);
+
+const TssPurchaseStep = dynamic(
+  () => import('@/components/ProductPageFlow/TssFlow/components/purchase/TssPurchaseStep'),
+  { ssr: false }
+);
 
 const faqs = [
   {
@@ -69,35 +87,220 @@ const faqs = [
   }
 ];
 
+// Banner Area Component - Shows form, quote or purchase based on mode
+const BannerArea = () => {
+  const { activeMode } = useProductPageQuery();
+
+  return (
+    <section id="tss-form-banner" className="cover product-page-banner">
+      <div className="container">
+        <h1 className="pp-product-title">Tamamlayıcı Sağlık Sigortası</h1>
+        {activeMode === 'purchase' ? (
+          <PurchaseWrapper />
+        ) : activeMode === 'quote' ? (
+          <QuoteWrapper />
+        ) : (
+          <FormWrapper />
+        )}
+      </div>
+    </section>
+  );
+};
+
+// Form Wrapper - Handles navigation after proposal created
+const FormWrapper = () => {
+  const { navigateToQuote } = useProductPageQuery();
+
+  const handleProposalCreated = (proposalId: string) => {
+    navigateToQuote(proposalId);
+  };
+
+  return <TssProductForm onProposalCreated={handleProposalCreated} />;
+};
+
+// Quote Wrapper - Handles quote view
+const QuoteWrapper = () => {
+  const { query, navigateToDefault, navigateToPurchase } = useProductPageQuery();
+
+  if (!query.proposalId) {
+    return null;
+  }
+
+  const handlePurchaseClick = (quoteId: string) => {
+    localStorage.setItem('selectedProductIdForTss', quoteId);
+    localStorage.setItem('currentProposalIdTss', query.proposalId!);
+
+    navigateToPurchase(quoteId, query.proposalId);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleRestart = () => {
+    localStorage.removeItem('selectedProductIdForTss');
+    localStorage.removeItem('currentProposalIdTss');
+    localStorage.removeItem('tssProposalId');
+    
+    navigateToDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  return (
+    <TssProductQuote
+      proposalId={query.proposalId}
+      onPurchaseClick={handlePurchaseClick}
+      onBack={navigateToDefault}
+    />
+  );
+};
+
+// Purchase Wrapper - Handles purchase view
+const PurchaseWrapper = () => {
+  const { query, navigateToQuote } = useProductPageQuery();
+
+  if (!query.purchaseId) {
+    return null;
+  }
+
+  const handleBack = () => {
+    const proposalId = localStorage.getItem('currentProposalIdTss');
+    if (proposalId) {
+      navigateToQuote(proposalId);
+    }
+  };
+
+  const handleNext = () => {
+    console.log('✅ TSS Ödeme tamamlandı');
+  };
+
+  return (
+    <div className="product-page-flow-container">
+      {/* Stepper */}
+      <div className="pp-stepper">
+        <div className="pp-step completed">
+          <div className="pp-step-visual">
+            <span>1</span>
+          </div>
+          <div className="pp-step-label">
+            <span>Kişisel</span>
+            <span>Bilgiler</span>
+          </div>
+        </div>
+
+        <div className="pp-step completed">
+          <div className="pp-step-visual">
+            <span>2</span>
+          </div>
+          <div className="pp-step-label">
+            <span>Sağlık</span>
+            <span>Bilgileri</span>
+          </div>
+        </div>
+
+        <div className="pp-step completed">
+          <div className="pp-step-visual">
+            <span>3</span>
+          </div>
+          <div className="pp-step-label">
+            <span>Teklif</span>
+            <span>Karşılaştırma</span>
+          </div>
+        </div>
+
+        <div className="pp-step active">
+          <div className="pp-step-visual">
+            <span>4</span>
+          </div>
+          <div className="pp-step-label">
+            <span>Ödeme</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="product-page-form pp-form-wide">
+        <TssPurchaseStep
+          onNext={handleNext}
+          onBack={handleBack}
+        />
+      </div>
+    </div>
+  );
+};
+
 export default function TamamlayiciSaglikSigortasiPage() {
   const anchors = productAnchors['tamamlayici-saglik-sigortasi'];
   const offerLink = getOfferLink('tamamlayici-saglik-sigortasi');
+  const { activeMode, navigateToDefault } = useProductPageQuery();
 
   useEffect(() => {
     document.body.classList.add('product-detail-page');
     return () => document.body.classList.remove('product-detail-page');
   }, []);
 
+  // TSS sayfasına özel: /tamamlayici-saglik-sigortasi veya /tamamlayici-saglik-sigortasi linklerini yakala ve banner formuna yönlendir
+  useEffect(() => {
+    const handleTssTeklifClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const link = target.closest('a[href*="/tamamlayici-saglik-sigortasi"], a[href*="/tamamlayici-saglik-sigortasi"]');
+
+      if (link) {
+        const href = link.getAttribute('href');
+
+        if (href && (href.includes('/tamamlayici-saglik-sigortasi') || href === '/tamamlayici-saglik-sigortasi')) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          // URL'i temizle
+          navigateToDefault();
+
+          // Banner formuna smooth scroll
+          setTimeout(() => {
+            const bannerElement = document.getElementById('tss-form-banner');
+            if (bannerElement) {
+              const offset = 120;
+              const elementPosition = bannerElement.offsetTop - offset;
+              window.scrollTo({
+                top: elementPosition,
+                behavior: 'smooth'
+              });
+            } else {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          }, 100);
+        }
+      }
+    };
+
+    document.addEventListener('click', handleTssTeklifClick, true);
+
+    return () => {
+      document.removeEventListener('click', handleTssTeklifClick, true);
+    };
+  }, [navigateToDefault]);
+
   return (
     <>
-      <ConditionalCTAPopup
+      {/* GEÇICI OLARAK KAPATILDI */}
+      {/* <ConditionalCTAPopup
         condition="inactivity"
         inactivityDelay={15}
         config={{
           title: 'Tamamlayıcı Sağlık Sigortası Teklifi Almak İster misiniz?',
           description: 'SGK\'nın karşılamadığı sağlık giderleriniz için hemen en uygun teklifleri karşılaştırın.',
           buttonText: 'Hemen Teklif Al',
-          buttonLink: '/tss-teklif'
+          buttonLink: '/tamamlayici-saglik-sigortasi'
         }}
+      /> */}
+      
+      <StickyProductNav 
+        anchors={anchors} 
+        offerLink={offerLink}
+        enableMobileScrollBasedVisibility={true}
+        formBannerId="tss-form-banner"
       />
-      <StickyProductNav anchors={anchors} offerLink={offerLink} />
-      <ProductBanner
-        title1="Sağlığım"
-        title2="Katılım Tamamlayıcı Sağlık Sigortası"
-        buttonText="Hemen Teklif Alın"
-        buttonHref="/tss-teklif"
-        size="sm"
-      />
+      
+      {/* Banner Area with Form/Quote/Purchase */}
+      <BannerArea />
+      
+      {/* Page Content - only show in default mode */}
       <section className="page-content">
         <div className="container">
           <Breadcrumb
@@ -163,7 +366,7 @@ export default function TamamlayiciSaglikSigortasiPage() {
                 <p>En uygun tekliflerle sağlığınızı güvence altına almak için hemen teklif alın.</p>
               </div>
               <div className="offer-banner__cta">
-                <a className="btn btn-wide btn-tertiary" href="/tss-teklif" target="_self">
+                <a className="btn btn-wide btn-tertiary" href="/tamamlayici-saglik-sigortasi" target="_self">
                   Hemen Teklif Alın
                 </a>
               </div>
@@ -171,12 +374,16 @@ export default function TamamlayiciSaglikSigortasiPage() {
           </div>
         </div>
       </section>
-      <section className="page-content pt-0">
-        <div className="container">
-          <h4>Tamamlayıcı Sağlık Sigortası ile İlgili Sıkça Sorulan Sorular</h4>
-          <FaqList faqs={faqs} />
-        </div>
-      </section>
+      
+      {/* FAQ - only show in default mode */}
+      {activeMode === 'default' && (
+        <section className="page-content pt-0">
+          <div className="container">
+            <h4>Tamamlayıcı Sağlık Sigortası ile İlgili Sıkça Sorulan Sorular</h4>
+            <FaqList faqs={faqs} />
+          </div>
+        </section>
+      )}
     </>
   );
-} 
+}

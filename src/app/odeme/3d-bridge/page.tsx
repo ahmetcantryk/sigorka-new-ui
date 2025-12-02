@@ -13,7 +13,7 @@ export default function ThreeDSecureBridgePage() {
     
     // URL parametrelerinden session token'ı al
     const sessionToken = searchParams.get('sessionToken');
-    const returnPath = searchParams.get('returnPath') || '/kasko-teklif';
+    const returnPath = searchParams.get('returnPath') || '/kasko-sigortasi';
     const merchantPaymentId = searchParams.get('merchantPaymentId');
     
     if (!sessionToken) {

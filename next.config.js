@@ -110,6 +110,62 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // Config dosyasından gelen yönlendirmeler (productAnchors.ts - offerToProductRedirects)
+      {
+        source: '/kasko-teklif',
+        destination: '/kasko-sigortasi',
+        permanent: true,
+      },
+      {
+        source: '/imm-teklif',
+        destination: '/imm',
+        permanent: true,
+      },
+      {
+        source: '/dask-teklif',
+        destination: '/dask',
+        permanent: true,
+      },
+      {
+        source: '/tss-teklif',
+        destination: '/tamamlayici-saglik-sigortasi',
+        permanent: true,
+      },  
+      {
+        source: '/trafik-teklif',
+        destination: '/zorunlu-trafik-sigortasi',
+        permanent: true,
+      },
+      {
+        source: '/konut-teklif',
+        destination: '/konut-sigortasi',
+        permanent: true,
+      },
+      {
+        source: '/acil-saglik-teklif',
+        destination: '/acil-saglik-sigortasi',
+        permanent: true,
+      },
+      {
+        source: '/yabanci-saglik-teklif',
+        destination: '/yabanci-saglik-sigortasi',
+        permanent: true,
+      },
+      {
+        source: '/ozel-saglik-teklif',
+        destination: '/ozel-saglik-sigortasi',
+        permanent: true,
+      },
+      {
+        source: '/ferdi-kaza-teklif',
+        destination: '/ferdi-kaza-sigortasi',
+        permanent: true,
+      },  
+      {
+        source: '/seyahat-saglik-teklif',
+        destination: '/seyahat-saglik-sigortasi',
+        permanent: true,
+      },
       // Eski URL'lerden yeni URL'lere 301 yönlendirmeleri
       {
         source: '/page/tamamlayici-saglik-sigortasi',
@@ -223,7 +279,7 @@ const nextConfig = {
       },
       {
         source: '/oto/kapsamli-kasko-teklifi-al',
-        destination: '/kasko-teklif',
+        destination: '/kasko-sigortasi',
         permanent: true,
       },
       {

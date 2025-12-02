@@ -28,7 +28,7 @@ const sagligimProducts = [
     title: "Özel Sağlık Katılım Sigortası",
     img: "/images/product-icons-subpage/ozel-saglik-katilim-sigortasi.svg",
     alt: "Özel Sağlık Katılım Sigortası",
-    link: "/ozel-saglik-teklif"
+    link: "/ozel-saglik-sigortasi"
   },
   {
     title: "Seyahat Sağlık Katılım Sigortası",
@@ -40,13 +40,13 @@ const sagligimProducts = [
     title: "Tamamlayıcı Sağlık Katılım Sigortası",
     img: "/images/product-icons-subpage/tamamlayici-saglik-sigortasi.svg",
     alt: "Tamamlayıcı Sağlık Katılım Sigortası",
-    link: "/tss-teklif"
+    link: "/tamamlayici-saglik-sigortasi"
   },
   {
     title: "Yabancı Sağlık Katılım Sigortası",
     img: "/images/product-icons-subpage/yabanci-saglik-sigortasi.svg",
     alt: "Yabancı Sağlık Katılım Sigortası",
-    link: "/yabanci-saglik-teklif"
+    link: "/yabanci-saglik-sigortasi"
   }
 ];
 

@@ -5,7 +5,7 @@ interface CoverageDetailsModalProps {
     isOpen: boolean;
     onClose: () => void;
     quote: any; // Using any for now to avoid complex type dependency chains
-    onPurchase: (quoteId: string) => void;
+    onPurchase: (quoteId: string, installmentNumber?: number) => void;
     onInstallmentChange: (quoteId: string, installment: number) => void;
     agencyPhoneNumber?: string;
 }
@@ -57,10 +57,14 @@ const CoverageDetailsModal: React.FC<CoverageDetailsModalProps> = ({
     const selectedPremium = quote.premiums.find((p: any) => p.installmentNumber === quote.selectedInstallmentNumber);
 
     const formatGuaranteeValue = (guarantee: any): string => {
-        if (guarantee.valueText) {
+        // Belirsiz değerler için boş döndür
+        if (guarantee?.valueText === 'Belirsiz') {
+            return '';
+        }
+        if (guarantee?.valueText) {
             return guarantee.valueText;
         }
-        if (guarantee.amount) {
+        if (guarantee?.amount) {
             return (
                 guarantee.amount.toLocaleString('tr-TR', {
                     minimumFractionDigits: 2,
@@ -68,7 +72,22 @@ const CoverageDetailsModal: React.FC<CoverageDetailsModalProps> = ({
                 }) + ' ₺'
             );
         }
-        return '-';
+        return '';
+    };
+
+    // Branch bilgisini quote'dan al (trafik, kasko, tss veya konut)
+    const getBranch = (): string => {
+        // Quote'un productBranch'ini kontrol et
+        if (quote?.productBranch === 'TRAFIK' || quote?.productBranch === 'trafik') {
+            return 'trafik';
+        }
+        if (quote?.productBranch === 'TSS' || quote?.productBranch === 'tss') {
+            return 'tss';
+        }
+        if (quote?.productBranch === 'KONUT' || quote?.productBranch === 'konut') {
+            return 'konut';
+        }
+        return 'kasko'; // Default kasko
     };
 
     const handleInstallmentSelect = (installmentNumber: number) => {
@@ -169,19 +188,24 @@ const CoverageDetailsModal: React.FC<CoverageDetailsModalProps> = ({
                     {/* Table Body */}
                     <div className="pp-coverage-modal-table-body">
                         {quote.insuranceCompanyGuarantees
-                            ?.filter((g: any) => formatGuaranteeValue(g) !== 'Belirsiz')
-                            .sort((a: any, b: any) => a.label.localeCompare(b.label))
-                            .map((guarantee: any) => (
-                                <div key={guarantee.insuranceGuaranteeId} className="pp-coverage-modal-row">
-                                    <div className="pp-row-cell-left">
-                                        {guarantee.label}
-                                        <CoverageTooltip branch="kasko" coverageKey={guarantee.label} />
+                            ?.sort((a: any, b: any) => a.label.localeCompare(b.label))
+                            .map((guarantee: any) => {
+                                const value = formatGuaranteeValue(guarantee);
+                                // Modalda her zaman text göster (tick/X yok)
+                                const displayText = value || (guarantee.isIncluded ? 'Dahil' : 'Dahil Değil');
+                                
+                                return (
+                                    <div key={guarantee.insuranceGuaranteeId} className="pp-coverage-modal-row">
+                                        <div className="pp-row-cell-left">
+                                            {guarantee.label}
+                                            <CoverageTooltip branch={guarantee.branch || getBranch()} coverageKey={guarantee.coverageKey || guarantee.label} />
+                                        </div>
+                                        <div className="pp-row-cell-right">
+                                            {displayText}
+                                        </div>
                                     </div>
-                                    <div className="pp-row-cell-right">
-                                        {formatGuaranteeValue(guarantee)}
-                                    </div>
-                                </div>
-                            ))}
+                                );
+                            })}
                     </div>
                 </div>
 

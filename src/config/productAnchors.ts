@@ -78,17 +78,17 @@ export const productAnchors: ProductNavConfig = {
 // Ürün slug'ına göre teklif link'ini döndür
 export const getOfferLink = (productSlug: string): string => {
   const offerLinks: { [key: string]: string } = {
-    'kasko-sigortasi': '/kasko-teklif',
-    'zorunlu-trafik-sigortasi': '/trafik-teklif',
-    'imm-sigortasi': '/imm-teklif',
-    'ozel-saglik-sigortasi': '/ozel-saglik-teklif',
-    'seyahat-saglik-sigortasi': '/seyahat-saglik-teklif',
-    'tamamlayici-saglik-sigortasi': '/tss-teklif',
-    'yabanci-saglik-sigortasi': '/yabanci-saglik-teklif',
-    'acil-saglik-sigortasi': '/acil-saglik-teklif',
-    'dask': '/dask-teklif',
-    'konut-sigortasi': '/konut-teklif',
-    'ferdi-kaza-sigortasi': '/ferdi-kaza-teklif'
+    'kasko-sigortasi': '/kasko-sigortasi',
+    'zorunlu-trafik-sigortasi': '/zorunlu-trafik-sigortasi',
+    'imm-sigortasi': '/imm',
+    'ozel-saglik-sigortasi': '/ozel-saglik-sigortasi',
+    'seyahat-saglik-sigortasi': '/seyahat-saglik-sigortasi',
+    'tamamlayici-saglik-sigortasi': '/tamamlayici-saglik-sigortasi',
+    'yabanci-saglik-sigortasi': '/yabanci-saglik-sigortasi',
+    'acil-saglik-sigortasi': '/acil-saglik-sigortasi',
+    'dask': '/dask',
+    'konut-sigortasi': '/konut-sigortasi',
+    'ferdi-kaza-sigortasi': '/ferdi-kaza-sigortasi'
   };
 
   return offerLinks[productSlug] || '/';

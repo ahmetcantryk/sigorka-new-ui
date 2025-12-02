@@ -14,12 +14,12 @@ export default function SeyahatSaglikQuoteComparisonPageComponent() {
     if (proposalId && selectedQuoteId) {
       router.push(`/seyahat-saglik/purchase/${proposalId}/${selectedQuoteId}`);
     } else {
-      router.push('/seyahat-saglik-teklif');
+      router.push('/seyahat-saglik-sigortasi');
     }
   };
 
   const handleBack = () => {
-    router.push('/seyahat-saglik-teklif');
+    router.push('/seyahat-saglik-sigortasi');
   };
 
   return (

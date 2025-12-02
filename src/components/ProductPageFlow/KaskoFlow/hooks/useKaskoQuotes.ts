@@ -50,6 +50,8 @@ export const useKaskoQuotes = (proposalId: string): UseKaskoQuotesResult => {
   const firstActiveQuoteTimeRef = useRef<number | null>(null);
   const progressStartTimeRef = useRef<number>(0);
   const progressAtFirstActiveRef = useRef<number | null>(null);
+  const backgroundPollingRef = useRef<NodeJS.Timeout | null>(null);
+  const pollingEndTimeRef = useRef<number | null>(null);
 
   // Installment değişikliği
   const handleInstallmentChange = useCallback((quoteId: string, installmentNumber: number) => {
@@ -250,6 +252,75 @@ export const useKaskoQuotes = (proposalId: string): UseKaskoQuotesResult => {
           }
 
           if (pollInterval) clearInterval(pollInterval);
+          
+          // 2 dakikadan önce kapandıysa, arka planda +1 dakika daha polling yap (loading göstermeden)
+          if (elapsedTime < POLLING_CONFIG.EARLY_FINISH_THRESHOLD && !backgroundPollingRef.current) {
+            pollingEndTimeRef.current = Date.now();
+            console.log('🔄 Erken kapanma tespit edildi, arka plan polling başlatılıyor...');
+            
+            // Arka plan polling'i başlat (loading olmadan)
+            const bgInterval = setInterval(async () => {
+              const bgElapsed = Date.now() - (pollingEndTimeRef.current || Date.now());
+              
+              // 1 dakika dolunca durdur
+              if (bgElapsed >= POLLING_CONFIG.BACKGROUND_POLLING_DURATION) {
+                console.log('🔄 Arka plan polling tamamlandı');
+                if (backgroundPollingRef.current) {
+                  clearInterval(backgroundPollingRef.current);
+                  backgroundPollingRef.current = null;
+                }
+                return;
+              }
+              
+              // Sessizce teklifleri güncelle
+              try {
+                const currentAccessToken = useAuthStore.getState().accessToken;
+                if (!currentAccessToken) return;
+                
+                const rawProductsResponse = await fetchWithAuth(
+                  API_ENDPOINTS.PROPOSALS_ID(proposalId),
+                  {
+                    method: 'GET',
+                    headers: {
+                      Authorization: `Bearer ${currentAccessToken}`,
+                      Accept: 'application/json',
+                    },
+                  }
+                );
+                
+                if (!rawProductsResponse.ok) return;
+                
+                const proposalData = await rawProductsResponse.json();
+                const productsData = proposalData.products as Quote[];
+                const processedQuotes = processQuotesData(productsData, currentCompanies);
+                
+                const bgFilteredQuotes = processedQuotes.filter(
+                  quote => quote.state === 'ACTIVE' && allowedProductIds.includes(quote.productId)
+                );
+                
+                // Sessizce state'i güncelle
+                setQuotes((prevQuotes) => {
+                  return bgFilteredQuotes.map((newQuote) => {
+                    const savedInstallment = selectedInstallmentsRef.current[newQuote.id];
+                    if (savedInstallment) {
+                      return { ...newQuote, selectedInstallmentNumber: savedInstallment };
+                    }
+                    const existingQuote = prevQuotes.find((q) => q.id === newQuote.id);
+                    if (existingQuote) {
+                      return { ...newQuote, selectedInstallmentNumber: existingQuote.selectedInstallmentNumber };
+                    }
+                    return newQuote;
+                  });
+                });
+              } catch (err) {
+                // Arka plan hatalarını sessizce yut
+                console.log('🔄 Arka plan polling hatası (yoksayıldı):', err);
+              }
+            }, POLLING_CONFIG.INTERVAL);
+            
+            backgroundPollingRef.current = bgInterval;
+          }
+          
           if (!isLoading) return;
           setIsLoading(false);
           return;
@@ -296,8 +367,13 @@ export const useKaskoQuotes = (proposalId: string): UseKaskoQuotesResult => {
     return () => {
       isPollingActive = false;
       if (pollInterval) clearInterval(pollInterval);
+      if (backgroundPollingRef.current) {
+        clearInterval(backgroundPollingRef.current);
+        backgroundPollingRef.current = null;
+      }
       firstActiveQuoteTimeRef.current = null;
       progressAtFirstActiveRef.current = null;
+      pollingEndTimeRef.current = null;
     };
   }, [proposalId, agencyConfig]);
 

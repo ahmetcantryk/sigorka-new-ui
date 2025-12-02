@@ -50,13 +50,21 @@ export default function Header() {
                          window.location.pathname.includes('/purchase');
       const isDashboardPage = window.location.pathname.startsWith('/dashboard');
       const isLoginPage = window.location.pathname === '/giris-yap' || window.location.pathname === '/login';
+      const isSpecialPage = window.location.pathname === '/aracim' || 
+                           window.location.pathname === '/yuvam' || 
+                           window.location.pathname === '/sagligim';
       
       setIsProductDetailPage(hasProductDetailClass);
       
-      // Dashboard ve giriş sayfalarında beyaz logo
-      if (isDashboardPage || isLoginPage) {
+      // Dashboard ve özel sayfalarda beyaz logo
+      if (isDashboardPage || isSpecialPage) {
         setIsScrolled(false);
         setLogoSrc('/images/sigorka-logo-new-2.svg');
+      }
+      // Giriş sayfasında normal logo
+      else if (isLoginPage) {
+        setIsScrolled(false);
+        setLogoSrc('/images/sigorka-logo-new.svg');
       }
       // Eğer ürün detay sayfasındaysak, scroll state'ini sıfırla ve normal logo kullan
       else if (hasProductDetailClass) {
@@ -91,7 +99,7 @@ export default function Header() {
       observer.disconnect();
       clearInterval(interval);
     };
-  }, []);
+  }, [pathname]);
 
   // Auth initialize
   useEffect(() => {
@@ -131,12 +139,25 @@ export default function Header() {
                          window.location.pathname.includes('/purchase');
       const isDashboardPage = window.location.pathname.startsWith('/dashboard');
       const isLoginPage = window.location.pathname === '/giris-yap' || window.location.pathname === '/login';
+      const isSpecialPage = window.location.pathname === '/aracim' || 
+                           window.location.pathname === '/yuvam' || 
+                           window.location.pathname === '/sagligim';
       
-      if (isDashboardPage || isLoginPage) {
-        // Dashboard ve giriş sayfalarında beyaz logo
+      if (isDashboardPage || isSpecialPage) {
+        // Dashboard ve özel sayfalarda beyaz logo
         setIsScrolled(false);
         if (!isMenuOpen) {
           setLogoSrc('/images/sigorka-logo-new-2.svg');
+        }
+        // Menü açıkken footer logo kullan
+        if (isMenuOpen) {
+          setLogoSrc('/images/footer-logo.svg');
+        }
+      } else if (isLoginPage) {
+        // Giriş sayfasında normal logo
+        setIsScrolled(false);
+        if (!isMenuOpen) {
+          setLogoSrc('/images/sigorka-logo-new.svg');
         }
         // Menü açıkken footer logo kullan
         if (isMenuOpen) {
@@ -187,7 +208,7 @@ export default function Header() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [isMenuOpen, isProductDetailPage, getManager]);
+  }, [isMenuOpen, isProductDetailPage, getManager, pathname]);
 
   // Dropdown handlers - sadece desktop için
   useEffect(() => {
@@ -252,10 +273,13 @@ export default function Header() {
                          window.location.pathname.includes('/purchase');
       const isDashboardPage = window.location.pathname.startsWith('/dashboard');
       const isLoginPage = window.location.pathname === '/giris-yap' || window.location.pathname === '/login';
+      const isSpecialPage = window.location.pathname === '/aracim' || 
+                           window.location.pathname === '/yuvam' || 
+                           window.location.pathname === '/sagligim';
       
-      if (isProductDetail) {
+      if (isProductDetail || isLoginPage) {
         setLogoSrc('/images/sigorka-logo-new.svg');
-      } else if (isQuotePage || isDashboardPage || isLoginPage) {
+      } else if (isQuotePage || isDashboardPage || isSpecialPage) {
         setLogoSrc('/images/sigorka-logo-new-2.svg');
       } else {
         setLogoSrc(isScrolled ? '/images/sigorka-logo-new-2.svg' : '/images/sigorka-logo-new.svg');
@@ -299,10 +323,16 @@ export default function Header() {
                          window.location.pathname.includes('/purchase');
       const isDashboardPage = window.location.pathname.startsWith('/dashboard');
       const isLoginPage = window.location.pathname === '/giris-yap' || window.location.pathname === '/login';
+      const isSpecialPage = window.location.pathname === '/aracim' || 
+                           window.location.pathname === '/yuvam' || 
+                           window.location.pathname === '/sagligim' 
       
-      if (isDashboardPage || isLoginPage) {
-        // Dashboard ve giriş sayfalarında beyaz logo
+      if (isDashboardPage || isSpecialPage) {
+        // Dashboard ve özel sayfalarda beyaz logo
         setLogoSrc('/images/sigorka-logo-new-2.svg');
+      } else if (isLoginPage) {
+        // Giriş sayfasında normal logo
+        setLogoSrc('/images/sigorka-logo-new.svg');
       } else if (isQuotePage) {
         // Teklif sayfalarında beyaz logo kullan
         setLogoSrc('/images/sigorka-logo-new-2.svg');
@@ -614,7 +644,7 @@ export default function Header() {
           <div className="navbar__mobile-info d-lg-none">
             <div className="customer-relations">
               <h4 className="customer-relations__title">Müşteri Hizmetleri Merkezi</h4>
-              <a href="tel:+908504044444" className="customer-relations__phone">
+              <a href="tel:+908504040404" className="customer-relations__phone">
                 <span className="icon-phone"></span> 0850 404 04 04
               </a>
             </div>

@@ -1373,11 +1373,11 @@ const PersonalInfoStep = ({ onNext, onBack, isFirstStep, isLastStep }: PersonalI
             Kurumsal müşterilerimize Ferdi Kaza sigortası hizmeti verememekteyiz.<br />
             <Box component="span" sx={{ display: 'block', mt: 2, textAlign: 'center' }}>
             <span> 
-                <Link href="/kasko-teklif" sx={{ fontWeight: 700, color: '#111', textDecoration: 'underline', mx: 0.5 }} target="_blank">Kasko,</Link>
-                <Link href="/trafik-teklif" sx={{ fontWeight: 700, color: '#111', textDecoration: 'underline', mx: 0.5 }} target="_blank">Trafik,</Link>
-                <Link href="/imm-teklif" sx={{ fontWeight: 700, color: '#111', textDecoration: 'underline', mx: 0.5 }} target="_blank">İMM,</Link>
-                <Link href="/dask-teklif" sx={{ fontWeight: 700, color: '#111', textDecoration: 'underline', mx: 0.5 }} target="_blank">DASK,</Link>
-                <Link href="/konut-teklif" sx={{ fontWeight: 700, color: '#111', textDecoration: 'underline', mx: 0.5 }} target="_blank">Konut</Link>
+                <Link href="/kasko-sigortasi" sx={{ fontWeight: 700, color: '#111', textDecoration: 'underline', mx: 0.5 }} target="_blank">Kasko,</Link>
+                <Link href="/trafik-sigortasi" sx={{ fontWeight: 700, color: '#111', textDecoration: 'underline', mx: 0.5 }} target="_blank">Trafik,</Link>
+                <Link href="/imm" sx={{ fontWeight: 700, color: '#111', textDecoration: 'underline', mx: 0.5 }} target="_blank">İMM,</Link>
+                <Link href="/dask" sx={{ fontWeight: 700, color: '#111', textDecoration: 'underline', mx: 0.5 }} target="_blank">DASK,</Link>
+                <Link href="/konut-sigortasi" sx={{ fontWeight: 700, color: '#111', textDecoration: 'underline', mx: 0.5 }} target="_blank">Konut</Link>
                 <br />
                 ürünlerimizden teklif alabilirsiniz.
               </span>

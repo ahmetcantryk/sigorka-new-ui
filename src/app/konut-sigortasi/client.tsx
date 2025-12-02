@@ -1,14 +1,43 @@
 "use client";
 
-import { useEffect } from 'react';
+import { useEffect, Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import Breadcrumb from '../components/common/Breadcrumb';
 import FaqList from '../components/common/FaqList';
-import ProductBanner from '../components/common/ProductBanner';
 import StickyProductNav from '../components/common/StickyProductNav';
-import ConditionalCTAPopup from '../components/common/ConditionalCTAPopup';
+// import ConditionalCTAPopup from '../components/common/ConditionalCTAPopup';
 import { productAnchors, getOfferLink } from '../../config/productAnchors';
+import { useProductPageQuery } from '@/components/ProductPageFlow/shared/hooks/useProductPageQuery';
 import '../../styles/subpage.min.css';
 import '../../styles/armorbroker.css';
+import '../../styles/product-flow/product-page-flow.css';
+
+// Loading component for dynamic imports
+const LoadingSpinner = () => (
+  <div className="product-page-flow-container">
+    <div className="product-page-form pp-form-wide">
+      <div className="pp-card" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '300px' }}>
+        <div className="pp-spinner" style={{ width: '40px', height: '40px' }}></div>
+      </div>
+    </div>
+  </div>
+);
+
+// Dynamic imports for better code splitting
+const KonutProductForm = dynamic(
+  () => import('@/components/ProductPageFlow/KonutFlow').then(mod => mod.KonutProductForm),
+  { ssr: false, loading: () => <LoadingSpinner /> }
+);
+
+const KonutProductQuote = dynamic(
+  () => import('@/components/ProductPageFlow/KonutFlow/KonutProductQuote'),
+  { ssr: false, loading: () => <LoadingSpinner /> }
+);
+
+const KonutPurchaseStep = dynamic(
+  () => import('@/components/ProductPageFlow/KonutFlow/components/purchase/KonutPurchaseStep'),
+  { ssr: false, loading: () => <LoadingSpinner /> }
+);
 
 const faqs = [
   {
@@ -65,9 +94,125 @@ const faqs = [
   }
 ];
 
+// Banner Area Component - Shows form, quote or purchase based on mode
+const BannerArea = () => {
+  const { activeMode } = useProductPageQuery();
+
+  return (
+    <section id="konut-form-banner" className="cover product-page-banner">
+      <div className="container">
+        <h1 className="pp-product-title">Konut Sigortası</h1>
+        {activeMode === 'purchase' ? (
+          <PurchaseWrapper />
+        ) : activeMode === 'quote' ? (
+          <QuoteWrapper />
+        ) : (
+          <FormWrapper />
+        )}
+      </div>
+    </section>
+  );
+};
+
+// Form Wrapper
+const FormWrapper = () => {
+  const { navigateToQuote } = useProductPageQuery();
+
+  const handleProposalCreated = (proposalId: string) => {
+    navigateToQuote(proposalId);
+  };
+
+  return <KonutProductForm onProposalCreated={handleProposalCreated} />;
+};
+
+// Quote Wrapper
+const QuoteWrapper = () => {
+  const { query, navigateToDefault, navigateToPurchase } = useProductPageQuery();
+
+  const handlePurchaseClick = (quoteId: string) => {
+    localStorage.setItem('selectedProductIdForKonut', quoteId);
+    localStorage.setItem('currentProposalIdKonut', query.proposalId!);
+    navigateToPurchase(quoteId, query.proposalId);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleRestart = () => {
+    localStorage.removeItem('selectedProductIdForKonut');
+    localStorage.removeItem('currentProposalIdKonut');
+    localStorage.removeItem('konutPropertyId');
+    localStorage.removeItem('konutProposalId');
+    navigateToDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // proposalId yoksa loading göster (URL parse edilene kadar)
+  if (!query.proposalId) {
+    return <LoadingSpinner />;
+  }
+
+  return (
+    <KonutProductQuote
+      proposalId={query.proposalId}
+      onPurchaseClick={handlePurchaseClick}
+      onBack={navigateToDefault}
+      onRestart={handleRestart}
+    />
+  );
+};
+
+// Purchase Wrapper
+const PurchaseWrapper = () => {
+  const { query, navigateToQuote } = useProductPageQuery();
+
+  const handleBack = () => {
+    const proposalId = localStorage.getItem('currentProposalIdKonut');
+    if (proposalId) {
+      navigateToQuote(proposalId);
+    }
+  };
+
+  const handleNext = () => {
+    console.log('✅ Ödeme tamamlandı');
+  };
+
+  // purchaseId yoksa loading göster (URL parse edilene kadar)
+  if (!query.purchaseId) {
+    return <LoadingSpinner />;
+  }
+
+  return (
+    <>
+      <div className="product-page-flow-container">
+        <div className="pp-stepper">
+          <div className="pp-step completed">
+            <div className="pp-step-visual"><span>1</span></div>
+            <div className="pp-step-label"><span>Kişisel</span><span>Bilgiler</span></div>
+          </div>
+          <div className="pp-step completed">
+            <div className="pp-step-visual"><span>2</span></div>
+            <div className="pp-step-label"><span>Konut</span><span>Bilgileri</span></div>
+          </div>
+          <div className="pp-step completed">
+            <div className="pp-step-visual"><span>3</span></div>
+            <div className="pp-step-label"><span>Teklif</span><span>Karşılaştırma</span></div>
+          </div>
+          <div className="pp-step active">
+            <div className="pp-step-visual"><span>4</span></div>
+            <div className="pp-step-label"><span>Ödeme</span></div>
+          </div>
+        </div>
+        <div className="product-page-form pp-form-wide">
+          <KonutPurchaseStep onNext={handleNext} onBack={handleBack} />
+        </div>
+      </div>
+    </>
+  );
+};
+
 export default function KonutSigortasiPage() {
   const anchors = productAnchors['konut-sigortasi'];
-  const offerLink = getOfferLink('konut-sigortasi');
+  const offerLink = '#konut-form-banner'; // Banner'a yönlendir
+  const { activeMode } = useProductPageQuery();
 
   useEffect(() => {
     document.body.classList.add('product-detail-page');
@@ -78,24 +223,28 @@ export default function KonutSigortasiPage() {
 
   return (
     <>
-      <ConditionalCTAPopup
+      {/* GEÇICI OLARAK KAPATILDI */}
+      {/* <ConditionalCTAPopup
         condition="inactivity"
         inactivityDelay={15}
         config={{
           title: 'Konut Sigortası Teklifi Almak İster misiniz?',
           description: 'Evinizi yangın, hırsızlık ve doğal afetlere karşı güvence altına almak için hemen teklif alın.',
           buttonText: 'Hemen Teklif Al',
-          buttonLink: '/konut-teklif'
+          buttonLink: '#konut-form-banner'
         }}
+      /> */}
+      <StickyProductNav 
+        anchors={anchors} 
+        offerLink={offerLink}
+        enableMobileScrollBasedVisibility={true}
+        formBannerId="konut-form-banner"
       />
-      <StickyProductNav anchors={anchors} offerLink={offerLink} />
-      <ProductBanner
-        title1="Yuvam"
-        title2="Katılım Konut Sigortası"
-        buttonText="Hemen Teklif Alın"
-        buttonHref="/konut-teklif"
-        size="sm"
-      />
+      
+      {/* Banner Area - Form/Quote/Purchase */}
+      <BannerArea />
+      
+      {/* Page Content - Always visible */}
       <section className="page-content">
         <div className="container">
           <Breadcrumb
@@ -142,7 +291,7 @@ export default function KonutSigortasiPage() {
             <h4>Konut Sigortası Hesaplama Nasıl Yapılır?</h4>
             <p>Konut sigortası fiyatları yani ödenecek katkı payları (primler), konutunun bulunduğu il ve ilçeye, metrekaresine, binanın yapı tarzına, konutunun bulunduğu kata, alınan güvenlik önlemlerine ve poliçede yer alan teminatlara göre belirlenir. Örneğin poliçenizde bina teminatı olmadan sadece evinizin içindeki eşyaları teminat altına alabilirsiniz.</p>
             <h4 id="nasil-teklif-alinir">En Uygun Konut Sigortası Teklifi Nasıl Alınır?</h4>
-            <p>Aşağıdaki bilgiler ile doğru teminatı, uygun fiyat seçenekleriyle <a href="/konut-sigortasi" target="_self">Sigorka.com</a> web sitemizden teklif alabilirsiniz.</p>
+            <p>Aşağıdaki bilgiler ile doğru teminatı, uygun fiyat seçenekleriyle <a href="#konut-form-banner" target="_self">Sigorka.com</a> web sitemizden teklif alabilirsiniz.</p>
             <ul className="prop-list">
               <li>TC kimlik numarası / Yabancı kimlik numarası</li>
               <li>Doğum tarihi</li>
@@ -175,7 +324,7 @@ export default function KonutSigortasiPage() {
                 <p>En uygun Katılım Konut teklifleri için tıklayınız.</p>
               </div>
               <div className="offer-banner__cta">
-                <a className="btn btn-wide btn-tertiary" href="/konut-teklif" target="_self">
+                <a className="btn btn-wide btn-tertiary" href="#konut-form-banner" target="_self">
                   Hemen Teklif Alın
                 </a>
               </div>
@@ -191,4 +340,4 @@ export default function KonutSigortasiPage() {
       </section>
     </>
   );
-} 
+}

@@ -27,7 +27,7 @@ export default function Footer() {
         <div className="footerCenter">
           <div className="customerServiceWrapper">
             <span className="customerServiceTitle">Müşteri Hizmetleri Merkezi</span>
-            <a href="tel:+908504044444" className="phoneWrapper">
+            <a href="tel:+908504040404" className="phoneWrapper">
               <span className="icon-phone"></span>
               <span className="phoneNumber">0850 404 04 04</span>
             </a>

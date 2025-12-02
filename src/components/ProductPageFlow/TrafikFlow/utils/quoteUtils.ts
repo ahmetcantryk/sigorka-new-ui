@@ -5,7 +5,7 @@
  */
 
 import type { TrafikQuote, ProcessedTrafikQuote, InsuranceCompany, Premium } from '../types';
-import { convertTrafikCoverageToGuarantees } from './coverageUtils';
+import { convertTrafikCoverageToGuarantees, addMandatoryTrafikCoverages } from './coverageUtils';
 
 // Kasko'dan ortak fonksiyonları import et
 export {
@@ -65,9 +65,12 @@ export const processTrafikQuotesData = (
       { coverage: quote.initialCoverage, type: 'initial' }
     ].filter(item => item.coverage !== null);
 
-    const guarantees = allCoverages.length > 0
+    let guarantees = allCoverages.length > 0
       ? convertTrafikCoverageToGuarantees(allCoverages[0].coverage as any)
       : [];
+
+    // Zorunlu teminatları ekle (eğer optimalCoverage'dan gelmezse otomatik tik ile)
+    guarantees = addMandatoryTrafikCoverages(guarantees);
 
     return {
       ...quote,
@@ -76,6 +79,7 @@ export const processTrafikQuotesData = (
       logo: `https://storage.dogasigorta.com/app-1/insurup-b2c-company/${quote.insuranceCompanyId}.png`,
       selectedInstallmentNumber: initialSelectedInstallment,
       insuranceCompanyGuarantees: guarantees,
+      productBranch: 'TRAFIK', // Modal'larda doğru branch tooltip'leri için
     };
   });
 };

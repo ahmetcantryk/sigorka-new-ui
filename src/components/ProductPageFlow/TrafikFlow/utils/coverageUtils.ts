@@ -9,6 +9,7 @@ import {
   TRAFIK_NUMERIC_COVERAGES,
   TRAFIK_TICK_COVERAGES,
   TRAFIK_DETAIL_COVERAGE_ORDER,
+  TRAFIK_MANDATORY_COVERAGES,
 } from '../config/trafikConstants';
 import type { TrafikCoverage, Guarantee, ProcessedTrafikQuote, CoverageValue } from '../types';
 
@@ -72,7 +73,8 @@ const processTrafikCoverageValue = (
       return { ...baseGuarantee, valueText: 'Limitsiz', amount: 0 };
 
     case 'HIGHEST_LIMIT':
-      return { ...baseGuarantee, valueText: 'En Yüksek Limit', amount: 0 };
+    case 'MARKET_VALUE':
+      return { ...baseGuarantee, valueText: 'Rayiç', amount: 0 };
 
     case 'DECIMAL':
       return {
@@ -88,7 +90,7 @@ const processTrafikCoverageValue = (
       return { ...baseGuarantee, valueText: 'Dahil Değil', amount: 0 };
 
     case 'UNDEFINED':
-      return { ...baseGuarantee, valueText: 'Dahil Değil', amount: 0 };
+      return { ...baseGuarantee, valueText: 'Belirsiz', amount: 0 };
 
     default:
       return { ...baseGuarantee, valueText: 'Dahil Değil', amount: 0 };
@@ -104,10 +106,10 @@ const processTrafikCoverageValue = (
 export const getMainTrafikCoverages = (quote: ProcessedTrafikQuote): Guarantee[] => {
   const coverages = quote.insuranceCompanyGuarantees || [];
 
-  const defaultGuarantee = (label: string, isIncluded: boolean = false): Guarantee => ({
+  const defaultGuarantee = (label: string): Guarantee => ({
     insuranceGuaranteeId: `default-${label}`,
     label,
-    valueText: isIncluded ? 'Dahil' : 'Dahil Değil',
+    valueText: 'Belirsiz', // Undefined durumunda Belirsiz olarak işaretle
     amount: 0
   });
 
@@ -129,11 +131,29 @@ export const getMainTrafikCoverages = (quote: ProcessedTrafikQuote): Guarantee[]
     g.label === 'İMM Kombine'
   );
 
+  // Eğer teminat bulunamazsa veya belirsiz ise Belirsiz olarak işaretle
+  const getOrDefault = (guarantee: Guarantee | undefined, label: string): Guarantee => {
+    if (!guarantee) {
+      return defaultGuarantee(label);
+    }
+    // Eğer teminat var ama belirsiz/undefined ise Belirsiz olarak işaretle
+    if (guarantee.valueText === 'Belirsiz' || 
+        (!guarantee.valueText && guarantee.amount === 0) ||
+        (guarantee.valueText === 'Dahil Değil' && guarantee.amount === 0 && guarantee.insuranceGuaranteeId?.startsWith('default-'))) {
+      return {
+        ...guarantee,
+        valueText: 'Belirsiz',
+        amount: 0
+      };
+    }
+    return guarantee;
+  };
+
   // Sıralama: Yol Yardım en başta
   return [
-    yolYardim || defaultGuarantee('Yol Yardım', false),
-    hukuksalKoruma || defaultGuarantee('Hukuksal Koruma', false),
-    imm || defaultGuarantee('İMM', false),
+    getOrDefault(yolYardim, 'Yol Yardım'),
+    getOrDefault(hukuksalKoruma, 'Hukuksal Koruma'),
+    getOrDefault(imm, 'İMM'),
   ];
 };
 
@@ -153,7 +173,7 @@ export const getAdditionalTrafikCoverages = (quote: ProcessedTrafikQuote): Array
   const undamagedRate = (quote as any).hasUndamagedDiscountRate;
   
   items.push({
-    label: 'Hasarsızlık',
+    label: 'Hasarsızlık İndirimi',
     rate: hasUndamaged && undamagedRate ? undamagedRate : undefined,
     hasValue: hasUndamaged
   });
@@ -165,26 +185,49 @@ export const getAdditionalTrafikCoverages = (quote: ProcessedTrafikQuote): Array
 
 /**
  * Teminatın dahil olup olmadığını kontrol eder
+ * INCLUDED, MARKET_VALUE, LIMITLESS = tick (dahil)
+ * UNDEFINED, NOT_INCLUDED = X (dahil değil)
  */
 export const isTrafikCoverageIncluded = (guarantee: Guarantee): boolean => {
-  return (
+  // MARKET_VALUE (Rayiç), INCLUDED (Dahil), LIMITLESS (Limitsiz) = tick
+  if (
     guarantee.valueText === 'Dahil' ||
     guarantee.valueText === 'Limitsiz' ||
-    guarantee.valueText === 'En Yüksek Limit' ||
-    guarantee.amount > 0 ||
-    (guarantee.valueText !== null &&
-      guarantee.valueText !== 'Dahil Değil' &&
-      guarantee.valueText !== 'Belirsiz')
-  ) || false;
+    guarantee.valueText === 'Rayiç'
+  ) {
+    return true;
+  }
+
+  // Sayısal değer varsa dahil
+  if (guarantee.amount > 0) {
+    return true;
+  }
+
+  // UNDEFINED (Belirsiz) veya NOT_INCLUDED (Dahil Değil) = X
+  if (
+    guarantee.valueText === 'Belirsiz' ||
+    guarantee.valueText === 'Dahil Değil' ||
+    guarantee.valueText === null
+  ) {
+    return false;
+  }
+
+  // Diğer text değerler varsa dahil
+  return guarantee.valueText !== null;
 };
 
 /**
- * Teminatın sayı ile mi tik ile mi gösterileceğini belirler
- * true = tik/x göster, false = sayı/değer göster
+ * Ana teminat alanında Tick/X gösterilecek mi kontrol eder
+ * Yol Yardım için her zaman tick/x göster
+ * MARKET_VALUE (Rayiç) için ana teminatlarda tick göster
  */
 export const shouldShowTrafikTickX = (guarantee: Guarantee): boolean => {
   // Yol Yardım için tik göster
   if (guarantee.label === 'Yol Yardım' || guarantee.label === 'Çekici Hizmeti') {
+    return true;
+  }
+  // MARKET_VALUE (Rayiç) için ana teminatlarda tick göster
+  if (guarantee.valueText === 'Rayiç') {
     return true;
   }
   return false;
@@ -194,6 +237,11 @@ export const shouldShowTrafikTickX = (guarantee: Guarantee): boolean => {
  * Teminat değerini gösterim için formatlar
  */
 export const getTrafikCoverageDisplayValue = (guarantee: Guarantee): string | null => {
+  // Belirsiz değerler için null döndür
+  if (guarantee.valueText === 'Belirsiz') {
+    return null;
+  }
+
   // Tik gösterilecek teminatlar için null döndür
   if (shouldShowTrafikTickX(guarantee)) {
     return null;
@@ -208,13 +256,18 @@ export const getTrafikCoverageDisplayValue = (guarantee: Guarantee): string | nu
   }
 
   // Text değer varsa döndür
-  return guarantee.valueText || '-';
+  return guarantee.valueText || null;
 };
 
 /**
  * Teminat değerini formatlar (detay görünümü için)
  */
 export const formatTrafikGuaranteeValue = (guarantee: Guarantee): string => {
+  // Belirsiz veya undefined değerler için boş döndür
+  if (guarantee.valueText === 'Belirsiz') {
+    return '';
+  }
+
   if (guarantee.valueText) {
     return guarantee.valueText;
   }
@@ -226,6 +279,62 @@ export const formatTrafikGuaranteeValue = (guarantee: Guarantee): string => {
     }) + ' ₺';
   }
 
-  return '-';
+  return '';
+};
+
+/**
+ * Zorunlu trafik teminatlarını otomatik olarak tik ile ekler
+ * Eğer optimalCoverage'dan bu teminatlar gelmezse (undefined/belirsiz), otomatik olarak tik ile eklenir
+ */
+export const addMandatoryTrafikCoverages = (guarantees: Guarantee[]): Guarantee[] => {
+  const existingLabels = guarantees.map(g => g.label);
+  const mandatoryGuarantees: Guarantee[] = [];
+  let guaranteeId = guarantees.length + 1;
+
+  TRAFIK_MANDATORY_COVERAGES.forEach((key) => {
+    const label = TRAFIK_COVERAGE_LABELS[key];
+    
+    // Eğer bu teminat zaten varsa ve belirsiz değilse, ekleme
+    const existingGuarantee = guarantees.find(g => g.label === label);
+    if (existingGuarantee && existingGuarantee.valueText !== 'Belirsiz') {
+      return; // Zaten var ve belirsiz değil, ekleme
+    }
+
+    // Eğer bu teminat yoksa veya belirsiz ise, otomatik tik ile ekle
+    if (!existingGuarantee || existingGuarantee.valueText === 'Belirsiz') {
+      mandatoryGuarantees.push({
+        insuranceGuaranteeId: `mandatory-${key}-${guaranteeId}`,
+        label,
+        valueText: 'Dahil', // Zorunlu olduğu için otomatik tik
+        amount: 0
+      });
+      guaranteeId++;
+    }
+  });
+
+  // Mevcut garantileri koru, sadece belirsiz olanları değiştir
+  const updatedGuarantees = guarantees.map(g => {
+    if (g.valueText === 'Belirsiz') {
+      const mandatoryKey = Object.entries(TRAFIK_COVERAGE_LABELS).find(([_, v]) => v === g.label)?.[0];
+      if (mandatoryKey && TRAFIK_MANDATORY_COVERAGES.includes(mandatoryKey)) {
+        // Belirsiz olan zorunlu teminatı tik ile değiştir
+        return {
+          ...g,
+          valueText: 'Dahil',
+          amount: 0
+        };
+      }
+    }
+    return g;
+  });
+
+  // Yeni eklenen zorunlu teminatları ekle
+  mandatoryGuarantees.forEach(mg => {
+    if (!updatedGuarantees.find(g => g.label === mg.label)) {
+      updatedGuarantees.push(mg);
+    }
+  });
+
+  return updatedGuarantees;
 };
 

@@ -16,12 +16,21 @@ export const metadata = {
     title: "Sigorka Hakkında - Kimiz, Ne Yapıyoruz? | Sigorka",
     description: "Katılım sigortacılığını dijitalle buluşturan Sigorka markasının kimliği hakkında tüm detaylı bilgilere bu sayfa üzerinden kolayca ulaşabilirsiniz.",
     url: "https://sigorka.com/biz-kimiz",
-    type: "website"
+    type: "website",
+    images: [
+      {
+        url: "https://sigorka.com/images/sigorka-og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Sigorka Hakkında - Kimiz, Ne Yapıyoruz? | Sigorka"
+      }
+    ]
   },
   twitter: {
     title: "Sigorka Hakkında - Kimiz, Ne Yapıyoruz? | Sigorka",
     description: "Katılım sigortacılığını dijitalle buluşturan Sigorka markasının kimliği hakkında tüm detaylı bilgilere bu sayfa üzerinden kolayca ulaşabilirsiniz.",
-    card: "summary_large_image"
+    card: "summary_large_image",
+    images: ["https://sigorka.com/images/sigorka-og-image.png"]
   }
 };
 

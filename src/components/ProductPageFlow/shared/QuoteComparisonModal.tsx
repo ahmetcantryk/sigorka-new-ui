@@ -19,7 +19,7 @@ interface QuoteComparisonModalProps {
     isOpen: boolean;
     onClose: () => void;
     allQuotes: ComparisonQuote[];
-    onPurchase: (quoteId: string) => void;
+    onPurchase: (quoteId: string, installmentNumber?: number) => void;
     agencyPhoneNumber?: string;
 }
 
@@ -182,14 +182,33 @@ const QuoteComparisonModal: React.FC<QuoteComparisonModalProps> = ({
     };
 
     const formatGuaranteeValue = (guarantee: any): string => {
-        if (!guarantee) return '-';
+        if (!guarantee) return '';
+        // Belirsiz değerler için boş döndür
+        if (guarantee.valueText === 'Belirsiz') {
+            return '';
+        }
         if (guarantee.valueText) {
             return guarantee.valueText;
         }
         if (guarantee.amount) {
             return formatPrice(guarantee.amount);
         }
-        return '-';
+        return '';
+    };
+
+    // Branch bilgisini quote'lardan al (trafik, kasko, tss veya konut)
+    const getBranch = (): string => {
+        const firstQuote = selectedQuotes.find(q => q !== null);
+        if (firstQuote?.productBranch === 'TRAFIK' || firstQuote?.productBranch === 'trafik') {
+            return 'trafik';
+        }
+        if (firstQuote?.productBranch === 'TSS' || firstQuote?.productBranch === 'tss') {
+            return 'tss';
+        }
+        if (firstQuote?.productBranch === 'KONUT' || firstQuote?.productBranch === 'konut') {
+            return 'konut';
+        }
+        return 'kasko'; // Default kasko
     };
 
     // Collect all unique guarantee labels
@@ -212,10 +231,16 @@ const QuoteComparisonModal: React.FC<QuoteComparisonModalProps> = ({
             .map(q => {
                 const premium = q.premiums.find(p => p.installmentNumber === 1);
                 const price = premium ? formatPrice(premium.grossPremium) : '';
+                // Paket adı varsa göster, yoksa şirket adı + fiyat
+                const packageName = q.coverageGroupName || '';
+                const label = packageName 
+                    ? `${q.company || ''} - ${packageName}`
+                    : `${q.company || ''} - ${price}`;
                 return {
-                    label: `${q.company || ''} - ${price}`,
+                    label: label,
                     value: q.id,
-                    price: price
+                    price: price,
+                    packageName: packageName
                 };
             });
     };
@@ -371,7 +396,7 @@ const QuoteComparisonModal: React.FC<QuoteComparisonModalProps> = ({
                                         {quote && (
                                             <button
                                                 className="pp-comp-btn-buy"
-                                                onClick={() => onPurchase(quote.id)}
+                                                onClick={() => onPurchase(quote.id, slotInstallments[index])}
                                             >
                                                 Satın Al
                                             </button>
@@ -382,12 +407,20 @@ const QuoteComparisonModal: React.FC<QuoteComparisonModalProps> = ({
                         </thead>
 
                         <tbody>
-                            {allGuaranteeLabels.map((label, rowIndex) => (
+                            {allGuaranteeLabels.map((label, rowIndex) => {
+                                // İlk quote'dan bu label için coverageKey'i bul (konut için gerekli)
+                                const firstQuoteWithGuarantee = selectedQuotes.find(q => 
+                                    q?.insuranceCompanyGuarantees?.some((g: any) => g.label === label)
+                                );
+                                const guaranteeForKey = firstQuoteWithGuarantee?.insuranceCompanyGuarantees?.find((g: any) => g.label === label);
+                                const coverageKey = guaranteeForKey?.coverageKey || label;
+
+                                return (
                                 <tr key={rowIndex} className="pp-comp-row">
                                     <td className="pp-comp-cell-label">
                                         <div className="pp-comp-label-content">
                                             <span className="pp-comp-label-text">{label}</span>
-                                            <CoverageTooltip branch="kasko" coverageKey={label} className="pp-comp-info-icon" />
+                                                <CoverageTooltip branch={getBranch()} coverageKey={coverageKey} className="pp-comp-info-icon" />
                                         </div>
                                     </td>
                                     {selectedQuotes.map((quote, colIndex) => {
@@ -395,18 +428,24 @@ const QuoteComparisonModal: React.FC<QuoteComparisonModalProps> = ({
 
                                         const guarantee = quote.insuranceCompanyGuarantees?.find((g: any) => g.label === label);
                                         const value = formatGuaranteeValue(guarantee);
-                                        const isIncluded = value === 'Dahil' || value === 'Limitsiz' || value === 'Rayiç' || (guarantee?.amount > 0);
+                                        
+                                        // Karşılaştırmada her zaman text göster (tick/X yok)
+                                        const displayText = value || (guarantee?.isIncluded ? 'Dahil' : 'Dahil Değil');
+                                        const isIncluded = guarantee?.isIncluded !== undefined 
+                                            ? guarantee.isIncluded 
+                                            : (value !== '' && value !== 'Dahil Değil');
 
                                         return (
                                             <td key={colIndex} className="pp-comp-cell-value">
-                                                <span className={isIncluded ? 'pp-comp-text-included' : 'pp-comp-text-default'}>
-                                                    {value}
+                                                <span className={isIncluded ? 'pp-comp-text-included' : 'pp-comp-text-not-included'}>
+                                                    {displayText}
                                                 </span>
                                             </td>
                                         );
                                     })}
                                 </tr>
-                            ))}
+                                );
+                            })}
                         </tbody>
                     </table>
                 </div>

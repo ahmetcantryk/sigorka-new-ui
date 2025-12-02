@@ -32,6 +32,7 @@ import VerificationCodeModal from '../shared/VerificationCodeModal';
 import { UpdateVehicleModal } from '../common';
 import KaskoProductQuote from './KaskoProductQuote';
 import PurchaseStepNew from '../../QuoteFlow/KaskoQuote/steps/PurchaseStepNew';
+import PhoneNotMatchModal from '@/components/common/PhoneNotMatchModal';
 
 // Hooks
 import { useKaskoVehicle } from './hooks/useKaskoVehicle';
@@ -72,6 +73,11 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
 
   const [activeStep, setActiveStep] = useState(getInitialStep());
 
+  // Step değiştiğinde sayfayı en üste scroll et
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [activeStep]);
+
   // Form state'leri
   const [selectionType, setSelectionType] = useState<'existing' | 'new'>('new');
   const [vehicleType, setVehicleType] = useState<'plated' | 'unplated'>('plated');
@@ -94,6 +100,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
   const [editingVehicleId, setEditingVehicleId] = useState<string | null>(null);
   const [showDuplicateVehiclePopup, setShowDuplicateVehiclePopup] = useState(false);
   const [duplicatePlateNumber, setDuplicatePlateNumber] = useState<string>('');
+  const [showPhoneNotMatchModal, setShowPhoneNotMatchModal] = useState(false);
 
   // Vehicle hook
   const {
@@ -140,6 +147,43 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
       setSelectedVehicleId(vehicles[0].id);
     }
   }, [vehicles]);
+
+  // AdditionalInfoStep açıldığında mevcut profil bilgilerini form'a yükle
+  useEffect(() => {
+    if (showAdditionalInfo && accessToken) {
+      const loadProfileData = async () => {
+        try {
+          const response = await fetchWithAuth(API_ENDPOINTS.CUSTOMER_ME);
+          if (response.ok) {
+            const profile = await response.json();
+            const customerType = (profile as any).taxNumber || (profile as any).type === 'company' 
+              ? CustomerType.Company 
+              : CustomerType.Individual;
+            
+            const cityValue = typeof profile.city === 'object' && profile.city ? profile.city.value : profile.city;
+            const districtValue = typeof profile.district === 'object' && profile.district ? profile.district.value : profile.district;
+            
+            formik.setValues(prev => ({
+              ...prev,
+              fullName: customerType === CustomerType.Company 
+                ? ((profile as any).title || profile.fullName || '')
+                : (profile.fullName || ''),
+              city: cityValue || prev.city || '',
+              district: districtValue || prev.district || '',
+            }));
+            
+            // İl seçildiyse ilçeleri yükle
+            if (cityValue) {
+              await fetchDistricts(cityValue);
+            }
+          }
+        } catch (error) {
+          console.warn('Profil bilgileri yüklenemedi:', error);
+        }
+      };
+      loadProfileData();
+    }
+  }, [showAdditionalInfo, accessToken]);
 
   // URL güncelleme
   const updateUrlParams = (params: { proposalId?: string; productId?: string }) => {
@@ -238,7 +282,99 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
 
     // Zaten login ise
     if (accessToken) {
-      console.log('✅ Already authenticated, skipping to step 1');
+      console.log('✅ Already authenticated, checking if email/job needs update');
+      
+      // E-posta veya meslek güncellemesi gerekebilir
+      const userEnteredEmail = formik.values.email?.trim() || localStorage.getItem(STORAGE_KEYS.INITIAL_EMAIL);
+      const userEnteredJob = formik.values.job !== undefined ? formik.values.job : (localStorage.getItem(STORAGE_KEYS.INITIAL_JOB) ? parseInt(localStorage.getItem(STORAGE_KEYS.INITIAL_JOB)!) : null);
+      
+      try {
+        setIsLoading(true);
+        
+        // Mevcut profil bilgilerini al
+        let meResponse = await fetchWithAuth(API_ENDPOINTS.CUSTOMER_ME);
+        let meData: CustomerProfile | null = null;
+        console.log('🔍 Kasko - /api/customers/me response status:', meResponse.status, meResponse.ok);
+        if (meResponse.ok) {
+          meData = await meResponse.json();
+          console.log('✅ Kasko - meData alındı:', !!meData, meData ? { id: meData.id, fullName: meData.fullName, city: meData.city, district: meData.district } : null);
+        } else {
+          const errorText = await meResponse.text();
+          console.warn('⚠️ Kasko - /api/customers/me hatası:', meResponse.status, errorText);
+        }
+        
+        // E-posta veya meslek güncellemesi
+        if (meData && (userEnteredEmail || (userEnteredJob !== null && userEnteredJob !== undefined))) {
+          const customerIdToUse = customerId || meData.id;
+          if (customerIdToUse) {
+            try {
+              await updateUserProfileWithCurrentData(meData, userEnteredEmail || null, userEnteredJob, customerIdToUse);
+            } catch (error) {
+              console.warn('Email/Job update hatası:', error);
+            }
+          }
+        }
+        
+        // Eksik bilgi kontrolü - meData null olsa bile kontrol yap
+        // meResponse.ok false ise veya meData null ise eksik bilgi sayfası göster
+        if (!meResponse.ok || !meData) {
+          console.log('⚠️ Kasko - meResponse.ok false veya meData null, AdditionalInfoStep gösteriliyor');
+          setShowAdditionalInfo(true);
+          setIsLoading(false);
+          return;
+        }
+        
+        if (meData) {
+          const customerType = (meData as any)?.taxNumber || (meData as any)?.type === 'company' 
+            ? CustomerType.Company 
+            : CustomerType.Individual;
+          const cityValue = typeof meData.city === 'object' && meData.city ? (meData.city as any).value : meData.city;
+          const districtValue = typeof meData.district === 'object' && meData.district ? (meData.district as any).value : meData.district;
+          const nameField = customerType === CustomerType.Company 
+            ? ((meData as any)?.title || meData.fullName)
+            : meData.fullName;
+          // Boş string ve null/undefined kontrolü
+          const isDataComplete = !!(nameField && String(nameField).trim() && cityValue && String(cityValue).trim() && districtValue && String(districtValue).trim());
+          
+          console.log('🔍 Kasko handlePersonalInfoSubmit (accessToken) - isDataComplete:', isDataComplete, {
+            meData: !!meData,
+            nameField,
+            cityValue,
+            districtValue,
+            customerType
+          });
+          
+          if (!isDataComplete) {
+            console.log('✅ Kasko - Eksik bilgiler var, AdditionalInfoStep gösteriliyor');
+            // Eksik bilgiler var, AdditionalInfoStep göster
+            if (cityValue) await fetchDistricts(cityValue);
+            formik.setValues(prev => ({
+              ...prev,
+              fullName: customerType === CustomerType.Company 
+                ? ((meData as any)?.title || meData.fullName || '')
+                : (meData.fullName || ''),
+              city: cityValue || '',
+              district: districtValue || '',
+            }), false);
+            setShowAdditionalInfo(true);
+            setIsLoading(false);
+            return;
+          }
+        } else {
+          // meData null ise, eksik bilgi sayfası göster
+          console.log('⚠️ Kasko - meData null, AdditionalInfoStep gösteriliyor');
+          setShowAdditionalInfo(true);
+          setIsLoading(false);
+          return;
+        }
+      } catch (error) {
+        console.warn('Profil kontrol hatası:', error);
+        // Hata olsa bile eksik bilgi sayfası göster
+        setShowAdditionalInfo(true);
+        setIsLoading(false);
+        return;
+      }
+      
       setActiveStep(1);
       return;
     }
@@ -250,20 +386,26 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
       setError(null);
 
       const cleanPhoneNumber = formik.values.phoneNumber.replace(/\D/g, '');
+      
+      // VKN kontrolü: 10 haneli ise Company, 11 haneli ise Individual
+      const isVKN = formik.values.identityNumber.length === 10;
+      const customerType = isVKN ? CustomerType.Company : CustomerType.Individual;
+      const identityOrTaxNumber = isVKN ? formik.values.identityNumber : parseInt(formik.values.identityNumber);
+      
       console.log('Sending login request with:', {
-        identityNumber: parseInt(formik.values.identityNumber),
-        birthDate: formik.values.birthDate,
+        identityOrTaxNumber,
+        birthDate: isVKN ? undefined : formik.values.birthDate,
         phoneNumber: cleanPhoneNumber,
         agentId: agentId,
-        customerType: CustomerType.Individual
+        customerType
       });
 
       const loginResponse = await performLogin(
-        parseInt(formik.values.identityNumber),
-        formik.values.birthDate,
+        identityOrTaxNumber,
+        isVKN ? undefined : formik.values.birthDate,
         cleanPhoneNumber,
         agentId,
-        CustomerType.Individual
+        customerType
       );
 
       console.log('Login response:', loginResponse);
@@ -275,8 +417,13 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
       } else {
         throw new Error('OTP gönderilemedi');
       }
-    } catch (err) {
+    } catch (err: any) {
+      // 404 hatası ve RESOURCE_NOT_FOUND_DATABASE kodu kontrolü
+      if (err?.status === 404 || err?.codes?.includes('RESOURCE_NOT_FOUND_DATABASE')) {
+        setShowPhoneNotMatchModal(true);
+      } else {
       setError(err instanceof Error ? err.message : 'Doğrulama kodu gönderilemedi');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -301,20 +448,55 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
       // Fetch customer profile
       let meResponse = await fetchWithAuth(API_ENDPOINTS.CUSTOMER_ME);
       let meData: CustomerProfile | null = null;
+      console.log('🔍 Kasko handleVerifyCode - /api/customers/me response status:', meResponse.status, meResponse.ok);
       if (meResponse.ok) {
         meData = await meResponse.json();
+        console.log('✅ Kasko handleVerifyCode - meData alındı:', !!meData, meData ? { id: meData.id, fullName: meData.fullName, city: meData.city, district: meData.district } : null);
+      } else {
+        const errorText = await meResponse.text();
+        console.warn('⚠️ Kasko handleVerifyCode - /api/customers/me hatası:', meResponse.status, errorText);
       }
 
-      const cityValue = typeof meData?.city === 'object' && meData?.city ? (meData.city as any).value : meData?.city;
-      const districtValue = typeof meData?.district === 'object' && meData?.district ? (meData.district as any).value : meData?.district;
-      const isDataComplete = meData && meData.fullName && cityValue && districtValue;
+      // meResponse.ok false ise veya meData null ise eksik bilgi sayfası göster
+      if (!meResponse.ok || !meData) {
+        console.log('⚠️ Kasko handleVerifyCode - meResponse.ok false veya meData null, AdditionalInfoStep gösteriliyor');
+        setShowAdditionalInfo(true);
+        setShowVerification(false);
+        setIsLoading(false);
+        // Sayfa başına scroll
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 100);
+        return;
+      }
+
+      const cityValue = typeof meData.city === 'object' && meData.city ? (meData.city as any).value : meData.city;
+      const districtValue = typeof meData.district === 'object' && meData.district ? (meData.district as any).value : meData.district;
+      const customerType = (meData as any)?.taxNumber || (meData as any)?.type === 'company' 
+        ? CustomerType.Company 
+        : CustomerType.Individual;
+      // Company müşterileri için title, Individual müşteriler için fullName kontrol et
+      const nameField = customerType === CustomerType.Company 
+        ? ((meData as any)?.title || meData?.fullName)
+        : meData?.fullName;
+      // Boş string ve null/undefined kontrolü
+      const isDataComplete = !!(meData && nameField && String(nameField).trim() && cityValue && String(cityValue).trim() && districtValue && String(districtValue).trim());
+      console.log('🔍 Kasko handleVerifyCode - isDataComplete:', isDataComplete, {
+        meData: !!meData,
+        nameField,
+        cityValue,
+        districtValue
+      });
+      
       let customerIdToUse = verifyData.customerId || meData?.id;
 
       if (customerIdToUse) {
         setCustomerId(customerIdToUse);
         setUser({
           id: customerIdToUse,
-          name: meData?.fullName || '',
+          name: customerType === CustomerType.Company 
+            ? ((meData as any)?.title || meData?.fullName || '')
+            : (meData?.fullName || ''),
           email: meData?.primaryEmail || '',
           phone: meData?.primaryPhoneNumber?.number || ''
         });
@@ -331,18 +513,35 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
       }
 
       if (!isDataComplete) {
+        console.log('✅ Kasko - Eksik bilgiler var, AdditionalInfoStep gösteriliyor');
         if (cityValue) await fetchDistricts(cityValue);
+        const customerType = (meData as any)?.taxNumber || (meData as any)?.type === 'company' 
+          ? CustomerType.Company 
+          : CustomerType.Individual;
         formik.setValues(prev => ({
           ...prev,
-          fullName: meData?.fullName || '',
+          fullName: customerType === CustomerType.Company 
+            ? ((meData as any)?.title || meData?.fullName || '')
+            : (meData?.fullName || ''),
           city: cityValue || '',
           district: districtValue || '',
         }), false);
         setShowAdditionalInfo(true);
         setShowVerification(false);
+        // Sayfa başına scroll
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 100);
       } else {
+        console.log('✅ Kasko - Veri tamam, step1\'e geçiliyor');
+        // OTP doğrulaması sonrası veri tamamsa step1 event'ini gönder
+        pushKaskoStep1Complete();
         setShowVerification(false);
         setActiveStep(1);
+        // Sayfa başına scroll
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 100);
       }
     } catch (err) {
       throw new Error(err instanceof Error ? err.message : 'Doğrulama başarısız');
@@ -359,18 +558,30 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
     customerIdToUse: string
   ) => {
     try {
+      // CustomerType belirleme: taxNumber varsa veya type === 'company' ise Company
+      const customerType = currentMeData && ((currentMeData as any).taxNumber || (currentMeData as any).type === 'company')
+        ? CustomerType.Company 
+        : CustomerType.Individual;
+
       const updatePayload: Record<string, any> = {
-        identityNumber: currentMeData?.identityNumber,
-        birthDate: currentMeData?.birthDate,
         primaryPhoneNumber: currentMeData?.primaryPhoneNumber,
       };
 
+      // Individual için identityNumber ve birthDate ekle
+      if (customerType === CustomerType.Individual) {
+        if (currentMeData?.identityNumber) updatePayload.identityNumber = currentMeData.identityNumber;
+        if (currentMeData?.birthDate) updatePayload.birthDate = currentMeData.birthDate;
       if (currentMeData?.fullName) updatePayload.fullName = currentMeData.fullName;
       if (currentMeData?.gender) updatePayload.gender = currentMeData.gender;
       if (currentMeData?.educationStatus) updatePayload.educationStatus = currentMeData.educationStatus;
       if (currentMeData?.nationality) updatePayload.nationality = currentMeData.nationality;
       if (currentMeData?.maritalStatus) updatePayload.maritalStatus = currentMeData.maritalStatus;
       if (currentMeData?.representedBy) updatePayload.representedBy = currentMeData.representedBy;
+      } else {
+        // Company için taxNumber ve title ekle
+        if ((currentMeData as any)?.taxNumber) updatePayload.taxNumber = (currentMeData as any).taxNumber;
+        updatePayload.title = (currentMeData as any)?.title || currentMeData?.fullName || '';
+      }
 
       const cityValue = typeof currentMeData?.city === 'object' && currentMeData?.city ? (currentMeData.city as any).value : currentMeData?.city;
       const districtValue = typeof currentMeData?.district === 'object' && currentMeData?.district ? (currentMeData.district as any).value : currentMeData?.district;
@@ -389,7 +600,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
         updatePayload.job = currentMeData.job;
       }
 
-      const updatedProfile = await updateCustomerProfile(updatePayload, customerIdToUse, CustomerType.Individual);
+      const updatedProfile = await updateCustomerProfile(updatePayload, customerIdToUse, customerType);
       setUser({
         id: customerIdToUse,
         name: updatedProfile.fullName || currentMeData?.fullName || '',
@@ -405,19 +616,30 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
   const handleResendOTP = async () => {
     try {
       const cleanPhoneNumber = formik.values.phoneNumber.replace(/\D/g, '');
+      
+      // VKN kontrolü: 10 haneli ise Company, 11 haneli ise Individual
+      const isVKN = formik.values.identityNumber.length === 10;
+      const customerType = isVKN ? CustomerType.Company : CustomerType.Individual;
+      const identityOrTaxNumber = isVKN ? formik.values.identityNumber : parseInt(formik.values.identityNumber);
+      
       const loginResponse = await performLogin(
-        parseInt(formik.values.identityNumber),
-        formik.values.birthDate,
+        identityOrTaxNumber,
+        isVKN ? undefined : formik.values.birthDate,
         cleanPhoneNumber,
         agentId,
-        CustomerType.Individual
+        customerType
       );
 
       if (loginResponse.token) {
         setTempToken(loginResponse.token);
       }
-    } catch (err) {
+    } catch (err: any) {
+      // 404 hatası ve RESOURCE_NOT_FOUND_DATABASE kodu kontrolü
+      if (err?.status === 404 || err?.codes?.includes('RESOURCE_NOT_FOUND_DATABASE')) {
+        setShowPhoneNotMatchModal(true);
+      } else {
       throw new Error(err instanceof Error ? err.message : 'Kod gönderilemedi');
+      }
     }
   };
 
@@ -444,22 +666,37 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
         throw new Error('Müşteri ID bulunamadı');
       }
 
+      // CustomerType belirleme: taxNumber varsa veya type === 'company' ise Company
+      const customerType = (currentMeData as any).taxNumber || (currentMeData as any).type === 'company' 
+        ? CustomerType.Company 
+        : CustomerType.Individual;
+
       const userEnteredEmail = localStorage.getItem(STORAGE_KEYS.INITIAL_EMAIL);
       const userEnteredJobStr = localStorage.getItem(STORAGE_KEYS.INITIAL_JOB);
 
       const updatePayload: Record<string, any> = {
-        identityNumber: currentMeData.identityNumber,
-        birthDate: currentMeData.birthDate,
         primaryPhoneNumber: currentMeData.primaryPhoneNumber,
-        fullName: formik.values.fullName.trim(),
         cityReference: formik.values.city.trim(),
         districtReference: formik.values.district.trim(),
-        gender: currentMeData.gender,
-        educationStatus: currentMeData.educationStatus,
-        nationality: currentMeData.nationality,
-        maritalStatus: currentMeData.maritalStatus,
-        representedBy: currentMeData.representedBy,
       };
+
+      // Individual için identityNumber ve birthDate ekle
+      if (customerType === CustomerType.Individual) {
+        updatePayload.identityNumber = currentMeData.identityNumber;
+        if (currentMeData.birthDate) {
+          updatePayload.birthDate = currentMeData.birthDate;
+        }
+        updatePayload.fullName = formik.values.fullName.trim();
+        updatePayload.gender = currentMeData.gender;
+        updatePayload.educationStatus = currentMeData.educationStatus;
+        updatePayload.nationality = currentMeData.nationality;
+        updatePayload.maritalStatus = currentMeData.maritalStatus;
+        updatePayload.representedBy = currentMeData.representedBy;
+      } else {
+        // Company için taxNumber ve title ekle
+        updatePayload.taxNumber = (currentMeData as any).taxNumber;
+        updatePayload.title = formik.values.fullName.trim() || (currentMeData as any).title || '';
+      }
 
       if (userEnteredEmail && userEnteredEmail.trim()) {
         updatePayload.primaryEmail = userEnteredEmail.trim();
@@ -474,7 +711,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
         updatePayload.job = currentMeData.job;
       }
 
-      const updatedProfile = await updateCustomerProfile(updatePayload, customerIdToUse, CustomerType.Individual);
+      const updatedProfile = await updateCustomerProfile(updatePayload, customerIdToUse, customerType);
 
       setUser({
         id: customerIdToUse,
@@ -560,12 +797,12 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
   // Brand change
   const handleBrandChange = async (brandCode: string) => {
     setModelError(null);
-    formik.setFieldValue('brandCode', brandCode);
+    await formik.setFieldValue('brandCode', brandCode);
     const brand = vehicleBrands.find(b => b.value === brandCode);
-    if (brand) formik.setFieldValue('brand', brand.text);
+    if (brand) await formik.setFieldValue('brand', brand.text);
 
-    formik.setFieldValue('modelCode', '');
-    formik.setFieldValue('model', '');
+    await formik.setFieldValue('modelCode', '');
+    await formik.setFieldValue('model', '');
 
     if (formik.values.year?.length === 4) {
       const year = parseInt(formik.values.year);
@@ -634,6 +871,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
 
         if (proposalId) {
           localStorage.setItem(STORAGE_KEYS.PROPOSAL_ID, proposalId);
+          pushKaskoStep2Complete();
           handleProposalCreated(proposalId);
         }
       } else {
@@ -805,9 +1043,11 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
     setShowUpdateVehicleModal(true);
   };
 
-  // Additional info render
+  // Additional info render - TSS gibi tam sayfa görünümü
   if (showAdditionalInfo) {
     return (
+      <div className="product-page-flow-container">
+        <KaskoStepper activeStep={0} />
       <AdditionalInfoStep
         formik={formik}
         cities={cities}
@@ -817,6 +1057,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
         onCityChange={fetchDistricts}
         onSubmit={handleAdditionalInfoSubmit}
       />
+      </div>
     );
   }
 
@@ -897,6 +1138,7 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
             onNext={() => {
               console.log('✅ Ödeme tamamlandı');
             }}
+            onBack={() => setActiveStep(2)}
           />
         )}
       </div>
@@ -946,6 +1188,12 @@ const KaskoProductForm = ({ onProposalCreated, onBack }: KaskoFormProps) => {
           }}
         />
       )}
+
+      {/* Phone Not Match Modal */}
+      <PhoneNotMatchModal
+        isOpen={showPhoneNotMatchModal}
+        onClose={() => setShowPhoneNotMatchModal(false)}
+      />
     </>
   );
 };

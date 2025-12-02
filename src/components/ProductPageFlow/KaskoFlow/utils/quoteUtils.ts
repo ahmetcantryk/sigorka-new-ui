@@ -66,6 +66,7 @@ export const processQuotesData = (
       logo: `https://storage.dogasigorta.com/app-1/insurup-b2c-company/${quote.insuranceCompanyId}.png`,
       selectedInstallmentNumber: initialSelectedInstallment,
       insuranceCompanyGuarantees: guarantees,
+      productBranch: 'KASKO', // Modal'larda doğru branch tooltip'leri için
     };
   });
 };
@@ -93,16 +94,51 @@ export const filterQuotes = (
 };
 
 /**
+ * Coverage group isimlerine göre öncelik sırası belirler
+ */
+const getCoverageGroupPriority = (groupName: string | undefined): number => {
+  if (!groupName) return 999; // Coverage group'u olmayanlar en sonda
+  
+  const normalizedName = groupName.toLowerCase().trim();
+  
+  // Hesaplı (kasko/trafik) önce
+  if (normalizedName.includes('hesaplı')) {
+    return 1;
+  }
+  // Geniş (kasko/trafik) sonra
+  if (normalizedName.includes('geniş')) {
+    return 2;
+  }
+  // Diğer coverage group'lar alfabetik sırayla
+  return 3;
+};
+
+/**
  * Quote'ları sıralar
  */
 export const sortQuotes = (
   quotes: ProcessedQuote[],
   sortType: string
 ): ProcessedQuote[] => {
+  // Varsayılan sıralama: Coverage group'a göre, sonra fiyata göre (ucuzdan pahalıya)
   if (sortType === 'Fiyata Göre Sırala') {
-    return quotes;
+    return [...quotes].sort((a, b) => {
+      // Önce coverage group'a göre sırala
+      const groupPriorityA = getCoverageGroupPriority(a.coverageGroupName);
+      const groupPriorityB = getCoverageGroupPriority(b.coverageGroupName);
+      
+      if (groupPriorityA !== groupPriorityB) {
+        return groupPriorityA - groupPriorityB;
+      }
+      
+      // Aynı coverage group içinde fiyata göre sırala (ucuzdan pahalıya)
+      const priceA = getSelectedPremium(a)?.grossPremium || 0;
+      const priceB = getSelectedPremium(b)?.grossPremium || 0;
+      return priceA - priceB;
+    });
   }
 
+  // Manuel sıralama seçenekleri
   return [...quotes].sort((a, b) => {
     const priceA = getSelectedPremium(a)?.grossPremium || 0;
     const priceB = getSelectedPremium(b)?.grossPremium || 0;
@@ -173,6 +209,10 @@ export const preparePurchaseData = (
     productId: quote.productId,
     proposalProductId: quote.id,
     proposalId: proposalId,
+    insuranceCompanyLogo: quote.logo,
+    coverageGroupName: quote.coverageGroupName,
+    hasUndamagedDiscount: quote.hasUndamagedDiscount,
+    hasUndamagedDiscountRate: (quote as any).hasUndamagedDiscountRate,
   };
 };
 

@@ -4,9 +4,13 @@
 
 'use client';
 
+import { useEffect, useState } from 'react';
 import { FormikProps } from 'formik';
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 import type { VehicleFormData } from '../../types';
+import { CustomerType } from '@/utils/authHelper';
+import { fetchWithAuth } from '@/services/fetchWithAuth';
+import { API_ENDPOINTS } from '@/config/api';
 
 interface AdditionalInfoStepProps {
   formik: FormikProps<VehicleFormData>;
@@ -27,6 +31,24 @@ const AdditionalInfoStep = ({
   onCityChange,
   onSubmit,
 }: AdditionalInfoStepProps) => {
+  const [customerType, setCustomerType] = useState<CustomerType>(CustomerType.Individual);
+
+  useEffect(() => {
+    // Mevcut profil bilgilerinden customerType'ı belirle
+    const determineCustomerType = async () => {
+      try {
+        const response = await fetchWithAuth(API_ENDPOINTS.CUSTOMER_ME);
+        if (response.ok) {
+          const profile = await response.json();
+          const isCompany = (profile as any).taxNumber || (profile as any).type === 'company';
+          setCustomerType(isCompany ? CustomerType.Company : CustomerType.Individual);
+        }
+      } catch (error) {
+        console.warn('Customer type belirlenemedi:', error);
+      }
+    };
+    determineCustomerType();
+  }, []);
   return (
     <div className="product-page-form">
       <div className="pp-card">
@@ -38,7 +60,9 @@ const AdditionalInfoStep = ({
         <div>
           <div className="pp-form-row">
             <div className="pp-form-group">
-              <label className="pp-label">Ad Soyad</label>
+              <label className="pp-label">
+                {customerType === CustomerType.Company ? 'Şirket Ünvanı' : 'Ad Soyad'}
+              </label>
               <input
                 type="text"
                 className="pp-input"
@@ -50,7 +74,7 @@ const AdditionalInfoStep = ({
                   formik.setFieldValue('fullName', value);
                 }}
                 onBlur={formik.handleBlur}
-                placeholder="Adınız ve Soyadınız"
+                placeholder={customerType === CustomerType.Company ? 'Şirket Ünvanı giriniz' : 'Adınız ve Soyadınız'}
               />
             </div>
           </div>

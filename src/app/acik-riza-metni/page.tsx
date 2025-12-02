@@ -14,12 +14,21 @@ export const metadata: Metadata = {
     title: "Açık Rıza Metni Hakkında - Kişisel Veri Onayı | Sigorka",
     description: "Kişisel verilerinizin işlenmesine dair açık rıza metnini okuyarak onay süreçleri hakkında bilgi sahibi olabilirsiniz. Daha fazlası için sitemizi ziyaret edin.",
     url: "https://sigorka.com/acik-riza-metni",
-    type: "website"
+    type: "website",
+    images: [
+      {
+        url: "https://sigorka.com/images/sigorka-og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Açık Rıza Metni Hakkında - Kişisel Veri Onayı | Sigorka"
+      }
+    ]
   },
   twitter: {
     title: "Açık Rıza Metni Hakkında - Kişisel Veri Onayı | Sigorka",
     description: "Kişisel verilerinizin işlenmesine dair açık rıza metnini okuyarak onay süreçleri hakkında bilgi sahibi olabilirsiniz. Daha fazlası için sitemizi ziyaret edin.",
-    card: "summary_large_image"
+    card: "summary_large_image",
+    images: ["https://sigorka.com/images/sigorka-og-image.png"]
   }
 };
 

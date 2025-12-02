@@ -45,34 +45,35 @@ const roboto = Roboto({
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Sigorka - Katılım Sigortacılığı',
-  description: 'Sigorka ile güvenli ve uygun fiyatlı sigorta çözümleri. Kasko, trafik, sağlık, DASK ve daha fazlası için hemen teklif alın.',
+  title: 'Sigorka | Katılım Sigortacılığına Modern Yaklaşım',
+  description: 'Sigorta dünyasını yüksek hizmet kalitesiyle yeniden tanımlayan Sigorka ile katılım sigortacılığında dijital ve kullanıcı dostu çözümler sizi bekliyor.',
   metadataBase: new URL('https://sigorka.com'),
   robots: {
-    index: true,
-    follow: true,
+    index: false,
+    follow: false,
   },
   openGraph: {
     type: 'website',
     locale: 'tr_TR',
-    url: 'https://sigorka.com',
-    siteName: 'Sigorka - Katılım Sigortacılığı',
-    title: 'Sigorka - Katılım Sigortacılığı',
-    description: 'Sigorka ile güvenli ve uygun fiyatlı sigorta çözümleri. Kasko, trafik, sağlık, DASK ve daha fazlası için hemen teklif alın.',
+    url: 'https://sigorka.com/',
+    siteName: 'Sigorka.com',
+    title: 'Sigorka | Katılım Sigortacılığına Modern Yaklaşım',
+    description: 'Sigorta dünyasını yüksek hizmet kalitesiyle yeniden tanımlayan Sigorka ile katılım sigortacılığında dijital ve kullanıcı dostu çözümler sizi bekliyor.',
     images: [
       {
-        url: '/images/sigorka-og-image.png',
+        url: 'https://sigorka.com/images/sigorka-og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Sigorka - Katılım Sigortacılığı'
+        alt: 'Sigorka | Katılım Sigortacılığına Modern Yaklaşım'
       }
     ]
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sigorka - Katılım Sigortacılığı',
-    description: 'Sigorka ile güvenli ve uygun fiyatlı sigorta çözümleri. Kasko, trafik, sağlık, DASK ve daha fazlası için hemen teklif alın.',
-    images: ['/images/sigorka-og-image.png']
+    site: '@sigorka',
+    title: 'Sigorka | Katılım Sigortacılığına Modern Yaklaşım',
+    description: 'Sigorta dünyasını yüksek hizmet kalitesiyle yeniden tanımlayan Sigorka ile katılım sigortacılığında dijital ve kullanıcı dostu çözümler sizi bekliyor.',
+    images: ['https://sigorka.com/images/sigorka-og-image.png']
   }
 };
 
@@ -84,6 +85,24 @@ export default function RootLayout({
   return (
     <html lang="tr" className={`${sourceSans3.variable} ${poppins.variable} ${roboto.variable} ${inter.className}`}>
       <head suppressHydrationWarning>
+        {/* JSON-LD WebSite Schema - Google arama sonuçlarında site adı için */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Sigorka.com",
+              "url": "https://sigorka.com",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://sigorka.com/search?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            })
+          }}
+        />
+        
         {/* Google Tag Manager */}
         <Script
           id="gtm-script"
@@ -106,6 +125,16 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
         {/* End Efilli Script */}
+        
+        {/* Segmage Script */}
+        <Script
+          id="segmage-script"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(s,l,b){window.Segmage=[];segmage=function(){Segmage.push(Array.prototype.slice.call(arguments));};var doc=document.createElement('script'),scr = document.getElementsByTagName('script')[0];doc.type='text/javascript';doc.async = true;doc.src=s;scr.parentNode.insertBefore(doc, scr);segmage('init',l,b,'p');})('https://cdn.segmage.com/segmage.min.js','tr','48694ce6-5f33-4034-0a38-08de2c6b2669');`,
+          }}
+        />
+        {/* End Segmage Script */}
       </head>
       <body>
         {/* Google Tag Manager (noscript) */}

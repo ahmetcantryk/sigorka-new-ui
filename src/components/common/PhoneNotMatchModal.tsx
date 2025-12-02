@@ -54,7 +54,7 @@ const PhoneNotMatchModal: React.FC<PhoneNotMatchModalProps> = ({ isOpen, onClose
             <div className="space-y-2">
               <p className="text-gray-600 text-sm">Müşteri Hizmetleri</p>
               <a 
-                href="tel:+908504044444" 
+                href="tel:+908504040404" 
                 className="inline-flex items-center gap-2 text-secondary hover:text-secondary/80 transition-colors text-lg font-semibold"
               >
                 <Phone size={20} />

@@ -13,12 +13,12 @@ export default function KaskoQuoteComparisonPageComponent() {
     if (proposalId && selectedQuoteId) {
       router.push(`/purchase/${proposalId}/${selectedQuoteId}`);
     } else {
-      router.push('/kasko-teklif');
+      router.push('/kasko-sigortasi');
     }
   };
 
   const handleBack = () => {
-    router.push('/kasko-teklif');
+    router.push('/kasko-sigortasi');
   };
 
   return (

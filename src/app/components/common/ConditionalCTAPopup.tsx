@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense, useCallback } from 'react';
 import Link from 'next/link';
+import { useSearchParams, usePathname } from 'next/navigation';
 
 interface CTAConfig {
   title: string;
@@ -16,21 +17,56 @@ interface ConditionalCTAPopupProps {
   inactivityDelay?: number; // saniye cinsinden
 }
 
-export default function ConditionalCTAPopup({ 
+function ConditionalCTAPopupContent({ 
   config, 
   condition,
   inactivityDelay = 15 
 }: ConditionalCTAPopupProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+
+  // Teklif formları içerisinde mi kontrol et
+  const isInProductForm = useCallback(() => {
+    // URL'de proposalId veya purchaseId varsa teklif formu içindeyiz
+    const proposalId = searchParams.get('proposalId');
+    const purchaseId = searchParams.get('purchaseId');
+    if (proposalId || purchaseId) {
+      return true;
+    }
+
+    // product-page-flow-container class'ı olan bir element varsa teklif formu içindeyiz
+    if (typeof window !== 'undefined') {
+      const productFormContainer = document.querySelector('.product-page-flow-container');
+      if (productFormContainer) {
+        return true;
+      }
+    }
+
+    return false;
+  }, [searchParams]);
+
+  // Teklif formu kontrolü için ayrı bir effect
+  useEffect(() => {
+    if (isInProductForm()) {
+      console.log('[CTA Popup] ⚠️ Teklif formu içerisinde - pop-up gösterilmeyecek');
+      setIsVisible(false);
+      setIsDismissed(true);
+    }
+  }, [isInProductForm, pathname]);
 
   useEffect(() => {
     if (isDismissed) return;
 
+    // Teklif formları içerisindeyse pop-up'ı gösterme
+    if (isInProductForm()) {
+      return;
+    }
+
     // Blog Detay - 2. kez scroll (.text-content bazlı)
     if (condition === 'blog-scroll') {
       let scrollCount = 0;
-      let lastScrollPosition = 0;
       let hasScrolledToBottom = false;
 
       const handleScroll = () => {
@@ -88,8 +124,6 @@ export default function ConditionalCTAPopup({
           console.log('[CTA Popup] ⬆️ İçeriğin başına dönüldü (%60\'ın altı) - flag sıfırlandı');
           hasScrolledToBottom = false;
         }
-
-        lastScrollPosition = currentScroll;
       };
 
       console.log('[CTA Popup] Blog scroll tracking başlatıldı');
@@ -148,7 +182,7 @@ export default function ConditionalCTAPopup({
       window.addEventListener('scroll', handleScroll);
       return () => window.removeEventListener('scroll', handleScroll);
     }
-  }, [condition, inactivityDelay, isDismissed]);
+  }, [condition, inactivityDelay, isDismissed, isInProductForm, pathname]);
 
   const handleClose = () => {
     console.log('[CTA Popup] ❌ Popup kapatıldı');
@@ -300,6 +334,14 @@ export default function ConditionalCTAPopup({
         }
       `}</style>
     </>
+  );
+}
+
+export default function ConditionalCTAPopup(props: ConditionalCTAPopupProps) {
+  return (
+    <Suspense fallback={null}>
+      <ConditionalCTAPopupContent {...props} />
+    </Suspense>
   );
 }
 

@@ -14,12 +14,21 @@ export const metadata: Metadata = {
     title: "Mesafeli Satış Sözleşmesi - Sigorka Yasal Bilgi | Sigorka",
     description: "Sigorta satış işlemleri için geçerli mesafeli satış sözleşmesi metnini detaylı olarak buradan inceleyebilir ve geleceğiniz için en doğru adımı atabilirsiniz.",
     url: "https://sigorka.com/mesafeli-satis-sozlesmesi",
-    type: "website"
+    type: "website",
+    images: [
+      {
+        url: "https://sigorka.com/images/sigorka-og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Mesafeli Satış Sözleşmesi - Sigorka Yasal Bilgi | Sigorka"
+      }
+    ]
   },
   twitter: {
     title: "Mesafeli Satış Sözleşmesi - Sigorka Yasal Bilgi | Sigorka",
     description: "Sigorta satış işlemleri için geçerli mesafeli satış sözleşmesi metnini detaylı olarak buradan inceleyebilir ve geleceğiniz için en doğru adımı atabilirsiniz.",
-    card: "summary_large_image"
+    card: "summary_large_image",
+    images: ["https://sigorka.com/images/sigorka-og-image.png"]
   }
 };
 

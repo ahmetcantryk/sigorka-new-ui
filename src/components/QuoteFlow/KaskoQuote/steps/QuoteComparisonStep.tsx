@@ -45,6 +45,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { fetchWithAuth } from '@/services/fetchWithAuth';
 import { API_ENDPOINTS } from '@/config/api';
 import QuoteComparisonModal, { QuoteForComparison } from '@/components/common/QuoteComparisonModal';
+import { getMainCoverages } from '@/components/ProductPageFlow/KaskoFlow/utils/coverageUtils';
 
 // DataLayer helper functions
 declare global {
@@ -298,7 +299,7 @@ const convertCoverageToGuarantees = (coverage: KaskoCoverage | null): Guarantee[
     ferdiKazaTedaviMasraflari: 'Ferdi Kaza Tedavi Masrafları',
     anahtarKaybi: 'Anahtar Kaybı',
     maneviTazminat: 'Manevi Tazminat',
-      onarimServisTuru: 'Servis Geçerliliği',
+      onarimServisTuru: 'Servis',
       yedekParcaTuru: 'Yedek Parça Türü',
       camKirilmaMuafeyeti: 'Cam Hasarı',
     hukuksalKorumaAracaBagli: 'Hukuksal Koruma (Araca Bağlı)',
@@ -565,7 +566,7 @@ export default function QuoteComparisonStep({
       ferdiKazaTedaviMasraflari: 'Ferdi Kaza Tedavi Masrafları',
       anahtarKaybi: 'Anahtar Kaybı',
       maneviTazminat: 'Manevi Tazminat',
-      onarimServisTuru: 'Servis Geçerliliği',
+      onarimServisTuru: 'Servis',
       yedekParcaTuru: 'Yedek Parça Türü',
       camKirilmaMuafeyeti: 'Cam Hasarı',
       hukuksalKorumaAracaBagli: 'Hukuksal Koruma (Araca Bağlı)',
@@ -1689,7 +1690,24 @@ export default function QuoteComparisonStep({
                           ?.filter(guarantee => {
                             // "Belirsiz" değerleri filtrele
                             const value = formatGuaranteeValue(guarantee);
-                            return value !== 'Belirsiz';
+                            if (value === 'Belirsiz') {
+                              return false;
+                            }
+                            // BÖLÜM 2'de gösterilen ana teminatları filtrele
+                            const mainCoverages = getMainCoverages(selectedQuoteForModal);
+                            const mainCoverageLabels = mainCoverages.map(c => c.label);
+                            // Label eşleşmesi kontrolü (alternatif label'ları da kontrol et)
+                            const isMainCoverage = mainCoverageLabels.some(label => {
+                              // Tam eşleşme
+                              if (guarantee.label === label) return true;
+                              // Alternatif label kontrolü
+                              if (label === 'Cam' && (guarantee.label === 'Cam Kırılma Muafiyeti')) return true;
+                              if (label === 'İMM Limiti' && (guarantee.label === 'İMM Limiti (Ayrımsız)' || guarantee.label === 'İMM Limitli / Limitsiz')) return true;
+                              if (label === 'Servis' && (guarantee.label === 'Onarım Servis Türü')) return true;
+                              if (label === 'İkame Araç' && (guarantee.label === 'Kiralık Araç')) return true;
+                              return false;
+                            });
+                            return !isMainCoverage;
                           })
                           .sort((a, b) => a.label.localeCompare(b.label))
                           .map((guarantee) => (
@@ -1744,7 +1762,24 @@ export default function QuoteComparisonStep({
                     ?.filter(guarantee => {
                       // "Belirsiz" değerleri filtrele
                       const value = formatGuaranteeValue(guarantee);
-                      return value !== 'Belirsiz';
+                      if (value === 'Belirsiz') {
+                        return false;
+                      }
+                      // BÖLÜM 2'de gösterilen ana teminatları filtrele
+                      const mainCoverages = getMainCoverages(selectedQuoteForModal);
+                      const mainCoverageLabels = mainCoverages.map(c => c.label);
+                      // Label eşleşmesi kontrolü (alternatif label'ları da kontrol et)
+                      const isMainCoverage = mainCoverageLabels.some(label => {
+                        // Tam eşleşme
+                        if (guarantee.label === label) return true;
+                        // Alternatif label kontrolü
+                        if (label === 'Cam' && (guarantee.label === 'Cam Kırılma Muafiyeti')) return true;
+                        if (label === 'İMM Limiti' && (guarantee.label === 'İMM Limiti (Ayrımsız)' || guarantee.label === 'İMM Limitli / Limitsiz')) return true;
+                        if (label === 'Servis' && (guarantee.label === 'Onarım Servis Türü')) return true;
+                        if (label === 'İkame Araç' && (guarantee.label === 'Kiralık Araç')) return true;
+                        return false;
+                      });
+                      return !isMainCoverage;
                     })
                     .sort((a, b) => a.label.localeCompare(b.label))
                     .map((guarantee) => (

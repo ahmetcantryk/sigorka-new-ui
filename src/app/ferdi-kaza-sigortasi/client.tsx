@@ -1,14 +1,28 @@
+/**
+ * Ferdi Kaza Sigortası Ürün Detay Sayfası - Client Component
+ * 
+ * Banner içinde offline talep formu gösterir
+ * Kasko/TSS ile aynı yapıda
+ */
+
 "use client";
 
 import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import Breadcrumb from '../components/common/Breadcrumb';
 import FaqList from '../components/common/FaqList';
-import ProductBanner from '../components/common/ProductBanner';
 import StickyProductNav from '../components/common/StickyProductNav';
-import ConditionalCTAPopup from '../components/common/ConditionalCTAPopup';
 import { productAnchors, getOfferLink } from '../../config/productAnchors';
+import { getBranchConfig } from '@/components/ProductPageFlow/OfflineFlow';
 import '../../styles/subpage.min.css';
 import '../../styles/armorbroker.css';
+import '../../styles/product-flow/product-page-flow.css';
+
+// Dynamic import for better code splitting
+const OfflineProductForm = dynamic(
+  () => import('@/components/ProductPageFlow/OfflineFlow').then(mod => mod.OfflineProductForm),
+  { ssr: false }
+);
 
 const faqs = [
   {
@@ -25,37 +39,29 @@ const faqs = [
   }
 ];
 
-export default function FerdiKazaSigortasiPage() {
-  const anchors = productAnchors['ferdi-kaza-sigortasi'];
-  const offerLink = getOfferLink('ferdi-kaza-sigortasi');
+// Banner Area Component - Shows form
+const BannerArea = () => {
+  const branchConfig = getBranchConfig('ferdi-kaza');
 
-  useEffect(() => {
-    document.body.classList.add('product-detail-page');
-    return () => {
-      document.body.classList.remove('product-detail-page');
-    };
-  }, []);
+  if (!branchConfig) {
+    return null;
+  }
 
   return (
+    <section id="ferdi-kaza-form-banner" className="cover product-page-banner">
+      <div className="container">
+        <h1 className="pp-product-title">Ferdi Kaza Sigortası</h1>
+        <OfflineProductForm branchConfig={branchConfig} />
+      </div>
+    </section>
+  );
+};
+
+// Product Detail Content Component
+const ProductDetailContent = () => {
+  return (
     <>
-      <ConditionalCTAPopup
-        condition="inactivity"
-        inactivityDelay={15}
-        config={{
-          title: 'Ferdi Kaza Sigortası Teklifi Almak İster misiniz?',
-          description: 'Beklenmedik kazalara karşı kendinizi ve ailenizi güvence altına almak için hemen teklif alın.',
-          buttonText: 'Hemen Teklif Al',
-          buttonLink: '/ferdi-kaza-teklif'
-        }}
-      />
-      <StickyProductNav anchors={anchors} offerLink={offerLink} />
-      <ProductBanner
-        title1="Yuvam"
-        title2="Katılım Ferdi Kaza Sigortası"
-        buttonText="Hemen Teklif Alın"
-        buttonHref="/ferdi-kaza-teklif"
-        size="sm"
-      />
+      <BannerArea />
       <section className="page-content">
         <div className="container">
           <Breadcrumb
@@ -81,7 +87,7 @@ export default function FerdiKazaSigortasiPage() {
             <p>Ferdi Kaza Sigortası ve Hayat Sigortası kişileri olası kaza durumlarına karşı güvence altına alma işlevi olan iki sigorta türü olsa da aralarında temel farklılıklar bulunmaktadır.</p>
             <p>Hayat Sigortası;</p>
             <ul className="prop-list">
-              <li>Her türlü ölüm durumunu güvence haline alır.</li>
+              <li>Her türlü ölüm durumunu güvence altına alır.</li>
               <li>Kişiler hastalık durumlarında sağlık hizmetlerinden yararlanabilirler.</li>
             </ul>
             <p>Ferdi Kaza Sigortası ;</p>
@@ -140,10 +146,25 @@ export default function FerdiKazaSigortasiPage() {
             <div className="offer-banner offer-banner-home-bg">
               <div className="offer-banner__content">
                 <h3>Katılım Ferdi Kaza Sigortasına mı ihtiyacınız var?</h3>
-                <p>En uygun Katılım Ferdi Kaza teklifleri için tıklayınız.</p>
+                <p>En uygun Katılım Ferdi Kaza teklifleri için yukarıdaki formu doldurun.</p>
               </div>
               <div className="offer-banner__cta">
-                <a className="btn btn-wide btn-tertiary" href="/ferdi-kaza-teklif" target="_self">
+                <a 
+                  className="btn btn-wide btn-tertiary" 
+                  href="#ferdi-kaza-form-banner"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const bannerElement = document.getElementById('ferdi-kaza-form-banner');
+                    if (bannerElement) {
+                      const offset = 120;
+                      const elementPosition = bannerElement.offsetTop - offset;
+                      window.scrollTo({
+                        top: elementPosition,
+                        behavior: 'smooth'
+                      });
+                    }
+                  }}
+                >
                   Hemen Teklif Alın
                 </a>
               </div>
@@ -151,6 +172,61 @@ export default function FerdiKazaSigortasiPage() {
           </div>
         </div>
       </section>
+    </>
+  );
+};
+
+export default function FerdiKazaSigortasiPage() {
+  const anchors = productAnchors['ferdi-kaza-sigortasi'];
+  const offerLink = '#ferdi-kaza-form-banner';
+
+  useEffect(() => {
+    document.body.classList.add('product-detail-page');
+    return () => {
+      document.body.classList.remove('product-detail-page');
+    };
+  }, []);
+
+  // Sayfa içi teklif linklerini banner'a yönlendir
+  useEffect(() => {
+    const handleOfferLinkClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const link = target.closest('a[href*="/ferdi-kaza-sigortasi"], a[href="#ferdi-kaza-form-banner"]');
+      
+      if (link) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const bannerElement = document.getElementById('ferdi-kaza-form-banner');
+        if (bannerElement) {
+          const offset = 120;
+          const elementPosition = bannerElement.offsetTop - offset;
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    };
+
+    document.addEventListener('click', handleOfferLinkClick, true);
+
+    return () => {
+      document.removeEventListener('click', handleOfferLinkClick, true);
+    };
+  }, []);
+
+  return (
+    <>
+      <StickyProductNav 
+        anchors={anchors} 
+        offerLink={offerLink}
+        enableMobileScrollBasedVisibility={true}
+        formBannerId="ferdi-kaza-form-banner"
+      />
+      
+      <ProductDetailContent />
+
       <section className="page-content pt-0">
         <div className="container">
           <h4>Ferdi Kaza Sigortası Hakkında Sıkça Sorulan Sorular</h4>
@@ -159,4 +235,4 @@ export default function FerdiKazaSigortasiPage() {
       </section>
     </>
   );
-} 
+}

@@ -13,6 +13,7 @@ export {
   JOB_OPTIONS,
   VEHICLE_USAGE_OPTIONS,
   FUEL_TYPE_OPTIONS,
+  MODEL_YEAR_OPTIONS,
 } from '../../KaskoFlow/config/kaskoConstants';
 
 // ==================== TRAFİK TEMİNAT ETİKETLERİ ====================
@@ -55,6 +56,17 @@ export const TRAFIK_TICK_COVERAGES = [
   'cekiciHizmeti',
 ];
 
+// ==================== ZORUNLU TEMİNATLAR ====================
+// Eğer optimalCoverage'dan gelmezse (undefined/belirsiz) otomatik tik ile gösterilecek zorunlu teminatlar
+export const TRAFIK_MANDATORY_COVERAGES = [
+  'maddiHasarAracBasina',
+  'maddiHasarKazaBasina',
+  'sakatlanmaVeOlumKisiBasina',
+  'sakatlanmaVeOlumKazaBasina',
+  'tedaviSaglikGiderleriKisiBasina',
+  'tedaviSaglikGiderleriKazaBasina',
+];
+
 // ==================== TEMİNAT DETAY SIRALAMA ====================
 // Teminat detayları açıldığında gösterilecek teminatlar (sıralı)
 export const TRAFIK_DETAIL_COVERAGE_ORDER = [
@@ -92,7 +104,7 @@ export const TRAFIK_FORM_DEFAULTS = {
   model: '',
   year: new Date().getFullYear().toString(),
   usageType: VehicleUtilizationStyle.PrivateCar,
-  fuelType: VehicleFuelType.Diesel,
+  fuelType: VehicleFuelType.Gasoline,
   engineNo: '',
   chassisNo: '',
   registrationDate: new Date().toISOString().split('T')[0],
@@ -125,5 +137,7 @@ export const TRAFIK_POLLING_CONFIG = {
   TIMEOUT: 180000,         // 3 dakika
   INITIAL_PROGRESS: 30,    // Başlangıç progress
   FINISH_DURATION: 30000,  // Active quote sonrası 30 saniye
+  EARLY_FINISH_THRESHOLD: 120000,  // 2 dakika - Bu süreden önce kapanırsa background polling başlar
+  BACKGROUND_POLLING_DURATION: 60000,  // 1 dakika - Arka planda ek polling süresi
 };
 

@@ -93,7 +93,7 @@ const processCoverageValue = (
 ): Guarantee | null => {
   const baseGuarantee = {
     insuranceGuaranteeId: id.toString(),
-    label: key === 'camKirilmaMuafeyeti' ? 'Cam Hasarı' : label,
+    label: key === 'camKirilmaMuafeyeti' ? 'Cam' : label,
   };
 
   switch (coverageValue.$type) {
@@ -118,7 +118,7 @@ const processCoverageValue = (
       return { ...baseGuarantee, valueText: 'Dahil Değil', amount: 0 };
 
     case 'UNDEFINED':
-      return { ...baseGuarantee, valueText: 'Dahil Değil', amount: 0 };
+      return { ...baseGuarantee, valueText: 'Belirsiz', amount: 0 };
 
     case 'DEFINED':
       if (key === 'kiralikArac') {
@@ -167,12 +167,12 @@ export const getMainCoverages = (quote: ProcessedQuote): Guarantee[] => {
   );
 
   const camHasari = coverages.find(g =>
-    g.label === 'Cam Hasarı' ||
+    g.label === 'Cam' ||
     g.label === 'Cam Kırılma Muafiyeti'
   );
 
   const servisGecerliligi = coverages.find(g =>
-    g.label === 'Servis Geçerliliği' ||
+    g.label === 'Servis' ||
     g.label === 'Onarım Servis Türü'
   );
 
@@ -182,10 +182,10 @@ export const getMainCoverages = (quote: ProcessedQuote): Guarantee[] => {
   );
 
   return [
-    camHasari || defaultGuarantee('Cam Hasarı'),
     immLimiti || defaultGuarantee('İMM Limiti'),
-    servisGecerliligi || defaultGuarantee('Servis Geçerliliği'),
-    ikameArac || defaultGuarantee('İkame Araç')
+    ikameArac || defaultGuarantee('İkame Araç'),
+    servisGecerliligi || defaultGuarantee('Servis'),
+    camHasari || defaultGuarantee('Cam')
   ];
 };
 
@@ -208,7 +208,7 @@ export const getAdditionalCoverages = (quote: ProcessedQuote): Array<{
   // Hasarsızlık İndirimi
   const hasUndamaged = quote.hasUndamagedDiscount && (quote as any).hasUndamagedDiscountRate;
   items.push({
-    label: 'Hasarsızlık',
+    label: 'Hasarsızlık İndirimi',
     rate: hasUndamaged ? (quote as any).hasUndamagedDiscountRate : undefined,
     hasValue: hasUndamaged
   });
@@ -220,34 +220,63 @@ export const getAdditionalCoverages = (quote: ProcessedQuote): Array<{
 
 /**
  * Teminatın dahil olup olmadığını kontrol eder
+ * INCLUDED, MARKET_VALUE, LIMITLESS = tick (dahil)
+ * UNDEFINED, NOT_INCLUDED = X (dahil değil)
  */
 export const isCoverageIncluded = (guarantee: Guarantee): boolean => {
-  if (guarantee.label === 'Cam Hasarı') {
-    return guarantee.valueText === 'Dahil';
-  }
-
-  return (
+  // MARKET_VALUE (Rayiç), INCLUDED (Dahil), LIMITLESS (Limitsiz) = tick
+  if (
     guarantee.valueText === 'Dahil' ||
     guarantee.valueText === 'Limitsiz' ||
-    guarantee.valueText === 'Rayiç' ||
-    guarantee.amount > 0 ||
-    (guarantee.valueText !== null &&
-      guarantee.valueText !== 'Dahil Değil' &&
-      guarantee.valueText !== 'Belirsiz')
-  ) || false;
+    guarantee.valueText === 'Rayiç'
+  ) {
+    return true;
+  }
+
+  // Sayısal değer varsa dahil
+  if (guarantee.amount > 0) {
+    return true;
+  }
+
+  // UNDEFINED (Belirsiz) veya NOT_INCLUDED (Dahil Değil) = X
+  if (
+    guarantee.valueText === 'Belirsiz' ||
+    guarantee.valueText === 'Dahil Değil' ||
+    guarantee.valueText === null
+  ) {
+    return false;
+  }
+
+  // Diğer text değerler varsa dahil (örn: "Yılda 3 kez 15 gün")
+  return guarantee.valueText !== null;
 };
 
 /**
- * Tick/X gösterilecek mi kontrol eder (sadece Cam Hasarı için)
+ * Ana teminat alanında Tick/X gösterilecek mi kontrol eder
+ * Cam için her zaman tick/x göster
+ * MARKET_VALUE (Rayiç) için ana teminatlarda tick göster
  */
 export const shouldShowTickX = (guarantee: Guarantee): boolean => {
-  return guarantee.label === 'Cam Hasarı';
+  // Cam için her zaman tick/x
+  if (guarantee.label === 'Cam') {
+    return true;
+  }
+  // MARKET_VALUE (Rayiç) için ana teminatlarda tick göster
+  if (guarantee.valueText === 'Rayiç') {
+    return true;
+  }
+  return false;
 };
 
 /**
  * Teminat değerini gösterim için formatlar
  */
 export const getCoverageDisplayValue = (guarantee: Guarantee): string | null => {
+  // Belirsiz değerler için null döndür
+  if (guarantee.valueText === 'Belirsiz') {
+    return null;
+  }
+
   // İMM Limiti
   if (
     guarantee.label === 'İMM Limiti' ||
@@ -260,20 +289,20 @@ export const getCoverageDisplayValue = (guarantee: Guarantee): string | null => 
         maximumFractionDigits: 0,
       }) + ' ₺';
     }
-    return guarantee.valueText || '-';
+    return guarantee.valueText || null;
   }
 
   // İkame Araç
   if (guarantee.label === 'İkame Araç' || guarantee.label === 'Kiralık Araç') {
-    return guarantee.valueText || '-';
+    return guarantee.valueText || null;
   }
 
-  // Servis Geçerliliği
-  if (guarantee.label === 'Servis Geçerliliği' || guarantee.label === 'Onarım Servis Türü') {
-    return guarantee.valueText || '-';
+  // Servis
+  if (guarantee.label === 'Servis' || guarantee.label === 'Onarım Servis Türü') {
+    return guarantee.valueText || null;
   }
 
-  // Cam Hasarı için null (tick/x gösterilir)
+  // Cam için null (tick/x gösterilir)
   return null;
 };
 
@@ -281,6 +310,11 @@ export const getCoverageDisplayValue = (guarantee: Guarantee): string | null => 
  * Teminat değerini formatlar (detay görünümü için)
  */
 export const formatGuaranteeValue = (guarantee: Guarantee): string => {
+  // Belirsiz veya undefined değerler için boş döndür
+  if (guarantee.valueText === 'Belirsiz') {
+    return '';
+  }
+
   if (guarantee.valueText) {
     let text = guarantee.valueText;
 
@@ -309,6 +343,6 @@ export const formatGuaranteeValue = (guarantee: Guarantee): string => {
     }) + ' ₺';
   }
 
-  return '-';
+  return '';
 };
 

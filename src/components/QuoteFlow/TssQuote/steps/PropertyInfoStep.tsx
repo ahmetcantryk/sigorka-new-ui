@@ -878,7 +878,7 @@ export default function PropertyInfoStep({
 
       {/* Dain-i Mürtehin */}
       <Typography variant="h6" gutterBottom>
-        Dain-i Mürtehin
+        Rehin Alacaklı Var mı? (Dain-i Mürtehin)
       </Typography>
 
       <Grid container spacing={3} sx={{ mt: 1 }}>
